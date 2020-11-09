@@ -1,0 +1,10 @@
+<section class="main-container-in-page">
+    <span>
+        <!-- {{ 'TEST' | translate }} -->
+    </span>
+    <div class="d-flex flex-wrap  justify-content-center">
+        <div *ngFor="let product of stores">
+            <app-card [data]="product"></app-card>
+        </div>
+    </div>
+</section>
