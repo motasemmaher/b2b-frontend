@@ -43,7 +43,7 @@ export function createTranslateLoader(http: HttpClient) {
 })
 export class AppModule {
   constructor(translate: TranslateService) {
-    translate.setDefaultLang('ar');
-    translate.use('ar');
+    translate.setDefaultLang('en');
+    translate.use('en');
   }
 }

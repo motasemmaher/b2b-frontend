@@ -23,6 +23,10 @@ ion-menu.md ion-content {
   }
 }
 
+:host(.menu-side-start) .menu-inner{
+  right: 0px !important;
+  left: auto !important;
+}
 ion-menu.md ion-list {
   padding: 20px 0;
 }

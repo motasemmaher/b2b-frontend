@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 
 import { ActivatedRoute } from '@angular/router';
@@ -16,58 +17,58 @@ export class BusinessComponent implements OnInit {
   public appPages = [
     {
       title: 'Search By Image',
-      url: '/folder/Inbox',
+      url: '/business/search-by-image',
       icon: 'search'
     },
     {
-      title: 'Chat',
-      url: '/folder/Inbox',
+      title: 'CHAT',
+      url: '/business/chat',
       icon: 'mail'
     },
     {
-      title: 'Home',
+      title: 'HOME',
       url: '/business/home',
       icon: 'home'
     },
     {
-      title: 'Stores',
+      title: 'STORES',
       url: '/business/store',
       icon: 'storefront'
     },
     {
-      title: 'Prodects',
-      url: '/folder/Archived',
+      title: 'PRODUCTS',
+      url: '/business/products',
       icon: 'pricetags'
     },
     {
-      title: 'Categories',
-      url: '/folder/Trash',
+      title: 'CATEGORIES',
+      url: '/business/categories',
       icon: 'grid'
     },
     {
-      title: 'Offers',
-      url: '/folder/Spam',
+      title: 'OFFERS',
+      url: '/business/offers',
       icon: 'gift'
     },
     {
-      title: 'Shopping Cart',
-      url: '/folder/Spam',
+      title: 'SHOPPING_CART',
+      url: '/business/shopping-card',
       icon: 'bag-handle'
     },
     {
-      title: 'Settings',
-      url: '/folder/Spam',
+      title: 'SETTING',
+      url: '/business/settings',
       icon: 'settings'
     },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private translate: TranslateService
   ) {
   }
-
-
+  
   ngOnInit() {
     const path = window.location.pathname.split('folder/')[1];
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
