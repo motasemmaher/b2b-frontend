@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import  data from '../data';
 @Component({
   templateUrl: './about-store.page.html',
   styleUrls: ['./about-store.page.css']
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class AboutStorePage implements OnInit {
 
   constructor() { }
+
+  data = data;
 
   ngOnInit(): void {
   }

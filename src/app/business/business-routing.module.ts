@@ -20,7 +20,35 @@ const routes: Routes = [
       {
         path: 'store',
         loadChildren: () => import('./stores/stores.module').then(m => m.StoresModule)
-      }
+      },
+      {
+        path: 'products',
+        loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+      },
+      {
+        path: 'search-by-image',
+        loadChildren: () => import('./search-by-image/search-by-image.module').then(m => m.SearchByImageModule)
+      },
+      {
+        path: 'categories',
+        loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+      },
+      {
+        path: 'offers',
+        loadChildren: () => import('./offers/offers.module').then(m => m.OffersModule)
+      },
+      {
+        path: 'settings',
+        loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
+      },
+      {
+        path: 'shopping-card',
+        loadChildren: () => import('./shopping-card/shopping-card.module').then(m => m.ShoppingCardModule)
+      },
+      {
+        path: 'chat',
+        loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
+      },
     ],
   },
 
