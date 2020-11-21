@@ -6,7 +6,7 @@ import { BusinessRoutingModule } from './business-routing.module';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from './shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
-
+// import { BusinessService } from './services/business.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,6 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
     BusinessComponent,
   ],
   providers: [
+    // BusinessService,
   ]
 })
 

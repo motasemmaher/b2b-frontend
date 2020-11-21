@@ -1,0 +1,27 @@
+<section>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Create Category</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <div>
+                <ion-item>
+                    <ion-label position="floating">Name</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Type</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+            </div>
+            <input type="button" (click)="takePhoto()" value="sd">
+            <ion-button expand="full" (onclick)="takePhoto()"> take photo
+                <!-- <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+                <ion-label slot="end">Upload Image</ion-label>
+                <input type="file" (change)="" id="file-input"
+                  accept="image/png, image/jpeg"> -->
+            </ion-button>
+            <img [src]="image">
+        </ion-card-content>
+    </ion-card>
+</section>

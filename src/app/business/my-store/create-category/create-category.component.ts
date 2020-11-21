@@ -1,25 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
-  selector: 'app-offers',
-  templateUrl: './offers.component.html',
-  styleUrls: ['./offers.component.css']
+  selector: 'app-create-category',
+  templateUrl: './create-category.component.html',
+  styleUrls: ['./create-category.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OffersComponent implements OnInit {
+export class CreateCategoryComponent implements OnInit {
   image;
-  constructor(private camera: Camera) { }
 
-  ngOnInit(): void {
+  constructor(private camera: Camera) {
+
   }
+
   takePhoto() {
     console.log("err")
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      allowEdit: true,
+      mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
@@ -31,4 +32,8 @@ export class OffersComponent implements OnInit {
       // Handle error
     });
   }
+  ngOnInit(): void {
+  }
+
+
 }
