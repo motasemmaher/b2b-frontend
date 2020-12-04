@@ -1,0 +1,99 @@
+<head>
+</head>
+<body>
+  <ion-app>
+
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Create Car Owner Account</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content fullscreen>
+      <!--<form [formGroup]="createCarOwnerInfo" (ngSubmit)="registerFormLog()">-->
+        <ion-slides pager="false" [options]="slideOpts" #slider>
+
+          <ion-slide>
+            <ion-card>
+              <ion-item lines="none">
+                <ion-buttons slot="start">
+                  <ion-back-button (click)="backToLogin()"></ion-back-button>
+                </ion-buttons>
+              </ion-item>
+              <ion-card-header>
+                <ion-card-title>User Information</ion-card-title>
+              </ion-card-header>
+              <form [formGroup]="createCarOwnerInfo1" (ngSubmit)="registerFormLog1()">
+                <!--<app-register></app-register>-->
+                <ion-item lines="full" class="margined">
+                  <ion-label position="floating">Username</ion-label>
+                  <ion-input type="text" formControlName="userName" required></ion-input>
+                </ion-item>
+                <ion-item lines="full" class="margined">
+                  <ion-label position="floating">Full name</ion-label>
+                  <ion-input type="text" formControlName="fullName" required></ion-input>
+                </ion-item>
+                <ion-item lines="full" class="margined">
+                  <ion-label position="floating">Email address</ion-label>
+                  <ion-input type="text" formControlName="email" required></ion-input>
+                </ion-item>
+                <ion-item lines="full" class="margined">
+                  <ion-label position="floating">Phone Number</ion-label>
+                  <ion-input type="text" formControlName="phoneNumber" required></ion-input>
+                </ion-item>
+                <ion-item lines="full" class="margined">
+                  <ion-label position="floating">Password</ion-label>
+                  <ion-input type="password" formControlName="password" required></ion-input>
+                </ion-item>
+                <ion-row>
+                  <ion-col class="ion-text-center">
+                    <ion-button type="submit" (click)="swipeNext()" size="default" [disabled]="!createCarOwnerInfo1.valid">Next</ion-button>
+                  </ion-col>
+                </ion-row>
+              </form>
+            </ion-card>  
+          </ion-slide>
+
+          <ion-slide>
+            <ion-card>
+              <ion-item lines="none">
+                <ion-buttons slot="start">
+                  <ion-back-button (click)="back()"></ion-back-button>
+                </ion-buttons>
+              </ion-item>
+              <ion-card-header>
+                <ion-card-title>Car Information</ion-card-title>
+              </ion-card-header>
+              <form [formGroup]="createCarOwnerInfo2" (ngSubmit)="registerFormLog2()">
+            <!--<form #form="ngForm" (ngSubmit)="signUp(form)" method="post">-->
+                <ion-item lines="full" class="margined">
+                  <ion-label position="floating">Model</ion-label>
+                  <ion-input type="text" formControlName="carModel" required></ion-input>
+                </ion-item>
+                <ion-item lines="full" class="margined">
+                  <ion-label position="floating">Make</ion-label>
+                  <ion-input type="text" formControlName="carMake" required></ion-input>
+                </ion-item>
+                <ion-item lines="full" class="margined">
+                  <ion-label position="floating">Year</ion-label>
+                  <ion-datetime value="2020" display-format="YYYY" picker-format="YYYY" formControlName="carYear" required></ion-datetime>
+                </ion-item>
+                <ion-row>
+                  <ion-col class="ion-text-center">
+                    <ion-button type="submit" size="default" [disabled]="!createCarOwnerInfo2.valid">Sign Up</ion-button>
+                  </ion-col>
+                </ion-row>
+            <!--</form>-->
+              </form>
+            </ion-card>
+          </ion-slide>
+
+        </ion-slides>
+      <!--</form>-->
+    </ion-content>
+
+  </ion-app>
+</body>

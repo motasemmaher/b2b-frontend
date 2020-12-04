@@ -8,14 +8,12 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateCategoryComponent implements OnInit {
-  image;
-
+  images = [];
   constructor(private camera: Camera) {
 
   }
 
   takePhoto() {
-    console.log("err")
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -25,8 +23,7 @@ export class CreateCategoryComponent implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-      const base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.image = base64Image;
+      this.images.push('data:image/jpeg;base64,' + imageData);
     }, (err) => {
       console.log(err)
       // Handle error
@@ -34,6 +31,22 @@ export class CreateCategoryComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-
+  uploadImage(event) {
+    const reader = new FileReader();
+    let x;
+    const i = this;
+    const file = event.target.files[0];
+    console.log(event.target.files)
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      x = reader.result;
+      i.images.push(x);
+      //me.modelvalue = reader.result;
+      // console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+  }
 
 }

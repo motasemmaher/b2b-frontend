@@ -4,17 +4,23 @@ import { IonicModule } from '@ionic/angular';
 
 import { CardComponent } from './card/card.component';
 import { LoadingComponent } from './loading/loading.component';
+import { FiltersComponent } from './filters/filters.component';
 
 @NgModule({
   declarations: [
-    // LoadingComponent
+    LoadingComponent,
+    CardComponent,
+    FiltersComponent
+
   ],
   imports: [
     CommonModule,
     IonicModule
   ],
   exports: [
-    // LoadingComponent
+    LoadingComponent,
+    CardComponent,
+    FiltersComponent
   ]
 })
 export class SharedModule { }

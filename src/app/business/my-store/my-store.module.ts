@@ -9,16 +9,19 @@ import { MyProductsComponent } from './my-products/my-products.component';
 import { MyCategoriesComponent } from './my-categories/my-categories.component';
 import { IonicModule } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
-
+import {  SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [MyStoreComponent, InsertProductComponent, CreateCategoryComponent, MyProductsComponent, MyCategoriesComponent],
+  declarations: [
+    MyStoreComponent, InsertProductComponent, CreateCategoryComponent, MyProductsComponent, MyCategoriesComponent
+  ],
   imports: [
     CommonModule,
     MyStoreRoutingModule,
-    IonicModule
+    IonicModule,
+    SharedModule
   ],
-  providers:[
+  providers: [
     Camera
   ],
   exports: [CreateCategoryComponent]

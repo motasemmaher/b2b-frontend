@@ -1,0 +1,57 @@
+<head>
+</head>
+<body>
+  <ion-app class="ion-app">
+
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>login</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content fullscreen>
+      <div>
+        <ion-card>
+          <form [formGroup]="loginInfo" (ngSubmit)="loginFormLog()">
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Username</ion-label>
+              <ion-input type="username" formControlName="username" required></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" formControlName="password" required></ion-input>
+            </ion-item>
+            <ion-item lines="none" class="margined">
+              <ion-checkbox color="primary" slot="start" name="rememberMe" ></ion-checkbox>
+              <ion-label>remember me</ion-label>
+            </ion-item>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <ion-button type="submit" size="default" [disabled]="!loginInfo.valid">Sign In</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <a class="small-text" href="/auth/reset">Forgot Password</a>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <a class="small-text" href="/auth/createCarOwner">Create account as car owner</a> 
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <a class="small-text" href="/auth/createGarageOwner">Create account as garage owner</a> 
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-card>
+      </div>
+    </ion-content>
+
+  </ion-app>
+</body>

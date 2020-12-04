@@ -9,6 +9,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 export class MyCategoriesComponent implements OnInit {
 
   constructor() { }
+  filters = [{label: 'By Category', value: 'byCategory'}, {label: 'By Name', value: 'byName'}];
 
   ngOnInit(): void {
   }

@@ -6,20 +6,19 @@ import { AboutStorePage } from './component/about-store/about-store.page';
 import { InfoComponent } from './info.component';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { LoadingComponent } from '../../shared/loading/loading.component';
+import { SharedModule } from '../../shared/shared.module';
 import { OffersPage } from './component/offers/offers.page';
 @NgModule({
   declarations: [
     InfoComponent,
     AboutStorePage,
-    OffersPage,
-    LoadingComponent
+    OffersPage
   ],
   imports: [
-  CommonModule,
+    CommonModule,
     InfoRoutingModule,
     IonicModule,
-    // SharedModule,
+    SharedModule,
     TranslateModule.forChild()
   ]
 })
