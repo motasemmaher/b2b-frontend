@@ -1,112 +1,100 @@
-<head>
-</head>
-<body>
-  <ion-app>
+<ion-content fullscreen>
+  <!--<form #form="ngForm" (ngSubmit)="signUp(form)" method="post">-->
+  <ion-slides pager="false" [options]="slideOpts" #slider>
 
-    <ion-header [translucent]="true">
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Create Garage Owner Account</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <ion-slide>
+      <ion-card>
+        <ion-item lines="none">
+          <ion-buttons slot="start">
+            <ion-back-button (click)="backToLogin()"></ion-back-button>
+          </ion-buttons>
+        </ion-item>
+        <ion-card-header>
+          <ion-card-title>User Information</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <form [formGroup]="userInfo" (ngSubmit)="registerFormLog1()">
+            <!--<app-register></app-register>-->
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Username</ion-label>
+              <ion-input type="text" formControlName="userName" required></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Full name</ion-label>
+              <ion-input type="text" formControlName="fullName" required></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Email address</ion-label>
+              <ion-input type="email" formControlName="email" required></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Phone Number</ion-label>
+              <ion-input type="text" formControlName="phoneNumber" required></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" formControlName="password" required></ion-input>
+            </ion-item>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <ion-button type="submit" (click)="swipeNext()" size="default" [disabled]="!userInfo.valid">Next
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <ion-item lines="none">
+          <ion-buttons slot="start">
+            <ion-back-button (click)="back()"></ion-back-button>
+          </ion-buttons>
+        </ion-item>
+        <ion-card-header>
+          <ion-card-title>Store Information</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <form [formGroup]="storeInfo" (ngSubmit)="registerFormLog2()">
+            <!--<form #form="ngForm" (ngSubmit)="signUp(form)" method="post">-->
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Store name</ion-label>
+              <ion-input type="text" formControlName="storeName" required></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Open Time</ion-label>
+              <ion-datetime display-format="h:mm A" picker-format="h:mm A" formControlName="openTime" required>
+              </ion-datetime>
+            </ion-item>
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Close Time</ion-label>
+              <ion-datetime display-format="h:mm A" picker-format="h:mm A" formControlName="closeTime" required>
+              </ion-datetime>
+            </ion-item>
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Address</ion-label>
+              <ion-input type="text" formControlName="address" required></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Number Of Stores</ion-label>
+              <ion-input type="number" formControlName="numberOfStores" required></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="margined">
+              <ion-label position="floating">Description</ion-label>
+              <ion-textarea type="text" rows="4" formControlName="discription" required></ion-textarea>
+            </ion-item>
 
-    <ion-content fullscreen>
-      <!--<form #form="ngForm" (ngSubmit)="signUp(form)" method="post">-->
-        <ion-slides pager="false" [options]="slideOpts" #slider>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <ion-button type="submit" size="default" [disabled]="!storeInfo.valid">Sign Up</ion-button>
+              </ion-col>
+            </ion-row>
+            <!--</form>-->
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
 
-          <ion-slide>
-            <ion-card>
-              <ion-item lines="none">
-                <ion-buttons slot="start">
-                  <ion-back-button (click)="backToLogin()"></ion-back-button>
-                </ion-buttons>
-                </ion-item>
-              <ion-card-header>
-                <ion-card-title>User Information</ion-card-title>
-              </ion-card-header>
-              <form [formGroup]="userInfo" (ngSubmit)="registerFormLog1()">
-                <!--<app-register></app-register>-->
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Username</ion-label>
-                  <ion-input type="text" formControlName="userName" required></ion-input>
-                </ion-item>
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Full name</ion-label>
-                  <ion-input type="text" formControlName="fullName" required></ion-input>
-                </ion-item>
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Email address</ion-label>
-                  <ion-input type="email" formControlName="email" required></ion-input>
-                </ion-item>
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Phone Number</ion-label>
-                  <ion-input type="text" formControlName="phoneNumber" required></ion-input>
-                </ion-item>
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Password</ion-label>
-                  <ion-input type="password" formControlName="password" required></ion-input>
-                </ion-item>
-                <ion-row>
-                  <ion-col class="ion-text-center">
-                    <ion-button type="submit" (click)="swipeNext()" size="default" [disabled]="!userInfo.valid">Next</ion-button>
-                  </ion-col>
-                </ion-row>
-              </form>
-            </ion-card>
-          </ion-slide>
-
-          <ion-slide> 
-            <ion-card>
-              <ion-item lines="none">
-                <ion-buttons slot="start">
-                  <ion-back-button (click)="back()"></ion-back-button>
-                </ion-buttons>
-              </ion-item>
-              <ion-card-header>
-                <ion-card-title>Store Information</ion-card-title>
-              </ion-card-header>
-              <form [formGroup]="storeInfo" (ngSubmit)="registerFormLog2()">
-                <!--<form #form="ngForm" (ngSubmit)="signUp(form)" method="post">-->
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Store name</ion-label>
-                  <ion-input type="text" formControlName="storeName" required></ion-input>
-                </ion-item>
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Open Time</ion-label>
-                  <ion-datetime display-format="h:mm A" picker-format="h:mm A" formControlName="openTime" required></ion-datetime>
-                </ion-item>
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Close Time</ion-label>
-                  <ion-datetime display-format="h:mm A" picker-format="h:mm A" formControlName="closeTime" required></ion-datetime>
-                </ion-item>
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Address</ion-label>
-                  <ion-input type="text" formControlName="address" required></ion-input>
-                </ion-item>
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Number Of Stores</ion-label>
-                  <ion-input type="number" formControlName="numberOfStores" required></ion-input>
-                </ion-item>
-                <ion-item lines="full" class="margined">
-                  <ion-label position="floating">Description</ion-label>
-                  <ion-textarea type="text" rows="4" formControlName="discription" required></ion-textarea>
-                </ion-item>
-
-                <ion-row>
-                  <ion-col class="ion-text-center">
-                    <ion-button type="submit" size="default" [disabled]="!storeInfo.valid">Sign Up</ion-button>
-                  </ion-col>
-                </ion-row>
-                <!--</form>-->
-              </form>
-            </ion-card>
-          </ion-slide>
-
-        </ion-slides>
-      <!--</form>-->
-    </ion-content>
-
-  </ion-app>
-</body>
+  </ion-slides>
+</ion-content>
