@@ -50,8 +50,8 @@ const routes: Routes = [
         loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
       },
       {
-        path: 'my-store',
-        loadChildren: () => import('./my-store/my-store.module').then(m => m.MyStoreModule)
+        path: 'my-stores',
+        loadChildren: () => import('./all-my-stores/all-my-stores.module').then(m => m.AllMyStoresModule)
       },
     ],
   },

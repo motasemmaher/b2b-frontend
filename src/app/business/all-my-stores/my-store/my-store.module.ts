@@ -9,7 +9,7 @@ import { MyProductsComponent } from './my-products/my-products.component';
 import { MyCategoriesComponent } from './my-categories/my-categories.component';
 import { IonicModule } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
-import {  SharedModule } from '../shared/shared.module';
+import {  SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [

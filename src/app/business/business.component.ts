@@ -17,7 +17,7 @@ export class BusinessComponent implements OnInit {
   public appPages = [
     {
       title: 'My Store',
-      url: '/business/my-store',
+      url: '/business/my-stores',
       icon: 'accessibility'
     },
     {
