@@ -2,10 +2,10 @@
     <span>
         <!-- {{ 'TEST' | translate }} -->
     </span>
-    <ng-template [ngIf]="stores" [ngIfElse]="loading">
+    <ng-template [ngIf]="categories" [ngIfElse]="loading">
         <div class="d-flex flex-wrap  justify-content-center">
-            <div *ngFor="let store of stores">
-                <app-card [data]="store" [type]="'stores'"></app-card>
+            <div *ngFor="let category of categories">
+                <app-card [data]="category"></app-card>
             </div>
         </div>
     </ng-template>

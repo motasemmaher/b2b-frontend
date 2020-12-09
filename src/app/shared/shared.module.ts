@@ -5,17 +5,19 @@ import { IonicModule } from '@ionic/angular';
 import { CardComponent } from './card/card.component';
 import { LoadingComponent } from './loading/loading.component';
 import { FiltersComponent } from './filters/filters.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
+  imports: [
+  CommonModule,
+    IonicModule,
+    RouterModule,
+  ],
   declarations: [
     LoadingComponent,
     CardComponent,
     FiltersComponent
 
-  ],
-  imports: [
-    CommonModule,
-    IonicModule
   ],
   exports: [
     LoadingComponent,

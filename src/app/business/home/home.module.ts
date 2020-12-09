@@ -4,19 +4,18 @@ import { HomeComponent } from './home.component';
 import { IonicModule } from '@ionic/angular';
 
 import { HomeRoutingModule } from './home-routing.module';
-import {  CardComponent } from '../shared/card/card.component';
-import { DescriptionPipe} from '../shared/pipes/description/description.pipe'
+import { SharedModule } from '@app/shared/shared.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     HomeRoutingModule,
-    IonicModule
+    IonicModule,
+    SharedModule
   ],
   declarations: [
     HomeComponent,
-    CardComponent,
-    DescriptionPipe
     // LengthOfDescriptionCardPipe,
   ]
 })

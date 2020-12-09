@@ -1,4 +1,39 @@
 <section>
+    <div *ngIf="type == 'card-info'" class="w-100 d-flex justify-content-center flex-wrap">
+        <div>
+            <ion-card style="width: 300px;">
+                <ion-card-header class="d-flex flex-column align-items-baseline">
+                    <ion-card-subtitle style="width: 40%;">
+                        <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+                    </ion-card-subtitle>
+                    <ion-card-title style="width: 60%">
+                        <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+                    </ion-card-title>
+                </ion-card-header>
+                <ion-skeleton-text animated style="width: 100%; height: 200px;"></ion-skeleton-text>
+        
+                <ion-card-content>
+                    <ion-label>
+                        <h3>
+                            <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+                        </h3>
+                        <p>
+                            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                        </p>
+                        <p>
+                            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                        </p>
+                        <p>
+                            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                        </p>
+                        <p>
+                            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                        </p>
+                    </ion-label>
+                </ion-card-content>
+            </ion-card>
+        </div>
+    </div>
     <div *ngIf="type == 'card'" class="w-100 d-flex justify-content-center flex-wrap">
         <div>
             <ion-card style="width: 300px;">

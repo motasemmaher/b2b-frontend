@@ -43,7 +43,7 @@ export class BusinessComponent implements OnInit {
     {
       title: 'PRODUCTS',
       url: '/business/products',
-      icon: 'pricetags'
+      icon: 'cube'
     },
     {
       title: 'CATEGORIES',

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import stores from './data';
+import { StoresService } from './service/stores.service';
+import { Store } from './model/store';
 
 @Component({
   selector: 'app-stores',
@@ -7,15 +8,26 @@ import stores from './data';
   styleUrls: ['./stores.component.css']
 })
 export class StoresComponent implements OnInit {
-  stores = stores;
+  stores: Store[];
 
-  constructor() {
-    this.stores = this.stores.map((store) => {
-      return { ...store, href: `info` };
-    });
+  constructor(
+    private storeService: StoresService
+  ) {
+    this.getStores();
   }
 
   ngOnInit(): void {
+
   }
 
+  getStores() {
+    // setTimeout(() => {
+      this.storeService.getStores('stores').subscribe((res) => {
+        this.stores = res.map((store) => {
+          return { ...store, href: `info/${store._id}` };
+        });
+        console.log(this.stores, res);
+      });
+    // }, 1000)
+  }
 }
