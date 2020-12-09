@@ -1,0 +1,157 @@
+<ion-header class="staticCheckout">
+    <ion-card>
+        <ion-grid >
+            <ion-row>
+                <ion-col>
+                    <ion-label>Total:</ion-label>
+                </ion-col>
+                <ion-col>
+                    <ion-label>231.79$</ion-label>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-button expand="full">Checkout</ion-button>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+</ion-header>
+
+<ion-content>
+
+    <!-- <ion-card class="ioncard">
+        <ion-grid >
+            <ion-row>
+                <ion-col>
+                    <ion-label>Total:</ion-label>
+                </ion-col>
+                <ion-col>
+                    <ion-label>231.79$</ion-label>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-button expand="full">Checkout</ion-button>
+            </ion-row>
+        </ion-grid>
+    </ion-card> -->
+
+    <ion-card class="ioncard">
+
+        <ion-card-header>
+            <ion-card-title>Shopping Cart</ion-card-title>
+        </ion-card-header>
+
+        <ion-list>
+
+            <div *ngFor="let product of cart">
+
+
+                <ion-item  class="row">
+                    <ion-grid float-left>
+                        <ion-row float-left>
+                            <ion-col>
+                                <ion-thumbnail>
+                                    <img src="{{product.picture}}" class="card-img-top">
+                                </ion-thumbnail>
+                            </ion-col>
+                            <ion-col float-left>
+                                <ion-label> {{product.name}} </ion-label>
+                                <ion-label> {{ product.price }}$ </ion-label>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="2" class="ion-align-self-center">
+
+                                <ion-button *ngIf="product.qauntity > 1" color="medium" fill="clear" (click)="minus(product)">
+                                    <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+                                </ion-button>
+                                <ion-button *ngIf="product.qauntity === 1" color="medium" fill="clear" (click)="remove(product)">
+                                    <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+                                </ion-button>
+                                
+                            </ion-col>
+            
+                            <ion-col size="1" class="ion-align-self-center">
+                                {{ product.qauntity }}
+                            </ion-col>
+                
+                            <ion-col size="2" class="ion-align-self-center">
+                                <ion-button color="medium" fill="clear" (click)="add(product)">
+                                    <ion-icon name="add-circle" slot="icon-only"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                
+                            <ion-col size="2" offset="5">
+                                <ion-button color="medium" fill="clear" (click)="remove(product)">
+                                    <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+
+
+                <!-- <ion-item>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                <img src="{{product.picture}}" class="card-img-top">
+                            </ion-col>
+                            <ion-col size="9">
+                                <b> {{product.name}} </b>
+                                <br>
+                                <b> {{ product.price }}$ </b>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="2" class="ion-align-self-center">
+                                <ion-button color="medium" fill="clear">
+                                    <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+            
+                            <ion-col size="1" class="ion-align-self-center">
+                                1
+                            </ion-col>
+                
+                            <ion-col size="2" class="ion-align-self-center">
+                                <ion-button color="medium" fill="clear">
+                                    <ion-icon name="add-circle" slot="icon-only"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                
+                            <ion-col size="2" offset="5">
+                                <ion-button color="medium" fill="clear">
+                                    <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item> -->
+
+            </div>
+
+            </ion-list>
+
+    </ion-card>
+
+
+</ion-content>
+
+
+<!-- 
+
+
+    <ion-card class="card" style="width: 18rem;">
+    <img src="{{data.picture}}" class="card-img-top">
+    <div></div>
+    <div class="card-body">
+        <ion-card-header>
+            <ion-card-subtitle>in stock</ion-card-subtitle>
+            <ion-card-title>{{data.name}}</ion-card-title>
+        </ion-card-header>
+        <a [routerLink]="[data.href, data._id || data.id, 'tabs']" class="btn btn-primary">View</a>
+    </div>
+    </ion-card>
+
+
+ -->
