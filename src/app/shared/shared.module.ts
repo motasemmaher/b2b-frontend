@@ -6,6 +6,7 @@ import { CardComponent } from './card/card.component';
 import { LoadingComponent } from './loading/loading.component';
 import { FiltersComponent } from './filters/filters.component';
 import { RouterModule } from '@angular/router';
+import { ViewProductComponent } from './view-product/view-product.component';
 
 @NgModule({
   imports: [
@@ -16,13 +17,15 @@ import { RouterModule } from '@angular/router';
   declarations: [
     LoadingComponent,
     CardComponent,
-    FiltersComponent
+    FiltersComponent,
+    ViewProductComponent
 
   ],
   exports: [
     LoadingComponent,
     CardComponent,
-    FiltersComponent
+    FiltersComponent,
+    ViewProductComponent
   ]
 })
 export class SharedModule { }

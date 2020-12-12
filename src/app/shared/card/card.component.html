@@ -19,6 +19,7 @@
                 </span>
             </ion-card-subtitle>
         </ion-card-header>
-        <a [routerLink]="[data.href, 'tabs']" class="btn btn-primary">View</a>
+        <a *ngIf="type && type === 'stores'"  [routerLink]="[data.href, 'tabs']" class="btn btn-primary">View</a>
+        <a *ngIf="type && type === 'products'" (click)="presentModal()" class="btn btn-primary">View</a>
     </div>
 </ion-card>

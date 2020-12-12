@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BusinessService {
 
-  limit = 30;
+  limit = 0;
   skip = 0;
   basedUrl = 'http://localhost:3000/';
 
@@ -45,8 +45,8 @@ export class BusinessService {
   }
   public get(path: string, options?: any): Observable<any> {
     const basedUrl = this.basedUrl.concat(path)
-      // .concat(`?limit=${this.limit}`)
-      // .concat(`&skip=${this.skip}`);
+      .concat(`?limit=${this.limit}`)
+      .concat(`&skip=${this.skip}`);
     return this.http.get(basedUrl, options);
   }
 

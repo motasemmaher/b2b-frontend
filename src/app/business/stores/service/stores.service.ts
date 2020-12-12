@@ -21,5 +21,17 @@ export class StoresService {
     path = path.concat(`/${id}/categories`);
     return this.businessService.get(path, options = options);
   }
+  public getProductsByStoreId(path: string, id: string, options?: any): Observable<any> {
+    path = path.concat(`/${id}/products`);
+    return this.businessService.get(path, options = options);
+  }
+  public getOffersByStoreId(path: string, id: string, options?: any): Observable<any> {
+    path = path.concat(`/${id}/offers`);
+    return this.businessService.get(path, options = options);
+  }
 
+  getProductsByCategoryIdAndStoreId(path: string, storeId: string, categoryId: string, options?: any): Observable<any> {
+    path = path.concat(`/${storeId}/category/${categoryId}/products`);
+    return this.businessService.get(path, options = options);
+  }
 }
