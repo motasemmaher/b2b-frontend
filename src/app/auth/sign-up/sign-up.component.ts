@@ -58,7 +58,7 @@ export class SignUpComponent implements OnInit {
   }
 
   listenOnSaveButton() {
-    if (this.type === 'car') {
+    if (this.type === SharedRoutingConstants.CAR) {
       this.signUpInfoService.getCarInfoData().valueChanges.subscribe((res) => {
         console.log(res)
         if (this.signUpInfoService.getCarInfoData().valid) {
@@ -69,7 +69,7 @@ export class SignUpComponent implements OnInit {
         }
       });
     }
-    else if (this.type === 'garage') {
+    else if (this.type === SharedRoutingConstants.GARAGE) {
       this.signUpInfoService.getGarageInfoData().valueChanges.subscribe(() => {
         if (this.signUpInfoService.getGarageInfoData().valid) {
           this.disableSaveButton = false;
@@ -99,12 +99,12 @@ export class SignUpComponent implements OnInit {
 
   nextPage() {
     if (this.userInfo.valid) {
-      if (this.type === 'car') {
+      if (this.type === SharedRoutingConstants.CAR) {
         this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.CAR_INFO}`)
         this.isMoved = true;
         this.disableNextButton = true;
         this.buttonName = "Save";
-      } else if (this.type === 'garage') {
+      } else if (this.type === SharedRoutingConstants.GARAGE) {
         this.buttonName = "Save";
         this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.GARAGE_INFO}`)
         this.disableNextButton = true;
