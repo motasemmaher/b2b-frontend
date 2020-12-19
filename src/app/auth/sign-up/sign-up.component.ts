@@ -21,7 +21,8 @@ export class SignUpComponent implements OnInit {
   buttonName: string = 'Next';
   isMoved: boolean = false;
   headerName: string = "User Info";
-    constructor(
+  heightClassName: string = 'user-info';
+  constructor(
     private navCtrl: NavController,
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
@@ -38,13 +39,16 @@ export class SignUpComponent implements OnInit {
     this.router.events.subscribe(() => {
       const url = this.router.url;
       if (url.includes(AuthRoutingConstants.USER_INFO)) {
+        this.heightClassName = 'user-info';
         this.buttonName = "Next";
         this.userInfo.updateValueAndValidity();
         this.headerName = "User Information";
-      } else if(url.includes(AuthRoutingConstants.CAR_INFO) || url.includes(AuthRoutingConstants.GARAGE_INFO)){
+      } else if (url.includes(AuthRoutingConstants.CAR_INFO) || url.includes(AuthRoutingConstants.GARAGE_INFO)) {
         if (url.includes(AuthRoutingConstants.CAR_INFO)) {
+          this.heightClassName = 'car-info';
           this.headerName = "Car Information";
         } else {
+          this.heightClassName = 'garage-info';
           this.headerName = "Garage Information";
         }
         this.buttonName = "Save";
@@ -112,7 +116,7 @@ export class SignUpComponent implements OnInit {
 
   saveInfo() {
     if (this.userInfo.valid && ((this.type === SharedRoutingConstants.CAR && this.signUpInfoService.getCarInfoData().valid) || (this.type === SharedRoutingConstants.GARAGE && this.signUpInfoService.getGarageInfoData().valid))) {
-      if (this.type === SharedRoutingConstants.GARAGE) {        
+      if (this.type === SharedRoutingConstants.GARAGE) {
         // this.authService.signUpForGarageOwner(this.signUpInfoService.getMergeBeforeSendToBackEndForGarage()).subscribe((res) =>{
         // });
       }

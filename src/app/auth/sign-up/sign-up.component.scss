@@ -1,10 +1,12 @@
-/* .height-page {
-   
-} */// :host {
-  ::ng-deep {
-    .height-page {
-      height: 250px !important;
-      display: block !important;
-    }
-  // }
+.height-page {
+  display: block !important;
+  .user-info {
+    height: 350px !important;
+  }
+  .car-info {
+    height: 250px !important;
+  }
+  .garage-info {
+    height: 450px !important;
+  }
 }
