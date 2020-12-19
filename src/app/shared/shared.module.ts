@@ -7,6 +7,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { FiltersComponent } from './filters/filters.component';
 import { RouterModule } from '@angular/router';
 import { ViewProductComponent } from './view-product/view-product.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 @NgModule({
   imports: [
@@ -18,14 +19,16 @@ import { ViewProductComponent } from './view-product/view-product.component';
     LoadingComponent,
     CardComponent,
     FiltersComponent,
-    ViewProductComponent
+    ViewProductComponent,
+    UploadImageComponent
 
   ],
   exports: [
     LoadingComponent,
     CardComponent,
     FiltersComponent,
-    ViewProductComponent
+    ViewProductComponent,
+    UploadImageComponent
   ]
 })
 export class SharedModule { }

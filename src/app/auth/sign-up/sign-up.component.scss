@@ -1,0 +1,10 @@
+/* .height-page {
+   
+} */// :host {
+  ::ng-deep {
+    .height-page {
+      height: 250px !important;
+      display: block !important;
+    }
+  // }
+}

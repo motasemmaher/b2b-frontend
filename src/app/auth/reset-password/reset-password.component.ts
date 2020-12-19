@@ -1,5 +1,4 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from './../services/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, NavController } from '@ionic/angular';
 
@@ -15,7 +14,6 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private authSevice: AuthService,
     public formBuilder: FormBuilder
   ) {
     this.resetInfo1 = this.formBuilder.group({

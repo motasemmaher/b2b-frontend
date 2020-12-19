@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { BasedUrlsConstants } from '@app/core/constants/routes';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class BusinessService {
 
-  limit = 0;
+  limit = 30;
   skip = 0;
-  basedUrl = 'http://localhost:3000/';
+  basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST;
 
 
   constructor(private http: HttpClient) { }
@@ -51,8 +51,9 @@ export class BusinessService {
   }
 
   public post(path: string, options?: any, body?: any): Observable<any> {
+    console.log(path, body)
     const basedUrl = this.basedUrl.concat(path);
-    return this.http.post(basedUrl, { options, body });
+    return this.http.post(basedUrl,  body);
   }
 
   public put(path: string, options?: any, body?: any): Observable<any> {

@@ -30,8 +30,8 @@ export class StoresService {
     return this.businessService.get(path, options = options);
   }
 
-  getProductsByCategoryIdAndStoreId(path: string, storeId: string, categoryId: string, options?: any): Observable<any> {
-    path = path.concat(`/${storeId}/category/${categoryId}/products`);
+  getProductsByCategoryIdAndStoreId(path: string, storeId: string, categoryId?: string, options?: any): Observable<any> {
+    path = path.concat(`/${storeId}`).concat(categoryId ? `/category/${categoryId}/products` : '/products');
     return this.businessService.get(path, options = options);
   }
 }

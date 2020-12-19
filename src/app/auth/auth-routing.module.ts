@@ -1,11 +1,10 @@
-import { CreateCarOwnerComponent } from './CreateCarOwner/CreateCarOwner.component';
-import { CreateGarageOwnerComponent } from './CreateGarageOwner/CreateGarageOwner.component';
+
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { AuthRoutingConstants } from '@app/core/constants/routes';
 
 const routes: Routes =
     [
@@ -16,28 +15,20 @@ const routes: Routes =
                 {
                     path: '',
                     pathMatch: 'full',
-                    redirectTo: 'login',
+                    redirectTo: AuthRoutingConstants.LOGIN,
                 },
                 {
-                    path: 'login',
+                    path: AuthRoutingConstants.LOGIN,
                     component: LoginComponent,
                 },
                 {
-                    path: 'register',
-                    component: RegisterComponent,
-                },
-                {
-                    path: 'reset',
+                    path: AuthRoutingConstants.RESET_PASSWORD,
                     component: ResetPasswordComponent,
                 },
                 {
-                    path: 'createGarageOwner',
-                    component: CreateGarageOwnerComponent,
+                    path: `${AuthRoutingConstants.SIGN_UP}/:${AuthRoutingConstants.TYPE}`,
+                    loadChildren: () => import('./sign-up/sign-up.module').then(m => m.SignUpModule)
                 },
-                {
-                    path: 'createCarOwner',
-                    component: CreateCarOwnerComponent,
-                }
             ]
         },
     ]

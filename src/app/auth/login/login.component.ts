@@ -1,7 +1,8 @@
-import { AuthService } from './../services/auth.service';
 import { IonicModule, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AuthRoutingConstants, AppRoutingConstants, SharedRoutingConstants } from '@app/core/constants/routes';
+import { AuthService } from '@app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,9 @@ import { Validators, FormBuilder, FormGroup, ReactiveFormsModule } from '@angula
 export class LoginComponent implements OnInit {
   loginInfo: FormGroup;
 
+  pathOfSignUpForCarOwner: string = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.USER_INFO}`;
+  pathOfSignUpForG1Owner: string = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.USER_INFO}`;
+  pathOfResetPassword: string = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.RESET_PASSWORD}`;
 
   constructor(
     private authService: AuthService,
@@ -29,20 +33,4 @@ export class LoginComponent implements OnInit {
   loginFormLog() {
     console.log(this.loginInfo);
   }
-
-  /* login(form: NgForm) { */
-    /* this.authService.login(form.value.email, form.value.password).subscribe(
-      data => {
-        this.navCtrl.navigateRoot('folder/inbox');
-      },
-      error => {
-        this.navCtrl.navigateRoot('folder/inbox');
-      }
-    ) */
-  /*   console.log(form.value);
-    if (this.authService.login(form.value.username, form.value.password)){
-      this.navCtrl.navigateRoot('folder/inbox');
-    }
-  } */
-
 }
