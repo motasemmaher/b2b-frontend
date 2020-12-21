@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { ShoppingCardRoutingModule } from './shopping-card-routing.module';
 import { ShoppingCardComponent } from './shopping-card.component';
+import { FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ShoppingCardComponent } from './shopping-card.component';
   imports: [
     CommonModule,
     ShoppingCardRoutingModule,
-    IonicModule
+    IonicModule,
+    ReactiveFormsModule
   ]
 })
 export class ShoppingCardModule { }
