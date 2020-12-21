@@ -20,7 +20,7 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: './auth/auth.module#AuthModule',
   },
-  { path: 'all-my-stores', loadChildren: () => import('./business/all-my-stores/all-my-stores.module').then(m => m.AllMyStoresModule) },
+  // { path: 'all-my-stores', loadChildren: () => import('./business/all-my-stores/all-my-stores.module').then(m => m.AllMyStoresModule) },
   
   // { path: 'my-store', loadChildren: () => import('./business/my-store/my-store.module').then(m => m.MyStoreModule) },
   // { path: 'stores', loadChildren: () => import('./business/stores/stores.module').then(m => m.StoresModule) },
