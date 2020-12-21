@@ -1,6 +1,6 @@
 import { IonicModule, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { AuthRoutingConstants, AppRoutingConstants, SharedRoutingConstants } from '@app/core/constants/routes';
 import { AuthService } from '@app/core/services/auth/auth.service';
 
@@ -22,8 +22,21 @@ export class LoginComponent implements OnInit {
     public formBuilder: FormBuilder
   ) {
     this.loginInfo = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: new FormControl('',
+      Validators.compose([
+        Validators.minLength(8),
+        Validators.maxLength(64),
+        Validators.pattern(/(^[A-Z a-z \s]{3,64}$)/),
+        Validators.required
+      ])),
+      password: new FormControl('',
+      Validators.compose([
+        Validators.minLength(8),
+        Validators.maxLength(64),
+        Validators.pattern(/(.{8,64})/),
+        Validators.required
+      ])),
+    rememberMe: new FormControl(false),
     });
   }
 
@@ -32,5 +45,10 @@ export class LoginComponent implements OnInit {
 
   loginFormLog() {
     console.log(this.loginInfo);
+    if (this.loginInfo.valid) {
+      this.authService.login(this.loginInfo.value).subscribe((res) => {
+        console.log(res);
+      })
+    }
   }
 }

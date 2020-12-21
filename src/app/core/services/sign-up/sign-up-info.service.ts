@@ -83,14 +83,14 @@ export class SignUpInfoService {
         Validators.compose([
           Validators.minLength(8),
           Validators.maxLength(64),
-          Validators.pattern('[0-9a-z-A-Z-_]*'),
+          Validators.pattern(/(^[A-Z a-z \s]{3,64}$)/),
           Validators.required
         ])),
       fullName: new FormControl('',
         Validators.compose([
           Validators.minLength(8),
           Validators.maxLength(64),
-          Validators.pattern('[a-zA-Z_ ]*'),
+          Validators.pattern(/(^[A-Z a-z \d_]{8,64}$)/),
           Validators.required
         ])),
       email: new FormControl('',
@@ -102,16 +102,17 @@ export class SignUpInfoService {
         Validators.compose([
           Validators.minLength(10),
           Validators.maxLength(10),
-          Validators.pattern('^07[789][0-9]{7}'),
+          Validators.pattern(/(^[0][7][789]\d{7}$)/),
           Validators.required
         ])),
       password: new FormControl('',
         Validators.compose([
           Validators.minLength(8),
           Validators.maxLength(64),
-          Validators.pattern('[0-9a-z-A-Z@.#*$!?&+-/]*'),
+          Validators.pattern(/(.{8,64})/),
           Validators.required
         ])),
+      role: new FormControl(''),
     });
   }
 
@@ -122,7 +123,7 @@ export class SignUpInfoService {
           Validators.compose([
             Validators.minLength(8),
             Validators.maxLength(64),
-            Validators.pattern('[a-zA-Z_ ]*'),
+            Validators.pattern(/(^[A-Z a-z \d\s-_']{4,64}$)/),
             Validators.required
           ])
         ),
@@ -143,19 +144,32 @@ export class SignUpInfoService {
       address:
         new FormControl('',
           Validators.compose([
-            // Validators.pattern('[a-zA-Z_ ]*'),
+            Validators.pattern(/(^[A-Z a-z ' -]{5,8}$)/),
+            Validators.required
+          ])
+        ),
+      location:
+        new FormControl('asfsdd',
+          Validators.compose([
+            Validators.pattern(/(^[A-Z a-z ' -]{5,8}$)/),
+            // Validators.required
+          ])
+        ),
+      tags:
+        new FormControl('',
+          Validators.compose([
+            Validators.pattern(/(^[A-Z a-z\s\d-,']{2,256}$)/),
             Validators.required
           ])
         ),
       description:
         new FormControl('',
           Validators.compose([
-            Validators.pattern('[a-zA-Z_ 0-9]*'),
+            Validators.pattern(/(^[A-Z a-z \d\s-_.']{8,512}$)/),
             Validators.required
           ])
         ),
       image: new FormControl(''),
-
     });
 
   }
@@ -163,28 +177,29 @@ export class SignUpInfoService {
   private createStructureOfDataForCar() {
     this.carInfo = new FormGroup(
       {
-        carModel: new FormControl('',
+        model: new FormControl('',
           Validators.compose([
             Validators.minLength(8),
             Validators.maxLength(100),
-            Validators.pattern('[a-zA-Z_ 0-9]*'),
+            Validators.pattern(/(^[A-Z a-z \d ']{2,24}$)/),
             Validators.required
           ])
         ),
-        carMake: new FormControl('',
+        make: new FormControl('',
           Validators.compose([
             Validators.minLength(8),
             Validators.maxLength(100),
-            Validators.pattern('[a-zA-Z_ 0-9]*'),
+            Validators.pattern(/(^[A-Z a-z \s\d-']{3,24}$)/),
             Validators.required
           ])
         ),
-        carYear: new FormControl('',
+        year: new FormControl('',
           Validators.compose([
+            // Validators.pattern(/(^[\d']{4}$)/),
             Validators.required
           ])
         ),
-        image: new FormControl(''),
+        // image: new FormControl(''),
       });
   }
 
@@ -211,7 +226,7 @@ export class SignUpInfoService {
   }
 
   public getMergeBeforeSendToBackEndForCar() {
-    return new FormGroup({ user: this.userInfo.value, car: this.carInfo.value });
+    return { user: this.userInfo.value, car: this.carInfo.value };
   }
   listenOnEnableSaveButton(): void {
     if (this.type === 'car') {

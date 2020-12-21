@@ -1,12 +1,12 @@
 <ion-content style="height: 100%;">
-    <ion-card style="height: calc(100% - 20px);">
+    <ion-card style="display: block; height: calc(100% - 20px) ; overflow-y: auto;">
         <ion-card-header>
             <h1 style="color: black; font-weight: bold;">
                 {{headerName}}
             </h1>
         </ion-card-header>
-        <ion-card-content>
-            <ion-list class="height-page">
+        <ion-card-content >
+            <ion-list class="height-page" >
                 <div class="{{heightClassName}}">
                     <ion-router-outlet></ion-router-outlet>¦
                 </div>
@@ -14,7 +14,7 @@
                     <div class="d-flex flex-wrap align-items-end w-100 justify-content-end">
                         <ion-button (click)="backURL()" [color]="'secondary'" size="default">previous</ion-button>
                         <ion-button [disabled]="disableNextButton || (disableSaveButton && isMoved)" color="primary"
-                            (click)="doSomething()" size="default">                            {{buttonName}}
+                            (click)="doSomething()" size="default"> {{buttonName}}
                         </ion-button>
                     </div>
                 </ion-item>

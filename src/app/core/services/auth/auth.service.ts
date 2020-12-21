@@ -14,10 +14,14 @@ export class AuthService {
     this.subject = new Subject<any>();
    }
 
-  // signUpForGarageOwner(data): Observable<any> {
+  signUpForGarageOwner(data): Observable<any> {
+    return this.http.post(this.basedUrl+ 'user/garage-owner/create', data);
+  }
+  signUpForCarOwner(data): Observable<any> {
+    return this.http.post(this.basedUrl+ 'user/car-owner/create', data);
+  }
+  login(data): Observable<any> {
+    return this.http.post(this.basedUrl+ 'user/login', data);
+  }
 
-  //   // this.http.post().subscribe((res) => {
-
-  //   // });
-  // }
 }
