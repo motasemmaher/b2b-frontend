@@ -1,5 +1,5 @@
 import { IonicModule, NavController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { AuthRoutingConstants, AppRoutingConstants, SharedRoutingConstants } from '@app/core/constants/routes';
 import { AuthService } from '@app/core/services/auth/auth.service';
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   pathOfSignUpForCarOwner: string = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.USER_INFO}`;
   pathOfSignUpForG1Owner: string = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.USER_INFO}`;
   pathOfResetPassword: string = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.RESET_PASSWORD}`;
+  listenOnErrorLogin: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private authService: AuthService,
@@ -38,6 +39,8 @@ export class LoginComponent implements OnInit {
       ])),
     rememberMe: new FormControl(false),
     });
+
+    
   }
 
   ngOnInit() {
@@ -46,9 +49,7 @@ export class LoginComponent implements OnInit {
   loginFormLog() {
     console.log(this.loginInfo);
     if (this.loginInfo.valid) {
-      this.authService.login(this.loginInfo.value).subscribe((res) => {
-        console.log(res);
-      })
+      this.authService.login(this.loginInfo.value);
     }
   }
 }

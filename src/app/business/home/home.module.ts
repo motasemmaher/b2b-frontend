@@ -16,7 +16,8 @@ import { SharedModule } from '@app/shared/shared.module';
   ],
   declarations: [
     HomeComponent,
-    // LengthOfDescriptionCardPipe,
+  ],
+  providers: [
   ]
 })
 export class HomeModule { }
