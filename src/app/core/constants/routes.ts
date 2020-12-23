@@ -9,9 +9,16 @@ export class AppRoutingConstants {
     static EXPORT = "export";
 }
 
+export class BusinessRoutingConstants {
+    static HOME = "home";
+    static BUSINESS = "business";
+    static EXPORT = "export";
+}
+
 export class BasedUrlsConstants {
     static BASED_URL_LOCALHOST = "http://localhost:3000/";
 }
+
 
 export class AuthRoutingConstants {
     static LOGIN = "login";
