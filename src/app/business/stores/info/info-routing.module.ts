@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { InfoComponent } from './info.component';
-import { AboutStorePage } from './component/about-store/about-store.page';
-import { OffersPage } from './component/offers/offers.page';
+import { AboutStoreComponent } from './component/about-store/about-store.component';
+import { OffersComponent } from './component/offers/offers.component';
+import { ProductsComponent } from './component/products/products.component';
+import { CategoriesComponent } from './component/categories/categories.component';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: ':id/tabs',
     component: InfoComponent,
     children: [
       {
@@ -17,11 +19,19 @@ const routes: Routes = [
       },
       {
         path: 'about-store',
-        component: AboutStorePage,
+        component: AboutStoreComponent,
       },
       {
         path: 'offers',
-        component: OffersPage,
+        component: OffersComponent,
+      },
+      {
+        path: 'products',
+        component: ProductsComponent,
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent,
       },
     ]
   }

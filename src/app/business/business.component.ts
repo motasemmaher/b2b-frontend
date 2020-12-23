@@ -16,6 +16,11 @@ export class BusinessComponent implements OnInit {
 
   public appPages = [
     {
+      title: 'My Store',
+      url: '/business/my-stores',
+      icon: 'accessibility'
+    },
+    {
       title: 'Search By Image',
       url: '/business/search-by-image',
       icon: 'search'
@@ -38,7 +43,7 @@ export class BusinessComponent implements OnInit {
     {
       title: 'PRODUCTS',
       url: '/business/products',
-      icon: 'pricetags'
+      icon: 'cube'
     },
     {
       title: 'CATEGORIES',

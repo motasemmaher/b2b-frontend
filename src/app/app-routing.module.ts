@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/router';
+
+
+export const routingConfiguration: ExtraOptions = {
+  paramsInheritanceStrategy: 'always'
+};
 
 const routes: Routes = [
   {
@@ -11,6 +16,13 @@ const routes: Routes = [
     path: 'business',
     loadChildren: './business/business.module#BusinessModule',
   },
+  {
+    path: 'auth',
+    loadChildren: './auth/auth.module#AuthModule',
+  },
+  // { path: 'all-my-stores', loadChildren: () => import('./business/all-my-stores/all-my-stores.module').then(m => m.AllMyStoresModule) },
+  
+  // { path: 'my-store', loadChildren: () => import('./business/my-store/my-store.module').then(m => m.MyStoreModule) },
   // { path: 'stores', loadChildren: () => import('./business/stores/stores.module').then(m => m.StoresModule) },
   // { path: 'info', loadChildren: () => import('./business/stores/info/info.module').then(m => m.InfoModule) },
   // { path: 'categories', loadChildren: () => import('./business/categories/categories.module').then(m => m.CategoriesModule) },
@@ -27,7 +39,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    // tslint:disable-next-line: max-line-length
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, paramsInheritanceStrategy: routingConfiguration.paramsInheritanceStrategy })
   ],
   exports: [RouterModule]
 })

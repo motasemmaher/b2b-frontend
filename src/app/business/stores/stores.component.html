@@ -2,9 +2,15 @@
     <span>
         <!-- {{ 'TEST' | translate }} -->
     </span>
-    <div class="d-flex flex-wrap  justify-content-center">
-        <div *ngFor="let product of stores">
-            <app-card [data]="product"></app-card>
+    <ng-template [ngIf]="stores" [ngIfElse]="loading">
+        <div class="d-flex flex-wrap  justify-content-center">
+            <div *ngFor="let store of stores">
+                <app-card [data]="store" [type]="'stores'"></app-card>
+            </div>
         </div>
-    </div>
+    </ng-template>
 </section>
+
+<ng-template #loading>
+    <app-loading [type]='"card"'></app-loading>
+</ng-template>
