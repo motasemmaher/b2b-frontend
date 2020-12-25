@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 
 import { BusinessComponent } from './business.component';
 import { AuthGuard} from '@app/core/guards/auth/auth.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -20,7 +21,6 @@ const routes: Routes = [
       {
         path: 'store',
         loadChildren: () => import('./stores/stores.module').then(m => m.StoresModule),
-        canActivate: [AuthGuard],
       },
       {
         path: 'products',
@@ -36,7 +36,6 @@ const routes: Routes = [
       },
       {
         path: 'offers',
-        canActivate: [AuthGuard],
         loadChildren: () => import('./offers/offers.module').then(m => m.OffersModule)
       },
       {
@@ -45,15 +44,18 @@ const routes: Routes = [
       },
       {
         path: 'shopping-card',
-        loadChildren: () => import('./shopping-card/shopping-card.module').then(m => m.ShoppingCardModule)
+        loadChildren: () => import('./shopping-card/shopping-card.module').then(m => m.ShoppingCardModule),
+        canActivate: [AuthGuard],
       },
       {
         path: 'chat',
-        loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
+        loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule),
+        canActivate: [AuthGuard],
       },
       {
         path: 'my-stores',
-        loadChildren: () => import('./all-my-stores/all-my-stores.module').then(m => m.AllMyStoresModule)
+        loadChildren: () => import('./all-my-stores/all-my-stores.module').then(m => m.AllMyStoresModule),
+        canActivate: [AuthGuard],
       },
     ],
   },

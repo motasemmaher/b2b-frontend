@@ -6,6 +6,7 @@ import { InsertProductComponent } from './insert-product/insert-product.componen
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { MyCategoriesComponent } from './my-categories/my-categories.component';
 import { MyProductsComponent } from './my-products/my-products.component';
+import { AuthGuard} from '@app/core/guards/auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -20,18 +21,22 @@ const routes: Routes = [
       {
         path: 'insert-product',
         component: InsertProductComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'create-category',
         component: CreateCategoryComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'my-categories',
         component: MyCategoriesComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'my-products',
         component: MyProductsComponent,
+        canActivate: [AuthGuard],
       },
     ]
   }

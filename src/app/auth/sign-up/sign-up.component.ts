@@ -122,11 +122,17 @@ export class SignUpComponent implements OnInit {
         this.data = this.signUpInfoService.getMergeBeforeSendToBackEndForGarage();
         this.manipulateDataBeforeSending();
         this.authService.signUpForGarageOwner(this.data).subscribe((res) => {
+          if (res) {
+            this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}`);
+          }
         });
       } else {
         this.data = this.signUpInfoService.getMergeBeforeSendToBackEndForCar();
         this.manipulateDataBeforeSending();
         this.authService.signUpForCarOwner(this.data).subscribe((res) => {
+          if (res) {
+            this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}`);
+          }
         });
       }
     }
