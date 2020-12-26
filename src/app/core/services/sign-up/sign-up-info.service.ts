@@ -142,14 +142,14 @@ export class SignUpInfoService {
           ])
         ),
       address:
-        new FormControl('',
+        new FormControl('asfsdd',
           Validators.compose([
             Validators.pattern(/(^[A-Z a-z ' -]{5,8}$)/),
             Validators.required
           ])
         ),
       location:
-        new FormControl('asfsdd',
+        new FormControl('',
           Validators.compose([
             Validators.pattern(/(^[A-Z a-z ' -]{5,8}$)/),
             // Validators.required
