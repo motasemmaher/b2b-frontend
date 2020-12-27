@@ -14,15 +14,12 @@ export class ProductsComponent implements OnInit {
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    console.log('111111 asds')
     this.productsService.getProducts().subscribe((res) => {
-      console.log('asds 22222')
       this.products = res.products;
     });
   }
 
   getProduct(type) {
-    console.log('asds')
     if (type === 'up') {
       this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit() + 30,this.productsService.getSkip() + 30);
       this.productsService.getProducts().subscribe((res) => {

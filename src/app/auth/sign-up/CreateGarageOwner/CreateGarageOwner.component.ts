@@ -27,7 +27,6 @@ export class CreateGarageOwnerComponent implements OnInit {
   }
 
   getImageAsBase64(value) {
-    console.log(value.length)
     this.storeInfo.patchValue({ image: value });
   }
 }

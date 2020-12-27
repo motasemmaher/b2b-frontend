@@ -19,7 +19,6 @@ export class OffersComponent implements OnInit {
       const id = params.id;
       this.storesService.getOffersByStoreId('store', id).subscribe(res => {
         this.offers = res;
-        console.log(this.offers)
       });
     });
   }

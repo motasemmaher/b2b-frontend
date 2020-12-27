@@ -51,9 +51,8 @@ export class BusinessService {
   }
 
   public post(path: string, options?: any, body?: any): Observable<any> {
-    console.log(path, body)
     const basedUrl = this.basedUrl.concat(path);
-    return this.http.post(basedUrl,  body);
+    return this.http.post(basedUrl,  body, {...options});
   }
 
   public put(path: string, options?: any, body?: any): Observable<any> {

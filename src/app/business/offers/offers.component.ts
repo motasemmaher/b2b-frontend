@@ -13,7 +13,6 @@ export class OffersComponent implements OnInit {
   ngOnInit(): void {
   }
   takePhoto() {
-    console.log("err")
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,

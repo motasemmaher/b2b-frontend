@@ -44,7 +44,6 @@ export class ProductsComponent implements OnInit {
     }
     this.storesService.getProductsByCategoryIdAndStoreId('store', this.storeId, categoryId).subscribe(res => {
       this.products = res;
-      console.log(res)
     });
   }
 

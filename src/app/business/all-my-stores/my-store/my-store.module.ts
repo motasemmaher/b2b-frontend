@@ -10,16 +10,23 @@ import { MyCategoriesComponent } from './my-categories/my-categories.component';
 import { IonicModule } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
 import { SharedModule } from '@app/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    MyStoreComponent, InsertProductComponent, CreateCategoryComponent, MyProductsComponent, MyCategoriesComponent
+    MyStoreComponent,
+    InsertProductComponent,
+    CreateCategoryComponent,
+    MyProductsComponent,
+    MyCategoriesComponent
   ],
   imports: [
+    IonicModule,
     CommonModule,
     MyStoreRoutingModule,
-    IonicModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     Camera

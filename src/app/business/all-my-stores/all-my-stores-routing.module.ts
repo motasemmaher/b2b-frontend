@@ -8,6 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: AllMyStoresComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'store-info',

@@ -1,52 +1,52 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MyStoresService } from '@app/business/all-my-stores/services/my-stores.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-category',
   templateUrl: './create-category.component.html',
-  styleUrls: ['./create-category.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./create-category.component.css']
 })
+
 export class CreateCategoryComponent implements OnInit {
-  images = [];
-  constructor(private camera: Camera) {
+  categoryFromGroup: FormGroup;
+  disableButtonSave: boolean = true;
+  storeId: string;
+  constructor(
+    private myStoresService: MyStoresService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.categoryFromGroup = new FormGroup({
+      name: new FormControl('', [Validators.required])
+    })
 
+    this.listenOnValidateButtonSave();
+    this.getStoreId();
   }
 
-  takePhoto() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      this.images.push('data:image/jpeg;base64,' + imageData);
-    }, (err) => {
-      console.log(err)
-      // Handle error
-    });
-  }
   ngOnInit(): void {
   }
-  uploadImage(event) {
-    const reader = new FileReader();
-    let x;
-    const i = this;
-    const file = event.target.files[0];
-    console.log(event.target.files)
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      x = reader.result;
-      i.images.push(x);
-      //me.modelvalue = reader.result;
-      // console.log(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log('Error: ', error);
-    };
+  getStoreId() {
+    this.activatedRoute.params.subscribe(params => {
+      this.storeId = params.id;
+    });
+  }
+
+  listenOnValidateButtonSave() {
+    this.categoryFromGroup.valueChanges.subscribe(() => {
+      if (this.categoryFromGroup.valid) {
+        this.disableButtonSave = false;
+      } else {
+        this.disableButtonSave = true;
+      }
+    })
+  }
+
+  createCategory() {
+    this.myStoresService.createCategory(this.storeId, this.categoryFromGroup.value).subscribe((res) => {
+      console.log(res)
+    });
   }
 
 }

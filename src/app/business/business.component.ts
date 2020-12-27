@@ -21,6 +21,11 @@ export class BusinessComponent implements OnInit {
       icon: 'accessibility'
     },
     {
+      title: 'My Store',
+      url: '/business/my-stores',
+      icon: 'accessibility'
+    },
+    {
       title: 'Search By Image',
       url: '/business/search-by-image',
       icon: 'search'

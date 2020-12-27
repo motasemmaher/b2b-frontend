@@ -20,9 +20,7 @@ export class AboutStoreComponent implements OnInit {
    setTimeout(() => {
     this.activatedRoute.params.subscribe(params => {
       const id = params.id;
-      console.log(id)
       this.storesService.getStoreById('stores', id).subscribe(res => {
-        console.log(res)
         this.store = res;
       });
     });

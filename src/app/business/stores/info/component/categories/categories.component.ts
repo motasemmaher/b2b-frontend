@@ -17,7 +17,6 @@ export class CategoriesComponent implements OnInit {
       const id = params.id;
       this.storesService.getCategoriesByStoreId('store', id).subscribe(res => {
         this.categories = res.categories;
-        console.log(this.categories)
       });
     });
   }

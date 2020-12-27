@@ -1,5 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { MyStoresService } from '@app/business/all-my-stores/services/my-stores.service';
+import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-insert-product',
@@ -11,7 +14,49 @@ export class InsertProductComponent implements OnInit {
   images = [];
   isLoading = false;
   loadType = '';
-  constructor(private camera: Camera) { }
+  categories: any[];
+  productFromGroup: FormGroup;
+  disableButtonSave: boolean = true;
+  storeId: string;
+  selectedCategoryId: string;
+
+  constructor(
+    private camera: Camera,
+    private myStoresService: MyStoresService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.productFromGroup = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.pattern(/(^[A-Z a-z \s\d-']{4,64}$)/)]),
+      description: new FormControl('', [Validators.required, Validators.pattern(/(^[A-Z a-z \s\d-'\.]{8,254}$)/)]),
+      price: new FormControl(0, [Validators.required, Validators.pattern(/(^[\d\.]+$)/)]),
+      amount: new FormControl(0, [Validators.required, Validators.pattern(/(^[\d\.]+$)/)]),
+      tags: new FormControl('', [Validators.required, Validators.pattern(/(^[A-Z a-z\s\d-,']{2,256}$)/)]),
+      productType: new FormControl('', [Validators.required]),
+      image: new FormControl('', [Validators.required]),
+      categoryId: new FormControl('', [Validators.required])
+    })
+
+    this.listenOnValidateButtonSave();
+    this.getStoreIdAndCategories();
+  }
+  getStoreIdAndCategories() {
+    this.activatedRoute.params.subscribe(params => {
+      this.storeId = params.id;
+      this.myStoresService.getCategories(this.storeId).subscribe(res => {
+        this.categories = res.categories;
+      })
+    });
+  }
+
+  listenOnValidateButtonSave() {
+    this.productFromGroup.valueChanges.subscribe(() => {
+      if (this.productFromGroup.valid) {
+        this.disableButtonSave = false;
+      } else {
+        this.disableButtonSave = true;
+      }
+    })
+  }
   takePhoto() {
     this.isLoading = true;
     this.loadType = 'takePhoto';
@@ -28,7 +73,6 @@ export class InsertProductComponent implements OnInit {
       this.isLoading = false;
       this.loadType = '';
     }, (err) => {
-      console.log(err)
       // Handle error
       this.isLoading = false;
       this.loadType = '';
@@ -42,14 +86,12 @@ export class InsertProductComponent implements OnInit {
     const reader = new FileReader();
     const i = this;
     const file = event.target.files[0];
-    console.log(event.target.files)
     reader.readAsDataURL(file);
     reader.onload = function () {
+      i.productFromGroup.patchValue({ image: reader.result });
       i.images.push(reader.result);
       i.isLoading = false;
       i.loadType = '';
-      //me.modelvalue = reader.result;
-      // console.log(reader.result);
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -58,4 +100,17 @@ export class InsertProductComponent implements OnInit {
     };
   }
 
+  insertProduct() {
+    const data = this.manipulateDataBeforeSending();
+    this.myStoresService.insertProduct(this.storeId,this.selectedCategoryId, data).subscribe((res) => {
+      console.log(res)
+    })
+  }
+
+  manipulateDataBeforeSending(): any {
+    let data = JSON.parse(JSON.stringify(this.productFromGroup.value));
+    this.selectedCategoryId = data.categoryId;
+    delete data.categoryId;
+    return data;
+  }
 }

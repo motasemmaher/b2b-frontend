@@ -21,7 +21,6 @@ export class CardComponent implements OnInit {
   }
 
   async presentModal(id) {
-    console.log(id);
     const modal = await this.modalController.create({
       component: ViewProductComponent,
       componentProps: {

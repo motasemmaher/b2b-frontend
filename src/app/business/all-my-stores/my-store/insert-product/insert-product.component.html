@@ -2,32 +2,44 @@
     <ion-card>
         <ion-card-header class="d-flex justify-content-between">
             <ion-card-title class="pt-2">Insert Product</ion-card-title>
-            <ion-button color="success">Insert</ion-button>
+            <ion-button color="success" [disabled]="disableButtonSave" (click)="insertProduct()">Insert</ion-button>
         </ion-card-header>
-        <ion-card-content>
-            <div>
+        <ion-card-content [formGroup]="productFromGroup">
+            <div >
                 <ion-item>
                     <ion-label position="floating">Name</ion-label>
-                    <ion-input></ion-input>
+                    <ion-input formControlName="name"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label position="floating">Type</ion-label>
-                    <ion-input></ion-input>
+                    <ion-label>Type </ion-label>
+                    <ion-select placeholder="Select One" formControlName="productType">
+                        <ion-select-option value="Part">Part</ion-select-option>
+                        <ion-select-option value="Accessory">Accessory</ion-select-option>
+                        <ion-select-option value="Service">Service</ion-select-option>
+                    </ion-select>
                 </ion-item>
                 <ion-item>
                     <ion-label position="floating">Price</ion-label>
-                    <ion-input [type]="'number'" [min]="0"></ion-input>
+                    <ion-input [type]="'number'" formControlName="price" [min]="0"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Amount</ion-label>
+                    <ion-input [type]="'number'" formControlName="amount" [min]="0"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label>Category Name </ion-label>
-                    <ion-select placeholder="Select One">
-                      <ion-select-option value="f">Colors</ion-select-option>
-                      <ion-select-option value="m">Wheels</ion-select-option>
+                    <ion-select placeholder="Select One"  formControlName="categoryId">
+                        <ion-select-option *ngFor="let category of categories" [value]="category._id"
+                       >{{category.name}}</ion-select-option>
                     </ion-select>
-                  </ion-item>
+                </ion-item>
                 <ion-item>
-                    <ion-label position="floating">Description</ion-label>
-                    <ion-textarea></ion-textarea>
+                    <ion-label position="floating" >Description</ion-label>
+                    <ion-textarea formControlName="description"></ion-textarea>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Tags</ion-label>
+                    <ion-input formControlName="tags"></ion-input>
                 </ion-item>
             </div>
             <div class="d-flex flex-wrap justify-content-around">
@@ -36,11 +48,11 @@
                 </div>
             </div>
             <input type="file" accept="image/*" #file class="d-none" (change)="uploadImage($event)">
-            <ion-button expand="full" (click)="takePhoto()"> 
+            <ion-button expand="full" (click)="takePhoto()">
                 <ion-spinner *ngIf="loadType === 'takePhoto' && isLoading"></ion-spinner>
                 Take photo
             </ion-button>
-            <ion-button expand="full" (click)="file.click()"> 
+            <ion-button expand="full" (click)="file.click()">
                 <ion-spinner *ngIf="loadType === 'uploadImage' && isLoading"></ion-spinner>
                 Upload file
             </ion-button>

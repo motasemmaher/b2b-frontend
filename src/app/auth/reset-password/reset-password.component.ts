@@ -35,11 +35,9 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   resetFormLog1() {
-    console.log(this.resetInfo1);
   }
 
   resetFormLog2() {
-    console.log(this.resetInfo2);
   }
 
   startReset(){

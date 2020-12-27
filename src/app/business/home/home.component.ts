@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
     this.data = this.data.map((item) => {
       return { ...item, href: `/product` };
     });
-    console.log(this.authService.userInfo())
   }
 
   ngOnInit() {

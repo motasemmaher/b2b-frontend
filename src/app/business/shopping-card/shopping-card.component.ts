@@ -142,7 +142,6 @@ export class ShoppingCardComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log((this.cartForm.get('items') as FormArray));
   }
 
 }
