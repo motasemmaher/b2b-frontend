@@ -17,7 +17,8 @@ export class AuthService {
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   token: string;
   user: any;
-   constructor(
+
+  constructor(
     private router: Router,
     private tokenHandlerService: TokenHandlerService,
     private http: HttpClient
@@ -37,11 +38,21 @@ export class AuthService {
     return this.user;
   }
 
+  isHasRole(role): boolean {
+    return this.user && this.user.role === role;
+  }
+
   signUpForGarageOwner(data): Observable<any> {
     return this.http.post(this.basedUrl + 'user/garage-owner/create', data);
   }
   signUpForCarOwner(data): Observable<any> {
     return this.http.post(this.basedUrl + 'user/car-owner/create', data);
+  }
+
+  clearDate() {
+    localStorage.removeItem('access_token');
+    this.user = null;
+    this.token = null;
   }
   login(data) {
     this.http.post(this.basedUrl + 'user/login', data, { headers: this.headers }).pipe(catchError(this.error)).subscribe(async (res: any) => {

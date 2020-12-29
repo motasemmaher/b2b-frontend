@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 
 import { BusinessComponent } from './business.component';
-import { AuthGuard} from '@app/core/guards/auth/auth.guard';
-
+import { AuthGuard } from '@app/core/guards/auth/auth.guard';
+import { BusinessRoutingConstants } from '@app/core/constants/routes';
 const routes: Routes = [
   {
     path: '',
@@ -12,12 +12,12 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'home',
+        redirectTo: 'store',
       },
-      {
-        path: 'home',
-        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-      },
+      // {
+      //   path: 'home',
+      //   loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+      // },
       {
         path: 'store',
         loadChildren: () => import('./stores/stores.module').then(m => m.StoresModule),
@@ -30,10 +30,10 @@ const routes: Routes = [
         path: 'search-by-image',
         loadChildren: () => import('./search-by-image/search-by-image.module').then(m => m.SearchByImageModule)
       },
-      {
-        path: 'categories',
-        loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
-      },
+      // {
+      //   path: 'categories',
+      //   loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+      // },
       {
         path: 'offers',
         loadChildren: () => import('./offers/offers.module').then(m => m.OffersModule)
@@ -53,7 +53,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'my-stores',
+        path: BusinessRoutingConstants.MY_STORES,
         loadChildren: () => import('./all-my-stores/all-my-stores.module').then(m => m.AllMyStoresModule),
         canActivate: [AuthGuard],
       },

@@ -57,14 +57,14 @@ export class BusinessService {
 
   public put(path: string, options?: any, body?: any): Observable<any> {
     const basedUrl = this.basedUrl.concat(path);
-    return this.http.put(basedUrl, { options, body });
+    return this.http.put(basedUrl, body,  options );
   }
 
   public patch(path: string, options?: any, body?: any): Observable<any> {
     const basedUrl = this.basedUrl.concat(path);
-    return this.http.patch(basedUrl, { options, body });
+    return this.http.patch(basedUrl,  body,  options);
   }
-  public delete(path: string, options?: any, body?: any): Observable<any> {
+  public delete(path: string, options?: any): Observable<any> {
     const basedUrl = this.basedUrl.concat(path);
     return this.http.delete(basedUrl, options);
   }

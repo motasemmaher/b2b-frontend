@@ -50,16 +50,25 @@ export class MyStoresService {
   /**
    * createCategory
    */
-  public createCategory(storeId: string, data): Observable<any> {
+  public createCategory(storeId: string, data: any): Observable<any> {
     const path = `stores/${storeId}/create-category`;
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
   }
-  public insertProduct(storeId: string, categoryId, data): Observable<any> {
+  public insertProduct(storeId: string, categoryId: string, data: any): Observable<any> {
     const path = `stores/${storeId}/category/${categoryId}/create-product`;
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
   }
+  public createOffers(storeId: string, data: any): Observable<any> {
+    const path = `stores/${storeId}/offers/add-offer`;
+    return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
+  }
 
-  public getCategories(storeId): Observable<any> {
+  public getCategories(storeId: string): Observable<any> {
     return this.businessService.get(`stores/${storeId}/categories`)
+  }
+
+  getProducts(storeId: string, categoryId?: string, filter?: string): Observable<any> {
+    const path = `stores/${storeId}${categoryId ? `/category/${categoryId}` : ''}/products?limit=${this.limit}&skip=${this.skip}${filter ? '&'.concat(filter) : ''}`;
+    return this.businessService.get(path);
   }
 }

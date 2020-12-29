@@ -10,9 +10,9 @@
                 </div>
             </ion-list-header>
             <div *ngIf="isViewFilter">
-                <ion-item *ngFor="let item of values;">
+                <ion-item *ngFor="let item of values;let index=index;">
                     <ion-label>{{item.label}}</ion-label>
-                    <ion-radio value="{{item.value}}" ></ion-radio>
+                    <ion-radio value="{{item.value}}" name="filter"></ion-radio>
                 </ion-item>
                 <ion-item lines="none">
                     <ion-button slot="end" (click)="applyFilter()" color="success">

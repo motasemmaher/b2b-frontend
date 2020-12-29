@@ -1,7 +1,7 @@
 <section class="container main-container-in-page">
-    <span>
-        <!-- {{ 'TEST' | translate }} -->
-    </span>
+    <!-- <span>
+        {{ 'TEST' | translate }}
+    </span> -->
     <ng-template [ngIf]="stores" [ngIfElse]="loading">
         <div *ngFor="let store of stores">
             <app-card [data]="store" [type]="'stores'"></app-card>

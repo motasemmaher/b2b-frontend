@@ -11,10 +11,16 @@ export class ViewProductComponent implements OnInit {
   product: any;
   constructor(private productsService: ProductService) {
   }
-  
+
   ngOnInit(): void {
     this.productsService.getProduct(this.id).subscribe(res => {
       this.product = res[0] ?? {};
+    });
+  }
+
+  addToShoppingCart() {
+    this.productsService.addToShoppingCart(this.product.storeId, this.product._id, { quantity: 1 }).subscribe((res) => {
+      console.log(res);
     });
   }
 }

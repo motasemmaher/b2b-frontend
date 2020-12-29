@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import { BusinessRoutingConstants } from '@app/core/constants/routes';
 
 
 import { ActivatedRoute } from '@angular/router';
@@ -17,12 +18,12 @@ export class BusinessComponent implements OnInit {
   public appPages = [
     {
       title: 'My Store',
-      url: '/business/my-stores',
+      url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.MY_STORES}`,
       icon: 'accessibility'
     },
     {
       title: 'My Store',
-      url: '/business/my-stores',
+      url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.MY_STORES}`,
       icon: 'accessibility'
     },
     {
@@ -35,11 +36,11 @@ export class BusinessComponent implements OnInit {
       url: '/business/chat',
       icon: 'mail'
     },
-    {
-      title: 'HOME',
-      url: '/business/home',
-      icon: 'home'
-    },
+    // {
+    //   title: 'HOME',
+    //   url: '/business/home',
+    //   icon: 'home'
+    // },
     {
       title: 'STORES',
       url: '/business/store',
@@ -50,11 +51,11 @@ export class BusinessComponent implements OnInit {
       url: '/business/products',
       icon: 'cube'
     },
-    {
-      title: 'CATEGORIES',
-      url: '/business/categories',
-      icon: 'grid'
-    },
+    // {
+    //   title: 'CATEGORIES',
+    //   url: '/business/categories',
+    //   icon: 'grid'
+    // },
     {
       title: 'OFFERS',
       url: '/business/offers',
