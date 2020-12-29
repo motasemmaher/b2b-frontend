@@ -1,0 +1,51 @@
+<section style="overflow-y: auto; height: 100%;">
+    <ion-card [formGroup]="offersFromGroup">
+        <ion-card-header>
+            <ion-card-header class="d-flex justify-content-between flex-wrap">
+                <ion-card-title class="pt-2">Create offers</ion-card-title>
+                <div>
+                    <ion-button color="secondary" (click)="addOffer()">Add
+                    </ion-button>
+                    <ion-button color="success" [disabled]="disableButtonSave" (click)="createOffer()">Create
+                    </ion-button>
+                </div>
+            </ion-card-header>
+        </ion-card-header>
+        <ion-card-content formArrayName="offers" *ngIf="offersFromGroup" >
+            <div *ngFor="let item of offersFromGroup.get('offers')['controls']; index as i">
+                <ion-card [formGroupName]="i">
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <ion-item lines="full" class="margined">
+                            <ion-label position="floating">Product name: </ion-label>
+                            <ion-select interface="alert" [interfaceOptions]="customPopoverOptions"
+                                formControlName="productId" placeholder="Select One" value="all">
+                                <ion-select-option value="all">All</ion-select-option>
+                                <ion-select-option *ngFor="let product of products" [value]="product.value">
+                                    {{product.name}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item lines="full" class="margined">
+                            <ion-label position="floating">Price</ion-label>
+                            <ion-input type="number" formControlName="price" required></ion-input>
+                        </ion-item>
+                        <ion-item lines="full" class="margined">
+                            <ion-label position="floating">Discount rate</ion-label>
+                            <ion-input type="number" formControlName="discountRate" required></ion-input>
+                        </ion-item>
+                        <ion-item lines="full" class="margined">
+                            <ion-label position="floating">Duration</ion-label>
+                            <ion-input type="number" formControlName="duration" required></ion-input>
+                        </ion-item>
+                       <div class="m-2">
+                        <ion-button color="danger" (click)="deleteOffer(i)">
+                            <ion-icon name="trash-outline"></ion-icon>
+                        </ion-button>
+                       </div>
+                    </div>
+                </ion-card>
+            </div>
+
+        </ion-card-content>
+    </ion-card>
+</section>
