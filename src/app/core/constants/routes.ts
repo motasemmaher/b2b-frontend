@@ -1,7 +1,6 @@
 export class SharedRoutingConstants {
     static CAR = "car";
     static GARAGE = "garage";
-
 }
 export class AppRoutingConstants {
     static AUTH = "auth";

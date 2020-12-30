@@ -42,6 +42,12 @@ export class AuthService {
     return this.user && this.user.role === role;
   }
 
+  getRole() {
+    return (this.user && this.user.role) || 'guest';
+  }
+  getUsername() {
+    return (this.user && this.user.username) || 'guest';
+  }
   signUpForGarageOwner(data): Observable<any> {
     return this.http.post(this.basedUrl + 'user/garage-owner/create', data);
   }
