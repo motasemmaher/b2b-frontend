@@ -13,7 +13,6 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'contacts',
       },
       {
         path: 'contacts',

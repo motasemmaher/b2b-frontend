@@ -1,1 +1,137 @@
-<ion-router-outlet></ion-router-outlet> 
+<!-- <ion-router-outlet></ion-router-outlet> -->
+
+  <ion-card *ngIf="!mobile" style="margin-bottom: 2px; margin-top: 2px; margin-left: 5px; margin-right: 5px; max-width: 75%;">
+    <ion-item>
+      <ion-card-title style="font-size: 25pt;">Chat</ion-card-title>
+    </ion-item>
+  </ion-card>
+  
+  <ion-card *ngIf="mobile" style="margin-bottom: 2px; margin-top: 2px; margin-left: 5px; margin-right: 5px; max-width: 100%;">
+    <ion-item>
+      <ion-card-title style="font-size: 25pt;">Chat</ion-card-title>
+    </ion-item>
+  </ion-card>
+  
+  <div *ngIf="!mobile" style="overflow-y: hidden; width: 100%; height: 100%; display: flex;">
+
+    <ion-row style="width: 100%; height: 100%; display: flex; max-width: 75%;">
+      
+      <div style="overflow-y: scroll; height: 100%; width: 50%;">
+        <ion-col>
+          <ion-card> 
+            <form [formGroup]="contactForm">
+           
+                <ion-list>
+                  <div formArrayName="contacts">
+                    <div *ngFor="let contact of contactsArray.controls; let i=index">
+                      <div [formGroupName]="i">
+                        <ion-item (click)="openConversation(i)">
+                          <ion-grid>
+                            <ion-row>
+                              <ion-col style="max-width: 60px; max-height: 60px;">
+                                <ion-avatar>
+                                  <ion-img style="max-width: 50px; max-height: 50px; object-fit: cover;" src="{{contact.get('image').value}}"></ion-img>
+                                </ion-avatar>
+                              </ion-col>
+                              <ion-col>
+                                <ion-label style="font-weight: bold;"> {{contact.get('username').value}} <span style="font-weight: lighter; font-size: 8pt; float: right;">{{contact.get('chat').value[1][1] + ' at ' + contact.get('chat').value[1][2]}}</span></ion-label>
+                                <ion-label style="font-weight: lighter; float: right;"> {{contact.get('chat').value[1][0]}}</ion-label>
+                              </ion-col>
+                            </ion-row>
+                          </ion-grid>
+                        </ion-item>
+                      </div>
+                    </div>
+                  </div>
+                </ion-list>
+            
+            </form>
+          </ion-card>
+       </ion-col>
+      </div>
+
+      <div style="overflow-y: scroll; height: 100%;  width: 50%;">
+        <ion-col>
+          <ion-card>
+          <form [formGroup]="contactForm">
+            <ion-grid>
+              <div formArrayName="contacts">
+                <div *ngFor="let contact of contactsArray.controls; let i=index;">
+                  <div [formGroupName]="i" *ngIf="i === index">
+                    <ion-row>
+                      <ion-col style="max-width: 60px; max-height: 60px;">
+                        <ion-avatar>
+                          <ion-img style="max-width: 50px; max-height: 50px; object-fit: cover;" src="{{contact.get('image').value}}"></ion-img>
+                        </ion-avatar>
+                      </ion-col>
+                      <ion-col>
+                        <ion-label style="font-weight: bold;"> {{contact.get('username').value}} </ion-label>
+                      </ion-col>
+                    </ion-row>
+                    <div *ngFor="let msg of contact.get('chat').value">
+                      <ion-row>
+                        <ion-col offset="6" size="6" *ngIf="msg[1] === 'sent'" class="message sent-message">
+                          <span>{{msg[0]}}</span>
+                        </ion-col>
+                        <ion-col size="6" *ngIf="msg[1] === 'received'"  class="message received-message">
+                          <span>{{msg[0]}}</span>
+                        </ion-col>
+                      </ion-row>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ion-grid>
+          </form>
+          </ion-card>
+          <div style="width: 48.4%; position: fixed; bottom: 1px; min-width: 384px; /* max-width: 500px; */  max-width: 36.8%;">
+            <ion-card>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="10">
+                    <textarea autosize class="message-input" [(ngModel)]="msgtxt"></textarea>
+                  </ion-col>
+                  <ion-col size="2">
+                    <ion-button style="--padding-start: 0.5em; --padding-end: 0.5em;" expand="block" fill="clear" color="primary" disable="msgtxt === ''" (click)="sendMessage()">
+                      <ion-icon name="send" slot="icon-only"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card>
+          </div>
+      
+        </ion-col>
+      </div>
+      
+    </ion-row>
+
+
+    
+
+
+  </div>
+
+  <div *ngIf="mobile" style="width: 100%;" style="overflow-y: scroll; width: 100%; height: 100%; display: flex;">
+    <div>
+      <div>
+        <app-contacts style="width: 50%; min-width: 384px; max-width: 524px;"></app-contacts>
+      </div>
+    </div>
+  </div>
+
+
+
+<!--   <ion-content>
+    <ion-split-pane>
+      <ion-menu>
+        <app-contacts style="width: 50%;"></app-contacts>
+      </ion-menu>
+    </ion-split-pane>
+    
+    <app-conversation style="width: 50%;"></app-conversation>
+  </ion-content> -->
+
+
+<!--   <app-contacts style="width: 50%; min-width: 384px; max-width: 524px;"></app-contacts>
+      <app-conversation style="width: 50%; min-width: 384px; max-width: 524px;"></app-conversation> -->
