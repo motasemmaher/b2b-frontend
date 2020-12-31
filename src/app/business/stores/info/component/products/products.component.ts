@@ -15,6 +15,7 @@ export class ProductsComponent implements OnInit {
   products: any[];
   storeId: string;
   categories: Category;
+  isFetching: boolean = false;
 
   constructor(
     private storesService: StoresService,
@@ -22,11 +23,13 @@ export class ProductsComponent implements OnInit {
   ) {
     this.activatedRoute.params.subscribe(params => {
       this.storeId = params.id;
-      this.storesService.getCategoriesByStoreId('store', this.storeId).subscribe(res => {
+      this.storesService.getCategoriesByStoreId('stores', this.storeId).subscribe(res => {
         this.categories = res.categories;
       });
-      this.storesService.getProductsByStoreId('store', this.storeId).subscribe(res => {
-        this.products = res;
+      this.isFetching = true;
+      this.storesService.getProductsByStoreId('stores', this.storeId).subscribe(res => {
+        this.isFetching = false;
+        this.products = res.products;
       });
     });
   }
@@ -42,7 +45,9 @@ export class ProductsComponent implements OnInit {
     if (categoryId === 'all') {
       categoryId= null;
     }
-    this.storesService.getProductsByCategoryIdAndStoreId('store', this.storeId, categoryId).subscribe(res => {
+    this.isFetching = true;
+    this.storesService.getProductsByCategoryIdAndStoreId('stores', this.storeId, categoryId).subscribe(res => {
+      this.isFetching = false;
       this.products = res;
     });
   }

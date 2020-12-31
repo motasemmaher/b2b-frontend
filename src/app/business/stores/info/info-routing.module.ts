@@ -5,7 +5,6 @@ import { InfoComponent } from './info.component';
 import { AboutStoreComponent } from './component/about-store/about-store.component';
 import { OffersComponent } from './component/offers/offers.component';
 import { ProductsComponent } from './component/products/products.component';
-import { CategoriesComponent } from './component/categories/categories.component';
 
 const routes: Routes = [
   {
@@ -28,10 +27,6 @@ const routes: Routes = [
       {
         path: 'products',
         component: ProductsComponent,
-      },
-      {
-        path: 'categories',
-        component: CategoriesComponent,
       },
     ]
   }

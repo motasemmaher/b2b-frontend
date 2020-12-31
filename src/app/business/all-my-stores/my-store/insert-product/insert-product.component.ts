@@ -3,7 +3,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { MyStoresService } from '@app/business/all-my-stores/services/my-stores.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { ToastService } from '@app/shared/toaster/toast.service';
 @Component({
   selector: 'app-insert-product',
   templateUrl: './insert-product.component.html',
@@ -23,7 +23,8 @@ export class InsertProductComponent implements OnInit {
   constructor(
     private camera: Camera,
     private myStoresService: MyStoresService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastService: ToastService
   ) {
     this.productFromGroup = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.pattern(/(^[A-Z a-z \s\d-']{4,64}$)/)]),
@@ -39,6 +40,9 @@ export class InsertProductComponent implements OnInit {
     this.listenOnValidateButtonSave();
     this.getStoreIdAndCategories();
   }
+
+
+
   getStoreIdAndCategories() {
     this.activatedRoute.params.subscribe(params => {
       this.storeId = params.id;
@@ -86,17 +90,26 @@ export class InsertProductComponent implements OnInit {
     const reader = new FileReader();
     const i = this;
     const file = event.target.files[0];
+    console.log(file)
     reader.readAsDataURL(file);
-    reader.onload = function () {
-      i.productFromGroup.patchValue({ image: reader.result });
-      i.images.push(reader.result);
-      i.isLoading = false;
-      i.loadType = '';
+    reader.onload =  () => {
+      const image = new Image();
+      image.src = reader.result.toString();
+      image.onload = () => {
+        if (image.width < 400 && image.width > 350 && image.height < 350 && image.height > 300) {
+          this.productFromGroup.patchValue({ image: reader.result });
+        } else {
+          // console.log('size error');
+          this.toastService.presentToastWithOptions('error','size error', 'danger')
+        }
+        this.isLoading = false;
+        this.loadType = '';
+      }
     };
-    reader.onerror = function (error) {
+    reader.onerror = (error) =>  {
       console.log('Error: ', error);
-      i.isLoading = false;
-      i.loadType = '';
+      this.isLoading = false;
+      this.loadType = '';
     };
   }
 

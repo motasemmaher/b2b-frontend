@@ -2,8 +2,8 @@
     <span>
         <!-- {{ 'TEST' | translate }} -->
     </span>
-    <ng-template [ngIf]="offers" [ngIfElse]="loading">
-        <div class="d-flex flex-wrap  justify-content-center">
+    <ng-template [ngIf]="offers || !isFetching" [ngIfElse]="loading">
+        <div class="container">
             <div *ngFor="let offer of offers">
                 <app-card [data]="offer" [type] ="'products'"></app-card>
             </div>
