@@ -31,6 +31,13 @@
               <ion-label>{{ p.title | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-menu-toggle *ngIf="isLoggedIn">
+            <ion-item (click)="logout()" routerDirection="root" lines="none"
+              detail="false">
+              <ion-icon slot="start" [ios]="'log-out-outline'" [md]="'log-out-sharp'"></ion-icon>
+              <ion-label>{{ 'LOG_OUT' | translate }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>
