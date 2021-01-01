@@ -20,11 +20,16 @@
                         <app-filters [values]="filters" (filterApplied)="filterApplied($event);"></app-filters>
                     </ion-card-content>
                 </ion-card>
-
-                <div *ngFor="let product of products">
-                    <app-card [data]="product" [type]="'products'"></app-card>
-                </div>
+                <ng-template [ngIf]="products" [ngIfElse]="noDataFound" >
+                    <div *ngFor="let product of products">
+                        <app-card [data]="product" [type]="'products'"></app-card>
+                    </div>
+                </ng-template>
             </div>
         </ion-card-content>
     </ion-card>
 </section>
+
+<ng-template #noDataFound>
+    <app-no-data-found class="h-100 w-100"></app-no-data-found>
+</ng-template>

@@ -2,40 +2,64 @@
   <ion-header>
     <ion-toolbar>
       <section class="d-flex justify-content-between">
-          <ion-buttons slot="start">
-            <ion-menu-button ng-controller="RightController" autoHide="false"></ion-menu-button> 
-            <!-- (click)="toggleMenu()"  -->
-          </ion-buttons>
-          <div class="w-100 d-flex justify-content-between">
-            <ion-title>
-              B2B
-            </ion-title>
-            <ion-title>
-              <div  class="d-flex justify-content-end">
-                <span>{{username}}</span>
-              </div>
-            </ion-title>
-          </div>
+        <ion-buttons slot="start">
+          <ion-menu-button
+            ng-controller="RightController"
+            autoHide="false"
+          ></ion-menu-button>
+          <!-- (click)="toggleMenu()"  -->
+        </ion-buttons>
+        <div class="w-100 d-flex justify-content-between">
+          <ion-title> B2B </ion-title>
+          <ion-title>
+            <div class="d-flex justify-content-end">
+              <span>{{ username }}</span>
+            </div>
+          </ion-title>
+        </div>
       </section>
     </ion-toolbar>
   </ion-header>
 
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" [menuId]="'mainContent'" type="overlay" class="side-menu">
+    <ion-menu
+      contentId="main-content"
+      [menuId]="'mainContent'"
+      type="overlay"
+      class="side-menu"
+    >
       <ion-content>
         <ion-list id="inbox-list" class="border-0 h-100">
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none"
-              detail="false" [class.selected]="selectedIndex == i">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item
+              *ngFor="let p of appPages; let i = index"
+              (click)="selectedIndex = i"
+              routerDirection="root"
+              [routerLink]="[p.url]"
+              lines="none"
+              detail="false"
+              [class.selected]="selectedIndex == i"
+            >
+              <ion-icon
+                slot="start"
+                [ios]="p.icon + '-outline'"
+                [md]="p.icon + '-sharp'"
+              ></ion-icon>
               <ion-label>{{ p.title | translate }}</ion-label>
             </ion-item>
-          </ion-menu-toggle>
-          <ion-menu-toggle *ngIf="isLoggedIn">
-            <ion-item (click)="logout()" routerDirection="root" lines="none"
-              detail="false">
-              <ion-icon slot="start" [ios]="'log-out-outline'" [md]="'log-out-sharp'"></ion-icon>
-              <ion-label>{{ 'LOG_OUT' | translate }}</ion-label>
+
+            <ion-item
+              *ngIf="isLoggedIn"
+              (click)="logout()"
+              lines="none"
+              detail="false"
+            >
+              <ion-icon
+                slot="start"
+                [ios]="'log-out-outline'"
+                [md]="'log-out-sharp'"
+              ></ion-icon>
+              <ion-label>{{ "LOG_OUT" | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

@@ -8,6 +8,7 @@ import { FiltersComponent } from './filters/filters.component';
 import { RouterModule } from '@angular/router';
 import { ViewProductComponent } from './view-product/view-product.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
+import { NoDataFoundComponent } from './no-data-found/no-data-found.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     CardComponent,
     FiltersComponent,
     ViewProductComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    NoDataFoundComponent
 
   ],
   exports: [
@@ -28,7 +30,8 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     CardComponent,
     FiltersComponent,
     ViewProductComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    NoDataFoundComponent
   ]
 })
 export class SharedModule { }

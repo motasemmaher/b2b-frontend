@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { BusinessRoutingConstants } from "@app/core/constants/routes";
 import { SharedConstants } from "@app/core/constants/constants";
@@ -12,7 +12,7 @@ import { MenuController } from "@ionic/angular";
   templateUrl: "./business.component.html",
   styleUrls: ["./business.component.css"],
 })
-export class BusinessComponent implements OnInit {
+export class BusinessComponent implements OnInit, OnDestroy {
   public selectedIndex = 0;
   public folder: string;
 
@@ -56,25 +56,7 @@ export class BusinessComponent implements OnInit {
     },
   ];
 
-  public appPages = [
-    {
-      title: "Search By Image",
-      url: "/business/search-by-image",
-      icon: "search",
-    },
-    {
-      title: "CHAT",
-      url: "/business/chat",
-      icon: "mail",
-    },
-    {
-      title: "SETTING",
-      url: "/business/settings",
-      icon: "settings",
-
-    },
-
-  ];
+  public appPages: any [];
   public labels = ["Family", "Friends", "Notes", "Work", "Travel", "Reminders"];
   role: string;
   isLoggedIn: boolean = false;
@@ -83,7 +65,31 @@ export class BusinessComponent implements OnInit {
     private translate: TranslateService,
     private authService: AuthService // private menu: MenuController
   ) {
+    this.appPages = [
+      {
+        title: "Search By Image",
+        url: "/business/search-by-image",
+        icon: "search",
+      },
+      {
+        title: "CHAT",
+        url: "/business/chat",
+        icon: "mail",
+      },
+      {
+        title: "SETTING",
+        url: "/business/settings",
+        icon: "settings",
+  
+      },
+  
+    ];
     this.role = this.authService.getRole();
+    if (this.authService.loggedIn) {
+     this.isLoggedIn = true;
+    }
+    // this.menu.enable(true, 'mainContent')
+    this.username = this.authService.getUsername();
     if (
       this.role === SharedConstants.GUEST ||
       this.role === SharedConstants.CAR_OWNER
@@ -96,11 +102,6 @@ export class BusinessComponent implements OnInit {
       this.appPages.unshift(...this.garageOwnerPages);
     } else {
     }
-    if (this.authService.loggedIn) {
-     this.isLoggedIn = true;
-    }
-    // this.menu.enable(true, 'mainContent')
-    this.username = this.authService.getUsername();
   }
 
   // toggleMenu() {
@@ -127,5 +128,8 @@ export class BusinessComponent implements OnInit {
         (page) => page.title.toLowerCase() === path.toLowerCase()
       );
     }
+  }
+  ngOnDestroy() {
+    this.appPages = [];
   }
 }

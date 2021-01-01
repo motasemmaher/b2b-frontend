@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class OffersComponent implements OnInit {
 
   offers: any[];
-  isFetching: boolean;
+  isFetching: boolean = false;
   constructor(
     private storesService: StoresService,
     private activatedRoute: ActivatedRoute,
