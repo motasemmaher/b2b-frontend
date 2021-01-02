@@ -1,37 +1,37 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes, CanActivate } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 
-import { BusinessComponent } from "./business.component";
-import { AuthGuard } from "@app/core/guards/auth/auth.guard";
-import { BusinessRoutingConstants } from "@app/core/constants/routes";
+import { BusinessComponent } from './business.component';
+import { AuthGuard } from '@app/core/guards/auth/auth.guard';
+import { BusinessRoutingConstants } from '@app/core/constants/routes';
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: BusinessComponent,
     children: [
       {
-        path: "",
-        pathMatch: "full",
-        redirectTo: "store",
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'store',
       },
       // {
       //   path: 'home',
       //   loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
       // },
       {
-        path: "store",
+        path: 'store',
         loadChildren: () =>
-          import("./stores/stores.module").then((m) => m.StoresModule),
+          import('./stores/stores.module').then((m) => m.StoresModule),
       },
       {
-        path: "products",
+        path: 'products',
         loadChildren: () =>
-          import("./products/products.module").then((m) => m.ProductsModule),
+          import('./products/products.module').then((m) => m.ProductsModule),
       },
       {
-        path: "search-by-image",
+        path: 'search-by-image',
         loadChildren: () =>
-          import("./search-by-image/search-by-image.module").then(
+          import('./search-by-image/search-by-image.module').then(
             (m) => m.SearchByImageModule
           ),
       },
@@ -40,41 +40,41 @@ const routes: Routes = [
       //   loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
       // },
       {
-        path: "offers",
+        path: 'offers',
         loadChildren: () =>
-          import("./offers/offers.module").then((m) => m.OffersModule),
+          import('./offers/offers.module').then((m) => m.OffersModule),
       },
       {
-        path: "settings",
+        path: 'settings',
         loadChildren: () =>
-          import("./settings/settings.module").then((m) => m.SettingsModule),
+          import('./settings/settings.module').then((m) => m.SettingsModule),
       },
       {
-        path: "shopping-card",
+        path: 'shopping-card',
         loadChildren: () =>
-          import("./shopping-card/shopping-card.module").then(
+          import('./shopping-card/shopping-card.module').then(
             (m) => m.ShoppingCardModule
           ),
         canActivate: [AuthGuard],
       },
       {
-        path: "chat",
+        path: 'chat',
         loadChildren: () =>
-          import("./chat/chat.module").then((m) => m.ChatModule),
+          import('./chat/chat.module').then((m) => m.ChatModule),
         canActivate: [AuthGuard],
       },
       {
         path: BusinessRoutingConstants.MY_STORES,
         loadChildren: () =>
-          import("./all-my-stores/all-my-stores.module").then(
+          import('./all-my-stores/all-my-stores.module').then(
             (m) => m.AllMyStoresModule
           ),
         canActivate: [AuthGuard],
       },
       {
-        path: "my-cars",
+        path: 'my-cars',
         loadChildren: () =>
-          import("./my-cars/my-cars.module").then((m) => m.MyCarsModule),
+          import('./my-cars/my-cars.module').then((m) => m.MyCarsModule),
           canActivate: [AuthGuard],
       },
     ],

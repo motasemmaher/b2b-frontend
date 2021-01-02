@@ -21,12 +21,12 @@ export class ProductsComponent implements OnInit {
 
   getProduct(type) {
     if (type === 'up') {
-      this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit() + 30,this.productsService.getSkip() + 30);
+      this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit() + 30, this.productsService.getSkip() + 30);
       this.productsService.getProducts().subscribe((res) => {
         this.products = res.products;
       });
     } else {
-      this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit() + 30,this.productsService.getSkip() + 30);
+      this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit() + 30, this.productsService.getSkip() + 30);
       this.productsService.getProducts().subscribe((res) => {
         this.products = res.products;
       });

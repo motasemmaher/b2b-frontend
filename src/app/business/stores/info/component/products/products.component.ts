@@ -15,7 +15,7 @@ export class ProductsComponent implements OnInit {
   products: any[];
   storeId: string;
   categories: Category;
-  isFetching: boolean = false;
+  isFetching = false;
 
   constructor(
     private storesService: StoresService,
@@ -43,12 +43,12 @@ export class ProductsComponent implements OnInit {
   updateCategory(value) {
     let { value: categoryId } = value.target;
     if (categoryId === 'all') {
-      categoryId= null;
+      categoryId = null;
     }
     this.isFetching = true;
     this.storesService.getProductsByCategoryIdAndStoreId('stores', this.storeId, categoryId).subscribe(res => {
       this.isFetching = false;
-      this.products = res;
+      this.products = res.products;
     });
   }
 

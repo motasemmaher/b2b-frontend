@@ -11,8 +11,8 @@ export class SignUpInfoService {
   private carInfo: FormGroup;
   private garageInfo: FormGroup;
   private type: string;
-  private enableSaveButton: boolean = false;
-  private enableNextButton: boolean = false;
+  private enableSaveButton = false;
+  private enableNextButton = false;
 
   constructor() {
   }
@@ -232,7 +232,7 @@ export class SignUpInfoService {
     if (this.type === 'car') {
       this.carInfo.valueChanges.subscribe(() => {
         if (this.carInfo.valid) {
-          this.enableEnableSaveButton()
+          this.enableEnableSaveButton();
         } else {
           this.disableEnableSaveButton();
         }
@@ -241,7 +241,7 @@ export class SignUpInfoService {
     else if (this.type === 'car') {
       this.carInfo.valueChanges.subscribe(() => {
         if (this.garageInfo.valid) {
-          this.enableEnableSaveButton()
+          this.enableEnableSaveButton();
         } else {
           this.disableEnableSaveButton();
         }

@@ -16,7 +16,7 @@ export class InsertProductComponent implements OnInit {
   loadType = '';
   categories: any[];
   productFromGroup: FormGroup;
-  disableButtonSave: boolean = true;
+  disableButtonSave = true;
   storeId: string;
   selectedCategoryId: string;
 
@@ -35,7 +35,7 @@ export class InsertProductComponent implements OnInit {
       productType: new FormControl('', [Validators.required]),
       image: new FormControl('', [Validators.required]),
       categoryId: new FormControl('', [Validators.required])
-    })
+    });
 
     this.listenOnValidateButtonSave();
     this.getStoreIdAndCategories();
@@ -48,7 +48,7 @@ export class InsertProductComponent implements OnInit {
       this.storeId = params.id;
       this.myStoresService.getCategories(this.storeId).subscribe(res => {
         this.categories = res.categories;
-      })
+      });
     });
   }
 
@@ -59,7 +59,7 @@ export class InsertProductComponent implements OnInit {
       } else {
         this.disableButtonSave = true;
       }
-    })
+    });
   }
   takePhoto() {
     this.isLoading = true;
@@ -69,7 +69,7 @@ export class InsertProductComponent implements OnInit {
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
-    }
+    };
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
@@ -90,7 +90,7 @@ export class InsertProductComponent implements OnInit {
     const reader = new FileReader();
     const i = this;
     const file = event.target.files[0];
-    console.log(file)
+    console.log(file);
     reader.readAsDataURL(file);
     reader.onload =  () => {
       const image = new Image();
@@ -100,11 +100,11 @@ export class InsertProductComponent implements OnInit {
           this.productFromGroup.patchValue({ image: reader.result });
         } else {
           // console.log('size error');
-          this.toastService.presentToastWithOptions('error','size error', 'danger')
+          this.toastService.presentToastWithOptions('error', 'size error', 'danger');
         }
         this.isLoading = false;
         this.loadType = '';
-      }
+      };
     };
     reader.onerror = (error) =>  {
       console.log('Error: ', error);
@@ -115,13 +115,13 @@ export class InsertProductComponent implements OnInit {
 
   insertProduct() {
     const data = this.manipulateDataBeforeSending();
-    this.myStoresService.insertProduct(this.storeId,this.selectedCategoryId, data).subscribe((res) => {
-      console.log(res)
-    })
+    this.myStoresService.insertProduct(this.storeId, this.selectedCategoryId, data).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   manipulateDataBeforeSending(): any {
-    let data = JSON.parse(JSON.stringify(this.productFromGroup.value));
+    const data = JSON.parse(JSON.stringify(this.productFromGroup.value));
     this.selectedCategoryId = data.categoryId;
     delete data.categoryId;
     return data;

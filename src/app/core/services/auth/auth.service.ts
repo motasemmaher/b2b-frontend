@@ -1,26 +1,26 @@
-import { Injectable, Pipe } from "@angular/core";
+import { Injectable, Pipe } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
-} from "@angular/common/http";
-import { Observable, Subject, throwError } from "rxjs";
-import { BasedUrlsConstants } from "@app/core/constants/routes";
-import { Router } from "@angular/router";
+} from '@angular/common/http';
+import { Observable, Subject, throwError } from 'rxjs';
+import { BasedUrlsConstants } from '@app/core/constants/routes';
+import { Router } from '@angular/router';
 import {
   AppRoutingConstants,
   BusinessRoutingConstants,
-} from "@app/core/constants/routes";
-import { TokenHandlerService } from "@app/core/services/token-handler/token-handler.service";
-import { catchError } from "rxjs/operators";
+} from '@app/core/constants/routes';
+import { TokenHandlerService } from '@app/core/services/token-handler/token-handler.service';
+import { catchError } from 'rxjs/operators';
 // import jwt from 'jsonwebtoken';
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService {
   subject: Subject<{}>;
   basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST;
-  private headers = new HttpHeaders({ "Content-Type": "application/json" });
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   token: string;
   user: any;
 
@@ -34,8 +34,8 @@ export class AuthService {
   }
 
   getData() {
-    if (localStorage.getItem("access_token")) {
-      this.token = localStorage.getItem("access_token");
+    if (localStorage.getItem('access_token')) {
+      this.token = localStorage.getItem('access_token');
       this.user = this.tokenHandlerService.getPayload(this.token);
     }
   }
@@ -49,21 +49,21 @@ export class AuthService {
   }
 
   getRole() {
-    return (this.user && this.user.role) || "guest";
+    return (this.user && this.user.role) || 'guest';
   }
   getUsername() {
-    return (this.user && this.user.username) || "guest";
+    return (this.user && this.user.username) || 'guest';
   }
   signUpForGarageOwner(data): Observable<any> {
-    return this.http.post(this.basedUrl + "user/garage-owner/create", data);
+    return this.http.post(this.basedUrl + 'user/garage-owner/create', data);
   }
   signUpForCarOwner(data): Observable<any> {
-    return this.http.post(this.basedUrl + "user/car-owner/create", data);
+    return this.http.post(this.basedUrl + 'user/car-owner/create', data);
   }
 
   logout() {
-    this.http.delete(this.basedUrl + "user/logout").subscribe(() => {
-      localStorage.removeItem("access_token");
+    this.http.delete(this.basedUrl + 'user/logout').subscribe(() => {
+      localStorage.removeItem('access_token');
       this.user = null;
       this.token = null;
       this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}`);
@@ -71,17 +71,17 @@ export class AuthService {
   }
 
   clearDate() {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem('access_token');
     this.user = null;
     this.token = null;
   }
   login(data) {
     this.http
-      .post(this.basedUrl + "user/login", data, { headers: this.headers })
+      .post(this.basedUrl + 'user/login', data, { headers: this.headers })
       .pipe(catchError(this.error))
       .subscribe(async (res: any) => {
         if (res.auth) {
-          localStorage.setItem("access_token", res.token);
+          localStorage.setItem('access_token', res.token);
           this.token = res.token;
           this.user = this.tokenHandlerService.getPayload(this.token);
           this.router.navigateByUrl(`/${AppRoutingConstants.BUSINESS}`);
@@ -96,7 +96,7 @@ export class AuthService {
   private error(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error("An error occurred:", error.error.message);
+      console.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
@@ -105,6 +105,6 @@ export class AuthService {
       );
     }
     // return an observable with a user-facing error message
-    return throwError("Something bad happened; please try aga<  in later.");
+    return throwError('Something bad happened; please try aga<  in later.');
   }
 }

@@ -44,7 +44,7 @@ export class BusinessService {
     return this.skip;
   }
   public get(path: string, options?: any): Observable<any> {
-    const basedUrl = this.basedUrl.concat(path)
+    const basedUrl = this.basedUrl.concat(path);
       // .concat(`?limit=${this.limit}`)
       // .concat(`&skip=${this.skip}`);
     return this.http.get(basedUrl, options);

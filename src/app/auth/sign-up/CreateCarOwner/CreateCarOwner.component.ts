@@ -15,7 +15,7 @@ export class CreateCarOwnerComponent implements OnInit {
   constructor(
     private signUpInfoService: SignUpInfoService,
     private router: Router,
-    
+
   ) {
    if (this.signUpInfoService.getUserInfoData().invalid) {
      this.router.navigateByUrl(`${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.USER_INFO}`);
@@ -23,7 +23,7 @@ export class CreateCarOwnerComponent implements OnInit {
    }
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.carInfo = this.signUpInfoService.getCarInfoData();
   }
 }

@@ -1,9 +1,9 @@
-import { Observable } from "rxjs";
-import { Injectable } from "@angular/core";
-import { BusinessService } from "@app/business/services/business.service";
-import { AuthService } from "@app/core/services/auth/auth.service";
+import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BusinessService } from '@app/business/services/business.service';
+import { AuthService } from '@app/core/services/auth/auth.service';
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class CarsService {
   constructor(
@@ -12,14 +12,14 @@ export class CarsService {
   ) {}
 
   getMyCars(): Observable<any> {
-    return this.businessService.get("user/manage-car-owner/cars", {
+    return this.businessService.get('user/manage-car-owner/cars', {
       headers: { authorization: this.authService.token },
     });
   }
 
   addNewCar(data: any): Observable<any> {
     return this.businessService.post(
-      "user/manage-car-owner/add-car",
+      'user/manage-car-owner/add-car',
       {
         headers: { authorization: this.authService.token },
       },

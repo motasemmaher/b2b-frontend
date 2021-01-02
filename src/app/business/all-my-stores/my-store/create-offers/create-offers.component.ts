@@ -11,7 +11,7 @@ import { MyStoresService } from '../../services/my-stores.service';
 })
 export class CreateOffersComponent implements OnInit {
 
-  disableButtonSave: boolean = true;
+  disableButtonSave = true;
   offersFromGroup: FormGroup;
   products: any[];
   storeId: any;
@@ -50,7 +50,7 @@ export class CreateOffersComponent implements OnInit {
       this.storeId = params.id;
       this.myStoresService.getProducts(this.storeId, null, 'nameSort=1').subscribe((res) => {
         this.products = res.products.map((product) => ({ name: product.name, value: product._id }));
-      })
+      });
     });
   }
 
@@ -61,14 +61,14 @@ export class CreateOffersComponent implements OnInit {
       } else {
         this.disableButtonSave = true;
       }
-    })
+    });
   }
 
   createOffer() {
     const data = this.offersFromGroup.value;
     this.myStoresService.createOffers(this.storeId, { productOffers: data.offers }).subscribe(res => {
       console.log(res);
-    })
+    });
   }
 
 

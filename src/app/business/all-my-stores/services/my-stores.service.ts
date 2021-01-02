@@ -64,7 +64,7 @@ export class MyStoresService {
   }
 
   public getCategories(storeId: string): Observable<any> {
-    return this.businessService.get(`stores/${storeId}/categories`)
+    return this.businessService.get(`stores/${storeId}/categories`);
   }
 
   getProducts(storeId: string, categoryId?: string, filter?: string): Observable<any> {

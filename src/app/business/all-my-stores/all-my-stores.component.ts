@@ -13,7 +13,7 @@ export class AllMyStoresComponent implements OnInit {
         return { ...store, href: `store-info/${store._id}` };
       });
     });
-   } 
+   }
 
   ngOnInit(): void {
   }

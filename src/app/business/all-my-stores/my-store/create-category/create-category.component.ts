@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 
 export class CreateCategoryComponent implements OnInit {
   categoryFromGroup: FormGroup;
-  disableButtonSave: boolean = true;
+  disableButtonSave = true;
   storeId: string;
   constructor(
     private myStoresService: MyStoresService,
@@ -19,7 +19,7 @@ export class CreateCategoryComponent implements OnInit {
   ) {
     this.categoryFromGroup = new FormGroup({
       name: new FormControl('', [Validators.required])
-    })
+    });
 
     this.listenOnValidateButtonSave();
     this.getStoreId();
@@ -40,12 +40,12 @@ export class CreateCategoryComponent implements OnInit {
       } else {
         this.disableButtonSave = true;
       }
-    })
+    });
   }
 
   createCategory() {
     this.myStoresService.createCategory(this.storeId, this.categoryFromGroup.value).subscribe((res) => {
-      console.log(res)
+      console.log(res);
     });
   }
 

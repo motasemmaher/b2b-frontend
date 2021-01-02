@@ -1,18 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { ShoppingCartService } from "./service/shopping-cart.service";
-import { AlertController } from "@ionic/angular";
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ShoppingCartService } from './service/shopping-cart.service';
+import { AlertController } from '@ionic/angular';
 @Component({
-  selector: "app-shopping-card",
-  templateUrl: "./shopping-card.component.html",
-  styleUrls: ["./shopping-card.component.scss"],
+  selector: 'app-shopping-card',
+  templateUrl: './shopping-card.component.html',
+  styleUrls: ['./shopping-card.component.scss'],
 })
 export class ShoppingCardComponent implements OnInit {
-  //cart = stores;
+  // cart = stores;
   total: number;
   cartForm: FormGroup;
   items: FormArray;
-  isFetching: boolean = true;
+  isFetching = true;
   isEmpty: boolean;
 
   constructor(
@@ -57,10 +57,10 @@ export class ShoppingCardComponent implements OnInit {
 
   calculateTotal() {
     let total = 0;
-    for (let i = 0; i < (this.cartForm.get("items") as FormArray).length; i++) {
+    for (let i = 0; i < (this.cartForm.get('items') as FormArray).length; i++) {
       total +=
-        (this.cartForm.get("items") as FormArray).at(i).get("quantity").value *
-        (this.cartForm.get("items") as FormArray).at(i).get("price").value;
+        (this.cartForm.get('items') as FormArray).at(i).get('quantity').value *
+        (this.cartForm.get('items') as FormArray).at(i).get('price').value;
     }
     return total;
   }
@@ -72,81 +72,81 @@ export class ShoppingCardComponent implements OnInit {
   }
 
   add(i: any) {
-    let quantity = (this.cartForm.get("items") as FormArray)
+    const quantity = (this.cartForm.get('items') as FormArray)
       .at(i)
-      .get("quantity").value;
-    const cartItemId = (this.cartForm.get("items") as FormArray)
+      .get('quantity').value;
+    const cartItemId = (this.cartForm.get('items') as FormArray)
       .at(i)
-      .get("cartItemId").value;
-    (this.cartForm.get("items") as FormArray)
+      .get('cartItemId').value;
+    (this.cartForm.get('items') as FormArray)
       .at(i)
-      .get("quantity")
+      .get('quantity')
       .setValue(quantity + 1);
     this.total = this.calculateTotal();
     this.updateCartItem(cartItemId, quantity + 1);
   }
 
   minus(i: any) {
-    let quantity = (this.cartForm.get("items") as FormArray)
+    const quantity = (this.cartForm.get('items') as FormArray)
       .at(i)
-      .get("quantity").value;
-    const cartItemId = (this.cartForm.get("items") as FormArray)
+      .get('quantity').value;
+    const cartItemId = (this.cartForm.get('items') as FormArray)
       .at(i)
-      .get("cartItemId").value;
-    (this.cartForm.get("items") as FormArray)
+      .get('cartItemId').value;
+    (this.cartForm.get('items') as FormArray)
       .at(i)
-      .get("quantity")
+      .get('quantity')
       .setValue(quantity - 1);
     this.total = this.calculateTotal();
     this.updateCartItem(cartItemId, quantity - 1);
   }
 
   remove(i: any) {
-    const cartItemId = (this.cartForm.get("items") as FormArray)
+    const cartItemId = (this.cartForm.get('items') as FormArray)
       .at(i)
-      .get("cartItemId").value;
+      .get('cartItemId').value;
     this.shoppingCartService
       .removeCartItemInShoppingCart(cartItemId)
       .subscribe((res) => {
-        (this.cartForm.get("items") as FormArray).removeAt(i);
+        (this.cartForm.get('items') as FormArray).removeAt(i);
         this.total = this.calculateTotal();
-        if ((this.cartForm.get("items") as FormArray).length === 0) {
+        if ((this.cartForm.get('items') as FormArray).length === 0) {
           this.isEmpty = true;
         }
       });
   }
 
   get itemsArray(): FormArray {
-    return this.cartForm.get("items") as FormArray;
+    return this.cartForm.get('items') as FormArray;
   }
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      cssClass: "my-custom-class",
-      header: "Checkout info",
+      cssClass: 'my-custom-class',
+      header: 'Checkout info',
       inputs: [
         {
-          name: "deliveryAddress",
-          type: "text",
-          placeholder: "Delivery Address",
+          name: 'deliveryAddress',
+          type: 'text',
+          placeholder: 'Delivery Address',
         },
         {
-          name: "phoneNumber",
-          type: "text",
-          placeholder: "Phone Number",
+          name: 'phoneNumber',
+          type: 'text',
+          placeholder: 'Phone Number',
         },
       ],
       buttons: [
         {
-          text: "Cancel",
-          role: "cancel",
-          cssClass: "secondary",
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
           // handler: (blah) => {
           //   console.log(blah)
           // }
         },
         {
-          text: "Okay",
+          text: 'Okay',
           handler: (data) => {
             console.log(data);
             this.shoppingCartService

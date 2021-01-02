@@ -12,9 +12,9 @@ import { AuthService } from '@app/core/services/auth/auth.service';
 export class LoginComponent implements OnInit {
   loginInfo: FormGroup;
 
-  pathOfSignUpForCarOwner: string = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.USER_INFO}`;
-  pathOfSignUpForG1Owner: string = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.USER_INFO}`;
-  pathOfResetPassword: string = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.RESET_PASSWORD}`;
+  pathOfSignUpForCarOwner = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.USER_INFO}`;
+  pathOfSignUpForG1Owner = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.USER_INFO}`;
+  pathOfResetPassword = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.RESET_PASSWORD}`;
   listenOnErrorLogin: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     rememberMe: new FormControl(false),
     });
 
-    
+
   }
 
   ngOnInit() {

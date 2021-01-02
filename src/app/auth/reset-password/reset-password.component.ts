@@ -49,7 +49,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   backToLogin() {
-    this.navCtrl.navigateRoot('auth/login')
+    this.navCtrl.navigateRoot('auth/login');
   }
 
   back(){

@@ -1,15 +1,15 @@
-import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
-import { Component, OnInit } from "@angular/core";
-import { CarsService } from "./service/cars.service";
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { CarsService } from './service/cars.service';
 @Component({
-  selector: "app-my-cars",
-  templateUrl: "./my-cars.component.html",
-  styleUrls: ["./my-cars.component.scss"],
+  selector: 'app-my-cars',
+  templateUrl: './my-cars.component.html',
+  styleUrls: ['./my-cars.component.scss'],
 })
 export class MyCarsComponent implements OnInit {
-  disableButtonSave: boolean = true;
+  disableButtonSave = true;
   addNewCarFormGroup: FormGroup;
-  disableAddNewCarBtn: boolean = true;
+  disableAddNewCarBtn = true;
   myCars: FormGroup;
   constructor(private carsService: CarsService) {
     this.getMyCars();
@@ -27,7 +27,7 @@ export class MyCarsComponent implements OnInit {
   manageMyCars(cars: any[]) {
     this.myCars = new FormGroup({ cars: new FormArray([]) });
     cars.forEach((car) => {
-      (this.myCars.get("cars") as FormArray).push(
+      (this.myCars.get('cars') as FormArray).push(
         new FormGroup({
           carId: new FormControl(car._id),
           model: new FormControl(
@@ -60,7 +60,7 @@ export class MyCarsComponent implements OnInit {
   manageAddNewCar() {
     this.addNewCarFormGroup = new FormGroup({
       model: new FormControl(
-        "",
+        '',
         Validators.compose([
           Validators.minLength(8),
           Validators.maxLength(100),
@@ -69,7 +69,7 @@ export class MyCarsComponent implements OnInit {
         ])
       ),
       make: new FormControl(
-        "",
+        '',
         Validators.compose([
           Validators.minLength(8),
           Validators.maxLength(100),
@@ -78,7 +78,7 @@ export class MyCarsComponent implements OnInit {
         ])
       ),
       year: new FormControl(
-        "",
+        '',
         Validators.compose([
           // Validators.pattern(/(^[\d']{4}$)/),
           Validators.required,
@@ -99,7 +99,7 @@ export class MyCarsComponent implements OnInit {
   }
 
   manipulateDataBeforeSendingForYear(data): any {
-    data.year = "" + new Date(data.year.toString()).getFullYear();
+    data.year = '' + new Date(data.year.toString()).getFullYear();
     return data;
   }
 
@@ -118,27 +118,27 @@ export class MyCarsComponent implements OnInit {
         });
     }
   }
-  
+
   saveEditedCar(index) {
-    const { carId } = (this.myCars.get("cars") as FormArray).at(index).value;
-    const info = (this.myCars.get("cars") as FormArray).at(index).value;
+    const { carId } = (this.myCars.get('cars') as FormArray).at(index).value;
+    const info = (this.myCars.get('cars') as FormArray).at(index).value;
     const data = {
       make: info.make,
       model: info.model,
       year: info.year,
-    }
+    };
     this.carsService.editCar(carId, this.manipulateDataBeforeSendingForYear(data)).subscribe(() => {
       this.getMyCars();
     });
   }
-  
+
   editCar(index) {
-    (this.myCars.get("cars") as FormArray).at(index).get('isEditing').setValue(true);
+    (this.myCars.get('cars') as FormArray).at(index).get('isEditing').setValue(true);
   }
   deleteCar(index) {
-    const { carId } = (this.myCars.get("cars") as FormArray).at(index).value;
+    const { carId } = (this.myCars.get('cars') as FormArray).at(index).value;
     this.carsService.deleteCar(carId).subscribe(() => {
-      (this.myCars.get("cars") as FormArray).removeAt(index);
+      (this.myCars.get('cars') as FormArray).removeAt(index);
     });
   }
 }

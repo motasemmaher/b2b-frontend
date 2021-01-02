@@ -36,7 +36,7 @@ export class MyProductsComponent implements OnInit {
       });
       this.myStoresService.getProducts(this.storeId, null, 'nameSort=1').subscribe((res) => {
         this.products = res.products;
-      })
+      });
     });
   }
 
@@ -44,7 +44,7 @@ export class MyProductsComponent implements OnInit {
     this.filterSelected = value;
     this.myStoresService.getProducts(this.storeId, this.categoryId, value).subscribe((res) => {
       this.products = res.products;
-    })
+    });
   }
 
   ngOnInit(): void {
