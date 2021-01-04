@@ -13,6 +13,7 @@ import {
 } from '@app/core/constants/routes';
 import { TokenHandlerService } from '@app/core/services/token-handler/token-handler.service';
 import { catchError } from 'rxjs/operators';
+
 // import jwt from 'jsonwebtoken';
 @Injectable({
   providedIn: 'root',
@@ -35,8 +36,10 @@ export class AuthService {
 
   getData() {
     if (localStorage.getItem('access_token')) {
-      this.token = localStorage.getItem('access_token');
-      this.user = this.tokenHandlerService.getPayload(this.token);
+      if (this.tokenHandlerService.isTokenValid(localStorage.getItem('access_token'))) {
+        this.token = localStorage.getItem('access_token');
+        this.user = this.tokenHandlerService.getPayload(this.token);
+      }
     }
   }
 
@@ -91,7 +94,7 @@ export class AuthService {
   }
 
   public get loggedIn(): boolean {
-    return this.tokenHandlerService.isTokenValid(this.token);
+    return this.token && this.tokenHandlerService.isTokenValid(this.token);
   }
   private error(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
