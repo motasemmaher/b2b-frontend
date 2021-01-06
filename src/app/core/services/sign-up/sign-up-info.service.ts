@@ -98,6 +98,13 @@ export class SignUpInfoService {
           Validators.pattern('^[a-z0-9_\.-]*@[\da-z]*\.[a-z]{2,6}$'),
           Validators.required
         ])),
+        address:
+        new FormControl('',
+          Validators.compose([
+            Validators.pattern(/(^[A-Z a-z ' -]{5,8}$)/),
+            Validators.required
+          ])
+        ),
       phoneNumber: new FormControl('',
         Validators.compose([
           Validators.minLength(10),
@@ -142,7 +149,7 @@ export class SignUpInfoService {
           ])
         ),
       address:
-        new FormControl('asfsdd',
+        new FormControl('asfsd',
           Validators.compose([
             Validators.pattern(/(^[A-Z a-z ' -]{5,8}$)/),
             Validators.required

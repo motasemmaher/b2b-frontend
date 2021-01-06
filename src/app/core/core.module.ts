@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { SignUpInfoService } from './services/sign-up/sign-up-info.service';
 import { AuthService } from './services/auth/auth.service';
 import { TokenHandlerService } from './services/token-handler/token-handler.service';
-
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   providers: [
     SignUpInfoService,

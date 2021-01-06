@@ -30,6 +30,7 @@ export class SearchByImageService {
 
   searchByImage(image:string): Observable<any> {
     const name = generateId();
-    return this.http.post(`${this.baseUrl}/get-image-name/${name}`, {img: image.split('data:image/jpeg;base64,')[1]}, {headers: {contentType: "multipart/form-data", processData: "false",}});
+    console.log(image.split('base64,')[1])
+    return this.http.post(`${this.baseUrl}/get-image-name/${name}`, {img: image.split('base64,')[1]}, {headers: {contentType: "multipart/form-data", processData: "false",}});
   }
 }
