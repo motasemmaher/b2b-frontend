@@ -1,85 +1,135 @@
-import { Component, OnInit } from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { BusinessRoutingConstants } from '@app/core/constants/routes';
+import { SharedConstants } from '@app/core/constants/constants';
+import { AuthService } from '@app/core/services/auth/auth.service';
 
 import { ActivatedRoute } from '@angular/router';
-
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-component',
   templateUrl: './business.component.html',
-  styleUrls: ['./business.component.css']
+  styleUrls: ['./business.component.css'],
 })
-export class BusinessComponent implements OnInit {
+export class BusinessComponent implements OnInit, OnDestroy {
   public selectedIndex = 0;
   public folder: string;
 
-  public appPages = [
+  username: string;
+
+  garageOwnerPages = [
     {
       title: 'My Store',
-      url: '/business/my-stores',
-      icon: 'accessibility'
+      url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.MY_STORES}`,
+      icon: 'accessibility',
     },
+  ];
+
+  CarOwnerPages = [
     {
-      title: 'Search By Image',
-      url: '/business/search-by-image',
-      icon: 'search'
+      title: 'My Cars',
+      url: '/business/my-cars',
+      icon: 'car-sport',
     },
-    {
-      title: 'CHAT',
-      url: '/business/chat',
-      icon: 'mail'
-    },
-    {
-      title: 'HOME',
-      url: '/business/home',
-      icon: 'home'
-    },
+  ];
+  guestPages = [
     {
       title: 'STORES',
       url: '/business/store',
-      icon: 'storefront'
+      icon: 'storefront',
     },
     {
       title: 'PRODUCTS',
       url: '/business/products',
-      icon: 'cube'
-    },
-    {
-      title: 'CATEGORIES',
-      url: '/business/categories',
-      icon: 'grid'
+      icon: 'cube',
     },
     {
       title: 'OFFERS',
       url: '/business/offers',
-      icon: 'gift'
+      icon: 'gift',
     },
     {
       title: 'SHOPPING_CART',
       url: '/business/shopping-card',
-      icon: 'bag-handle'
-    },
-    {
-      title: 'SETTING',
-      url: '/business/settings',
-      icon: 'settings'
+      icon: 'bag-handle',
     },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
+  public appPages: any [];
+  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  role: string;
+  isLoggedIn = false;
   constructor(
     private activatedRoute: ActivatedRoute,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService // private menu: MenuController
   ) {
+    this.appPages = [
+      {
+        title: 'Search By Image',
+        url: '/business/search-by-image',
+        icon: 'search',
+      },
+      {
+        title: 'CHAT',
+        url: '/business/chat',
+        icon: 'mail',
+      },
+      {
+        title: 'SETTING',
+        url: '/business/settings',
+        icon: 'settings',
+
+      },
+
+    ];
+    this.role = this.authService.getRole();
+    if (this.authService.loggedIn) {
+     this.isLoggedIn = true;
+    }
+    // this.menu.enable(true, 'mainContent')
+    this.username = this.authService.getUsername();
+    if (
+      this.role === SharedConstants.GUEST ||
+      this.role === SharedConstants.CAR_OWNER
+    ) {
+      this.appPages.unshift(...this.guestPages);
+      if (this.role === SharedConstants.CAR_OWNER) {
+        this.appPages.unshift(...this.CarOwnerPages);
+      }
+    } else if (this.role === SharedConstants.GARAGE_OWNER) {
+      this.appPages.unshift(...this.garageOwnerPages);
+    } else {
+    }
   }
-  
+
+  // toggleMenu() {
+  //   console.log('toggleMenu')
+  //   this.menu.close();
+  //   // this.menu.isOpen('mainContent').then(isOpen => {
+  //   //   console.log(isOpen)
+  //   //   if (isOpen) {
+  //   //     this.menu.close('mainContent');
+  //   //   } else {
+  //   //     this.menu.open('mainContent');
+  //   //   }
+  //   // })
+  // }
+  logout() {
+    this.authService.logout();
+  }
+
   ngOnInit() {
     const path = window.location.pathname.split('folder/')[1];
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+      this.selectedIndex = this.appPages.findIndex(
+        (page) => page.title.toLowerCase() === path.toLowerCase()
+      );
     }
   }
-
+  ngOnDestroy() {
+    this.appPages = [];
+  }
 }

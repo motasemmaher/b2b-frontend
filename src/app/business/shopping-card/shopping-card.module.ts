@@ -2,6 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SharedModule } from '@app/shared/shared.module';
 import { ShoppingCardRoutingModule } from './shopping-card-routing.module';
 import { ShoppingCardComponent } from './shopping-card.component';
 import { FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/for
     CommonModule,
     ShoppingCardRoutingModule,
     IonicModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class ShoppingCardModule { }

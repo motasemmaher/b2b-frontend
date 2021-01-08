@@ -12,7 +12,7 @@ import { IonicModule } from '@ionic/angular';
     AuthRoutingModule,
     IonicModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule
   ],
   declarations: [
     AuthComponent,

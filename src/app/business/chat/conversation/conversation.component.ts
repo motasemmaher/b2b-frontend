@@ -64,7 +64,7 @@ export class ConversationComponent implements OnInit {
       date: new Date(),
       reply: true,
       type: files.length ? 'file' : 'text',
-      files: files,
+      files,
       user: {
         name: 'Jonh Doe',
         avatar: 'https://i.gifer.com/no.gif',

@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginFormLog() {
-    console.log(this.loginInfo);
   }
 
   /* login(form: NgForm) { */

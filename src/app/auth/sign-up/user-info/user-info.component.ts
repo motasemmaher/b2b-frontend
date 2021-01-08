@@ -17,9 +17,9 @@ export class UserInfoComponent implements OnInit {
     this.router.events.subscribe(() => {
       const url = this.router.url;
       if (url.includes(AuthRoutingConstants.CAR_INFO)) {
-       this.userInfo.patchValue({role: 'carOwner'})
+       this.userInfo.patchValue({role: 'carOwner'});
       } else if (url.includes(AuthRoutingConstants.GARAGE_INFO)) {
-        this.userInfo.patchValue({role: 'garageOwner'})
+        this.userInfo.patchValue({role: 'garageOwner'});
       }
     });
   }

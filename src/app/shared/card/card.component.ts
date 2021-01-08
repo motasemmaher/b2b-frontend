@@ -20,10 +20,13 @@ export class CardComponent implements OnInit {
     return this.type && this.type === 'stores' ? 'storeOpenClose' : 'productInOutStock';
   }
 
-  async presentModal() {
+  async presentModal(id) {
     const modal = await this.modalController.create({
       component: ViewProductComponent,
-      // cssClass: 'my-custom-class'
+      componentProps: {
+        id
+      },
+      showBackdrop: true,
       swipeToClose: true,
     });
     return await modal.present();

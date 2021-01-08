@@ -11,15 +11,18 @@ import { ActivatedRoute } from '@angular/router';
 export class OffersComponent implements OnInit {
 
   offers: any[];
+  isFetching = false;
   constructor(
     private storesService: StoresService,
     private activatedRoute: ActivatedRoute,
   ) {
+
     this.activatedRoute.params.subscribe(params => {
       const id = params.id;
-      this.storesService.getOffersByStoreId('store', id).subscribe(res => {
-        this.offers = res;
-        console.log(this.offers)
+      this.isFetching = true;
+      this.storesService.getOffersByStoreId('storeS', id).subscribe(res => {
+        this.isFetching = false;
+        this.offers = res.offers;
       });
     });
   }

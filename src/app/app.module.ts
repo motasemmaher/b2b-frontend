@@ -7,6 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 // import { TranslateModule } from '@ngx-translate/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 
 import { AppComponent } from './app.component';
@@ -49,3 +50,4 @@ export class AppModule {
     translate.use('en');
   }
 }
+platformBrowserDynamic().bootstrapModule(AppModule);

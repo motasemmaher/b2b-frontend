@@ -5,6 +5,8 @@
 }
 .side-menu{
   width: 300px;
+  margin-top: 50px;
+  height: calc(100% - 50px);
 }
 
 @media screen and (max-width: 720px) {

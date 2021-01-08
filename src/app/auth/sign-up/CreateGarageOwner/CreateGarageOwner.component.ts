@@ -17,7 +17,7 @@ export class CreateGarageOwnerComponent implements OnInit {
     private router: Router,
   ) {
     if (this.signUpInfoService.getUserInfoData().invalid) {
-      this.router.navigateByUrl(`${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.USER_INFO}`)
+      this.router.navigateByUrl(`${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.USER_INFO}`);
       return;
     }
   }
@@ -27,7 +27,6 @@ export class CreateGarageOwnerComponent implements OnInit {
   }
 
   getImageAsBase64(value) {
-    console.log(value.length)
     this.storeInfo.patchValue({ image: value });
   }
 }

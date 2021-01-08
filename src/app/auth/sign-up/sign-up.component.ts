@@ -16,12 +16,12 @@ export class SignUpComponent implements OnInit {
 
   type: string;
   userInfo: FormGroup;
-  disableNextButton: boolean = true;
-  disableSaveButton: boolean = true;
-  buttonName: string = 'Next';
-  isMoved: boolean = false;
-  headerName: string = "User Info";
-  heightClassName: string = 'user-info';
+  disableNextButton = true;
+  disableSaveButton = true;
+  buttonName = 'Next';
+  isMoved = false;
+  headerName = 'User Info';
+  heightClassName = 'user-info';
   data: any;
   constructor(
     private navCtrl: NavController,
@@ -42,20 +42,20 @@ export class SignUpComponent implements OnInit {
       const url = this.router.url;
       if (url.includes(AuthRoutingConstants.USER_INFO)) {
         this.heightClassName = 'user-info';
-        this.buttonName = "Next";
+        this.buttonName = 'Next';
         this.isMoved = false;
         this.userInfo.updateValueAndValidity();
-        this.headerName = "User Information";
+        this.headerName = 'User Information';
       } else if (url.includes(AuthRoutingConstants.CAR_INFO) || url.includes(AuthRoutingConstants.GARAGE_INFO)) {
         this.isMoved = true;
         if (url.includes(AuthRoutingConstants.CAR_INFO)) {
           this.heightClassName = 'car-info';
-          this.headerName = "Car Information";
+          this.headerName = 'Car Information';
         } else {
           this.heightClassName = 'garage-info';
-          this.headerName = "Garage Information";
+          this.headerName = 'Garage Information';
         }
-        this.buttonName = "Save";
+        this.buttonName = 'Save';
         this.userInfo.updateValueAndValidity();
       }
     });
@@ -89,7 +89,7 @@ export class SignUpComponent implements OnInit {
       } else {
         this.disableNextButton = true;
       }
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -102,13 +102,13 @@ export class SignUpComponent implements OnInit {
   nextPage() {
     if (this.userInfo.valid) {
       if (this.type === SharedRoutingConstants.CAR) {
-        this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.CAR_INFO}`)
+        this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.CAR_INFO}`);
         this.isMoved = true;
         this.disableNextButton = true;
-        this.buttonName = "Save";
+        this.buttonName = 'Save';
       } else if (this.type === SharedRoutingConstants.GARAGE) {
-        this.buttonName = "Save";
-        this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.GARAGE_INFO}`)
+        this.buttonName = 'Save';
+        this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.GARAGE_INFO}`);
         this.disableNextButton = true;
         this.isMoved = true;
       }
@@ -122,11 +122,17 @@ export class SignUpComponent implements OnInit {
         this.data = this.signUpInfoService.getMergeBeforeSendToBackEndForGarage();
         this.manipulateDataBeforeSending();
         this.authService.signUpForGarageOwner(this.data).subscribe((res) => {
+          if (res) {
+            this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}`);
+          }
         });
       } else {
         this.data = this.signUpInfoService.getMergeBeforeSendToBackEndForCar();
         this.manipulateDataBeforeSending();
         this.authService.signUpForCarOwner(this.data).subscribe((res) => {
+          if (res) {
+            this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}`);
+          }
         });
       }
     }
@@ -137,7 +143,7 @@ export class SignUpComponent implements OnInit {
       this.data.store.openTime = convertFrom24To12Hour(this.data.store.openTime.toString().split('T')[1].split('.')[0]);
       this.data.store.closeTime = convertFrom24To12Hour(this.data.store.closeTime.toString().split('T')[1].split('.')[0]);
     } else {
-      this.data.car.year = "" + new Date(this.data.car.year.toString()).getFullYear();
+      this.data.car.year = '' + new Date(this.data.car.year.toString()).getFullYear();
     }
   }
 

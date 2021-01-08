@@ -23,10 +23,9 @@ export class StoresComponent implements OnInit {
   getStores() {
     // setTimeout(() => {
       this.storeService.getStores('stores').subscribe((res) => {
-        this.stores = res.map((store) => {
-          return { ...store, href: `info/${store._id}` };
+        this.stores = res.stores.map((store) => {
+          return { ...store, href: `info/${store._id}/tabs` };
         });
-        console.log(this.stores, res);
       });
     // }, 1000)
   }

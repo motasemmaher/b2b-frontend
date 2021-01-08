@@ -19,6 +19,9 @@
       "@app/*": [
         "app/*",
       ],
+      "@env/*": [
+        "environments/*"
+      ],
     },
   },
   "angularCompilerOptions": {

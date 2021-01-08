@@ -1,14 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker,
-  Environment
-} from '@ionic-native/google-maps';
+import { SearchByImageService } from './service/search-by-image.service';
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'search-by-image',
@@ -16,50 +7,30 @@ import {
   styleUrls: ['./search-by-image.component.css']
 })
 export class SearchByImageComponent implements OnInit {
+  image: string = "assets/defaultImage.png";
+  disableSaerch: boolean = true;
+  isLoading: boolean = false;
+  isShowResult: boolean = false;
+  imageNameResult: string;
+  constructor(
+    private searchByImageService: SearchByImageService
+  ) { 
 
-  map: GoogleMap;
-  constructor() { }
-
-  ionViewDidLoad() {
-    this.loadMap();
   }
-
-  loadMap() {
-
-    // This code is necessary for browser
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_RELEASE: 'https://maps.googleapis.com/maps/api/js?key=9856d2b5d8fd26f9`)',
-      API_KEY_FOR_BROWSER_DEBUG: 'http://maps.googleapis.com/maps/api/js?key=9856d2b5d8fd26f9`)'
-    });
-
-    const mapOptions: GoogleMapOptions = {
-      camera: {
-         target: {
-           lat: 43.0741904,
-           lng: -89.3809802
-         },
-         zoom: 18,
-         tilt: 30
-       }
-    };
-
-    this.map = GoogleMaps.create('map_canvas', mapOptions);
-
-    const marker: Marker = this.map.addMarkerSync({
-      title: 'Ionic',
-      icon: 'blue',
-      animation: 'DROP',
-      position: {
-        lat: 43.0741904,
-        lng: -89.3809802
-      }
-    });
-    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      alert('clicked');
-    });
-  }
-
+  
   ngOnInit(): void {
   }
-
+  getImageAsBase64(value) {
+    this.disableSaerch = false;
+    this.image = value;
+  }  
+  search() {
+    this.disableSaerch = true;
+    this.isLoading = true;
+    this.searchByImageService.searchByImage(this.image).subscribe(res => {
+      this.isLoading = false;
+      this.isShowResult = true;
+      this.imageNameResult = res.name;
+    })
+  }
 }
