@@ -1,8 +1,9 @@
+import { MobileComponent } from './mobile/mobile.component';
+import { DesktopComponent } from './desktop/desktop.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ChatComponent } from './chat.component';
-import { ContactsComponent } from './contacts/contacts.component';
 import { ConversationComponent } from './conversation/conversation.component';
 
 const routes: Routes = [
@@ -13,14 +14,19 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
+        redirectTo: 'm'
       },
       {
-        path: 'contacts',
-        component: ContactsComponent,
+        path: 'm',
+        component: MobileComponent,
       },
       {
         path: 'conversations/:userId',
         component: ConversationComponent,
+      },
+      {
+        path: 'd',
+        component: DesktopComponent,
       }
     ]
   }

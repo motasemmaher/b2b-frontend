@@ -1,21 +1,20 @@
-import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormArray, FormControl, FormBuilder } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
-import { IonContent, NavController } from '@ionic/angular';
-// import { ChatShowcaseService } from './chat-showcase.service';
+import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { Platform } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-conversation',
-  templateUrl: './conversation.component.html',
-  styleUrls: ['./conversation.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-mobile',
+  templateUrl: './mobile.component.html',
+  styleUrls: ['./mobile.component.css']
 })
-export class ConversationComponent implements OnInit {
+export class MobileComponent implements OnInit {
   index = 0;
 
   contactForm: FormGroup;
   contacts: FormArray = new FormArray([
-    new FormGroup({ id: new FormControl(0), username: new FormControl('Ibrahim Sisneros'), image: new FormControl("https://img.icons8.com/dusk/64/000000/test-account.png"), chat: new FormControl([['hi','sent','14:30'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35'],['yo','received','14:35']]) }),
+    new FormGroup({ id: new FormControl(0), username: new FormControl('Ibrahim Sisneros'), image: new FormControl("https://img.icons8.com/dusk/64/000000/test-account.png"), chat: new FormControl([['hi','sent','14:30'],['yo','received','14:35']]) }),
     new FormGroup({ id: new FormControl(1), username: new FormControl('Kamil Strouse'), image: new FormControl("https://img.icons8.com/dusk/64/000000/test-account.png"), chat: new FormControl([['hi','received','14:30'],['yo','sent','14:35']]) }),
     new FormGroup({ id: new FormControl(2), username: new FormControl('Drury Verde'), image: new FormControl("https://img.icons8.com/dusk/64/000000/test-account.png"), chat: new FormControl([['hi','sent','14:30'],['yo','received','14:35']]) }),
     new FormGroup({ id: new FormControl(3), username: new FormControl('Ademaro Strouse'), image: new FormControl("https://img.icons8.com/dusk/64/000000/test-account.png"), chat: new FormControl([['hi','sent','14:30'],['yo','received','14:35']]) }),
@@ -30,64 +29,47 @@ export class ConversationComponent implements OnInit {
 
   msgtxt = '';
 
-  @ViewChild(IonContent) content: IonContent;
-
-  constructor(private formBuilder: FormBuilder, private route:ActivatedRoute, private navCtrl: NavController) {
-    this.index = parseInt(this.route.snapshot.paramMap.get('userId'));
-  }
+  constructor
+    (
+      private platform: Platform,
+      private splashScreen: SplashScreen,
+      private statusBar: StatusBar,
+      private formBuilder: FormBuilder
+    ) 
+    {
+      this.initializeApp();
+    }
 
   ngOnInit(): void {
     this.contactForm = this.formBuilder.group({
       contacts: this.contacts
     });
-    /* setTimeout(() => {
-      this.content.scrollToBottom(200);
-    }); */
-    /* this.scrollToBottomOnInit(); */
+  }
+
+  test(){
     
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
   }
 
   sendMessage(event: any) {
 
-    (this.contactForm.get("contacts") as FormArray).at(this.index).get("chat").value.push([this.msgtxt,'sent', new Date().toTimeString().substr(0,5)]);
+    (this.contactForm.get("contacts") as FormArray).at(0).get("chat").value.push([this.msgtxt,'sent','10:30']);
     this.msgtxt='';
-/*     const files = !event.files ? [] : event.files.map((file) => {
-      return {
-        url: file.src,
-        type: file.type,
-        icon: 'file-text-outline',
-      };
-    });
-
-    this.messages.push({
-      text: event.message,
-      date: new Date(),
-      reply: true,
-      type: files.length ? 'file' : 'text',
-      files: files,
-      user: {
-        name: 'Jonh Doe',
-        avatar: 'https://i.gifer.com/no.gif',
-      },
-    }); */
-
-    this.scrollBottom();
   }
 
   get contactsArray() : FormArray {
     return this.contactForm.get("contacts") as FormArray;
   }
 
-  goBack(){
-    this.navCtrl.back();
-  }
-
-  scrollBottom(){
-    this.content.scrollToBottom(500);
-  }
-
-  scrollToBottomOnInit() {
-    this.scrollBottom()
+  openConversation(i:any){
+    console.log("Clicked = " + i);
+    this.index = i;
   }
 
 }

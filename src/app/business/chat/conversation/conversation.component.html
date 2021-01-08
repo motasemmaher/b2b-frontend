@@ -1,43 +1,16 @@
-<!-- <ion-content>
-  <form [formGroup]="contactForm">
-    <ion-card>
-      <ion-card-header>
-        <div formArrayName="contacts">
-          <div *ngFor="let contact of contactsArray.controls; let i=index;">
-            <div [formGroupName]="i">
-              <ion-item *ngIf="staticIndex === i">
-                <ion-grid>
-                  <ion-row>
-                    <ion-col style="max-width: 60px; max-height: 60px;">
-                      <ion-avatar>
-                        <ion-img style="max-width: 50px; max-height: 50px; object-fit: cover;" src="{{contact.get('image').value}}"></ion-img>
-                      </ion-avatar>
-                    </ion-col>
-                    <ion-col>
-                      <ion-label style="font-weight: bold;"> {{contact.get('username').value}} </ion-label>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-item>
-            </div>
-          </div>
-        </div>
-      </ion-card-header>
-      <ion-list>
-      </ion-list>
-    </ion-card>
-  </form>
-</ion-content> -->
-
- <div style="overflow-y: scroll; height: 100%;">
-  <!-- <ion-col> -->
-    <ion-card>
+<div style="overflow-y: scroll; height: 100%;">
+  <ion-content #content>
+  <ion-card> 
     <form [formGroup]="contactForm">
-      <ion-grid>
+      <ion-grid float-left fixed>
         <div formArrayName="contacts">
-          <div *ngFor="let contact of contactsArray.controls; let i=index;">
+          <div *ngFor="let contact of contactsArray.controls; let i=index; let l = last">
             <div [formGroupName]="i" *ngIf="i === index">
-              <ion-row>
+              <ion-row style="align-items: center;">
+                {{l ? scrollBottom() : ''}}
+                <ion-col style="flex-grow: unset;" (click)="goBack()">
+                  <ion-icon style="width: 26px; height: 26px;" name="arrow-back"></ion-icon>
+                </ion-col>
                 <ion-col style="max-width: 60px; max-height: 60px;">
                   <ion-avatar>
                     <ion-img style="max-width: 50px; max-height: 50px; object-fit: cover;" src="{{contact.get('image').value}}"></ion-img>
@@ -51,9 +24,11 @@
                 <ion-row>
                   <ion-col offset="6" size="6" *ngIf="msg[1] === 'sent'" class="message sent-message">
                     <span>{{msg[0]}}</span>
+                    <div class="msg-time"><br>{{msg[2]}}</div>
                   </ion-col>
                   <ion-col size="6" *ngIf="msg[1] === 'received'"  class="message received-message">
                     <span>{{msg[0]}}</span>
+                    <div class="msg-time"><br>{{msg[2]}}</div>
                   </ion-col>
                 </ion-row>
               </div>
@@ -62,38 +37,24 @@
         </div>
       </ion-grid>
     </form>
+  </ion-card>
+  <br/><br/><br/><br/><br/><br/><br/>
+</ion-content>
+  <div style="width: 48.4%; position: fixed; bottom: 1px; min-width: 384px; max-width: 500px;">
+    <ion-card>
+      <ion-grid>
+        <ion-row align-items-center no-padding>
+          <ion-col size="10">
+            <textarea autosize maxRows="3" class="message-input" [(ngModel)]="msgtxt"></textarea>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button style="--padding-start: 0.5em; --padding-end: 0.5em;" expand="block" fill="clear" color="primary" disable="msgtxt === ''" (click)="sendMessage()">
+              <ion-icon name="send" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card>
-<!-- <ion-footer>
-  <ion-toolbar color="light">
-    <ion-row>
-      <ion-col size="10">
-        <textarea autosize class="message-input"></textarea>
-      </ion-col>
-      <ion-col size="2">
-        <ion-button expand="block" fill="clear" color="primary">
-          <ion-icon name="send" slot="icon-only"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
-</ion-footer> -->
-
-    <div style="width: 48.4%; position: fixed; bottom: 1px; min-width: 384px; max-width: 500px;">
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="10">
-              <textarea autosize class="message-input" [(ngModel)]="msgtxt"></textarea>
-            </ion-col>
-            <ion-col size="2">
-              <ion-button style="--padding-start: 0.5em; --padding-end: 0.5em;" expand="block" fill="clear" color="primary" disable="msgtxt === ''" (click)="sendMessage()">
-                <ion-icon name="send" slot="icon-only"></ion-icon>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </div>
-
-<!--   </ion-col> -->
+  </div>
+  
 </div>

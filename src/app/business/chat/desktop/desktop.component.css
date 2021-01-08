@@ -23,6 +23,13 @@
   position: absolute;
   bottom: 0;
 }
+.contact:hover{
+  color: rgb(0, 195, 255);
+  cursor: pointer;
+}
+.contact:active{
+  color: rgb(0, 47, 255);
+}
 .msg-time{
   color: #dfdfdf;
   float: right;
