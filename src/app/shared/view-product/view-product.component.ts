@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { ProductService } from "@app/core/services/product/product.service";
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '@app/core/services/product/product.service';
 @Component({
-  selector: "app-view-product",
-  templateUrl: "./view-product.component.html",
-  styleUrls: ["./view-product.component.css"],
+  selector: 'app-view-product',
+  templateUrl: './view-product.component.html',
+  styleUrls: ['./view-product.component.css'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewProductComponent implements OnInit {

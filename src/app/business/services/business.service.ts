@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { BasedUrlsConstants } from "@app/core/constants/routes";
-import { catchError } from "rxjs/operators";
-import { ToastService } from "@app/shared/toaster/toast.service";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { BasedUrlsConstants } from '@app/core/constants/routes';
+import { catchError } from 'rxjs/operators';
+import { ToastService } from '@app/shared/toaster/toast.service';
 @Injectable({
-  providedIn: "any",
+  providedIn: 'any',
 })
 export class BusinessService {
   limit = 30;
@@ -74,7 +74,7 @@ export class BusinessService {
   private error(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error("An error occurred:", error.error.message);
+      console.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
@@ -84,7 +84,7 @@ export class BusinessService {
     }
     // throwError('Something bad happened; please try aga<  in later.')
     // return an observable with a user-facing error message
-    this.toastService.presentToastWithOptions("error", error.error, "danger");
+    this.toastService.presentToastWithOptions('error', error.error, 'danger');
     return throwError('Something bad happened; please try aga<  in later.');
   }
 }

@@ -7,23 +7,23 @@ import { SearchByImageService } from './service/search-by-image.service';
   styleUrls: ['./search-by-image.component.css']
 })
 export class SearchByImageComponent implements OnInit {
-  image: string = "assets/defaultImage.png";
-  disableSaerch: boolean = true;
-  isLoading: boolean = false;
-  isShowResult: boolean = false;
+  image = 'assets/defaultImage.png';
+  disableSaerch = true;
+  isLoading = false;
+  isShowResult = false;
   imageNameResult: string;
   constructor(
     private searchByImageService: SearchByImageService
-  ) { 
+  ) {
 
   }
-  
+
   ngOnInit(): void {
   }
   getImageAsBase64(value) {
     this.disableSaerch = false;
     this.image = value;
-  }  
+  }
   search() {
     this.disableSaerch = true;
     this.isLoading = true;
@@ -31,6 +31,6 @@ export class SearchByImageComponent implements OnInit {
       this.isLoading = false;
       this.isShowResult = true;
       this.imageNameResult = res.name;
-    })
+    });
   }
 }
