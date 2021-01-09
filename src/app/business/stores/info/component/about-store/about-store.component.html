@@ -1,4 +1,4 @@
-<section style="overflow-y: auto">
+<section class="container" style="overflow-y: auto">
   <ng-template [ngIf]="store" [ngIfElse]="cardInfoLoading">
     <ion-card *ngIf="store">
       <div class="d-flex justify-content-center">
@@ -11,9 +11,14 @@
         <ion-card-subtitle
           >Location: {{ store?.address || store?.location }}</ion-card-subtitle
         >
-        <ion-card-title
-          >{{ "NAME" | translate }}: {{ store.name }}</ion-card-title
-        >
+        <div class="w-100 d-flex justify-content-between flex-wrap">
+          <ion-card-title
+            >{{ "NAME" | translate }}: {{ store.name }}</ion-card-title
+          >
+          <div>
+            <ion-button [color] ="'warning'" (click)="presentAlertConfirm()">Write Complaint</ion-button>
+          </div>
+        </div>
       </ion-card-header>
       <ion-card-content>
         <div class="d-flex">
