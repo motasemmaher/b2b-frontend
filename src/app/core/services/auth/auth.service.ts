@@ -15,14 +15,11 @@ import { TokenHandlerService } from '@app/core/services/token-handler/token-hand
 import { catchError } from 'rxjs/operators';
 import { ToastService } from '@app/shared/toaster/toast.service';
 
-// import jwt from 'jsonwebtoken';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // subject: Subject<{}>;
   basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST;
-  // private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   token: string;
   user: any;
 
@@ -32,7 +29,6 @@ export class AuthService {
     private http: HttpClient,
     private toastService: ToastService
   ) {
-    // this.subject = new Subject<any>();
     this.getData();
   }
 
@@ -60,10 +56,10 @@ export class AuthService {
     return (this.user && this.user.username) || 'guest';
   }
   signUpForGarageOwner(data): Observable<any> {
-    return this.http.post(this.basedUrl + 'auth/garage-owner/create', data);
+    return this.http.post(this.basedUrl + 'auth/garage-owner/create', data).pipe(catchError((error) => this.error(error)));
   }
   signUpForCarOwner(data): Observable<any> {
-    return this.http.post(this.basedUrl + 'auth/car-owner/create', data);
+    return this.http.post(this.basedUrl + 'auth/car-owner/create', data).pipe(catchError((error) => this.error(error)));
   }
 
   logout() {
@@ -100,20 +96,7 @@ export class AuthService {
   }
 
   public error(error: HttpErrorResponse) {
-    alert('dfaddf')
-    // if (error.error instanceof ErrorEvent) {
-    //   // A client-side or network error occurred. Handle it accordingly.
-    //   console.error("An error occurred:", error.error.message);
-    // } else {
-    //   // The backend returned an unsuccessful response code.
-    //   // The response body may contain clues as to what went wrong,
-    //   console.error(
-    //     `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-    //   );
-    // }
-    // throwError('Something bad happened; please try aga<  in later.')
-    // return an observable with a user-facing error message
-    this.toastService.presentToastWithOptions("error", error.error.Error || error.error, "danger");
+    this.toastService.presentToastWithOptions('error', error.error.error, 'danger');
     return throwError('Something bad happened; please try aga<  in later.');
   }
 }
