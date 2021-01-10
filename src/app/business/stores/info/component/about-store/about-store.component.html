@@ -16,7 +16,7 @@
             >{{ "NAME" | translate }}: {{ store.name }}</ion-card-title
           >
           <div>
-            <ion-button [color] ="'warning'" (click)="presentAlertConfirm()">Write Complaint</ion-button>
+            <ion-button *ngIf="isLoggedIn" [color] ="'warning'" (click)="presentAlertConfirm()">Write Complaint</ion-button>
           </div>
         </div>
       </ion-card-header>

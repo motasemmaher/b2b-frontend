@@ -13,6 +13,7 @@ export class BusinessRoutingConstants {
     static MY_STORES = 'my-stores';
     static BUSINESS = 'business';
     static EXPORT = 'export';
+    static COMPLAINTS = 'complaints';
 }
 
 export class BasedUrlsConstants {

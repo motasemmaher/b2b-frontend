@@ -75,8 +75,15 @@ const routes: Routes = [
         path: 'my-cars',
         loadChildren: () =>
           import('./my-cars/my-cars.module').then((m) => m.MyCarsModule),
-          canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
+      {
+        path: 'complaints',
+        loadChildren: () =>
+         import('./complaints/complaints.module').then(m => m.ComplaintsModule),
+         canActivate: [AuthGuard],
+      },
+
     ],
   },
 ];
@@ -85,4 +92,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class BusinessRoutingModule {}
+export class BusinessRoutingModule { }

@@ -20,9 +20,14 @@ export class BusinessComponent implements OnInit, OnDestroy {
 
   garageOwnerPages = [
     {
-      title: 'My Store',
+      title: 'My Stores',
       url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.MY_STORES}`,
-      icon: 'accessibility',
+      icon: 'storefront',
+    },
+    {
+      title: 'Complaints',
+      url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.COMPLAINTS}`,
+      icon: 'document-text',
     },
   ];
 
