@@ -18,6 +18,7 @@ export class SearchByImageService {
   ) { }
 
     base64ToArrayBuffer(base64: string) {
+      // tslint:disable-next-line: variable-name
       const binary_string = atob(base64);
       const len = binary_string.length;
       const bytes = new Uint8Array(len);
@@ -30,6 +31,7 @@ export class SearchByImageService {
 
   searchByImage(image: string): Observable<any> {
     const name = generateId();
-    return this.http.post(`${this.baseUrl}/get-image-name/${name}`, {img: image.split('data:image/jpeg;base64,')[1]}, {headers: {contentType: 'multipart/form-data', processData: 'false', }});
+    // tslint:disable-next-line: max-line-length
+    return this.http.post(`${this.baseUrl}/get-image-name/${name}`, {img: image.split('base64,')[1]}, {headers: {contentType: "*", processData: "false",}});
   }
 }

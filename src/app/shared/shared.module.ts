@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { ViewProductComponent } from './view-product/view-product.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { NoDataFoundComponent } from './no-data-found/no-data-found.component';
+import { ToastService } from './toaster/toast.service';
 
 @NgModule({
   imports: [
@@ -25,13 +26,17 @@ import { NoDataFoundComponent } from './no-data-found/no-data-found.component';
     NoDataFoundComponent
 
   ],
+  providers:[
+    ToastService,
+  ],
   exports: [
     LoadingComponent,
     CardComponent,
     FiltersComponent,
     ViewProductComponent,
     UploadImageComponent,
-    NoDataFoundComponent
+    NoDataFoundComponent,
+    ToastService
   ]
 })
 export class SharedModule { }
