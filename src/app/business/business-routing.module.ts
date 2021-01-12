@@ -80,10 +80,14 @@ const routes: Routes = [
       {
         path: 'complaints',
         loadChildren: () =>
-         import('./complaints/complaints.module').then(m => m.ComplaintsModule),
-         canActivate: [AuthGuard],
+          import('./complaints/complaints.module').then(m => m.ComplaintsModule),
+        canActivate: [AuthGuard],
       },
-
+      {
+        path: 'admin',
+        loadChildren: './admin/admin.module#AdminModule',
+        canActivate: [AuthGuard],
+      },
     ],
   },
 ];

@@ -186,17 +186,14 @@ export class SignUpInfoService {
       {
         model: new FormControl('',
           Validators.compose([
-            Validators.minLength(8),
-            Validators.maxLength(100),
-            Validators.pattern(/(^[A-Z a-z \d ']{2,24}$)/),
+            Validators.pattern(/(^[\p{L} \d'-]{2,24}$)/ugi),
             Validators.required
           ])
         ),
         make: new FormControl('',
           Validators.compose([
-            Validators.minLength(8),
-            Validators.maxLength(100),
-            Validators.pattern(/(^[A-Z a-z \s\d-']{3,24}$)/),
+
+            Validators.pattern(/(^[\p{L} \s\d'-]{3,24}$)/ugi),
             Validators.required
           ])
         ),

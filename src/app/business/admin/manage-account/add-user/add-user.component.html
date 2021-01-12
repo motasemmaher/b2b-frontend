@@ -1,1 +1,33 @@
-<p>add-user works!</p>
+<section class="container main-container-in-page">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; index as index">
+        <th scope="row">{{ index }}</th>
+        <td>{{ user.username }}</td>
+        <td>{{ user.fullName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>
+          <div class="d-flex justify-content-start">
+            <ion-button color="success" (click)="acceptUser(index)">
+              <ion-icon name="checkmark" ></ion-icon>
+            </ion-button>
+            <ion-button color="danger" (click)="rejectUser(index)">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

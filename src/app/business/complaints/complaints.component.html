@@ -1,1 +1,31 @@
-<p>complaints works!</p>
+<section class="container main-container-in-page">
+    <h2>
+        View Complaints
+    </h2>
+
+    <div class="d-flex flex-column">
+        <div *ngFor="let complaint of complaints" style="border-bottom: 1px solid #f1f1f1;" class="my-2">
+            <div class="d-flex flex-column justify-content-lg-start">
+                <div>
+                    <span>
+                        Garage Owner Name: {{complaint.garageOwnerName}}
+                    </span>
+                </div>
+                <div>
+                    <span>
+                        Garage Name: {{complaint.storeName}}
+                    </span>
+                </div>
+            </div>
+            <div>
+                <span>
+                    Message: 
+                </span>
+                <p style="max-height: 250px; overflow-y: auto;">
+                    {{complaint.message}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>

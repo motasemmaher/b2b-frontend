@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { BusinessRoutingConstants } from '@app/core/constants/routes';
+import { BusinessRoutingConstants, SharedRoutingConstants } from '@app/core/constants/routes';
 import { SharedConstants } from '@app/core/constants/constants';
 import { AuthService } from '@app/core/services/auth/auth.service';
 
@@ -105,22 +105,27 @@ export class BusinessComponent implements OnInit, OnDestroy {
       }
     } else if (this.role === SharedConstants.GARAGE_OWNER) {
       this.appPages.unshift(...this.garageOwnerPages);
-    } else {
+    } else if (this.role === SharedConstants.ADMIN ){
+      this.appPages = [
+        {
+          title: 'Manage accounts',
+          url: '/business/admin/manage-account',
+          icon: 'people',
+        },
+        {
+          title: 'Complaints',
+          url: '/business/admin/complaints',
+          icon: 'document-text',
+        },
+        {
+          title: 'SETTING',
+          url: '/business/settings',
+          icon: 'settings',
+        },
+      ];
     }
   }
 
-  // toggleMenu() {
-  //   console.log('toggleMenu')
-  //   this.menu.close();
-  //   // this.menu.isOpen('mainContent').then(isOpen => {
-  //   //   console.log(isOpen)
-  //   //   if (isOpen) {
-  //   //     this.menu.close('mainContent');
-  //   //   } else {
-  //   //     this.menu.open('mainContent');
-  //   //   }
-  //   // })
-  // }
   logout() {
     this.authService.logout();
   }
@@ -138,3 +143,8 @@ export class BusinessComponent implements OnInit, OnDestroy {
     this.appPages = [];
   }
 }
+
+
+
+
+

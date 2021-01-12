@@ -1,13 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ComplaintsService } from './service/complaints.service';
 @Component({
   selector: 'app-complaints',
   templateUrl: './complaints.component.html',
   styleUrls: ['./complaints.component.css']
 })
 export class ComplaintsComponent implements OnInit {
+  complaints: any [] = [];
 
-  constructor() { }
+  constructor(
+    private complaintsService: ComplaintsService,
+  ) {
+    this.complaintsService.getComplaints().subscribe(res => {
+      res.complaints.forEach(complaint => {
+        this.complaints.push({
+          garageOwnerName: complaint.garageOwnerId.fullName,
+          storeName: complaint.garageId.name,
+          message: complaint.message.data,
+        });
+      });
+    });
+   }
 
   ngOnInit(): void {
   }
