@@ -1,9 +1,10 @@
+import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import  { SharedModule} from '@app/shared/shared.module';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
-import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     SettingsRoutingModule,
     SharedModule,
-    IonicModule
+    IonicModule,
+    FormsModule
   ]
 })
 export class SettingsModule { }

@@ -6,10 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
+  darkMode = false;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }
+
+  toggleClicked(){
+    this.darkMode = !this.darkMode;
+    console.log(this.darkMode);
+    //window.matchMedia('prefers-color-scheme: dark')
+
+    document.body.classList.toggle('dark');
+    
+    this.ngOnInit();
+  }
+
 
 }
