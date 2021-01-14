@@ -62,6 +62,11 @@ export class MyStoresService {
     const path = `stores/${storeId}/offers/add-offer`;
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
   }
+ 
+  public addNewStore(data: any): Observable<any> {
+    const path = 'user/manage-garage-owner/add-store';
+    return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
+  }
 
   public getCategories(storeId: string): Observable<any> {
     return this.businessService.get(`stores/${storeId}/categories`);

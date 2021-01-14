@@ -28,11 +28,6 @@
                         class="btn btn-primary">View</a>
                     <a *ngIf="type && type === 'products'" (click)="presentModal(data._id)" class="btn btn-primary">View</a>
                 </div>
-                <div *ngIf="data.description">
-                    <p>
-                        {{data.description}}
-                    </p>
-                </div>
             </div>
         </div>
     </ion-card>

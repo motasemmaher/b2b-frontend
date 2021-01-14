@@ -25,6 +25,11 @@ export class BusinessComponent implements OnInit, OnDestroy {
       icon: 'storefront',
     },
     {
+      title: 'Add Store',
+      url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.MY_STORES}/${BusinessRoutingConstants.ADD_STORE}`,
+      icon: 'add-circle',
+    },
+    {
       title: 'Complaints',
       url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.COMPLAINTS}`,
       icon: 'document-text',

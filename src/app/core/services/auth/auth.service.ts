@@ -67,7 +67,8 @@ export class AuthService {
       localStorage.removeItem('access_token');
       this.user = null;
       this.token = null;
-      this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}`);
+      window.location.href = `/${AppRoutingConstants.AUTH}`;
+      // this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}`);
     });
   }
 
