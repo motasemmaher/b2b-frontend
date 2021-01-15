@@ -52,5 +52,10 @@
   "INVALID_PHONE_NUMBER":"Invalid phone number !",
   "INVALID_PASSWORD":"Invalid password !",
   "INVALID_USER_ADDRESS":"Invalid user address !",
-  "INVALID_USER_ROLE":"Invalid user role !"
+  "INVALID_USER_ROLE":"Invalid user role !",
+  "LANGUAGE":"Language",
+  "LANGUAGES":"Languages",
+  "DARK_MODE":"Dark mode",
+  "ACCOUNT_SETTINGS":"Account settings",
+  "SAVE":"save"
 }

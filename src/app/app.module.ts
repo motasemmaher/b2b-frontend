@@ -46,8 +46,33 @@ export function createTranslateLoader(http: HttpClient) {
 })
 export class AppModule {
   constructor(translate: TranslateService) {
-    translate.setDefaultLang('en');
-    translate.use('en');
+    /* translate.setDefaultLang('en');
+    translate.use('en'); */
+    if(localStorage.getItem('language') === null){
+      localStorage.setItem('language', 'en');
+      translate.setDefaultLang('en');
+    }
+    
+    translate.use(localStorage.getItem('language'));
+
+
+    if(localStorage.getItem('darkMode') === null){
+      localStorage.setItem('darkMode' , 'disabled')
+    }
+    else if(localStorage.getItem('darkMode') === 'enabled' && document.body.className === ''){
+      document.body.classList.toggle('dark');
+    }
+
+    /* if(localStorage.getItem('darkMode') === 'disabled'){
+      this.darkMode = false;
+    }
+    else if(localStorage.getItem('darkMode') === 'enabled'){
+      document.body.classList.toggle('dark');
+      this.darkMode = true;
+    } */
+
+
   }
+
 }
 platformBrowserDynamic().bootstrapModule(AppModule);

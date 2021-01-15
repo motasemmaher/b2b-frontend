@@ -52,5 +52,11 @@
   "INVALID_PHONE_NUMBER":"! رقم الهاتف غير صحيح",
   "INVALID_PASSWORD":"! رمز مرور خاطئ!",
   "INVALID_USER_ADDRESS":"! عنوان المستخدم غير صالح",
-  "INVALID_USER_ROLE":"! دور المستخدم غير صالح"
+  "INVALID_USER_ROLE":"! دور المستخدم غير صالح",
+  "LANGUAGE":"اللغة",
+  "LANGUAGES":"اللغات",
+  "DARK_MODE":"الوضع الليلي",
+  "ACCOUNT_SETTINGS":"إعدادت الحساب",
+  "SAVE":"حفظ"
+
 }
