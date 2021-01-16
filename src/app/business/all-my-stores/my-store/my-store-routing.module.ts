@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MyStoreComponent } from './my-store.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
-import { CreateCategoryComponent } from './create-category/create-category.component';
+import { ManageCategoryComponent } from './manage-category/manage-category.component';
 import { CreateOffersComponent } from './create-offers/create-offers.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { AuthGuard} from '@app/core/guards/auth/auth.guard';
@@ -36,8 +36,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'create-category',
-        component: CreateCategoryComponent,
+        path: 'manage-category',
+        component: ManageCategoryComponent,
         canActivate: [AuthGuard],
       },
       {

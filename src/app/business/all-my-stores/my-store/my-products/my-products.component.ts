@@ -12,6 +12,8 @@ export class MyProductsComponent implements OnInit {
   categories: any[];
   storeId: string = null;
   categoryId: string = null;
+
+  
   filters = [
     { label: 'By Descending Name', value: 'nameSort=1' },
     { label: 'By ascending Name', value: 'nameSort=-1' },
@@ -64,6 +66,7 @@ export class MyProductsComponent implements OnInit {
     this.getProducts(this.storeId, this.categoryId);
   }
 
+
   deleteProduct(index: number) {
     const productId = this.products[index]._id;
     const storeId = this.products[index].storeId;
@@ -72,5 +75,6 @@ export class MyProductsComponent implements OnInit {
       this.getProducts(this.storeId, this.categoryId);
     })
   }
+
 
 }

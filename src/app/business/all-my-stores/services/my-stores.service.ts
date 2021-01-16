@@ -59,6 +59,16 @@ export class MyStoresService {
     const path = `stores/${storeId}/create-category`;
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
   }
+
+  public updateCategory(storeId: string, categoyId: string, data: any): Observable<any> {
+    const path = `stores/${storeId}/update-category/${categoyId}`;
+    return this.businessService.put(path, { headers: { authorization: this.authService.token } }, data);
+  }
+
+  public removeCategory(storeId: string, categoyId: string): Observable<any> {
+    const path = `stores/${storeId}/delete-category/${categoyId}`;
+    return this.businessService.delete(path, { headers: { authorization: this.authService.token } });
+  }
   
   public insertProduct(storeId: string, categoryId: string, data: any): Observable<any> {
     const path = `stores/${storeId}/category/${categoryId}/create-product`;
@@ -87,6 +97,10 @@ export class MyStoresService {
 
   public getCategories(storeId: string): Observable<any> {
     return this.businessService.get(`stores/${storeId}/categories`);
+  }
+
+  public getCategory(storeId: string, categoryId: string): Observable<any> {
+    return this.businessService.get(`stores/${storeId}/categories/${categoryId}`);
   }
 
   getProducts(storeId: string, categoryId?: string, filter?: string): Observable<any> {

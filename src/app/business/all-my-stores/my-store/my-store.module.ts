@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MyStoreRoutingModule } from './my-store-routing.module';
 import { MyStoreComponent } from './my-store.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
-import { CreateCategoryComponent } from './create-category/create-category.component';
+import { ManageCategoryComponent } from './manage-category/manage-category.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { IonicModule } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
@@ -16,7 +16,7 @@ import { CreateOffersComponent } from './create-offers/create-offers.component';
   declarations: [
     MyStoreComponent,
     ManageProductComponent,
-    CreateCategoryComponent,
+    ManageCategoryComponent,
     MyProductsComponent,
     CreateOffersComponent
   ],
@@ -31,6 +31,6 @@ import { CreateOffersComponent } from './create-offers/create-offers.component';
   providers: [
     Camera
   ],
-  exports: [CreateCategoryComponent]
+  exports: [ManageCategoryComponent]
 })
 export class MyStoreModule { }
