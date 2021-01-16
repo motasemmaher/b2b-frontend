@@ -2,23 +2,46 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MyStoresService } from '../services/my-stores.service';
 import { convertFrom24To12Hour } from '@app/shared/functions/convertTime';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-store',
-  templateUrl: './add-store.component.html',
-  styleUrls: ['./add-store.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './manage-store-info.component.html',
+  styleUrls: ['./manage-store-info.component.css'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddStoreComponent implements OnInit {
+export class ManageStoreInfoComponent implements OnInit {
 
   newStore: FormGroup;
+  storeId?: string;
+  pageName: string = 'Add New Store';
 
   constructor(
     private myStoresService: MyStoresService,
-  ) { 
+    private activatedRoute: ActivatedRoute,
+  ) {
+
+    this.activatedRoute.params.subscribe(params => {
+      this.storeId = params.storeId;
+      // this.isFetching = true;
+      if (this.storeId) {
+        this.pageName = 'Edit Store'
+        this.myStoresService.getMyStore(this.storeId).subscribe(res => {
+          this.createStoreStructure(res);
+        });
+      } else {
+        this.createStoreStructure();
+      }
+    });
+  }
+
+  ngOnInit(): void {
+  }
+
+  createStoreStructure(data?: any) {
     this.newStore = new FormGroup({
       name:
-        new FormControl('',
+        new FormControl(data?.name || '',
           Validators.compose([
             Validators.minLength(8),
             Validators.maxLength(64),
@@ -27,54 +50,50 @@ export class AddStoreComponent implements OnInit {
           ])
         ),
       openTime:
-        new FormControl('',
+        new FormControl(new Date(`11/11/2020 ${data?.openTime}`).toString() ||'',
           Validators.compose([
             // Validators.pattern('[a-zA-Z_ ]*'),
             Validators.required
           ])
         ),
       closeTime:
-        new FormControl('',
+        new FormControl(new Date(`11/11/2020 ${data?.closeTime}`).toString() || '',
           Validators.compose([
             // Validators.pattern('[a-zA-Z_ ]*'),
             Validators.required
           ])
         ),
       address:
-        new FormControl('asfsd',
+        new FormControl(data?.address || 'testr',
           Validators.compose([
             Validators.pattern(/(^[A-Z a-z ' -]{5,8}$)/),
             Validators.required
           ])
         ),
       location:
-        new FormControl('',
+        new FormControl(data?.location || '',
           Validators.compose([
             Validators.pattern(/(^[A-Z a-z ' -]{5,8}$)/),
             // Validators.required
           ])
         ),
       tags:
-        new FormControl('',
+        new FormControl(data?.tags || '',
           Validators.compose([
             Validators.pattern(/(^[A-Z a-z\s\d-,']{2,256}$)/),
             Validators.required
           ])
         ),
       description:
-        new FormControl('',
+        new FormControl(data?.description || '',
           Validators.compose([
             Validators.pattern(/(^[A-Z a-z \d\s-_.']{8,512}$)/),
             Validators.required
           ])
         ),
-      image: new FormControl(''),
+      image: new FormControl(data?.image || ''),
     });
   }
-
-  ngOnInit(): void {
-  }
-
   getImageAsBase64(value) {
     this.newStore.patchValue({ image: value });
   }
@@ -85,11 +104,27 @@ export class AddStoreComponent implements OnInit {
     return data;
   }
 
+  manageStore() {
+    if (this.storeId) {
+      this.editStore();
+    } else {
+      this.addNewStore();
+    }
+  }
   addNewStore() {
     if (this.newStore.valid) {
       const data = this.manipulateDataBeforeSending(JSON.parse(JSON.stringify(this.newStore.value)))
-      
+
       this.myStoresService.addNewStore(data).subscribe((res) => {
+        console.log(res);
+      })
+    }
+  }
+  editStore() {
+    if (this.newStore.valid) {
+      const data = this.manipulateDataBeforeSending(JSON.parse(JSON.stringify(this.newStore.value)))
+
+      this.myStoresService.editStore(this.storeId,data).subscribe((res) => {
         console.log(res);
       })
     }

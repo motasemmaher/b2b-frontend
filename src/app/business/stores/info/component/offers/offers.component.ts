@@ -20,7 +20,7 @@ export class OffersComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       const id = params.id;
       this.isFetching = true;
-      this.storesService.getOffersByStoreId('storeS', id).subscribe(res => {
+      this.storesService.getOffersByStoreId('stores', id).subscribe(res => {
         this.isFetching = false;
         this.offers = res.offers;
       });

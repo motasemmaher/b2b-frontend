@@ -47,6 +47,11 @@ export class MyStoresService {
     return this.businessService.get(path, { headers: { authorization: this.authService.token } });
   }
 
+  public getMyStore(storeId: string): Observable<any> {
+    const path = `stores/${storeId}`;
+    return this.businessService.get(path, { headers: { authorization: this.authService.token } });
+  }
+
   /**
    * createCategory
    */
@@ -54,10 +59,17 @@ export class MyStoresService {
     const path = `stores/${storeId}/create-category`;
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
   }
+  
   public insertProduct(storeId: string, categoryId: string, data: any): Observable<any> {
     const path = `stores/${storeId}/category/${categoryId}/create-product`;
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
   }
+
+  public updateProduct(storeId: string, categoryId: string, productId, data: any): Observable<any> {
+    const path = `stores/${storeId}/category/${categoryId}/update-product/${productId}`;
+    return this.businessService.put(path, { headers: { authorization: this.authService.token } }, data);
+  }
+
   public createOffers(storeId: string, data: any): Observable<any> {
     const path = `stores/${storeId}/offers/add-offer`;
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
@@ -68,6 +80,11 @@ export class MyStoresService {
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
   }
 
+  public editStore(storeId: string,data: any): Observable<any> {
+    const path = `user/manage-garage-owner/update-store/${storeId}`;
+    return this.businessService.put(path, { headers: { authorization: this.authService.token } }, data);
+  }
+
   public getCategories(storeId: string): Observable<any> {
     return this.businessService.get(`stores/${storeId}/categories`);
   }
@@ -75,5 +92,18 @@ export class MyStoresService {
   getProducts(storeId: string, categoryId?: string, filter?: string): Observable<any> {
     const path = `stores/${storeId}${categoryId ? `/category/${categoryId}` : ''}/products?limit=${this.limit}&skip=${this.skip}${filter ? '&'.concat(filter) : ''}`;
     return this.businessService.get(path);
+  }
+
+  getProduct(storeId: string, productId: string): Observable<any> {
+    const path = `stores/${storeId}/products/${productId}`;
+    return this.businessService.get(path);
+  }
+
+  deleteStore(storeId: string): Observable<any> {
+    return this.businessService.delete(`user/manage-garage-owner/delete-store/${storeId}`, { headers: { authorization: this.authService.token } });
+  }
+  
+  deleteProduct(storeId: string, categoryId: string, productId: string): Observable<any> {
+    return this.businessService.delete(`stores/${storeId}/category/${categoryId}/delete-product/${productId}`, { headers: { authorization: this.authService.token } });
   }
 }

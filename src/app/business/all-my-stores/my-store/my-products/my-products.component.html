@@ -1,35 +1,51 @@
-<section style="overflow-y: auto;">
-    <ion-card>
-        <ion-card-header>
-            <ion-card-title class="pt-2">View Products</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            <div class="container">
-                <ion-card>
-                    <ion-card-content>
-                        <ion-item>
-                            <ion-label>Select a category name: </ion-label>
-                            <ion-select interface="alert" (ionChange)="updateCategory($event)"
-                                [interfaceOptions]="customPopoverOptions" placeholder="Select One" value="all">
-                                <ion-select-option value="all">All</ion-select-option>
-                                <ion-select-option *ngFor="let category of categories" [value]="category._id">
-                                    {{category.name}}
-                                </ion-select-option>
-                            </ion-select>
-                        </ion-item>
-                        <app-filters [values]="filters" (filterApplied)="filterApplied($event);"></app-filters>
-                    </ion-card-content>
-                </ion-card>
-                <ng-template [ngIf]="products" [ngIfElse]="noDataFound" >
-                    <div *ngFor="let product of products">
-                        <app-card [data]="product" [type]="'products'"></app-card>
-                    </div>
-                </ng-template>
-            </div>
-        </ion-card-content>
-    </ion-card>
+<section style="overflow-y: auto">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="pt-2">View Products</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="container">
+        <ion-card>
+          <ion-card-content>
+            <ion-item>
+              <ion-label>Select a category name: </ion-label>
+              <ion-select
+                interface="alert"
+                (ionChange)="updateCategory($event)"
+                [interfaceOptions]="customPopoverOptions"
+                placeholder="Select One"
+                value="all"
+              >
+                <ion-select-option value="all">All</ion-select-option>
+                <ion-select-option
+                  *ngFor="let category of categories"
+                  [value]="category._id"
+                >
+                  {{ category.name }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <app-filters
+              [values]="filters"
+              (filterApplied)="filterApplied($event)"
+            ></app-filters>
+          </ion-card-content>
+        </ion-card>
+        <ng-template [ngIf]="products" [ngIfElse]="noDataFound">
+          <div *ngFor="let product of products; index as index">
+            <app-card
+              [data]="product"
+              [type]="'products'"
+              [isOwne]="product.isOwne"
+              (delete)="deleteProduct(index)"
+            ></app-card>
+          </div>
+        </ng-template>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </section>
 
 <ng-template #noDataFound>
-    <app-no-data-found class="h-100 w-100"></app-no-data-found>
+  <app-no-data-found class="h-100 w-100"></app-no-data-found>
 </ng-template>

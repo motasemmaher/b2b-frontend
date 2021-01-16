@@ -4,13 +4,15 @@ import { MyStoresService } from '@app/business/all-my-stores/services/my-stores.
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastService } from '@app/shared/toaster/toast.service';
+
+
 @Component({
   selector: 'app-insert-product',
-  templateUrl: './insert-product.component.html',
-  styleUrls: ['./insert-product.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './manage-product.component.html',
+  styleUrls: ['./manage-product.component.css'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InsertProductComponent implements OnInit {
+export class ManageProductComponent implements OnInit {
   images = [];
   isLoading = false;
   loadType = '';
@@ -18,44 +20,65 @@ export class InsertProductComponent implements OnInit {
   productFromGroup: FormGroup;
   disableButtonSave = true;
   storeId: string;
+  productId?: string;
+  categoryId?: string;
   selectedCategoryId: string;
+  pageName: string = "Insert New Product";
 
   constructor(
     private camera: Camera,
     private myStoresService: MyStoresService,
     private activatedRoute: ActivatedRoute,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {
+
+    this.activatedRoute.params.subscribe(params => {
+      this.storeId = params.id;
+      this.productId = params.productId;
+      // this.isFetching = true;
+      if (this.productId) {
+        this.pageName = 'Update product'
+        this.myStoresService.getProduct(this.storeId, this.productId).subscribe(res => {
+          this.categoryId = res.categoryId;
+          this.createProductStructure(res);
+          this.listenOnValidateButtonSave();
+          this.getStoreIdAndCategories();
+        });
+      } else {
+        this.createProductStructure();
+        this.listenOnValidateButtonSave();
+        this.getStoreIdAndCategories();
+      }
+    });
+  }
+
+  createProductStructure(data?: any) {
     this.productFromGroup = new FormGroup({
-      name: new FormControl('', [
+      name: new FormControl(data?.name || '', [
         Validators.required,
         Validators.pattern(/(^[A-Z a-z \s\d-']{4,64}$)/),
       ]), //
-      description: new FormControl('', [
+      description: new FormControl(data?.description || '', [
         Validators.required,
         Validators.pattern(/(^[A-Z a-z \s\d-'\.]{8,254}$)/),
       ]),
-      price: new FormControl(0, [
+      price: new FormControl(data?.price || 0, [
         Validators.required,
         Validators.pattern(/(^[\d\.]+$)/),
       ]),
-      amount: new FormControl(0, [
+      amount: new FormControl(data?.amount || 0, [
         Validators.required,
         Validators.pattern(/(^[\d\.]+$)/),
       ]),
-      tags: new FormControl('', [
+      tags: new FormControl((data?.tags || []).join(', ') || '', [
         Validators.required,
         Validators.pattern(/(^[A-Z a-z\s\d-,']{2,256}$)/),
       ]),
-      productType: new FormControl('', [Validators.required]),
-      image: new FormControl('', [Validators.required]),
-      categoryId: new FormControl('', [Validators.required]),
+      productType: new FormControl(data?.productType || '', [Validators.required]),
+      image: new FormControl(data?.image || '', [Validators.required]),
+      categoryId: new FormControl(data?.categoryId || '', [Validators.required]),
     });
-
-    this.listenOnValidateButtonSave();
-    this.getStoreIdAndCategories();
   }
-
   getStoreIdAndCategories() {
     this.activatedRoute.params.subscribe((params) => {
       this.storeId = params.id;
@@ -99,6 +122,7 @@ export class InsertProductComponent implements OnInit {
     );
   }
   ngOnInit(): void {}
+
   uploadImage(event) {
     this.isLoading = true;
     this.loadType = 'uploadImage';
@@ -137,6 +161,22 @@ export class InsertProductComponent implements OnInit {
       });
   }
 
+  updateProduct() {
+    const data = this.manipulateDataBeforeSending();
+    this.myStoresService
+      .updateProduct(this.storeId, this.categoryId, this.productId, data)
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
+  manageProduct() {
+    if (this.productId) {
+      this.updateProduct();
+    } else {
+      this.insertProduct();
+    }
+  }
   manipulateDataBeforeSending(): any {
     const data = JSON.parse(JSON.stringify(this.productFromGroup.value));
     this.selectedCategoryId = data.categoryId;

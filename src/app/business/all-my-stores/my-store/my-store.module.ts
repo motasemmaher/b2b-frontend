@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MyStoreRoutingModule } from './my-store-routing.module';
 import { MyStoreComponent } from './my-store.component';
-import { InsertProductComponent } from './insert-product/insert-product.component';
+import { ManageProductComponent } from './manage-product/manage-product.component';
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { IonicModule } from '@ionic/angular';
@@ -15,7 +15,7 @@ import { CreateOffersComponent } from './create-offers/create-offers.component';
 @NgModule({
   declarations: [
     MyStoreComponent,
-    InsertProductComponent,
+    ManageProductComponent,
     CreateCategoryComponent,
     MyProductsComponent,
     CreateOffersComponent

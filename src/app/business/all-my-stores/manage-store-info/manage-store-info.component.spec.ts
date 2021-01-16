@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddStoreComponent } from './add-store.component';
+import { ManageStoreInfoComponent } from './manage-store-info.component';
 
-describe('AddStoreComponent', () => {
-  let component: AddStoreComponent;
-  let fixture: ComponentFixture<AddStoreComponent>;
+describe('ManageStoreInfoComponent', () => {
+  let component: ManageStoreInfoComponent;
+  let fixture: ComponentFixture<ManageStoreInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddStoreComponent ]
+      declarations: [ ManageStoreInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddStoreComponent);
+    fixture = TestBed.createComponent(ManageStoreInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

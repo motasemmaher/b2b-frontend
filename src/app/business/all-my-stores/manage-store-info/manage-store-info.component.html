@@ -1,5 +1,5 @@
-<section class="container main-container-in-page h-100">
-  <h2>Add New Store</h2>
+<section *ngIf="newStore" class="container main-container-in-page h-100">
+  <h2>{{pageName}}</h2>
   <ion-list [formGroup]="newStore">
     <ion-item lines="full" class="margined">
       <ion-label position="floating">Store name</ion-label>
@@ -44,12 +44,12 @@
   <div class="d-flex justify-content-end my-3">
     <div>
       <ion-button
-        [disabled]="newStore.invalid"
+        [disabled]="newStore.invalid || !newStore.dirty"
         color="primary"
-        (click)="addNewStore()"
+        (click)="manageStore()"
         size="default"
       >
-        Add new store
+        {{pageName}}
       </ion-button>
     </div>
   </div>

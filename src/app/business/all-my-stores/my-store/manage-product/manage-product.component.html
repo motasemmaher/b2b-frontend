@@ -1,8 +1,8 @@
-<section style="overflow-y: auto;">
+<section *ngIf="productFromGroup" style="overflow-y: auto;">
     <ion-card>
         <ion-card-header class="d-flex justify-content-between">
-            <ion-card-title class="pt-2">Insert Product</ion-card-title>
-            <ion-button color="success" [disabled]="disableButtonSave" (click)="insertProduct()">Insert</ion-button>
+            <ion-card-title class="pt-2">{{pageName}}</ion-card-title>
+            <ion-button color="success" [disabled]="disableButtonSave" (click)="manageProduct()">{{pageName}}</ion-button>
         </ion-card-header>
         <ion-card-content [formGroup]="productFromGroup">
             <div >

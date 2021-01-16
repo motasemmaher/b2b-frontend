@@ -32,6 +32,6 @@ export class SearchByImageService {
   searchByImage(image: string): Observable<any> {
     const name = generateId();
     // tslint:disable-next-line: max-line-length
-    return this.http.post(`${this.baseUrl}/get-image-name/${name}`, {img: image.split('base64,')[1]}, {headers: {contentType: "*", processData: "false",}});
+    return this.http.post(`${this.baseUrl}/get-image-name/${name}`, {img: image.split('base64,')[1]});
   }
 }

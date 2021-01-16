@@ -18,7 +18,8 @@ export class CreateCategoryComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.categoryFromGroup = new FormGroup({
-      name: new FormControl('', [Validators.required])
+      name: new FormControl('', [Validators.required]),
+      tags: new FormControl('', [Validators.required])
     });
 
     this.listenOnValidateButtonSave();

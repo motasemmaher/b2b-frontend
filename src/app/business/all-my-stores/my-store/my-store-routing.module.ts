@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MyStoreComponent } from './my-store.component';
-import { InsertProductComponent } from './insert-product/insert-product.component';
+import { ManageProductComponent } from './manage-product/manage-product.component';
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { CreateOffersComponent } from './create-offers/create-offers.component';
 import { MyProductsComponent } from './my-products/my-products.component';
@@ -11,7 +11,7 @@ import { BusinessAllowedGuard} from '@app/core/guards/business-allowed.guard';
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: '',
     component: MyStoreComponent,
     canActivate: [AuthGuard, BusinessAllowedGuard],
     children: [
@@ -21,8 +21,18 @@ const routes: Routes = [
         redirectTo: 'my-products',
       },
       {
-        path: 'insert-product',
-        component: InsertProductComponent,
+        path: 'manage-product',
+        // pathMatch: 'full',
+        redirectTo: 'manage-product/insert',
+      },
+      {
+        path: 'manage-product/insert',
+        component: ManageProductComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'manage-product/edit/:productId',
+        component: ManageProductComponent,
         canActivate: [AuthGuard],
       },
       {

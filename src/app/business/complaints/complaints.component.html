@@ -1,11 +1,16 @@
 <section class="container main-container-in-page h-100" >
-  <h2>View Complaints</h2>
-
-  <ng-template
-  
+    
+    <ng-template
+    
+    [ngIf]="!isLoading"
+    [ngIfElse]="loading"
+    >
+    <ng-template
+    
     [ngIf]="complaints && complaints.length !== 0"
-    [ngIfElse]="!complaints ? loading : noDataFound"
-  >
+    [ngIfElse]="noDataFound"
+    >
+    <h2>View Complaints</h2>
     <div class="d-flex flex-column">
       <div
         *ngFor="let complaint of complaints"
@@ -29,10 +34,11 @@
       </div>
     </div>
   </ng-template>
+  </ng-template>
 </section>
 
 <ng-template #loading>
-  <app-loading [type]="'card'"></app-loading>
+  <app-loading [type]="'card-without-image'"></app-loading>
 </ng-template>
 
 <ng-template #noDataFound >

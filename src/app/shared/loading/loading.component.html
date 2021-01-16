@@ -158,6 +158,99 @@
       </ion-card>
     </div> -->
   </div>
+  <div *ngIf="type == 'card-without-image'" >
+    <ion-card class="card" *ngFor="let item of array">
+      <div class="d-flex justify-content-center flex-wrap">
+        <div class="card-body">
+          <div>
+            <ion-card-header>
+              <ion-card-subtitle *ngIf="type && type === 'products'"
+                >in stock</ion-card-subtitle
+              >
+              <ion-card-subtitle *ngIf="type && type === 'stores'">
+                <ion-skeleton-text
+                  animated
+                  style="width: 10%"
+                ></ion-skeleton-text>
+              </ion-card-subtitle>
+              <ion-card-title
+                ><ion-skeleton-text
+                  animated
+                  style="width: 30%"
+                ></ion-skeleton-text
+              ></ion-card-title>
+              <ion-card-subtitle *ngIf="type && type === 'stores'">
+                <span>
+                  <ion-skeleton-text
+                    animated
+                    style="width: 40%"
+                  ></ion-skeleton-text>
+                </span>
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-skeleton-text
+              animated
+              style="width: 100px"
+            ></ion-skeleton-text>
+          </div>
+          <div>
+            <div>
+              <ion-skeleton-text
+                animated
+                style="width: 50%"
+              ></ion-skeleton-text>
+            </div>
+            <div>
+              <ion-skeleton-text
+                animated
+                style="width: 80%"
+              ></ion-skeleton-text>
+            </div>
+            <div>
+              <ion-skeleton-text
+                animated
+                style="width: 60%"
+              ></ion-skeleton-text>
+            </div>
+            <div>
+              <ion-skeleton-text
+                animated
+                style="width: 80%"
+              ></ion-skeleton-text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-card>
+    <!-- <div class="container card" style="overflow-y: auto">
+      <ion-card
+       
+        style="height: 200px"
+        class="w-100 d-flex justify-content-center"
+      >
+        <div
+          style="width: calc(100% - 300px); height: 100%"
+          class="d-flex flex-column justify-content-center px-2"
+        >
+          <div>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </div>
+          <div>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </div>
+          <div>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </div>
+          <div>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </div>
+          <div>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </div>
+        </div>
+      </ion-card>
+    </div> -->
+  </div>
   <div *ngIf="type === 'list'">
     <ion-list *ngFor="let item of array">
       <ion-item>

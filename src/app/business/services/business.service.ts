@@ -41,6 +41,7 @@ export class BusinessService {
   }
 
   private error(error: HttpErrorResponse) {
+    console.log(error)
     this.toastService.presentToastWithOptions('error', error.error.error, 'danger');
     return throwError('Something bad happened; please try aga<  in later.');
   }
