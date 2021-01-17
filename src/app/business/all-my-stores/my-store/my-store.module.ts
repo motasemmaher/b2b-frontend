@@ -10,7 +10,8 @@ import { IonicModule } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
 import { SharedModule } from '@app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreateOffersComponent } from './create-offers/create-offers.component';
+import { ManageOffersComponent } from './manage-offers/manage-offers.component';
+import { ToastService } from '@app/shared/toaster/toast.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { CreateOffersComponent } from './create-offers/create-offers.component';
     ManageProductComponent,
     ManageCategoryComponent,
     MyProductsComponent,
-    CreateOffersComponent
+    ManageOffersComponent
   ],
   imports: [
     IonicModule,
@@ -29,7 +30,8 @@ import { CreateOffersComponent } from './create-offers/create-offers.component';
     ReactiveFormsModule
   ],
   providers: [
-    Camera
+    Camera,
+    ToastService
   ],
   exports: [ManageCategoryComponent]
 })

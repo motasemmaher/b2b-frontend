@@ -84,6 +84,11 @@ export class MyStoresService {
     const path = `stores/${storeId}/offers/add-offer`;
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
   }
+
+  public getOffers(storeId: string): Observable<any> {
+    const path = `stores/${storeId}/offers/`;
+    return this.businessService.get(path);
+  }
  
   public addNewStore(data: any): Observable<any> {
     const path = 'user/manage-garage-owner/add-store';
@@ -115,6 +120,10 @@ export class MyStoresService {
 
   deleteStore(storeId: string): Observable<any> {
     return this.businessService.delete(`user/manage-garage-owner/delete-store/${storeId}`, { headers: { authorization: this.authService.token } });
+  }
+  
+  deleteOffer(storeId: string, offerId: string): Observable<any> {
+    return this.businessService.delete(`stores/${storeId}/offers/delete-offer/${offerId}`, { headers: { authorization: this.authService.token } });
   }
   
   deleteProduct(storeId: string, categoryId: string, productId: string): Observable<any> {

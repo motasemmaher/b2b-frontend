@@ -5,6 +5,7 @@ import { MyCarsRoutingModule } from './my-cars-routing.module';
 import { MyCarsComponent } from './my-cars.component';
 import { CarsService } from './service/cars.service';
 import {  ReactiveFormsModule } from '@angular/forms';
+import { ToastService } from '@app/shared/toaster/toast.service';
 
 @NgModule({
   declarations: [MyCarsComponent],
@@ -15,7 +16,8 @@ import {  ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [
-    CarsService
+    CarsService,
+    ToastService
   ]
 })
 export class MyCarsModule { }

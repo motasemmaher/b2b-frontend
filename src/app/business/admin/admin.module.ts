@@ -6,6 +6,7 @@ import { AdminComponent } from './admin.component';
 import { IonicModule } from '@ionic/angular';
 import { AdminService } from './service/admin.service';
 
+
 @NgModule({
   declarations: [AdminComponent],
   imports: [

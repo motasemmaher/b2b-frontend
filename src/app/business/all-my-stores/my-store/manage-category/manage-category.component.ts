@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MyStoresService } from '@app/business/all-my-stores/services/my-stores.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastService } from '@app/shared/toaster/toast.service';
 
 @Component({
   selector: 'app-create-category',
@@ -21,10 +22,12 @@ export class ManageCategoryComponent implements OnInit {
   customPopoverOptions: any = {
     header: 'Select Category',
   };
+  isFetchingCategories: boolean = false;
 
   constructor(
     private myStoresService: MyStoresService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastService: ToastService
   ) {
     this.categoryFromGroup = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -57,19 +60,21 @@ export class ManageCategoryComponent implements OnInit {
 
   createCategory() {
     this.myStoresService.createCategory(this.storeId, this.categoryFromGroup.value).subscribe((res) => {
-      console.log(res);
       this.getCategroies();
+      this.toastService.presentToastWithOptions('success', 'Category created successfully', 'success');
     });
   }
 
   UpdateCategory() {
     this.myStoresService.updateCategory(this.storeId, this.categoryIdSelectedForUpdate, this.categoryFromGroupForUpdate.value).subscribe((res) => {
-      console.log(res);
+      this.toastService.presentToastWithOptions('success', 'Category updated successfully', 'success');
     });
   }
 
   getCategroies() {
+    this.isFetchingCategories = true;
     this.myStoresService.getCategories(this.storeId).subscribe(res => {
+      this.isFetchingCategories = false;
       this.categories = res.categories;
     });
   }
@@ -92,6 +97,7 @@ export class ManageCategoryComponent implements OnInit {
     this.myStoresService.removeCategory(this.storeId, this.categoryIdForRemoving).subscribe(res => {
       this.getCategroies();
       this.categoryIdForRemoving = null;
+      this.toastService.presentToastWithOptions('success', 'Category removed successfully', 'success');
     });
   }
 

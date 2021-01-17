@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MyStoresService } from '../../services/my-stores.service';
+import { ToastService } from '@app/shared/toaster/toast.service';
 
 @Component({
   selector: 'app-my-products',
@@ -13,7 +14,7 @@ export class MyProductsComponent implements OnInit {
   storeId: string = null;
   categoryId: string = null;
 
-  
+
   filters = [
     { label: 'By Descending Name', value: 'nameSort=1' },
     { label: 'By ascending Name', value: 'nameSort=-1' },
@@ -26,7 +27,8 @@ export class MyProductsComponent implements OnInit {
   filterSelected: any = null;
   constructor(
     private myStoresService: MyStoresService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastService: ToastService,
   ) {
     this.getStoreId();
   }
@@ -73,6 +75,7 @@ export class MyProductsComponent implements OnInit {
     const categoryId = this.products[index].categoryId;
     this.myStoresService.deleteProduct(storeId, categoryId, productId).subscribe((res) => {
       this.getProducts(this.storeId, this.categoryId);
+      this.toastService.presentToastWithOptions('success', 'Product removed successfully', 'success');
     })
   }
 

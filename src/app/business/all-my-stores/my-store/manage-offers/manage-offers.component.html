@@ -6,13 +6,13 @@
                 <div>
                     <ion-button color="secondary" (click)="addOffer()">Add
                     </ion-button>
-                    <ion-button color="success" [disabled]="disableButtonSave" (click)="createOffer()">Create
+                    <ion-button color="success" [disabled]="offersFromGroup.invalid || !offersFromGroup.dirty" (click)="createOffer()">Create
                     </ion-button>
                 </div>
             </ion-card-header>
         </ion-card-header>
         <ion-card-content formArrayName="offers" *ngIf="offersFromGroup" >
-            <div *ngFor="let item of offersFromGroup.get('offers')['controls']; index as i">
+            <div *ngFor="let offer of offersFromGroup.get('offers')['controls']; index as i">
                 <ion-card [formGroupName]="i">
                     <div class="d-flex justify-content-between flex-wrap">
                         <ion-item lines="full" class="margined">
@@ -37,11 +37,11 @@
                             <ion-label position="floating">Duration</ion-label>
                             <ion-input type="number" formControlName="duration" required></ion-input>
                         </ion-item>
-                       <div class="m-2">
-                        <ion-button color="danger" (click)="deleteOffer(i)">
-                            <ion-icon name="trash-outline"></ion-icon>
-                        </ion-button>
-                       </div>
+                        <div class="col mb-2 row-btns d-flex justify-content-end">
+                            <ion-button color="danger" (click)="deleteOffer(i)">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </ion-button>
+                          </div>
                     </div>
                 </ion-card>
             </div>

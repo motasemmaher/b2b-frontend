@@ -4,6 +4,7 @@ import { StoresService } from '../../../service/stores.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '@app/core/services/auth/auth.service';
+import { ToastService } from '@app/shared/toaster/toast.service';
 
 @Component({
   selector: 'app-about-store',
@@ -20,6 +21,7 @@ export class AboutStoreComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private alertController: AlertController,
     private authService: AuthService,
+    private toastService: ToastService
   ) {
     this.isLoggedIn = this.authService.loggedIn;
     this.activatedRoute.params.subscribe((params) => {
@@ -52,7 +54,9 @@ export class AboutStoreComponent implements OnInit {
           handler: (data) => {
             console.log(data);
             this.storesService.writeComplaint(this.storeId, data)
-              .subscribe();
+              .subscribe(res => {
+                this.toastService.presentToastWithOptions('success', 'Complaints sent successfully', 'success');
+              });
           },
         },
       ],

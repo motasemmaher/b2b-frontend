@@ -24,7 +24,10 @@ export class ManageProductComponent implements OnInit {
   categoryId?: string;
   selectedCategoryId: string;
   pageName: string = "Insert New Product";
-
+  typies: string [] = [
+    'wheel',
+    'mirror',
+  ];
   constructor(
     private camera: Camera,
     private myStoresService: MyStoresService,
@@ -75,6 +78,7 @@ export class ManageProductComponent implements OnInit {
         Validators.pattern(/(^[A-Z a-z\s\d-,']{2,256}$)/),
       ]),
       productType: new FormControl(data?.productType || '', [Validators.required]),
+      generalType: new FormControl(data?.generalType || '', [Validators.required]),
       image: new FormControl(data?.image || '', [Validators.required]),
       categoryId: new FormControl(data?.categoryId || '', [Validators.required]),
     });
@@ -157,7 +161,7 @@ export class ManageProductComponent implements OnInit {
     this.myStoresService
       .insertProduct(this.storeId, this.selectedCategoryId, data)
       .subscribe((res) => {
-        console.log(res);
+        this.toastService.presentToastWithOptions('success', 'Product created successfully', 'success');
       });
   }
 
@@ -166,7 +170,7 @@ export class ManageProductComponent implements OnInit {
     this.myStoresService
       .updateProduct(this.storeId, this.categoryId, this.productId, data)
       .subscribe((res) => {
-        console.log(res);
+        this.toastService.presentToastWithOptions('success', 'Product updated successfully', 'success');
       });
   }
 
