@@ -10,6 +10,7 @@ export class AppRoutingConstants {
 
 export class BusinessRoutingConstants {
     static HOME = 'home';
+    static ORDERS = 'orders';
     static MY_STORES = 'my-stores';
     static ADD_STORE = 'add-store';
     static BUSINESS = 'business';

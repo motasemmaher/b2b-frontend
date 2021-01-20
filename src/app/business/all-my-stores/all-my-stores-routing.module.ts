@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AllMyStoresComponent } from './all-my-stores.component';
-import { AuthGuard} from '@app/core/guards/auth/auth.guard';
+import { AuthGuard } from '@app/core/guards/auth/auth.guard';
 import { ManageStoreInfoComponent } from './manage-store-info/manage-store-info.component';
 
 const routes: Routes = [
@@ -24,7 +24,12 @@ const routes: Routes = [
   {
     path: 'edit-store/:storeId',
     component: ManageStoreInfoComponent,
-  }
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
+  },
+
 ];
 
 @NgModule({

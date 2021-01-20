@@ -47,6 +47,11 @@ export class MyStoresService {
     return this.businessService.get(path, { headers: { authorization: this.authService.token } });
   }
 
+  public getMyStoresId(): Observable<any> {
+    const path = 'user/manage-garage-owner/stores/storesId';
+    return this.businessService.get(path, { headers: { authorization: this.authService.token } });
+  }
+
   public getMyStore(storeId: string): Observable<any> {
     const path = `stores/${storeId}`;
     return this.businessService.get(path, { headers: { authorization: this.authService.token } });
@@ -116,6 +121,11 @@ export class MyStoresService {
   getProduct(storeId: string, productId: string): Observable<any> {
     const path = `stores/${storeId}/products/${productId}`;
     return this.businessService.get(path);
+  }
+
+  getOrders(storeId: string): Observable<any> {
+    const path = `${storeId}/orders`;
+    return this.businessService.get(path, { headers: { authorization: this.authService.token } });
   }
 
   deleteStore(storeId: string): Observable<any> {

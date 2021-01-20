@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductsService } from './service/products.service';
 // import { InfiniteScroll } from 'ngx-infinite-scroll';
 
@@ -8,29 +8,24 @@ import { ProductsService } from './service/products.service';
   styleUrls: ['./products.component.css'],
   // directives: [InfiniteScroll]
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
 
-  products: any [];
-  constructor(private productsService: ProductsService) {}
+  products: any[];
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
-    this.productsService.getProducts().subscribe((res) => {
-      console.log(res)
-      this.products = res.products;
-    });
+    this.products = [];
+    this.getProduct();
   }
 
-  getProduct(type) {
-    if (type === 'up') {
-      this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit() + 30, this.productsService.getSkip() + 30);
-      this.productsService.getProducts().subscribe((res) => {
-        this.products = res.products;
-      });
-    } else {
-      this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit() + 30, this.productsService.getSkip() + 30);
-      this.productsService.getProducts().subscribe((res) => {
-        this.products = res.products;
-      });
-    }
+  getProduct() {
+    this.productsService.getProducts().subscribe((res) => {
+      this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit(), this.productsService.getSkip() + 5);
+      console.log(res.products.length)
+      this.products.push(...res.products);
+    });
+  }
+  ngOnDestroy(): void {
+    this.productsService.resetBothDateSkipAndLimit();
   }
 }

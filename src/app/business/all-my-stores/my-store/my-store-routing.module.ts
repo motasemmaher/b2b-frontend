@@ -51,6 +51,12 @@ const routes: Routes = [
         canActivate: [AuthGuard, BusinessAllowedGuard],
         // canLoad: [BusinessAllowedGuard]
       },
+      {
+        path: 'orders',
+        component: MyProductsComponent,
+        canActivate: [AuthGuard, BusinessAllowedGuard],
+        // canLoad: [BusinessAllowedGuard]
+      },
     ]
   }
 ];

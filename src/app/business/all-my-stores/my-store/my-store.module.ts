@@ -19,7 +19,7 @@ import { ToastService } from '@app/shared/toaster/toast.service';
     ManageProductComponent,
     ManageCategoryComponent,
     MyProductsComponent,
-    ManageOffersComponent
+    ManageOffersComponent,
   ],
   imports: [
     IonicModule,
