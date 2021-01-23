@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AddUserRoutingModule } from './add-user-routing.module';
 import { AddUserComponent } from './add-user.component';
 import { IonicModule } from '@ionic/angular';
+import { ToastService } from '@app/shared/toaster/toast.service';
 
 
 @NgModule({
@@ -12,6 +13,9 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     AddUserRoutingModule,
     IonicModule
+  ],
+  providers: [
+    ToastService
   ]
 })
 export class AddUserModule { }

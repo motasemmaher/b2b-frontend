@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ShoppingCartService } from './service/shopping-cart.service';
 import { AlertController } from '@ionic/angular';
+import { ToastService } from '@app/shared/toaster/toast.service';
+
 @Component({
   selector: 'app-shopping-card',
   templateUrl: './shopping-card.component.html',
@@ -17,7 +19,8 @@ export class ShoppingCardComponent implements OnInit {
 
   constructor(
     private shoppingCartService: ShoppingCartService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastService: ToastService,
   ) {
     this.getShoppingCartItems();
   }
@@ -68,7 +71,9 @@ export class ShoppingCardComponent implements OnInit {
   updateCartItem(cartItemId: string, quantity: number) {
     this.shoppingCartService
       .updateCartItemInShoppingCart(cartItemId, { quantity })
-      .subscribe((res) => {});
+      .subscribe((res) => {
+        this.toastService.presentToastWithOptions('success', 'Shopping Cart updated successfully', 'success');
+      });
   }
 
   add(i: any) {
@@ -113,6 +118,7 @@ export class ShoppingCardComponent implements OnInit {
         if ((this.cartForm.get('items') as FormArray).length === 0) {
           this.isEmpty = true;
         }
+        this.toastService.presentToastWithOptions('success', 'Item removed successfully', 'success');
       });
   }
 
@@ -151,7 +157,10 @@ export class ShoppingCardComponent implements OnInit {
             console.log(data);
             this.shoppingCartService
               .checkout(data)
-              .subscribe(() => this.getShoppingCartItems());
+              .subscribe(res =>{
+                 this.getShoppingCartItems();
+                 this.toastService.presentToastWithOptions('success', 'Checkout successfully', 'success');
+                });
           },
         },
       ],

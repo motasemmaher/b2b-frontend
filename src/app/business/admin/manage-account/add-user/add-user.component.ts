@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../service/admin.service';
+import { ToastService } from '@app/shared/toaster/toast.service';
 
 @Component({
   selector: 'app-add-user',
@@ -10,7 +11,8 @@ export class AddUserComponent implements OnInit {
   users: any [] = [];
 
   constructor(
-    private adminService: AdminService
+    private adminService: AdminService,
+    private toastService: ToastService
   ) { 
     this.getUsers();
   }
@@ -38,13 +40,13 @@ export class AddUserComponent implements OnInit {
   acceptUser(index: number) {
     const userId = this.users[index].id;
     this.adminService.acceptUser(userId).subscribe((res) => {
-      console.log(res)
+      this.toastService.presentToastWithOptions('success', 'User accepted successfully', 'success');
     })
   }
   rejectUser(index: number) {
     const userId = this.users[index].id;
     this.adminService.rejectUser(userId).subscribe((res) => {
-      console.log(res)
+      this.toastService.presentToastWithOptions('success', 'User rejected successfully', 'success');
     })
   }
 }

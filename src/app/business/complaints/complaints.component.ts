@@ -7,11 +7,12 @@ import { ComplaintsService } from './service/complaints.service';
 })
 export class ComplaintsComponent implements OnInit {
   complaints: any [];
-
+  isLoading: boolean = false;
   constructor(
     private complaintsService: ComplaintsService,
   ) {
     this.complaints = [];
+    this.isLoading = true;
     setTimeout(() => {
       this.complaintsService.getComplaints().subscribe(res => {
         res.complaints.forEach(complaint => {
@@ -21,6 +22,7 @@ export class ComplaintsComponent implements OnInit {
             message: complaint.message.data,
           });
         });
+        this.isLoading= false;
       });
     }, 2000)
    }
@@ -28,4 +30,5 @@ export class ComplaintsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
 }

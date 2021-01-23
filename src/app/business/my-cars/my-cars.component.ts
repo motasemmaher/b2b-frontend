@@ -1,6 +1,9 @@
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { CarsService } from './service/cars.service';
+import { ToastService } from '@app/shared/toaster/toast.service';
+
+
 @Component({
   selector: 'app-my-cars',
   templateUrl: './my-cars.component.html',
@@ -11,12 +14,13 @@ export class MyCarsComponent implements OnInit {
   addNewCarFormGroup: FormGroup;
   disableAddNewCarBtn = true;
   myCars: FormGroup;
-  constructor(private carsService: CarsService) {
+  constructor(private carsService: CarsService, private toastService: ToastService,
+  ) {
     this.getMyCars();
     this.manageAddNewCar();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   getMyCars() {
     this.carsService.getMyCars().subscribe((res) => {
@@ -115,6 +119,7 @@ export class MyCarsComponent implements OnInit {
           this.disableAddNewCarBtn = true;
           this.manageAddNewCar();
           this.getMyCars();
+          this.toastService.presentToastWithOptions('success', 'Car created successfully', 'success');
         });
     }
   }
@@ -129,6 +134,7 @@ export class MyCarsComponent implements OnInit {
     };
     this.carsService.editCar(carId, this.manipulateDataBeforeSendingForYear(data)).subscribe(() => {
       this.getMyCars();
+      this.toastService.presentToastWithOptions('success', 'Car updated successfully', 'success');
     });
   }
 
@@ -139,6 +145,7 @@ export class MyCarsComponent implements OnInit {
     const { carId } = (this.myCars.get('cars') as FormArray).at(index).value;
     this.carsService.deleteCar(carId).subscribe(() => {
       (this.myCars.get('cars') as FormArray).removeAt(index);
+      this.toastService.presentToastWithOptions('success', 'Car removed successfully', 'success');
     });
   }
 }

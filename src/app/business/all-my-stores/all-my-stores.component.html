@@ -1,14 +1,19 @@
 <section class="container main-container-in-page">
-    <!-- <span>
+  <!-- <span>
         {{ 'TEST' | translate }}
     </span> -->
-    <ng-template [ngIf]="stores" [ngIfElse]="loading">
-        <div *ngFor="let store of stores">
-            <app-card [data]="store" [type]="'stores'"></app-card>
-        </div>
-    </ng-template>
+  <ng-template [ngIf]="stores" [ngIfElse]="loading">
+    <div *ngFor="let store of stores; index as index">
+      <app-card
+        [data]="store"
+        [type]="'stores'"
+        [isOwne]="store.isOwne"
+        (delete)= "deleteStore(index)"
+      ></app-card>
+    </div>
+  </ng-template>
 </section>
 
 <ng-template #loading>
-    <app-loading [type]='"card"'></app-loading>
+  <app-loading [type]="'card'"></app-loading>
 </ng-template>

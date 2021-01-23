@@ -1,0 +1,39 @@
+<section class="container h-100">
+  <div class="m-3 d-flex justify-content-around flex-wrap border-bottom">
+    <div>
+      <ion-label> Select Store </ion-label>
+      <ion-select
+        interface="alert"
+        (ionChange)="selectStore($event)"
+        [interfaceOptions]="customPopoverOptions"
+        placeholder="Select One"
+        [value]="storeId"
+      >
+        <ion-select-option
+          *ngFor="let storesId of storesId"
+          [value]="storesId._id"
+          >{{ storesId.name }}</ion-select-option
+        >
+      </ion-select>
+    </div>
+    <div>
+      <ion-label> Select Status orders </ion-label>
+      <ion-select
+        interface="alert"
+        (ionChange)="selectStatusOrder($event)"
+        [interfaceOptions]="customPopoverOptions"
+        placeholder="Select One"
+        [value]="statusOrder"
+      >
+        <ion-select-option
+          *ngFor="let status of statuses"
+          [value]="status.key"
+          >{{ status.label }}</ion-select-option
+        >
+      </ion-select>
+    </div>
+  </div>
+  <div>
+      
+  </div>
+</section>

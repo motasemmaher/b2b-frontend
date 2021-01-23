@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MyStoresService } from '../../services/my-stores.service';
+import { ToastService } from '@app/shared/toaster/toast.service';
 
 @Component({
   selector: 'app-my-products',
@@ -12,6 +13,8 @@ export class MyProductsComponent implements OnInit {
   categories: any[];
   storeId: string = null;
   categoryId: string = null;
+
+
   filters = [
     { label: 'By Descending Name', value: 'nameSort=1' },
     { label: 'By ascending Name', value: 'nameSort=-1' },
@@ -24,7 +27,8 @@ export class MyProductsComponent implements OnInit {
   filterSelected: any = null;
   constructor(
     private myStoresService: MyStoresService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastService: ToastService,
   ) {
     this.getStoreId();
   }
@@ -34,17 +38,22 @@ export class MyProductsComponent implements OnInit {
       this.myStoresService.getCategories(this.storeId).subscribe(res => {
         this.categories = res.categories;
       });
-      this.myStoresService.getProducts(this.storeId, null, 'nameSort=1').subscribe((res) => {
-        this.products = res.products;
+      this.getProducts(this.storeId);
+    });
+  }
+
+  getProducts(storeId: string, categoryId?: string) {
+    this.myStoresService.getProducts(storeId, categoryId, 'nameSort=1').subscribe((res) => {
+      this.products = res.products.map((product) => {
+        return { ...product, isOwne: product.storeId === this.storeId, editPath: product.storeId === this.storeId ? `../manage-product/edit/${product._id}` : '' };
       });
     });
   }
 
+
   filterApplied(value) {
     this.filterSelected = value;
-    this.myStoresService.getProducts(this.storeId, this.categoryId, value).subscribe((res) => {
-      this.products = res.products;
-    });
+    this.getProducts(this.storeId, this.categoryId);
   }
 
   ngOnInit(): void {
@@ -56,9 +65,19 @@ export class MyProductsComponent implements OnInit {
       categoryId = null;
     }
     this.categoryId = categoryId;
-    this.myStoresService.getProducts(this.storeId, categoryId, this.filterSelected).subscribe(res => {
-      this.products = res;
-    });
+    this.getProducts(this.storeId, this.categoryId);
   }
+
+
+  deleteProduct(index: number) {
+    const productId = this.products[index]._id;
+    const storeId = this.products[index].storeId;
+    const categoryId = this.products[index].categoryId;
+    this.myStoresService.deleteProduct(storeId, categoryId, productId).subscribe((res) => {
+      this.getProducts(this.storeId, this.categoryId);
+      this.toastService.presentToastWithOptions('success', 'Product removed successfully', 'success');
+    })
+  }
+
 
 }

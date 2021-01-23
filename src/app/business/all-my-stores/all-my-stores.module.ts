@@ -6,11 +6,11 @@ import { AllMyStoresRoutingModule } from './all-my-stores-routing.module';
 import { AllMyStoresComponent } from './all-my-stores.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { MyStoresService } from './services/my-stores.service';
-import { AddStoreComponent } from './add-store/add-store.component';
+import { ManageStoreInfoComponent } from './manage-store-info/manage-store-info.component';
 import { IonicModule } from '@ionic/angular';
 
 @NgModule({
-  declarations: [AllMyStoresComponent, AddStoreComponent],
+  declarations: [AllMyStoresComponent, ManageStoreInfoComponent],
   imports: [
     CommonModule,
     AllMyStoresRoutingModule,

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '@app/core/services/product/product.service';
+import { ToastService } from '@app/shared/toaster/toast.service';
+
 @Component({
   selector: 'app-view-product',
   templateUrl: './view-product.component.html',
@@ -9,7 +11,8 @@ import { ProductService } from '@app/core/services/product/product.service';
 export class ViewProductComponent implements OnInit {
   id;
   product: any;
-  constructor(private productsService: ProductService) {}
+  constructor(private productsService: ProductService, private toastService: ToastService,
+  ) { }
 
   ngOnInit(): void {
     this.productsService.getProduct(this.id).subscribe((res) => {
@@ -23,7 +26,7 @@ export class ViewProductComponent implements OnInit {
         quantity: 1,
       })
       .subscribe((res) => {
-        console.log(res);
+        this.toastService.presentToastWithOptions('success', 'Product added to shopping cart successfully', 'success');
       });
   }
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ViewProductComponent } from '@app/shared/view-product/view-product.component';
-
+import { BusinessService } from '@app/business/services/business.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -11,7 +11,11 @@ import { ViewProductComponent } from '@app/shared/view-product/view-product.comp
 export class CardComponent implements OnInit {
   @Input() data: any;
   @Input() type?: string;
-  constructor(public modalController: ModalController) { }
+  @Input() isOwne?: boolean;
+  @Output('delete') delete: EventEmitter<any> = new EventEmitter();
+
+
+  constructor(public modalController: ModalController, private businessService: BusinessService) { }
 
   ngOnInit(): void {
   }
@@ -31,4 +35,14 @@ export class CardComponent implements OnInit {
     });
     return await modal.present();
   }
+
+  deleteCard() {
+    this.delete.emit();
+  }
+
+  editCard() {
+
+  }
+
+
 }

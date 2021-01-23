@@ -29,6 +29,14 @@
                     <a *ngIf="type && type === 'products'" (click)="presentModal(data._id)" class="btn btn-primary">View</a>
                 </div>
             </div>
+            <div *ngIf="isOwne">
+                <ion-button color="secondary" [routerLink]="data.editPath">
+                    <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+                <ion-button color="danger" (click)="deleteCard()">
+                    <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+            </div>
         </div>
     </ion-card>
 </div>

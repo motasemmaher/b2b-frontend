@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { BusinessService } from '@app/business/services/business.service';
 @Injectable()
 export class ProductsService {
-  limit = 30;
+  limit = 5;
   skip = 0;
 
   constructor(private businessService: BusinessService) { }
@@ -25,7 +25,7 @@ export class ProductsService {
   }
 
   public resetBothDateSkipAndLimit(): boolean {
-    this.limit = 30;
+    this.limit = 5;
     this.skip = 0;
     return true;
   }

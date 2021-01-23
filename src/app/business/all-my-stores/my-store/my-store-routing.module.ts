@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MyStoreComponent } from './my-store.component';
-import { InsertProductComponent } from './insert-product/insert-product.component';
-import { CreateCategoryComponent } from './create-category/create-category.component';
-import { CreateOffersComponent } from './create-offers/create-offers.component';
+import { ManageProductComponent } from './manage-product/manage-product.component';
+import { ManageCategoryComponent } from './manage-category/manage-category.component';
+import { ManageOffersComponent } from './manage-offers/manage-offers.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { AuthGuard} from '@app/core/guards/auth/auth.guard';
 import { BusinessAllowedGuard} from '@app/core/guards/business-allowed.guard';
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: '',
     component: MyStoreComponent,
     canActivate: [AuthGuard, BusinessAllowedGuard],
     children: [
@@ -21,22 +21,38 @@ const routes: Routes = [
         redirectTo: 'my-products',
       },
       {
-        path: 'insert-product',
-        component: InsertProductComponent,
+        path: 'manage-product',
+        // pathMatch: 'full',
+        redirectTo: 'manage-product/insert',
+      },
+      {
+        path: 'manage-product/insert',
+        component: ManageProductComponent,
         canActivate: [AuthGuard],
       },
       {
-        path: 'create-category',
-        component: CreateCategoryComponent,
+        path: 'manage-product/edit/:productId',
+        component: ManageProductComponent,
         canActivate: [AuthGuard],
       },
       {
-        path: 'create-offers',
-        component: CreateOffersComponent,
+        path: 'manage-category',
+        component: ManageCategoryComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'manage-offers',
+        component: ManageOffersComponent,
         canActivate: [AuthGuard],
       },
       {
         path: 'my-products',
+        component: MyProductsComponent,
+        canActivate: [AuthGuard, BusinessAllowedGuard],
+        // canLoad: [BusinessAllowedGuard]
+      },
+      {
+        path: 'orders',
         component: MyProductsComponent,
         canActivate: [AuthGuard, BusinessAllowedGuard],
         // canLoad: [BusinessAllowedGuard]
