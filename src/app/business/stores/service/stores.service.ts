@@ -11,7 +11,7 @@ export class StoresService {
   constructor(
     private authService: AuthService,
     private businessService: BusinessService
-    ) { }
+  ) { }
 
   public getStoreById(path: string, id: string, options?: any): Observable<any> {
     path = path.concat(`/${id}`);
@@ -38,9 +38,22 @@ export class StoresService {
     path = path.concat(`/${storeId}`).concat(categoryId ? `/category/${categoryId}/products` : '/products');
     return this.businessService.get(path, options = options);
   }
-  
-  writeComplaint(storeId:string, data: any): Observable<any> {
+
+  writeComplaint(storeId: string, data: any): Observable<any> {
     const path = `stores/${storeId}/create-complaint`;
-    return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data)
+    return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
+  }
+
+  startChat(garageOwnerId: string, storeName: string) {
+    const path = `user/contact`;
+    return this.businessService.post(path, { headers: { authorization: this.authService.token } }, { garageOwnerId, storeName });
+  }
+  inContact(garageOwnerId) {
+    const path = `user/chat/hasContactId/${garageOwnerId}`;
+    return this.businessService.get(path, {
+      headers: {
+        Authorization: this.authService.token
+      }
+    });
   }
 }

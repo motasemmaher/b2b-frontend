@@ -16,6 +16,10 @@ export class AboutStoreComponent implements OnInit {
   store: Store;
   storeId: string;
   isLoggedIn: boolean = false;
+  userId: string;
+  garageOwnerId: string;
+  isInContact: boolean = false;
+
   constructor(
     private storesService: StoresService,
     private activatedRoute: ActivatedRoute,
@@ -24,10 +28,16 @@ export class AboutStoreComponent implements OnInit {
     private toastService: ToastService
   ) {
     this.isLoggedIn = this.authService.loggedIn;
+    if (this.isLoggedIn) {
+      this.userId = this.authService.userInfo()._id;
+    }
+
     this.activatedRoute.params.subscribe((params) => {
       this.storeId = params.id;
       this.storesService.getStoreById('stores', this.storeId).subscribe((res) => {
+        this.garageOwnerId = res.userId;
         this.store = res;
+        this.inContact();
       });
     });
   }
@@ -62,6 +72,20 @@ export class AboutStoreComponent implements OnInit {
       ],
     });
     await alert.present();
+  }
+
+  startChat() {
+    this.storesService.startChat(this.garageOwnerId, this.store.name).subscribe((res) => {
+      this.toastService.presentToastWithOptions('success', 'Contacts created successfully', 'success');
+    });
+  }
+
+  inContact() {
+    if (this.isLoggedIn) {
+      this.storesService.inContact(this.garageOwnerId).subscribe((has: any) => {
+        this.isInContact = has.has;
+      });
+    }
   }
   ngOnInit(): void {}
 }

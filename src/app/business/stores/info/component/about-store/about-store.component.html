@@ -16,7 +16,25 @@
             >{{ "NAME" | translate }}: {{ store.name }}</ion-card-title
           >
           <div>
-            <ion-button *ngIf="isLoggedIn" [color] ="'warning'" (click)="presentAlertConfirm()">Write Complaint</ion-button>
+            <ion-button
+              *ngIf="isLoggedIn"
+              [color]="'danger'"
+              (click)="presentAlertConfirm()"
+              >Write Complaint</ion-button
+            >
+            <ion-button
+              *ngIf="isLoggedIn && userId != garageOwnerId && !isInContact"
+              [color]="'secondary'"
+              (click)="startChat()"
+              >Start Chat</ion-button
+            >
+            <ion-button
+              [color]="'secondary'"
+              *ngIf="isLoggedIn && userId != garageOwnerId && isInContact"
+              [disabled]="true"
+            >
+              chat already exists!
+            </ion-button>
           </div>
         </div>
       </ion-card-header>

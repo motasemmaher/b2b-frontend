@@ -36,7 +36,7 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    CoreModule,  ],
+    CoreModule,],
   providers: [
     SplashScreen,
     StatusBar,
@@ -48,18 +48,18 @@ export class AppModule {
   constructor(translate: TranslateService) {
     /* translate.setDefaultLang('en');
     translate.use('en'); */
-    if(localStorage.getItem('language') === null){
+    if (localStorage.getItem('language') === null) {
       localStorage.setItem('language', 'en');
       translate.setDefaultLang('en');
     }
-    
+
     translate.use(localStorage.getItem('language'));
 
 
-    if(localStorage.getItem('darkMode') === null){
-      localStorage.setItem('darkMode' , 'disabled')
+    if (localStorage.getItem('darkMode') === null) {
+      localStorage.setItem('darkMode', 'disabled')
     }
-    else if(localStorage.getItem('darkMode') === 'enabled' && document.body.className === ''){
+    else if (localStorage.getItem('darkMode') === 'enabled' && document.body.className === '') {
       document.body.classList.toggle('dark');
     }
 

@@ -9,7 +9,7 @@ import { ToastService } from '@app/shared/toaster/toast.service';
 })
 export class BusinessService {
 
-  basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST;
+  basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST + '/';
 
   constructor(private http: HttpClient, private toastService: ToastService) { }
 

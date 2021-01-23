@@ -1,7 +1,7 @@
 {
   "name": "b2b",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "B2B Team members",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -34,9 +34,12 @@
     "bootstrap": "^4.5.3",
     "cordova-plugin-camera": "^5.0.1",
     "ngx-autosize": "^1.8.4",
+    "ngx-avatar": "^4.0.0",
     "ngx-bootstrap": "^6.1.0",
     "ngx-infinite-scroll": "^10.0.1",
+    "ngx-socket-io": "^3.2.0",
     "rxjs": "~6.5.5",
+    "socket.io-client": "^3.1.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

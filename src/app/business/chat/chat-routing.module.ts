@@ -5,29 +5,30 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ChatComponent } from './chat.component';
 import { ConversationComponent } from './conversation/conversation.component';
+import { ContactsComponent } from './contacts/contacts.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ChatComponent,
     children: [
+      // {
+      //   path: '',
+      //   pathMatch: 'full',
+      //   redirectTo: 'm'
+      // },
+      // {
+      //   path: 'm',
+      //   component: ContactsComponent,
+      // },
       {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'm'
-      },
-      {
-        path: 'm',
-        component: MobileComponent,
-      },
-      {
-        path: 'conversations/:userId',
+        path: ':conversationId',
         component: ConversationComponent,
       },
-      {
-        path: 'd',
-        component: DesktopComponent,
-      }
+      // {
+      //   path: 'd',
+      //   component: ContactsComponent,
+      // }
     ]
   }
 ];

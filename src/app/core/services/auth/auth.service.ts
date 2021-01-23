@@ -19,7 +19,7 @@ import { ToastService } from '@app/shared/toaster/toast.service';
   providedIn: 'root',
 })
 export class AuthService {
-  basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST;
+  basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST + '/';
   token: string;
   user: any;
 

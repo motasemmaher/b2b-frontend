@@ -14,6 +14,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ProductsRoutingModule,
     SharedModule,
     InfiniteScrollModule,
+    
   ],
   providers: [
     ProductsService

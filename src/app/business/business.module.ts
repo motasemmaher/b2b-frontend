@@ -8,6 +8,11 @@ import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '@app/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { BusinessService } from './services/business.service';
+import { AvatarModule } from 'ngx-avatar';
+
+
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +20,8 @@ import { BusinessService } from './services/business.service';
     BusinessRoutingModule,
     SharedModule,
     TranslateModule.forChild(),
-    HttpClientModule
+    HttpClientModule,
+    AvatarModule
   ],
   declarations: [
     BusinessComponent,
