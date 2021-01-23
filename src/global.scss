@@ -29,6 +29,47 @@
     overflow-y: auto;
 }
 
+/* 
+ * Fix text for div borders
+ * 
+ */
+
+ .settingsDiv{
+  border-style: solid;
+  border-color: rgb(218, 220, 224);
+  border-radius: 8px;
+  border-width: 1px;
+  //margin-left: 12px;
+  //margin-right: 12px;
+  margin-top: 24px;
+ }
+ .lastInput{
+   --border-color: white;
+ }
+ h1{
+  color: black;
+} h2{
+  color: black;
+} h3{
+  color: black;
+} h4{
+  color: black;
+} h5{
+  color: black;
+} h6{
+  color: black;
+}
+ion-item.margined{
+  border-radius: 30px !important;
+  padding-left: 30px !important;
+  font-size: 1em;
+  margin-bottom: 10px;
+  border: 2px solid  rgb(218, 220, 224);
+  border-bottom: 2px !important;
+  box-shadow: none !important;
+}
+
+
 /*
  * Dark Colors
  * -------------------------------------------
@@ -97,6 +138,44 @@
     --ion-color-light-contrast-rgb: 255,255,255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
+
+    .divColorFix{
+      background-color: #1e1e1e;
+      border-color: #1e1e1e;
+    }
+    h1{
+      color: white;
+    } h2{
+      color: white;
+    } h3{
+      color: white;
+    } h4{
+      color: white;
+    } h5{
+      color: white;
+    } h6{
+      color: white;
+    }
+    .lastInput{
+      --border-color: #1e1e1e;
+    }
+    ion-item.margined{
+      border-radius: 30px !important;
+      padding-left: 30px !important;
+      font-size: 1em;
+      margin-bottom: 10px;
+      border: 2px solid #121212;
+      border-bottom: 2px !important;
+      box-shadow: none !important;
+      --border-color: #121212;
+    }
+    ion-card{
+      background-color: #1e1e1e;
+    }
+    ion-title{
+      color: white;
+    }
+
   }
   
   /*
@@ -133,9 +212,43 @@
   
     --ion-toolbar-background: #0d0d0d;
   
-    --ion-item-background: #000000;
+    --ion-item-background: #1e1e1e;
   
     --ion-card-background: #1c1c1d;
+
+    .divColorFix{
+      background-color: #1e1e1e;
+      border-color: #1e1e1e;
+    }
+    h1{
+      color: white;
+    } h2{
+      color: white;
+    } h3{
+      color: white;
+    } h4{
+      color: white;
+    } h5{
+      color: white;
+    } h6{
+      color: white;
+    }
+    .lastInput{
+      --border-color: #1e1e1e;
+    }
+    ion-item.margined{
+      border-radius: 30px !important;
+      padding-left: 30px !important;
+      font-size: 1em;
+      margin-bottom: 10px;
+      border: 2px solid #121212;
+      border-bottom: 2px !important;
+      box-shadow: none !important;
+      --border-color: #121212;
+    }
+    ion-card{
+      background-color: #1e1e1e;
+    }
   }
   
   
@@ -151,7 +264,7 @@
     --ion-text-color: #ffffff;
     --ion-text-color-rgb: 255,255,255;
   
-    --ion-border-color: #222222;
+    //--ion-border-color: #222222;
   
     --ion-color-step-50: #1e1e1e;
     --ion-color-step-100: #2a2a2a;
@@ -180,4 +293,18 @@
     --ion-tab-bar-background: #1f1f1f;
   
     --ion-card-background: #1e1e1e;
+
+    ion-item.margined{
+      border-radius: 30px !important;
+      padding-left: 30px !important;
+      font-size: 1em;
+      margin-bottom: 10px;
+      border: 2px solid #121212;
+      border-bottom: 2px !important;
+      box-shadow: none !important;
+      --border-color: #121212;
+    }
+    ion-card{
+      background-color: #1e1e1e;
+    }
   }

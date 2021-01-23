@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/core/services/auth/auth.service';
 import { NavController } from '@ionic/angular';
@@ -18,9 +19,9 @@ export class SignUpComponent implements OnInit {
   userInfo: FormGroup;
   disableNextButton = true;
   disableSaveButton = true;
-  buttonName = 'Next';
+  buttonName = 'NEXT';
   isMoved = false;
-  headerName = 'User Info';
+  headerName = 'USER_INFO';
   heightClassName = 'user-info';
   data: any;
   constructor(
@@ -28,7 +29,8 @@ export class SignUpComponent implements OnInit {
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private signUpInfoService: SignUpInfoService
+    private signUpInfoService: SignUpInfoService,
+    private translate: TranslateService
   ) {
     this.activatedRoute.params.subscribe(params => {
       this.type = params.type;
@@ -42,20 +44,20 @@ export class SignUpComponent implements OnInit {
       const url = this.router.url;
       if (url.includes(AuthRoutingConstants.USER_INFO)) {
         this.heightClassName = 'user-info';
-        this.buttonName = 'Next';
+        this.buttonName = 'NEXT';
         this.isMoved = false;
         this.userInfo.updateValueAndValidity();
-        this.headerName = 'User Information';
+        this.headerName = 'USER_INFORMATION';
       } else if (url.includes(AuthRoutingConstants.CAR_INFO) || url.includes(AuthRoutingConstants.GARAGE_INFO)) {
         this.isMoved = true;
         if (url.includes(AuthRoutingConstants.CAR_INFO)) {
           this.heightClassName = 'car-info';
-          this.headerName = 'Car Information';
+          this.headerName = 'CAR_INFORMATION';
         } else {
           this.heightClassName = 'garage-info';
-          this.headerName = 'Garage Information';
+          this.headerName = 'GARAGE_INFORMATION';
         }
-        this.buttonName = 'Save';
+        this.buttonName = 'SAVE';
         this.userInfo.updateValueAndValidity();
       }
     });
@@ -105,9 +107,9 @@ export class SignUpComponent implements OnInit {
         this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.CAR_INFO}`);
         this.isMoved = true;
         this.disableNextButton = true;
-        this.buttonName = 'Save';
+        this.buttonName = 'SAVE';
       } else if (this.type === SharedRoutingConstants.GARAGE) {
-        this.buttonName = 'Save';
+        this.buttonName = 'SAVE';
         this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.GARAGE_INFO}`);
         this.disableNextButton = true;
         this.isMoved = true;

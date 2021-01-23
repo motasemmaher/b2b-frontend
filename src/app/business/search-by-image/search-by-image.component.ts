@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 import { SearchByImageService } from './service/search-by-image.service';
 @Component({
@@ -13,7 +14,8 @@ export class SearchByImageComponent implements OnInit {
   isShowResult = false;
   imageNameResult: string;
   constructor(
-    private searchByImageService: SearchByImageService
+    private searchByImageService: SearchByImageService,
+    private translate: TranslateService
   ) {
 
   }

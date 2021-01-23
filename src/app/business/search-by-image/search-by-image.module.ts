@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -12,7 +13,8 @@ import { SharedModule } from '@app/shared/shared.module';
     SearchByImageRoutingModule,
     IonicModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    TranslateModule.forChild()
   ]
 })
 export class SearchByImageModule { }

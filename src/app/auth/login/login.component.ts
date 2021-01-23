@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { IonicModule, NavController } from '@ionic/angular';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private navCtrl: NavController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private translate: TranslateService
   ) {
     this.loginInfo = this.formBuilder.group({
       username: new FormControl('',

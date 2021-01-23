@@ -34,3 +34,12 @@ export class AuthRoutingConstants {
     static GARAGE_INFO = 'garage-owner';
     static REFRESH_AUTHENTICATION = 'refresh-authentication';
 }
+
+export class SettingsRoutingConstants {
+    static MANAGE_ACCOUNTS = 'manage-accounts';
+    static USER_INFO = 'user-info';
+    static CAR_INFO = 'car-owner';
+    static GARAGE_INFO = 'garage-owner';
+    static TYPE = 'type';
+    static GENERAL = 'general';
+}

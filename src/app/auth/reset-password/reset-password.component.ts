@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, NavController } from '@ionic/angular';
@@ -14,7 +15,8 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private translate: TranslateService
   ) {
     this.resetInfo1 = this.formBuilder.group({
       email: ['', Validators.required]
