@@ -2,9 +2,10 @@
   <ion-list>
     <ion-item
       *ngFor="let contact of contacts; index as index"
-      [routerLink]="contact._id"
+      class="contact"
+      (click)="openChat(index)"
     >
-      <div class="contact py-2 w-100 d-flex justify-content-start">
+      <div class="py-2 w-100 d-flex justify-content-start">
         <ngx-avatar class="mx-2" name="{{ contact.name }}"></ngx-avatar>
         <div>
           <h3>

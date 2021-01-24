@@ -1,67 +1,61 @@
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormArray, FormControl, FormBuilder } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { IonContent, NavController } from '@ionic/angular';
 import { ChatService } from '../service/chat.service';
 import { AuthService } from '@app/core/services/auth/auth.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-conversation',
   templateUrl: './conversation.component.html',
   styleUrls: ['./conversation.component.css'],
 })
-export class ConversationComponent implements OnInit {
-  index = 0;
+export class ConversationComponent implements OnInit, OnDestroy {
   message: string;
   conversationId; string;
-  messages: any[];
+  messages: any[] = [];
   chatId: string;
-  conversationInfo: any;
   userInfo: any;
 
-  @ViewChild(IonContent) content: IonContent;
+  @Input() conversationInfo: any;
+  @Output('backToContacts') backToContacts: EventEmitter<any> = new EventEmitter();
+
+  @ViewChild('content') content;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private chat: ChatService,
     private auth: AuthService,
-  ) {
-    this.activatedRoute.params.subscribe((params) => {
-      this.conversationId = params.conversationId;
-      this.messages = [];
-      this.conversationInfo = {};
-      this.getContact();
-      this.userInfo = this.auth.userInfo();
-      this.getconversationInfoUser();
-    });
-  }
+  ) { }
+
+
 
   ngOnInit(): void {
+    this.conversationId = this.conversationInfo._id;
+    this.messages = [];
+    this.getContact();
+    this.userInfo = this.auth.userInfo();
     this.chat.initChat();
   }
 
 
   getContact() {
     this.chat.getContact(this.conversationId).subscribe(res => {
-      console.log(res);
       this.chatId = res.contactBetween;
       this.messages = [...res.messages];
+      this.getLiveMessageFotUser();
     });
   }
 
-  getconversationInfoUser() {
-    console.log(this.conversationId)
-    this.chat.conversationInfo(this.conversationId).subscribe(res => {
-      this.conversationInfo = res.user;
-    });
+  getLiveMessageFotUser() {
+    this.chat.getLiveMessageFotUser(this.chatId).subscribe((message) => {
+      this.messages.push(message)
+    })
   }
 
   sendMessage() {
     const msg = {
       text: this.message,
-      date: new Date(),
+      date: new Date().toUTCString(),
       reply: false,
       user: {
         name: this.userInfo.username,
@@ -70,12 +64,12 @@ export class ConversationComponent implements OnInit {
       },
     };
     this.messages.push(msg);
-    this.chat.sendMessage(msg, this.userInfo._id, this.userInfo._id);
+    this.chat.sendMessage(msg, this.chatId);
+    this.message = '';
   }
 
-
   goBack() {
-    this.navCtrl.back();
+    this.backToContacts.emit();
   }
 
   scrollBottom() {
@@ -86,4 +80,11 @@ export class ConversationComponent implements OnInit {
     this.scrollBottom();
   }
 
+  ngOnDestroy(): void {
+    this.message = '';
+    this.conversationId = null;
+    this.messages = [];
+    this.chatId = null;
+    this.userInfo = null;
+  }
 }

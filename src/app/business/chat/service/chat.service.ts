@@ -21,18 +21,15 @@ export class ChatService {
 
   initChat() {
     this.socket.connect();
+
   }
 
   destroyChat() {
     this.socket.disconnect();
   }
 
-  public sendMessage(message: any, userId: string, contactID: string) {
-    if (userId > contactID) {
-      this.socket.emit(userId + '-' + contactID, message);
-    } else {
-      this.socket.emit(contactID + '-' + userId, message);
-    }
+  public sendMessage(message: any, chatbetweem) {
+    this.socket.emit(chatbetweem, message);
   }
 
   public getLiveMessage = (contacts, user): Observable<any> => {
@@ -49,6 +46,14 @@ export class ChatService {
           observer.next(message);
         });
       });
+    });
+  }
+  public getLiveMessageFotUser = (chatbetweem): Observable<any> => {
+    // tslint:disable-next-line: deprecation
+    return Observable.create((observer) => {
+        this.socket.on(chatbetweem, (message) => {
+          observer.next(message);
+        });
     });
   }
 

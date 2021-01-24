@@ -1,5 +1,3 @@
-import { DesktopComponent } from './desktop/desktop.component';
-import { MobileComponent } from './mobile/mobile.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,7 +28,7 @@ const config: SocketIoConfig = { url: `${BasedUrlsConstants.BASED_URL_LOCALHOST}
     AutosizeModule,
     AvatarModule
   ],
-  declarations: [ChatComponent, ConversationComponent, MobileComponent, DesktopComponent, ContactsComponent],
+  declarations: [ChatComponent, ConversationComponent, ContactsComponent],
   providers: [
     ChatService
   ]

@@ -1,83 +1,83 @@
-<section style="overflow-y: scroll; height: 100%">
-  <ion-card class="h-100">
-    <ion-grid float-left fixed>
-      <ion-row style="align-items: center">
-        <ion-col style="flex-grow: unset" (click)="goBack()">
-          <ion-icon
-            style="width: 26px; height: 26px"
-            name="arrow-back"
-          ></ion-icon>
-        </ion-col>
-        <ion-col style="max-width: 60px; max-height: 60px">
-          <ngx-avatar
-          name="{{ conversationInfo.name }}"
-        ></ngx-avatar>
-        </ion-col>
-        <ion-col>
-          <ion-label style="font-weight: bold">
-            {{ conversationInfo.name }}
-          </ion-label>
-        </ion-col>
-      </ion-row>
-      <ion-content #content>
-        <div *ngFor="let msg of messages; let i = index; let l = last">
-          <ion-row>
-            {{ l ? scrollBottom() : "" }}
-            <ion-col
-              offset="6"
-              size="6"
-              *ngIf="msg.sender === userInfo._id"
-              class="message sent-message"
-            >
-              <span>{{ msg.text }}</span>
-              <div class="msg-time"><br />{{ msg.date }}</div>
-            </ion-col>
-  
-            <ion-col
-              size="6"
-              *ngIf="msg.receiver !== userInfo._id"
-              class="message received-message"
-            >
-              <span>{{ msg.text }}</span>
-              <div class="msg-time"><br />{{ msg.date }}</div>
-            </ion-col>
-          </ion-row>
-        </div>
-      </ion-content>
-    </ion-grid>
-    <div
-      style="
-        width: 48.4%;
-        position: fixed;
-        bottom: 1px;
-        min-width: 384px;
-        max-width: 500px;
-      "
-    >
-      <ion-grid>
-        <ion-row align-items-center no-padding>
-          <ion-col size="10">
-            <textarea
-              autosize
-              maxRows="3"
-              class="message-input"
-              [(ngModel)]="message"
-            ></textarea>
+<section
+  *ngIf="conversationInfo"
+  style="
+    overflow: hidden;
+    height: calc(100% - 15px);
+    position: relative;
+    width: 100%;
+    border: 1px solid #f1f1f1;
+    margin: 5px;
+    border-radius: 5px;
+  "
+>
+  <ion-row
+    style="align-items: center; border: 1px solid #f1f1f1; border-radius: 5px; height: 65px;"
+  >
+    <ion-col class="manage-back-btn" style="flex-grow: unset" (click)="goBack()">
+      <ion-icon style="width: 26px; height: 26px" name="arrow-back"></ion-icon>
+    </ion-col>
+    <ion-col style="max-width: 60px; max-height: 60px">
+      <ngx-avatar name="{{ conversationInfo.name }}"></ngx-avatar>
+    </ion-col>
+    <ion-col>
+      <ion-label style="font-weight: bold">
+        {{ conversationInfo.name }}
+      </ion-label>
+    </ion-col>
+  </ion-row>
+  <div  style="height: calc(100% - 130px);">
+  <ion-content #content>
+      <div *ngFor="let msg of messages; let i = index; let l = last">
+        <ion-row>
+          {{ l ? scrollBottom() : "" }}
+          <ion-col
+            offset="6"
+            size="6"
+            *ngIf="msg.user.sender === userInfo._id"
+            class="message sent-message"
+          >
+            <span>{{ msg.text }}</span>
+            <div class="msg-time"><br />{{ msg.date }}</div>
           </ion-col>
-          <ion-col size="2">
-            <ion-button
-              style="--padding-start: 0.5em; --padding-end: 0.5em"
-              expand="block"
-              fill="clear"
-              color="primary"
-              disable="msgtxt === ''"
-              (click)="sendMessage()"
-            >
-              <ion-icon name="send" slot="icon-only"></ion-icon>
-            </ion-button>
+  
+          <ion-col
+            size="6"
+            *ngIf="msg.user.sender !== userInfo._id"
+            class="message received-message"
+          >
+            <span>{{ msg.text }}</span>
+            <div class="msg-time"><br />{{ msg.date }}</div>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </div>
+    </ion-content>
+  </div>
+  <div style="width: 100%;height: 50px;">
+    <div class="d-flex justify-content-lg-center">
+      <div style="width: calc(100% - 60px) !important">
+        <ion-textarea
+          autosize
+          class="message-input"
+          [(ngModel)]="message"
+          maxRows="2"
+        >
+        </ion-textarea>
+      </div>
+      <div
+        style="width: 50px"
+        class="d-flex justify-content-end flex-column align-items-end"
+      >
+        <ion-button
+          color="primary"
+          expand="block"
+          fill="clear"
+          (click)="sendMessage()"
+        >
+          <div>
+            <ion-icon name="send" slot="icon-only"></ion-icon>
+          </div>
+        </ion-button>
+      </div>
     </div>
-  </ion-card>
+  </div>
 </section>

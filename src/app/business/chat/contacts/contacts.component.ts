@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { ChatService } from '../service/chat.service';
 
 @Component({
@@ -10,6 +10,9 @@ import { ChatService } from '../service/chat.service';
 export class ContactsComponent implements OnInit {
 
   contacts: any[];
+  // tslint:disable-next-line: no-output-rename
+  @Output('selectedContacts') contactSelect: EventEmitter<any> = new EventEmitter();
+
   constructor(private chatService: ChatService) {
     this.contacts = [];
     this.getContacts();
@@ -25,6 +28,6 @@ export class ContactsComponent implements OnInit {
   }
 
   openChat(index: number) {
-
+    this.contactSelect.emit(this.contacts[index]);
   }
 }

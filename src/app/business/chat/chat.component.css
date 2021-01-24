@@ -1,25 +1,21 @@
-.message{
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 4px;
-  white-space: pre-wrap;
+.manage-contact {
+  min-width: 350px !important;
+  max-width: 100%;
 }
-.sent-message{
-  background: rgb(75, 202, 1);
-  color: white;
+
+.manage-conversation {
+  width: calc(100% - 360px);
 }
-.received-message{
-  background: gray;
-  color: white;
+
+.full-width {
+  width: 100% !important;
 }
-.message-input{
-  width: 100%;
-  border: 1px solid var(--ion-color-medium);
-  border-radius: 10px;
-  background: white;
-  resize: none;
-  padding-left: 10px;
-  padding-right: 10px;
-  position: absolute;
-  bottom: 0;
+
+@media screen and (max-width: 720px) {
+  .manage-conversation {
+    width: 100%;
+  }
+  .manage-contact {
+    width: 100%;
+  }
 }
