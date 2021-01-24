@@ -20,12 +20,12 @@ export class BusinessComponent implements OnInit, OnDestroy {
 
   garageOwnerPages = [
     {
-      title: 'My Stores',
+      title: 'MY_STORES',
       url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.MY_STORES}`,
       icon: 'storefront',
     },
     {
-      title: 'Add Store',
+      title: 'ADD_STORE',
       url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.MY_STORES}/${BusinessRoutingConstants.ADD_STORE}`,
       icon: 'add-circle',
     },
@@ -43,7 +43,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
 
   CarOwnerPages = [
     {
-      title: 'My Cars',
+      title: 'MY_CARS',
       url: '/business/my-cars',
       icon: 'car-sport',
     },
@@ -82,7 +82,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
   ) {
     this.appPages = [
       {
-        title: 'Search By Image',
+        title: 'SEARCH_BY_IMAGE',
         url: '/business/search-by-image',
         icon: 'search',
       },
@@ -118,12 +118,12 @@ export class BusinessComponent implements OnInit, OnDestroy {
     } else if (this.role === SharedConstants.ADMIN ){
       this.appPages = [
         {
-          title: 'Manage accounts',
+          title: 'MANAGE_ACCOUNTS',
           url: '/business/admin/manage-account',
           icon: 'people',
         },
         {
-          title: 'Complaints',
+          title: 'COMPLAINTS',
           url: '/business/admin/complaints',
           icon: 'document-text',
         },

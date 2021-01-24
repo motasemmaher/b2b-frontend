@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -15,6 +16,7 @@ export class CreateCarOwnerComponent implements OnInit {
   constructor(
     private signUpInfoService: SignUpInfoService,
     private router: Router,
+    private translate: TranslateService
 
   ) {
    if (this.signUpInfoService.getUserInfoData().invalid) {

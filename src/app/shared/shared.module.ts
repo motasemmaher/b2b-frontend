@@ -1,3 +1,5 @@
+import { ShowHidePasswordComponent } from './Show-Hide-Password/Show-Hide-Password.component';
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -16,6 +18,7 @@ import { ToastService } from './toaster/toast.service';
   CommonModule,
     IonicModule,
     RouterModule,
+    TranslateModule.forChild()
   ],
   declarations: [
     LoadingComponent,
@@ -23,7 +26,8 @@ import { ToastService } from './toaster/toast.service';
     FiltersComponent,
     ViewProductComponent,
     UploadImageComponent,
-    NoDataFoundComponent
+    NoDataFoundComponent,
+    ShowHidePasswordComponent
 
   ],
   providers:[
@@ -36,7 +40,8 @@ import { ToastService } from './toaster/toast.service';
     ViewProductComponent,
     UploadImageComponent,
     NoDataFoundComponent,
-    ToastService
+    ToastService,
+    ShowHidePasswordComponent
   ]
 })
 export class SharedModule { }

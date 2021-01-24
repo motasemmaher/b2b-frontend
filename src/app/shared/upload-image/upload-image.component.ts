@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -9,7 +10,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
 export class UploadImageComponent implements OnInit {
   isLoading = false;
   @Output('getImageAsBase64') getImageAsBase64: EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   ngOnInit(): void {
   }

@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
@@ -12,7 +13,8 @@ import { IonicModule } from '@ionic/angular';
     AuthRoutingModule,
     IonicModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forChild()
   ],
   declarations: [
     AuthComponent,
