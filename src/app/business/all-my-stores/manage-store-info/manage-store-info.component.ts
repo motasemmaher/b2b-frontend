@@ -4,6 +4,9 @@ import { MyStoresService } from '../services/my-stores.service';
 import { convertFrom24To12Hour } from '@app/shared/functions/convertTime';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { ModalController } from '@ionic/angular';
+import { ViewProductComponent } from '@app/shared/view-product/view-product.component';
+import { MapComponent } from '@app/shared/map/map.component';
 
 @Component({
   selector: 'app-add-store',
@@ -20,7 +23,8 @@ export class ManageStoreInfoComponent implements OnInit {
   constructor(
     private myStoresService: MyStoresService,
     private activatedRoute: ActivatedRoute,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private modalController: ModalController
 
   ) {
 
@@ -53,13 +57,13 @@ export class ManageStoreInfoComponent implements OnInit {
           ])
         ),
       openTime:
-        new FormControl(data?.openTime ? new Date(`11/11/2020 ${data?.openTime}`).toString() :'',
+        new FormControl(data?.openTime ? new Date(`11/11/2020 ${data?.openTime}`).toString() : '',
           Validators.compose([
             Validators.required
           ])
         ),
       closeTime:
-        new FormControl(data?.closeTime ? new Date( `11/11/2020 ${data?.closeTime}`).toString() : '',
+        new FormControl(data?.closeTime ? new Date(`11/11/2020 ${data?.closeTime}`).toString() : '',
           Validators.compose([
             Validators.required
           ])
@@ -134,11 +138,27 @@ export class ManageStoreInfoComponent implements OnInit {
   editStore() {
     if (this.newStore.valid) {
       const data = this.manipulateDataBeforeSending(JSON.parse(JSON.stringify(this.newStore.value)))
-      this.myStoresService.editStore(this.storeId,data).subscribe((res) => {
+      this.myStoresService.editStore(this.storeId, data).subscribe((res) => {
         this.toastService.presentToastWithOptions('success', 'store updated successfully', 'success');
         console.log(res);
       })
     }
   }
+
+  async applyLocationFromMap() {
+    const modal = await this.modalController.create({
+      component: MapComponent,
+      showBackdrop: true,
+      swipeToClose: true,
+    });
+    modal.onDidDismiss()
+      .then((data) => {
+        const location = data['data']; // Here's your selected user!
+        this.newStore.get('lat').patchValue(location.lat);
+        this.newStore.get('long').patchValue(location.long);
+      });
+    return await modal.present();
+  }
+
 }
 

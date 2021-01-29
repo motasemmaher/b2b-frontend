@@ -25,13 +25,22 @@
       <ion-label position="floating">Address</ion-label>
       <ion-input type="text" formControlName="address"></ion-input>
     </ion-item>
-    <ion-item lines="full" class="margined">
-      <ion-label position="floating">Latitude</ion-label>
-      <ion-input type="text" formControlName="lat"></ion-input>
-    </ion-item>
-    <ion-item lines="full" class="margined">
-      <ion-label position="floating">Longitude</ion-label>
-      <ion-input type="text" formControlName="long"></ion-input>
+      <ion-item lines="full" class="margined">
+        <ion-label position="floating">Latitude</ion-label>
+        <ion-input type="text" formControlName="lat"></ion-input>
+      </ion-item>
+      <ion-item lines="full" class="margined">
+        <ion-label position="floating">Longitude</ion-label>
+        <ion-input type="text" formControlName="long"></ion-input>
+      </ion-item>
+    <ion-item>
+      <ion-button
+      color="secondary"
+      (click)="applyLocationFromMap()"
+      size="default"
+    >
+      Apply Location From Map
+    </ion-button>
     </ion-item>
     <ion-item class="margined">
       <app-upload-image
@@ -42,7 +51,7 @@
       <ion-label position="floating">Description</ion-label>
       <ion-textarea rows="4" formControlName="description"></ion-textarea>
     </ion-item>
-    <ion-item lines="full" class="margined">
+    <ion-item lines="none" class="margined">
       <ion-label position="floating">Tags</ion-label>
       <ion-input type="text" formControlName="tags"></ion-input>
     </ion-item>
