@@ -3,20 +3,24 @@
       <ion-label position="floating">{{ "STORE_NAME" | translate }}</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
   </ion-item>
+  <app-input-error-message [form]="storeInfo" formInput='name'></app-input-error-message>
   <ion-item lines="full">
       <ion-label position="floating">{{ "OPEN_TIME" | translate }}</ion-label>
       <ion-datetime display-format="hh:mm A" picker-format="hh:mm A" formControlName="openTime">
       </ion-datetime>
   </ion-item>
+  <app-input-error-message [form]="storeInfo" formInput='openTime'></app-input-error-message>
   <ion-item lines="full">
       <ion-label position="floating">{{ "CLOSE_TIME" | translate }}</ion-label>
       <ion-datetime display-format="hh:mm A" picker-format="hh:mm A" formControlName="closeTime">
       </ion-datetime>
   </ion-item>
+  <app-input-error-message [form]="storeInfo" formInput='closeTime'></app-input-error-message>
   <ion-item lines="full">
       <ion-label position="floating">{{ "LOCATION" | translate }}</ion-label>
       <ion-input type="text" formControlName="location"></ion-input>
   </ion-item>
+  <app-input-error-message [form]="storeInfo" formInput='location'></app-input-error-message>
   <ion-item>
       <app-upload-image (getImageAsBase64)="getImageAsBase64($event)"></app-upload-image>
   </ion-item>
@@ -24,8 +28,10 @@
       <ion-label position="floating">{{ "DESCRIPTION" | translate }}</ion-label>
       <ion-textarea rows="4" formControlName="description"></ion-textarea>
   </ion-item>
+  <app-input-error-message [form]="storeInfo" formInput='description'></app-input-error-message>
   <ion-item lines="full" class="lastInput">
       <ion-label position="floating">{{ "TAGS" | translate }}</ion-label>
       <ion-input type="text" formControlName="tags"></ion-input>
   </ion-item>
+  <app-input-error-message [form]="storeInfo" formInput='tags'></app-input-error-message>
 </div>

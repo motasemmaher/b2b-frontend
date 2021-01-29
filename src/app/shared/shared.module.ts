@@ -1,3 +1,4 @@
+import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ShowHidePasswordComponent } from './Show-Hide-Password/Show-Hide-Password.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,7 @@ import { MapComponent } from './map/map.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 // import { AgmCoreModule } from '@agm/core';
+import { InputErrorMessageComponent } from './input-error-message/input-error-message.component';
 
 @NgModule({
   imports: [
@@ -35,8 +37,9 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     UploadImageComponent,
     NoDataFoundComponent,
     ShowHidePasswordComponent,
-    MapComponent
-
+    MapComponent,
+    SearchBarComponent,
+    InputErrorMessageComponent
   ],
   providers:[
     ToastService,
@@ -52,7 +55,9 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     NoDataFoundComponent,
     ToastService,
     ShowHidePasswordComponent,
-    MapComponent
+    MapComponent,
+    SearchBarComponent,
+    InputErrorMessageComponent
   ]
 })
 export class SharedModule { }

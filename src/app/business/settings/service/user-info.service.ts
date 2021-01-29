@@ -14,16 +14,12 @@ export class UserInfoService {
   ) { }
 
   getUserInfo(userId: any): Observable<any> {
-    /* return this.businessService.get(`user/${userId}`, {
-      headers: { authorization: this.auth.token },
-    }) */
+    
     return;
   }
 
   setUserInfo(userId: any, data: any): Observable<any>{
-    /* return this.businessService.put(`/user/:${userId}/manage-user-info`, data, {
-      headers: { authorization: this.auth.token },
-    }) */
+    
     return;
   }
 

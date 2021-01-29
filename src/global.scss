@@ -175,6 +175,12 @@ ion-item.margined{
     ion-title{
       color: white;
     }
+    ion-searchbar.full{
+      --background: #1e1e1e;
+    }
+    ion-searchbar.header{
+      --background: #121212;
+    }
 
   }
   
@@ -306,5 +312,11 @@ ion-item.margined{
     }
     ion-card{
       background-color: #1e1e1e;
+    }
+    ion-searchbar.full{
+      --background: #1e1e1e;
+    }
+    ion-searchbar.header{
+      --background: #121212;
     }
   }

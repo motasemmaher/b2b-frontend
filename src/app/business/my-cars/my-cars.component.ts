@@ -1,4 +1,4 @@
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CarsService } from './service/cars.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
@@ -35,24 +35,22 @@ export class MyCarsComponent implements OnInit, OnDestroy {
       (this.myCars.get('cars') as FormArray).push(
         new FormGroup({
           carId: new FormControl(car._id),
-          model: new FormControl(
-            car.model,
-            Validators.compose([
-              Validators.minLength(8),
-              Validators.maxLength(100),
-              Validators.pattern(/(^[A-Z a-z \d ']{2,24}$)/),
-              Validators.required,
-            ])
-          ),
-          make: new FormControl(
-            car.make,
-            Validators.compose([
-              Validators.minLength(8),
-              Validators.maxLength(100),
-              Validators.pattern(/(^[A-Z a-z \s\d-']{3,24}$)/),
-              Validators.required,
-            ])
-          ),
+          model: new FormControl('',
+          Validators.compose([
+            Validators.minLength(2),
+            Validators.maxLength(24),
+            Validators.required,
+            this.customPatternValid({ pattern: /(^[\p{L} \d'-]{2,24}$)/ugi , msg: 'invalid model'})
+          ])
+        ),
+          make: new FormControl('',
+          Validators.compose([
+            Validators.minLength(3),
+            Validators.maxLength(24),
+            Validators.required,
+            this.customPatternValid({ pattern: /(^[\p{L} \s\d'-]{3,24}$)/ugi , msg: 'invalid make'})
+          ])
+        ),
           year: new FormControl(
             car.year,
             Validators.compose([Validators.required])
@@ -64,24 +62,22 @@ export class MyCarsComponent implements OnInit, OnDestroy {
   }
   manageAddNewCar() {
     this.addNewCarFormGroup = new FormGroup({
-      model: new FormControl(
-        '',
-        Validators.compose([
-          Validators.minLength(8),
-          Validators.maxLength(100),
-          Validators.pattern(/(^[A-Z a-z \d ']{2,24}$)/),
-          Validators.required,
-        ])
-      ),
-      make: new FormControl(
-        '',
-        Validators.compose([
-          Validators.minLength(8),
-          Validators.maxLength(100),
-          Validators.pattern(/(^[A-Z a-z \s\d-']{3,24}$)/),
-          Validators.required,
-        ])
-      ),
+      model: new FormControl('',
+          Validators.compose([
+            Validators.minLength(2),
+            Validators.maxLength(24),
+            Validators.required,
+            this.customPatternValid({ pattern: /(^[\p{L} \d'-]{2,24}$)/ugi , msg: 'invalid model'})
+          ])
+        ),
+        make: new FormControl('',
+          Validators.compose([
+            Validators.minLength(3),
+            Validators.maxLength(24),
+            Validators.required,
+            this.customPatternValid({ pattern: /(^[\p{L} \s\d'-]{3,24}$)/ugi , msg: 'invalid make'})
+          ])
+        ),
       year: new FormControl(
         '',
         Validators.compose([
@@ -154,5 +150,18 @@ export class MyCarsComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(): void {
     this.carsService.resetBothDataSkipAndLimit();
+  }
+
+  public customPatternValid(config: any): ValidatorFn {
+    return (control: FormControl) => {
+      let urlRegEx: RegExp = config.pattern;
+      if (control.value && !control.value.match(urlRegEx)) {
+        return {
+          invalidMsg: config.msg
+        };
+      } else {
+        return null;
+      }
+    };
   }
 }
