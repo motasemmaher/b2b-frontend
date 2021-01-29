@@ -63,7 +63,9 @@ export class AuthService {
   }
 
   logout() {
-    this.http.delete(this.basedUrl + 'user/logout').subscribe(() => {
+    this.http.delete(this.basedUrl + 'user/logout', {
+      headers: { authorization: this.token },
+    }).subscribe(() => {
       localStorage.removeItem('access_token');
       this.user = null;
       this.token = null;

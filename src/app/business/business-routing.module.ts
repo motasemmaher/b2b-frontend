@@ -88,6 +88,7 @@ const routes: Routes = [
         loadChildren: './admin/admin.module#AdminModule',
         canActivate: [AuthGuard],
       },
+      { path: 'sos', loadChildren: () => import('./sos/sos.module').then(m => m.SosModule) },
     ],
   },
 ];

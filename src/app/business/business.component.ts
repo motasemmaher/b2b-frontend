@@ -40,12 +40,16 @@ export class BusinessComponent implements OnInit, OnDestroy {
       icon: 'document-text',
     },
   ];
-
   CarOwnerPages = [
     {
       title: 'MY_CARS',
       url: '/business/my-cars',
       icon: 'car-sport',
+    },
+    {
+      title: 'SOS',
+      url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.SOS}`,
+      icon: 'warning',
     },
   ];
   guestPages = [

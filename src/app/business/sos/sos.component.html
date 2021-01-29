@@ -1,0 +1,31 @@
+<section style="overflow-y: auto;" class="container search-results" >
+  <div class="d-flex justify-content-between flex-wrap">
+    <div>
+        <ion-label>
+         Get Location From Map
+        </ion-label>
+      <ion-button
+      color="secondary"
+      (click)="applyLocationFromMap()"
+      size="default"
+    >
+      Apply
+    </ion-button>
+    </div>
+    <div>
+        <ion-button
+        color="secondary"
+        [disabled]= "!lat || !long"
+        (click)="getStoresNearBy()"
+        size="default"
+      >
+        Get Store Near By
+      </ion-button>
+    </div>
+  </div>
+
+    <app-card *ngFor="let product of products" [data]="product" [type]="'products'"></app-card>
+</section>
+<!-- 
+infiniteScroll [infiniteScrollDistance]="0.5"
+    [infiniteScrollThrottle]="5"  [scrollWindow]="false" (scrolled)="getProduct('down')" [infiniteScrollUpDistance]="1.5" -->

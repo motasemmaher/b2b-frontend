@@ -69,14 +69,14 @@ export class ManageStoreInfoComponent implements OnInit {
           ])
         ),
       lat:
-        new FormControl(data?.lat,
+        new FormControl(data?.location?.coordinates[0],
           Validators.compose([
             Validators.pattern(/(^(\d+).?(\d+)$)/),
             Validators.required
           ])
         ),
       long:
-        new FormControl(data?.long,
+        new FormControl(data?.location?.coordinates[1],
           Validators.compose([
             Validators.pattern(/(^(\d+).?(\d+)$)/),
             Validators.required

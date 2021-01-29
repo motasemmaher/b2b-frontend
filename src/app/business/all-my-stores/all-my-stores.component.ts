@@ -31,6 +31,8 @@ export class AllMyStoresComponent implements OnInit, OnDestroy {
   deleteStore(index: number) {
     const storeId = this.stores[index]._id;
     this.myStoresService.deleteStore(storeId).subscribe((res) => {
+      this.myStoresService.resetBothDataSkipAndLimit();
+      this.stores = [];
       this.getMyStores();
     })
   }
