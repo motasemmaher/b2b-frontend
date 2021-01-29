@@ -1,4 +1,6 @@
 {
+  "LATITUDE": "Latitude",
+  "LONGITUDE": "Longitude",
   "TEST": "test",
   "STORES": "Stores",
   "STORE": "Store",
