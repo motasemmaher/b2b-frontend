@@ -1,0 +1,17 @@
+<section style="overflow-y: auto;">
+    <ion-card>
+        <ion-card-header class="d-flex justify-content-between">
+            <ion-card-title class="pt-2">Create Category</ion-card-title>
+            <ion-button color="success" [disabled]="disableButtonSave" (click) ="createCategory()">Create</ion-button>
+        </ion-card-header>
+        <ion-card-content [formGroup]="categoryFromGroup">
+            <div>
+                <ion-item>
+                    <ion-label position="floating">Name</ion-label>
+                    <ion-input formControlName="name"></ion-input>
+                </ion-item>
+                <app-input-error-message [form]="categoryFromGroup" formInput='name'></app-input-error-message>
+            </div>
+        </ion-card-content>
+    </ion-card>
+</section>

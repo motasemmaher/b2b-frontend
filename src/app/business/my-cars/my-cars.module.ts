@@ -1,3 +1,4 @@
+import { SharedModule } from '@app/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -15,7 +16,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MyCarsRoutingModule,
     IonicModule,
     ReactiveFormsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    SharedModule
   ],
   providers: [
     CarsService,

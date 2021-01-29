@@ -1,3 +1,4 @@
+import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +15,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ProductsRoutingModule,
     SharedModule,
     InfiniteScrollModule,
-    
+    IonicModule
   ],
   providers: [
     ProductsService

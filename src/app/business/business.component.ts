@@ -1,3 +1,4 @@
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BusinessRoutingConstants, SharedRoutingConstants } from '@app/core/constants/routes';
@@ -15,6 +16,10 @@ import { MenuController } from '@ionic/angular';
 export class BusinessComponent implements OnInit, OnDestroy {
   public selectedIndex = 0;
   public folder: string;
+  isSearchOpen: boolean = false;
+  resizeObservable$: Observable<Event>; 
+  resizeSubscription$: Subscription;
+  isMobile: boolean = false;
 
   username: string;
 
@@ -75,7 +80,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
     },
   ];
 
-  public appPages: any [];
+  public appPages: any[];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   role: string;
   isLoggedIn = false;
@@ -105,7 +110,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
     ];
     this.role = this.authService.getRole();
     if (this.authService.loggedIn) {
-     this.isLoggedIn = true;
+      this.isLoggedIn = true;
     }
     // this.menu.enable(true, 'mainContent')
     this.username = this.authService.getUsername();
@@ -119,7 +124,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
       }
     } else if (this.role === SharedConstants.GARAGE_OWNER) {
       this.appPages.unshift(...this.garageOwnerPages);
-    } else if (this.role === SharedConstants.ADMIN ){
+    } else if (this.role === SharedConstants.ADMIN) {
       this.appPages = [
         {
           title: 'MANAGE_ACCOUNTS',
@@ -144,14 +149,27 @@ export class BusinessComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 
+  search() {
+    //
+  }
+
+  isSearchOpened(value: boolean) {
+    this.isSearchOpen = value;
+  }
+
+  listenOnChangeSizeWindow() {
+    this.resizeObservable$ = fromEvent(window, 'resize');
+    this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
+      if (window.innerWidth <= 720 && !this.isMobile) {
+        this.isMobile = true;
+      } else if (window.innerWidth > 720 && this.isMobile) {
+        this.isMobile = false;
+      }
+    });
+  }
+
   ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(
-        (page) => page.title.toLowerCase() === path.toLowerCase()
-      );
-    }
+    this.listenOnChangeSizeWindow();
   }
   
   ngOnDestroy() {

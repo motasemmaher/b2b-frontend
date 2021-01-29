@@ -28,7 +28,7 @@
                 <h5 style="font-weight: bold;">{{ "ACCOUNT_INFORMATION" | translate }}</h5>
             </div>
             <div>
-                <ion-button [disabled]="!userInfo.valid" color="success" (click)="setUserInfo()">{{ "SAVE" | translate }}</ion-button>
+                <ion-button [disabled]="!userInfo?.valid" color="success" (click)="setUserInfo()">{{ "SAVE" | translate }}</ion-button>
             </div>
         </div>
         <div>
@@ -37,31 +37,36 @@
                     <ion-label position="floating">{{ "USERNAME" | translate }}</ion-label>
                     <ion-input type="text" formControlName="username" required></ion-input>
                 </ion-item>
+                <app-input-error-message [form]="userInfo" formInput='username'></app-input-error-message>
                 <ion-item lines="full">
                     <ion-label position="floating">{{ "FULL_NAME" | translate }}</ion-label>
                     <ion-input type="text" formControlName="fullName" required></ion-input>
                 </ion-item>
+                <app-input-error-message [form]="userInfo" formInput='fullName'></app-input-error-message>
                 <ion-item lines="full">
                     <ion-label position="floating">{{ "EMAIL_ADDRESS" | translate }}</ion-label>
                     <ion-input type="text" formControlName="email" required></ion-input>
                 </ion-item>
+                <app-input-error-message [form]="userInfo" formInput='email'></app-input-error-message>
                 <ion-item lines="full">
-                    <app-Show-Hide-Password>
-                        <ion-label position="floating">{{ "PASSWORD" | translate }}</ion-label>
+                    <ion-label position="floating">{{ "PASSWORD" | translate }}</ion-label>
+                    <app-Show-Hide-Password> 
                         <ion-input type="password" formControlName="password" required></ion-input>
                     </app-Show-Hide-Password>
                 </ion-item>
+                <app-input-error-message [form]="userInfo" formInput='password'></app-input-error-message>
                 <ion-item lines="full">
                     <ion-label position="floating">{{ "ADDRESS" | translate }}</ion-label>
                     <ion-input type="text" formControlName="address" required></ion-input>
                 </ion-item>
+                <app-input-error-message [form]="userInfo" formInput='address'></app-input-error-message>
                 <ion-item lines="full" class="lastInput">
                     <ion-label position="floating">{{ "PHONE_NUMBER" | translate }}</ion-label>
                     <ion-input type="text" formControlName="phoneNumber" required></ion-input>
                 </ion-item>
+                <app-input-error-message [form]="userInfo" formInput='phoneNumber'></app-input-error-message>
             </div>
         </div>
     </div>
-    <br/>
 
 </section>
