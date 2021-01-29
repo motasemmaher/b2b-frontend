@@ -8,6 +8,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { MyStoresService } from './services/my-stores.service';
 import { ManageStoreInfoComponent } from './manage-store-info/manage-store-info.component';
 import { IonicModule } from '@ionic/angular';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [AllMyStoresComponent, ManageStoreInfoComponent],
@@ -17,7 +18,8 @@ import { IonicModule } from '@ionic/angular';
     SharedModule,
     IonicModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InfiniteScrollModule
   ],
   providers: [
     MyStoresService

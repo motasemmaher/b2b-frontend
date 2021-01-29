@@ -1,5 +1,5 @@
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CarsService } from './service/cars.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
 
@@ -9,13 +9,14 @@ import { ToastService } from '@app/shared/toaster/toast.service';
   templateUrl: './my-cars.component.html',
   styleUrls: ['./my-cars.component.scss'],
 })
-export class MyCarsComponent implements OnInit {
+export class MyCarsComponent implements OnInit, OnDestroy {
   disableButtonSave = true;
   addNewCarFormGroup: FormGroup;
   disableAddNewCarBtn = true;
   myCars: FormGroup;
   constructor(private carsService: CarsService, private toastService: ToastService,
   ) {
+    this.myCars = new FormGroup({ cars: new FormArray([]) });
     this.getMyCars();
     this.manageAddNewCar();
   }
@@ -24,12 +25,12 @@ export class MyCarsComponent implements OnInit {
 
   getMyCars() {
     this.carsService.getMyCars().subscribe((res) => {
+      this.carsService.setSkip(this.carsService.skip + 5);
       this.manageMyCars(res);
     });
   }
 
   manageMyCars(cars: any[]) {
-    this.myCars = new FormGroup({ cars: new FormArray([]) });
     cars.forEach((car) => {
       (this.myCars.get('cars') as FormArray).push(
         new FormGroup({
@@ -116,6 +117,8 @@ export class MyCarsComponent implements OnInit {
           )
         )
         .subscribe(() => {
+          this.myCars = new FormGroup({ cars: new FormArray([]) });
+          this.carsService.resetBothDataSkipAndLimit();
           this.disableAddNewCarBtn = true;
           this.manageAddNewCar();
           this.getMyCars();
@@ -133,8 +136,8 @@ export class MyCarsComponent implements OnInit {
       year: info.year,
     };
     this.carsService.editCar(carId, this.manipulateDataBeforeSendingForYear(data)).subscribe(() => {
-      this.getMyCars();
       this.toastService.presentToastWithOptions('success', 'Car updated successfully', 'success');
+      (this.myCars.get('cars') as FormArray).at(index).get('isEditing').setValue(false);
     });
   }
 
@@ -147,5 +150,9 @@ export class MyCarsComponent implements OnInit {
       (this.myCars.get('cars') as FormArray).removeAt(index);
       this.toastService.presentToastWithOptions('success', 'Car removed successfully', 'success');
     });
+  }
+  
+  ngOnDestroy(): void {
+    this.carsService.resetBothDataSkipAndLimit();
   }
 }

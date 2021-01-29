@@ -149,6 +149,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
       );
     }
   }
+  
   ngOnDestroy() {
     this.appPages = [];
   }

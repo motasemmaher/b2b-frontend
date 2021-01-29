@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MyStoresService } from '../../services/my-stores.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { BasedUrlsConstants } from '@app/core/constants/routes';
+
 
 @Component({
   selector: 'app-my-products',
@@ -30,30 +32,33 @@ export class MyProductsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toastService: ToastService,
   ) {
+    this.products = [];
     this.getStoreId();
   }
+
   getStoreId() {
     this.activatedRoute.params.subscribe(params => {
       this.storeId = params.id;
       this.myStoresService.getCategories(this.storeId).subscribe(res => {
         this.categories = res.categories;
       });
-      this.getProducts(this.storeId);
+      this.getProducts();
     });
   }
 
-  getProducts(storeId: string, categoryId?: string) {
-    this.myStoresService.getProducts(storeId, categoryId, 'nameSort=1').subscribe((res) => {
-      this.products = res.products.map((product) => {
-        return { ...product, isOwne: product.storeId === this.storeId, editPath: product.storeId === this.storeId ? `../manage-product/edit/${product._id}` : '' };
-      });
+  getProducts() {
+    this.myStoresService.getProducts(this.storeId, this.categoryId, 'nameSort=1').subscribe((res) => {
+      this.myStoresService.setSkip(this.myStoresService.skip + 5);
+      this.products.push(...res.products.map((product) => {
+        return { ...product, isOwne: product.storeId === this.storeId, editPath: product.storeId === this.storeId ? `../manage-product/edit/${product._id}` : '', image: product.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${product.image}` : product.image };
+      }));
     });
   }
 
 
   filterApplied(value) {
     this.filterSelected = value;
-    this.getProducts(this.storeId, this.categoryId);
+    this.getProducts();
   }
 
   ngOnInit(): void {
@@ -65,7 +70,7 @@ export class MyProductsComponent implements OnInit {
       categoryId = null;
     }
     this.categoryId = categoryId;
-    this.getProducts(this.storeId, this.categoryId);
+    this.getProducts();
   }
 
 
@@ -74,10 +79,12 @@ export class MyProductsComponent implements OnInit {
     const storeId = this.products[index].storeId;
     const categoryId = this.products[index].categoryId;
     this.myStoresService.deleteProduct(storeId, categoryId, productId).subscribe((res) => {
-      this.getProducts(this.storeId, this.categoryId);
+      this.getProducts();
       this.toastService.presentToastWithOptions('success', 'Product removed successfully', 'success');
     })
   }
 
-
+  ngOnDestroy(): void {
+    this.myStoresService.resetBothDataSkipAndLimit();
+  }
 }

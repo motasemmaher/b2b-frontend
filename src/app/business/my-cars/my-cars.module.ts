@@ -6,6 +6,7 @@ import { MyCarsComponent } from './my-cars.component';
 import { CarsService } from './service/cars.service';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [MyCarsComponent],
@@ -13,7 +14,8 @@ import { ToastService } from '@app/shared/toaster/toast.service';
     CommonModule,
     MyCarsRoutingModule,
     IonicModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InfiniteScrollModule
   ],
   providers: [
     CarsService,

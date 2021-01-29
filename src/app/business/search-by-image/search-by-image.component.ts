@@ -1,6 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 import { SearchByImageService } from './service/search-by-image.service';
+import { SearchService } from '@app/shared/search/search.service';
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'search-by-image',
@@ -13,9 +14,11 @@ export class SearchByImageComponent implements OnInit {
   isLoading = false;
   isShowResult = false;
   imageNameResult: string;
+  resultOfSearch: any [];
   constructor(
     private searchByImageService: SearchByImageService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private searchService: SearchService
   ) {
 
   }
@@ -33,6 +36,9 @@ export class SearchByImageComponent implements OnInit {
       this.isLoading = false;
       this.isShowResult = true;
       this.imageNameResult = res.name;
+      this.searchService.search(this.imageNameResult).subscribe(res => {
+        this.resultOfSearch = res.productsSearchResult;
+      })
     });
   }
 }

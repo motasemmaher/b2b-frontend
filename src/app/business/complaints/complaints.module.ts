@@ -6,12 +6,15 @@ import { ComplaintsComponent } from './complaints.component';
 import { ComplaintsService } from './service/complaints.service';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '@app/shared/shared.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 @NgModule({
   declarations: [ComplaintsComponent],
   imports: [
     CommonModule,
     ComplaintsRoutingModule,
-    SharedModule
+    SharedModule,
+    InfiniteScrollModule
   ],
   providers: [
     ComplaintsService,

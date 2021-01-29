@@ -1,6 +1,6 @@
 <div style="width: 100%;">
     <ion-card class="card">
-        <div class="d-flex justify-content-center flex-wrap">
+        <div class="d-flex justify-content-center flex-wrap" style="position: relative;">
             <div style="width: 300px; height: 200px; background-color: rgb(218, 218, 218);"
                 class="d-flex justify-content-center align-items-center">
                 <img src="{{data.image}}" style="width: fit-content;" class="card-img-top">
@@ -29,7 +29,7 @@
                     <a *ngIf="type && type === 'products'" (click)="presentModal(data._id)" class="btn btn-primary">View</a>
                 </div>
             </div>
-            <div *ngIf="isOwne">
+            <div *ngIf="isOwne" style="position: absolute; right: 10px; top: 0px;">
                 <ion-button color="secondary" [routerLink]="data.editPath">
                     <ion-icon name="create-outline"></ion-icon>
                 </ion-button>

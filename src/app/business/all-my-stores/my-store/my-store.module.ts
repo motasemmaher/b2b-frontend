@@ -12,6 +12,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ManageOffersComponent } from './manage-offers/manage-offers.component';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ToastService } from '@app/shared/toaster/toast.service';
     MyStoreRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InfiniteScrollModule
   ],
   providers: [
     Camera,

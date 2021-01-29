@@ -7,7 +7,7 @@ import { AuthService } from '@app/core/services/auth/auth.service';
 })
 export class MyStoresService {
 
-  limit = 30;
+  limit = 5;
   skip = 0;
 
   constructor(private businessService: BusinessService, private authService: AuthService) { }
@@ -28,8 +28,8 @@ export class MyStoresService {
     return true;
   }
 
-  public resetBothDateSkipAndLimit(): boolean {
-    this.limit = 30;
+  public resetBothDataSkipAndLimit(): boolean {
+    this.limit = 5;
     this.skip = 0;
     return true;
   }
@@ -57,9 +57,6 @@ export class MyStoresService {
     return this.businessService.get(path, { headers: { authorization: this.authService.token } });
   }
 
-  /**
-   * createCategory
-   */
   public createCategory(storeId: string, data: any): Observable<any> {
     const path = `stores/${storeId}/create-category`;
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
@@ -74,7 +71,7 @@ export class MyStoresService {
     const path = `stores/${storeId}/delete-category/${categoyId}`;
     return this.businessService.delete(path, { headers: { authorization: this.authService.token } });
   }
-  
+
   public insertProduct(storeId: string, categoryId: string, data: any): Observable<any> {
     const path = `stores/${storeId}/category/${categoryId}/create-product`;
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
@@ -91,16 +88,16 @@ export class MyStoresService {
   }
 
   public getOffers(storeId: string): Observable<any> {
-    const path = `stores/${storeId}/offers/`;
+    const path = `stores/${storeId}/offers?limit=${this.limit}&skip=${this.skip}`;
     return this.businessService.get(path);
   }
- 
+
   public addNewStore(data: any): Observable<any> {
     const path = 'user/manage-garage-owner/add-store';
     return this.businessService.post(path, { headers: { authorization: this.authService.token } }, data);
   }
 
-  public editStore(storeId: string,data: any): Observable<any> {
+  public editStore(storeId: string, data: any): Observable<any> {
     const path = `user/manage-garage-owner/update-store/${storeId}`;
     return this.businessService.put(path, { headers: { authorization: this.authService.token } }, data);
   }
@@ -123,20 +120,40 @@ export class MyStoresService {
     return this.businessService.get(path);
   }
 
-  getOrders(storeId: string): Observable<any> {
-    const path = `${storeId}/orders`;
+  getOrders(storeId: string, status: string): Observable<any> {
+    console.log(storeId, status)
+    const path = `store/${storeId}/orders?status=${status}`;
     return this.businessService.get(path, { headers: { authorization: this.authService.token } });
   }
 
+  updateOrderStatus(storeId: string, orderId: string, status: string): Observable<any> {
+    console.log(orderId, storeId)
+    const path = `store/${storeId}/order/${orderId}`;
+    console.log(path)
+    return this.businessService.put(path, { headers: { authorization: this.authService.token } }, { status });
+  }
+
   deleteStore(storeId: string): Observable<any> {
-    return this.businessService.delete(`user/manage-garage-owner/delete-store/${storeId}`, { headers: { authorization: this.authService.token } });
+    return this.businessService.delete(
+      `user/manage-garage-owner/delete-store/${storeId}`
+      , {
+        headers: { authorization: this.authService.token }
+      });
   }
-  
+
   deleteOffer(storeId: string, offerId: string): Observable<any> {
-    return this.businessService.delete(`stores/${storeId}/offers/delete-offer/${offerId}`, { headers: { authorization: this.authService.token } });
+    return this.businessService.delete(
+      `stores/${storeId}/offers/delete-offer/${offerId}`
+      , {
+        headers: { authorization: this.authService.token }
+      });
   }
-  
+
   deleteProduct(storeId: string, categoryId: string, productId: string): Observable<any> {
-    return this.businessService.delete(`stores/${storeId}/category/${categoryId}/delete-product/${productId}`, { headers: { authorization: this.authService.token } });
+    return this.businessService.delete(
+      `stores/${storeId}/category/${categoryId}/delete-product/${productId}`
+      , {
+        headers: { authorization: this.authService.token }
+      });
   }
 }

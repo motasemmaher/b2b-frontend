@@ -1,4 +1,5 @@
-<section style="overflow-y: auto" class="container">
+<section style="overflow-y: auto" class="container" infiniteScroll [infiniteScrollDistance]="0.5"
+[infiniteScrollThrottle]="5"  [scrollWindow]="false" (scrolled)="getProducts()" [infiniteScrollUpDistance]="1.5">
     <h2>
         View Products
     </h2>

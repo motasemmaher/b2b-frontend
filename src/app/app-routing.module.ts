@@ -3,7 +3,8 @@ import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/
 
 
 export const routingConfiguration: ExtraOptions = {
-  paramsInheritanceStrategy: 'always'
+    paramsInheritanceStrategy: 'always',
+    relativeLinkResolution: 'legacy'
 };
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     // tslint:disable-next-line: max-line-length
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, paramsInheritanceStrategy: routingConfiguration.paramsInheritanceStrategy })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, paramsInheritanceStrategy: routingConfiguration.paramsInheritanceStrategy, relativeLinkResolution: 'legacy' })
   ],
   exports: [RouterModule]
 })
