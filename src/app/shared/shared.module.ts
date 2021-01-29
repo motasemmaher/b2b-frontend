@@ -13,13 +13,19 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
 import { NoDataFoundComponent } from './no-data-found/no-data-found.component';
 import { ToastService } from './toaster/toast.service';
 import { MapComponent } from './map/map.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+// import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
   CommonModule,
     IonicModule,
     RouterModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyANjVs1r0V8ZriyH83yKQsNuZpY14UourY'
+    // })
   ],
   declarations: [
     LoadingComponent,
@@ -34,6 +40,8 @@ import { MapComponent } from './map/map.component';
   ],
   providers:[
     ToastService,
+    Geolocation,
+    NativeGeocoder,
   ],
   exports: [
     LoadingComponent,

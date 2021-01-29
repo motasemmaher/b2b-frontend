@@ -1,5 +1,8 @@
+import { MapComponent } from '@app/shared/map/map.component';
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { ModalController } from '@ionic/angular';
+import { ViewProductComponent } from '@app/shared/view-product/view-product.component';
 
 @Component({
   selector: 'app-offers',
@@ -8,7 +11,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 })
 export class OffersComponent implements OnInit {
   image;
-  constructor(private camera: Camera) { }
+  constructor(private camera: Camera, public modalController: ModalController) { }
 
   ngOnInit(): void {
   }
@@ -30,4 +33,19 @@ export class OffersComponent implements OnInit {
       // Handle error
     });
   }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: MapComponent,
+      showBackdrop: true,
+      swipeToClose: true,
+    });
+    modal.onDidDismiss()
+    .then((data) => {
+      const location = data['data']; // Here's your selected user!
+      console.log(location)
+    });
+    return await modal.present();
+  }
+
 }

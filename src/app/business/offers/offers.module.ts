@@ -5,13 +5,14 @@ import { OffersRoutingModule } from './offers-routing.module';
 import { OffersComponent } from './offers.component';
 import { IonicModule } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
-
+import { SharedModule } from '@app/shared/shared.module';
 @NgModule({
   declarations: [OffersComponent],
   imports: [
     CommonModule,
     OffersRoutingModule,
-    IonicModule
+    IonicModule,
+    SharedModule
   ],
   providers: [Camera],
 })
