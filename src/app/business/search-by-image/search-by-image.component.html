@@ -22,4 +22,7 @@
   <div class="px-3" *ngIf="isShowResult">
     <h3>The result is: {{ imageNameResult }}</h3>
   </div>
+  <div>
+    <app-card *ngFor="let product of resultOfSearch" [data]="product" [type]="'products'"></app-card>
+  </div>
 </section>

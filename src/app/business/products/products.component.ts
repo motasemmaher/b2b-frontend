@@ -21,7 +21,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getProduct() {
     this.productsService.getProducts().subscribe((res) => {
       this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit(), this.productsService.getSkip() + 5);
-      console.log(res.products.length)
       this.products.push(...res.products);
     });
   }

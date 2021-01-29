@@ -9,7 +9,6 @@
       <ion-label position="floating">Open Time</ion-label>
       <ion-datetime
         display-format="hh:mm A"
-        picker-format="hh:mm A"
         formControlName="openTime"
       >
       </ion-datetime>
@@ -18,14 +17,21 @@
       <ion-label position="floating">Close Time</ion-label>
       <ion-datetime
         display-format="hh:mm A"
-        picker-format="hh:mm A"
         formControlName="closeTime"
       >
       </ion-datetime>
     </ion-item>
     <ion-item lines="full" class="margined">
-      <ion-label position="floating">Location</ion-label>
-      <ion-input type="text" formControlName="location"></ion-input>
+      <ion-label position="floating">Address</ion-label>
+      <ion-input type="text" formControlName="address"></ion-input>
+    </ion-item>
+    <ion-item lines="full" class="margined">
+      <ion-label position="floating">Latitude</ion-label>
+      <ion-input type="text" formControlName="lat"></ion-input>
+    </ion-item>
+    <ion-item lines="full" class="margined">
+      <ion-label position="floating">Longitude</ion-label>
+      <ion-input type="text" formControlName="long"></ion-input>
     </ion-item>
     <ion-item class="margined">
       <app-upload-image

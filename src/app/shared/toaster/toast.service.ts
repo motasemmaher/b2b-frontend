@@ -12,7 +12,7 @@ export class ToastService {
       message,
       color,
       position: 'top',
-      duration: 3000,
+      duration: 5000,
       buttons: [ {
           text: 'Close',
           role: 'cancel',

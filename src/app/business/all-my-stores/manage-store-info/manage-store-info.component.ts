@@ -3,6 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MyStoresService } from '../services/my-stores.service';
 import { convertFrom24To12Hour } from '@app/shared/functions/convertTime';
 import { ActivatedRoute } from '@angular/router';
+import { ToastService } from '@app/shared/toaster/toast.service';
 
 @Component({
   selector: 'app-add-store',
@@ -19,6 +20,8 @@ export class ManageStoreInfoComponent implements OnInit {
   constructor(
     private myStoresService: MyStoresService,
     private activatedRoute: ActivatedRoute,
+    private toastService: ToastService
+
   ) {
 
     this.activatedRoute.params.subscribe(params => {
@@ -50,28 +53,33 @@ export class ManageStoreInfoComponent implements OnInit {
           ])
         ),
       openTime:
-        new FormControl(new Date(`11/11/2020 ${data?.openTime}`).toString() ||'',
+        new FormControl(data?.openTime ? new Date(`11/11/2020 ${data?.openTime}`).toString() :'',
           Validators.compose([
-            // Validators.pattern('[a-zA-Z_ ]*'),
             Validators.required
           ])
         ),
       closeTime:
-        new FormControl(new Date(`11/11/2020 ${data?.closeTime}`).toString() || '',
+        new FormControl(data?.closeTime ? new Date( `11/11/2020 ${data?.closeTime}`).toString() : '',
           Validators.compose([
-            // Validators.pattern('[a-zA-Z_ ]*'),
+            Validators.required
+          ])
+        ),
+      lat:
+        new FormControl(data?.lat,
+          Validators.compose([
+            Validators.pattern(/(^(\d+).?(\d+)$)/),
+            Validators.required
+          ])
+        ),
+      long:
+        new FormControl(data?.long,
+          Validators.compose([
+            Validators.pattern(/(^(\d+).?(\d+)$)/),
             Validators.required
           ])
         ),
       address:
-        new FormControl(data?.address || 'testr',
-          Validators.compose([
-            Validators.pattern(/(^[A-Z a-z ' -]{5,8}$)/),
-            Validators.required
-          ])
-        ),
-      location:
-        new FormControl(data?.location || '',
+        new FormControl(data?.address || '',
           Validators.compose([
             Validators.pattern(/(^[A-Z a-z ' -]{5,8}$)/),
             // Validators.required
@@ -111,20 +119,23 @@ export class ManageStoreInfoComponent implements OnInit {
       this.addNewStore();
     }
   }
+
   addNewStore() {
     if (this.newStore.valid) {
       const data = this.manipulateDataBeforeSending(JSON.parse(JSON.stringify(this.newStore.value)))
-
       this.myStoresService.addNewStore(data).subscribe((res) => {
+        this.toastService.presentToastWithOptions('success', 'store added successfully', 'success');
+
         console.log(res);
       })
     }
   }
+
   editStore() {
     if (this.newStore.valid) {
       const data = this.manipulateDataBeforeSending(JSON.parse(JSON.stringify(this.newStore.value)))
-
       this.myStoresService.editStore(this.storeId,data).subscribe((res) => {
+        this.toastService.presentToastWithOptions('success', 'store updated successfully', 'success');
         console.log(res);
       })
     }

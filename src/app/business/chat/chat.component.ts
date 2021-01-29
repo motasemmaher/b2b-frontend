@@ -33,18 +33,18 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.isMoblieAndOpenContact = false;
       this.isMoblieAndOpenConversation = true;
       this.isHids = false;
-    })
+    });
   }
 
   listenOnChangeSizeWindow() {
-    this.resizeObservable$ = fromEvent(window, 'resize')
+    this.resizeObservable$ = fromEvent(window, 'resize');
     this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
       if (window.innerWidth <= 720 && !this.isMobile) {
         this.isMobile = true;
       } else if (window.innerWidth > 720 && this.isMobile) {
         this.isMobile = false;
       }
-    })
+    });
   }
 
   backToContacts() {

@@ -28,6 +28,7 @@ export class BusinessService {
 
   public put(path: string, options?: any, body?: any): Observable<any> {
     const basedUrl = this.basedUrl.concat(path);
+    console.log(basedUrl)
     return this.http.put(basedUrl, body, options).pipe(catchError((error) => this.error(error)));
   }
 

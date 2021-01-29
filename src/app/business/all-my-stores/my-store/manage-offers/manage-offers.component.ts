@@ -54,6 +54,10 @@ export class ManageOffersComponent implements OnInit {
       const offerId = (this.offersFromGroup.get('offers') as FormArray).at(index).get('id').value;
       this.myStoresService.deleteOffer(this.storeId, offerId).subscribe(res => {
         (this.offersFromGroup.get('offers') as FormArray).removeAt(index);
+        this.offersFromGroup = new FormGroup({
+          offers: new FormArray([])
+        });
+        this.myStoresService.resetBothDataSkipAndLimit();
         this.toastService.presentToastWithOptions('success', 'Offers removed successfully', 'success');
       })
     } else {
@@ -73,9 +77,7 @@ export class ManageOffersComponent implements OnInit {
 
   getOffers() {
     this.myStoresService.getOffers(this.storeId).subscribe((res) => {
-      this.offersFromGroup = new FormGroup({
-        offers: new FormArray([])
-      });
+      this.myStoresService.setSkip(this.myStoresService.skip + 5);
       res.offers.forEach((offer) => this.addOffer({ productId: offer._id, ...offer.offer }));
     });
   }
@@ -95,8 +97,12 @@ export class ManageOffersComponent implements OnInit {
   }
 
   createOffer() {
-    const data = this.offersFromGroup.value;
-    this.myStoresService.createOffers(this.storeId, { productOffers: data.offers }).subscribe(res => {
+    const data = this.offersFromGroup.value.offers.filter((offer) => offer.isNew);
+    this.myStoresService.createOffers(this.storeId, { productOffers: data }).subscribe(res => {
+      this.offersFromGroup = new FormGroup({
+        offers: new FormArray([])
+      });
+      this.myStoresService.resetBothDataSkipAndLimit();
       this.getOffers();
       this.toastService.presentToastWithOptions('success', 'Offers created successfully', 'success');
     });

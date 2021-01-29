@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BusinessService } from '@app/business/services/business.service';
 import { MyStoresService } from '../services/my-stores.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastService } from '@app/shared/toaster/toast.service';
 
 @Component({
   selector: 'app-orders',
@@ -10,8 +11,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OrdersComponent implements OnInit {
   storeId: string;
-  orders: any [];
-  storesId: any [];
+  status: string;
+  orders: any[];
+  storesId: any[];
   customPopoverOptions: any = {
     header: 'Select Store',
   };
@@ -33,40 +35,53 @@ export class OrdersComponent implements OnInit {
       key: '',
       label: 'All',
     },
-  ]
+  ];
 
   constructor(
-    private businessService: BusinessService,
     private myStoresService: MyStoresService,
-    private activatedRoute: ActivatedRoute,
+    private toastService: ToastService
   ) {
-    // this.getMyStoresId();
-   }
+    this.getMyStoresId();
+  }
 
   ngOnInit(): void {
   }
 
-  getOrders(storeId, status) {
-    // // this.myStoresService.getOrders(storeId, status).subscribe(res => {
-    //   this.orders = res.orders;
-    // });
+  getOrders() {
+    console.log(this.storeId, this.status)
+    this.orders = [];
+    this.myStoresService.getOrders(this.storeId, this.status).subscribe(res => {
+      console.log(res);
+      this.orders = res.order;
+    });
   }
 
-  selectStatusOrder( ) {
-
-  }
   getMyStoresId() {
     this.myStoresService.getMyStoresId().subscribe(res => {
       this.storesId = res.storesId;
+      console.log(this.storesId[0]?._id)
       this.storeId = this.storesId[0]?._id;
-      // this.getOrders(this.storeId);
+      this.status = this.statuses[0]?.key;
+      this.getOrders();
     });
   }
 
   selectStore(value) {
-    let { value: storeId } = value.target;
-    // this.getOrders(storeId);
+    const { value: storeId } = value.target;
     this.storeId = storeId;
+    this.getOrders();
   }
 
+  selectStatusOrder(value) {
+    const { value: status } = value.target;
+    this.status = status;
+    this.getOrders();
+  }
+
+  updateOrderStatus(storeId, orderId, status) {
+    this.myStoresService.updateOrderStatus(storeId, orderId, status).subscribe(res => {
+      this.toastService.presentToastWithOptions('success', `order ${status} successfully`, 'success');
+      this.getOrders();
+    })
+  }
 }

@@ -34,6 +34,44 @@
     </div>
   </div>
   <div>
-      
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">User Inforamtion</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Address</th>
+          <th scope="col">Product Info</th>
+          <th *ngIf="statusOrder === 'pending' || statusOrder === 'all'" scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders; index as index">
+          <th scope="row">{{ index + 1 }}</th>
+          <td>
+            <div>
+              <div>User Name: {{ order.carOwner.fullName }}</div>
+              <div>Email: {{ order.carOwner.fullName }}</div>
+            </div>
+          </td>
+          <td>{{ order.phoneNumber }}</td>
+          <td>{{ order.deliveryAddress }}</td>
+          <td>
+            <div>Name: {{ order.product.name }}</div>
+            <div>Price: {{ order.product.price }}</div>
+          </td>
+          <td *ngIf="statusOrder === 'pending' || order.status === 'pending'">
+            <div class="d-flex justify-content-start">
+              <ion-button color="success" (click)="updateOrderStatus(order.storeId, order._id, 'delivered')">
+                <ion-icon name="bag-check-outline"></ion-icon>
+              </ion-button>
+              <ion-button color="danger" (click)="updateOrderStatus(order.storeId, order._id, 'cancel')">
+                <ion-icon name="close"></ion-icon>
+              </ion-button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </section>

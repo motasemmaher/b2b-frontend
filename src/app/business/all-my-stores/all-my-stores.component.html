@@ -1,4 +1,5 @@
-<section class="container main-container-in-page">
+<section class="container main-container-in-page" infiniteScroll [infiniteScrollDistance]="0.5"
+[infiniteScrollThrottle]="5"  [scrollWindow]="false" (scrolled)="getMyStores()" [infiniteScrollUpDistance]="1.5">
   <!-- <span>
         {{ 'TEST' | translate }}
     </span> -->
