@@ -12,6 +12,7 @@ import { ViewProductComponent } from './view-product/view-product.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { NoDataFoundComponent } from './no-data-found/no-data-found.component';
 import { ToastService } from './toaster/toast.service';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ToastService } from './toaster/toast.service';
     ViewProductComponent,
     UploadImageComponent,
     NoDataFoundComponent,
-    ShowHidePasswordComponent
+    ShowHidePasswordComponent,
+    MapComponent
 
   ],
   providers:[
@@ -41,7 +43,8 @@ import { ToastService } from './toaster/toast.service';
     UploadImageComponent,
     NoDataFoundComponent,
     ToastService,
-    ShowHidePasswordComponent
+    ShowHidePasswordComponent,
+    MapComponent
   ]
 })
 export class SharedModule { }
