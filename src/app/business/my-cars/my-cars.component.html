@@ -9,10 +9,12 @@
               <ion-label position="floating">Model</ion-label>
               <ion-input type="text" formControlName="model"></ion-input>
             </ion-item>
+            <app-input-error-message [form]="addNewCarFormGroup" formInput='model'></app-input-error-message>
             <ion-item>
               <ion-label position="floating">Make</ion-label>
               <ion-input type="text" formControlName="make"></ion-input>
             </ion-item>
+            <app-input-error-message [form]="addNewCarFormGroup" formInput='make'></app-input-error-message>
             <ion-item>
               <ion-label position="floating">Year</ion-label>
               <ion-datetime
@@ -50,10 +52,12 @@
                 <ion-label position="floating">Model</ion-label>
                 <ion-input type="text" formControlName="model"></ion-input>
               </ion-item>
+              <app-input-error-message [form]="i" formInput='model'></app-input-error-message>
               <ion-item>
                 <ion-label position="floating">Make</ion-label>
                 <ion-input type="text" formControlName="make"></ion-input>
               </ion-item>
+              <app-input-error-message [form]="i" formInput='make'></app-input-error-message>
               <ion-item>
                 <ion-label position="floating">Year</ion-label>
                 <ion-datetime

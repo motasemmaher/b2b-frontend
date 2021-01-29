@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MyStoresService } from '../../services/my-stores.service';
 
@@ -36,9 +36,9 @@ export class CreateOffersComponent implements OnInit {
   addOffer() {
     (this.offersFromGroup.get('offers') as FormArray).push(new FormGroup({
       productId: new FormControl('', [Validators.required]),
-      price: new FormControl(0, [Validators.required, Validators.pattern(/(^[\d\.]+$)/)]),
-      discountRate: new FormControl(0, [Validators.required, Validators.pattern(/(^[\d]{1,3}$)/)]),
-      duration: new FormControl(0, [Validators.required, Validators.pattern(/(^[\d]{1,3}$)/)])
+      price: new FormControl(0, [Validators.required, this.customPatternValid({ pattern: /(^[\d\.])/ , msg: 'invalid price'})]),
+      discountRate: new FormControl(0, [Validators.required, this.customPatternValid({ pattern: /(^[\d]{1,3})/ , msg: 'invalid discount rate'})]),
+      duration: new FormControl(0, [Validators.required, this.customPatternValid({ pattern: /(^[\d]{1,3})/ , msg: 'invalid duration'})])
     }));
   }
 
@@ -71,5 +71,17 @@ export class CreateOffersComponent implements OnInit {
     });
   }
 
+  public customPatternValid(config: any): ValidatorFn {
+    return (control: FormControl) => {
+      let urlRegEx: RegExp = config.pattern;
+      if (control.value && !control.value.match(urlRegEx)) {
+        return {
+          invalidMsg: config.msg
+        };
+      } else {
+        return null;
+      }
+    };
+  }
 
 }

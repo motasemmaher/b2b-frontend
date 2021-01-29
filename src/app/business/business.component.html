@@ -10,12 +10,25 @@
           <!-- (click)="toggleMenu()"  -->
         </ion-buttons>
         <div class="w-100 d-flex justify-content-between">
-          <ion-title> B2B </ion-title>
-          <ion-title>
-            <div class="d-flex justify-content-end">
-              <span>{{ username }}</span>
+          <div class="d-flex justify-content-start">
+            <div class="mt-2" *ngIf="(!isSearchOpen && isMobile) || !isMobile">
+              <ion-title> B2B </ion-title>
             </div>
-          </ion-title>
+            <div >
+              <app-search-bar
+                [isHeader]="true"
+                (searchTerm)="search($event)"
+                (isSearchOpen)="isSearchOpened($event)"
+              ></app-search-bar>
+            </div>
+          </div>
+          <div>
+            <ion-title *ngIf="(!isSearchOpen && isMobile) || !isMobile">
+              <div  class="mt-2" >
+                <span>{{ username }}</span>
+              </div>
+            </ion-title>
+          </div>
         </div>
       </section>
     </ion-toolbar>
@@ -68,8 +81,12 @@
               lines="none"
               detail="false"
             >
-            <ion-icon slot="start" [ios]="'enter-outline'"
-            [md]="'enter-sharp'" name="-outline"></ion-icon>
+              <ion-icon
+                slot="start"
+                [ios]="'enter-outline'"
+                [md]="'enter-sharp'"
+                name="-outline"
+              ></ion-icon>
               <ion-label>{{ "LOGIN" | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>

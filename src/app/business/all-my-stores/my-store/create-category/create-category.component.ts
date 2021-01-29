@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { MyStoresService } from '@app/business/all-my-stores/services/my-stores.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -18,7 +18,12 @@ export class CreateCategoryComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.categoryFromGroup = new FormGroup({
-      name: new FormControl('', [Validators.required])
+      name: new FormControl('', 
+        Validators.compose([
+          Validators.required,
+          this.customPatternValid({ pattern: /(^[\p{L}\s\d'_-]{2,64}$)/ugi , msg: 'invalid name'})
+        ])
+      )
     });
 
     this.listenOnValidateButtonSave();
@@ -47,6 +52,19 @@ export class CreateCategoryComponent implements OnInit {
     this.myStoresService.createCategory(this.storeId, this.categoryFromGroup.value).subscribe((res) => {
       console.log(res);
     });
+  }
+
+  public customPatternValid(config: any): ValidatorFn {
+    return (control: FormControl) => {
+      let urlRegEx: RegExp = config.pattern;
+      if (control.value && !control.value.match(urlRegEx)) {
+        return {
+          invalidMsg: config.msg
+        };
+      } else {
+        return null;
+      }
+    };
   }
 
 }

@@ -29,14 +29,17 @@
                             <ion-label position="floating">Price</ion-label>
                             <ion-input type="number" formControlName="price" required></ion-input>
                         </ion-item>
+                        <app-input-error-message [form]="offersFromGroup" formInput='price'></app-input-error-message>
                         <ion-item lines="full" class="margined">
                             <ion-label position="floating">Discount rate</ion-label>
                             <ion-input type="number" formControlName="discountRate" required></ion-input>
                         </ion-item>
+                        <app-input-error-message [form]="offersFromGroup" formInput='discountRate'></app-input-error-message>
                         <ion-item lines="full" class="margined">
                             <ion-label position="floating">Duration</ion-label>
                             <ion-input type="number" formControlName="duration" required></ion-input>
                         </ion-item>
+                        <app-input-error-message [form]="offersFromGroup" formInput='duration'></app-input-error-message>
                        <div class="m-2">
                         <ion-button color="danger" (click)="deleteOffer(i)">
                             <ion-icon name="trash-outline"></ion-icon>

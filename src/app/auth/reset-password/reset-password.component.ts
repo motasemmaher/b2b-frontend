@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, NavController } from '@ionic/angular';
 
@@ -19,10 +19,20 @@ export class ResetPasswordComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.resetInfo1 = this.formBuilder.group({
-      email: ['', Validators.required]
+      email: new FormControl('',
+      Validators.compose([
+        Validators.required,
+        Validators.email,
+        this.customPatternValid({ pattern: /(^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$)/ , msg: 'invalid email'})
+      ]))
     });
     this.resetInfo2 = this.formBuilder.group({
-      code: ['', Validators.required]
+      code: new FormControl('',
+      Validators.compose([
+        this.customPatternValid({ pattern: /(^[0-9]{6}$)/ , msg: 'invalid code'}),
+        Validators.required
+      ])
+      )
     });
   }
 
@@ -56,6 +66,19 @@ export class ResetPasswordComponent implements OnInit {
 
   back(){
     this.slider.slidePrev();
+  }
+
+  public customPatternValid(config: any): ValidatorFn {
+    return (control: FormControl) => {
+      let urlRegEx: RegExp = config.pattern;
+      if (control.value && !control.value.match(urlRegEx)) {
+        return {
+          invalidMsg: config.msg
+        };
+      } else {
+        return null;
+      }
+    };
   }
 
 }

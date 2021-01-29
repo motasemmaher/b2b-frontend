@@ -10,6 +10,7 @@
                     <ion-label position="floating">Name</ion-label>
                     <ion-input formControlName="name"></ion-input>
                 </ion-item>
+                <app-input-error-message [form]="categoryFromGroup" formInput='name'></app-input-error-message>
             </div>
         </ion-card-content>
     </ion-card>

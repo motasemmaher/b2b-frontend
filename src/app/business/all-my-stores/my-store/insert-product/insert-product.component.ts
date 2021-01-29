@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { MyStoresService } from '@app/business/all-my-stores/services/my-stores.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { ToastService } from '@app/shared/toaster/toast.service';
 @Component({
   selector: 'app-insert-product',
@@ -29,23 +29,28 @@ export class InsertProductComponent implements OnInit {
     this.productFromGroup = new FormGroup({
       name: new FormControl('', [
         Validators.required,
-        Validators.pattern(/(^[A-Z a-z \s\d-']{4,64}$)/),
+        //Validators.pattern(/(^[A-Z a-z \s\d-']{4,64}$)/),
+        this.customPatternValid({ pattern: /(^[\p{L}\s\d'-]{4,64}$)/ugi , msg: 'invalid product name'})
       ]), //
       description: new FormControl('', [
         Validators.required,
-        Validators.pattern(/(^[A-Z a-z \s\d-'\.]{8,254}$)/),
+        //Validators.pattern(/(^[A-Z a-z \s\d-'\.]{8,254}$)/),
+        this.customPatternValid({ pattern: /(^[\p{L}\s\d'\.-]{8,254}$)/ugi , msg: 'invalid description'})
       ]),
       price: new FormControl(0, [
         Validators.required,
-        Validators.pattern(/(^[\d\.]+$)/),
+        //Validators.pattern(/(^[\d\.]+$)/),
+        this.customPatternValid({ pattern: /(^[\d\.])/ , msg: 'invalid price'})
       ]),
       amount: new FormControl(0, [
         Validators.required,
-        Validators.pattern(/(^[\d\.]+$)/),
+        //Validators.pattern(/(^[\d\.]+$)/),
+        this.customPatternValid({ pattern: /(^[\d\.]+$)/ , msg: 'invalid amount'})
       ]),
       tags: new FormControl('', [
         Validators.required,
-        Validators.pattern(/(^[A-Z a-z\s\d-,']{2,256}$)/),
+        //Validators.pattern(/(^[A-Z a-z\s\d-,']{2,256}$)/),
+        this.customPatternValid({ pattern: /(^[\p{L}\s\d',-]{2,256}$)/ugi , msg: 'invalid tags'})
       ]),
       productType: new FormControl('', [Validators.required]),
       image: new FormControl('', [Validators.required]),
@@ -142,5 +147,18 @@ export class InsertProductComponent implements OnInit {
     this.selectedCategoryId = data.categoryId;
     delete data.categoryId;
     return data;
+  }
+
+  public customPatternValid(config: any): ValidatorFn {
+    return (control: FormControl) => {
+      let urlRegEx: RegExp = config.pattern;
+      if (control.value && !control.value.match(urlRegEx)) {
+        return {
+          invalidMsg: config.msg
+        };
+      } else {
+        return null;
+      }
+    };
   }
 }

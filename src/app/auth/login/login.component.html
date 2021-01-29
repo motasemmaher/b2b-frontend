@@ -1,6 +1,10 @@
 <ion-card>
   <ion-card-header>
+    
     <h1 style="font-weight: bold;">
+      <ion-buttons slot="start">
+        <ion-back-button (click)="back()"></ion-back-button>
+      </ion-buttons>
       {{ "LOGIN" | translate}}
     </h1>
   </ion-card-header>
@@ -9,10 +13,14 @@
         <ion-label position="floating">{{ "USERNAME" | translate }}</ion-label>
         <ion-input type="username" formControlName="username" required></ion-input>
       </ion-item>
+      <app-input-error-message [form]="loginInfo" formInput='username'></app-input-error-message>
       <ion-item lines="full" class="margined">
         <ion-label position="floating">{{ "PASSWORD" | translate }}</ion-label>
-        <ion-input type="password" formControlName="password" required></ion-input>
+        <app-Show-Hide-Password>
+          <ion-input type="password" formControlName="password" required></ion-input>
+        </app-Show-Hide-Password>
       </ion-item>
+      <app-input-error-message [form]="loginInfo" formInput='password'></app-input-error-message>
       <ion-item lines="none">
         <ion-checkbox color="primary" slot="start" formControlName="rememberMe" name="rememberMe"></ion-checkbox>
         <ion-label>{{ "REMEMBER_ME" | translate }}</ion-label>

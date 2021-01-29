@@ -1,3 +1,4 @@
+import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ShowHidePasswordComponent } from './Show-Hide-Password/Show-Hide-Password.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,7 @@ import { ViewProductComponent } from './view-product/view-product.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { NoDataFoundComponent } from './no-data-found/no-data-found.component';
 import { ToastService } from './toaster/toast.service';
+import { InputErrorMessageComponent } from './input-error-message/input-error-message.component';
 
 @NgModule({
   imports: [
@@ -27,8 +29,9 @@ import { ToastService } from './toaster/toast.service';
     ViewProductComponent,
     UploadImageComponent,
     NoDataFoundComponent,
-    ShowHidePasswordComponent
-
+    ShowHidePasswordComponent,
+    SearchBarComponent,
+    InputErrorMessageComponent
   ],
   providers:[
     ToastService,
@@ -41,7 +44,9 @@ import { ToastService } from './toaster/toast.service';
     UploadImageComponent,
     NoDataFoundComponent,
     ToastService,
-    ShowHidePasswordComponent
+    ShowHidePasswordComponent,
+    SearchBarComponent,
+    InputErrorMessageComponent
   ]
 })
 export class SharedModule { }

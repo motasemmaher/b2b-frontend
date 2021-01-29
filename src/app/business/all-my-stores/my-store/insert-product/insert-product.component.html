@@ -10,6 +10,7 @@
                     <ion-label position="floating">Name</ion-label>
                     <ion-input formControlName="name"></ion-input>
                 </ion-item>
+                <app-input-error-message [form]="productFromGroup" formInput='name'></app-input-error-message>
                 <ion-item>
                     <ion-label>Type </ion-label>
                     <ion-select placeholder="Select One" formControlName="productType">
@@ -22,10 +23,12 @@
                     <ion-label position="floating">Price</ion-label>
                     <ion-input [type]="'number'" formControlName="price" [min]="0"></ion-input>
                 </ion-item>
+                <app-input-error-message [form]="productFromGroup" formInput='price'></app-input-error-message>
                 <ion-item>
                     <ion-label position="floating">Amount</ion-label>
                     <ion-input [type]="'number'" formControlName="amount" [min]="0"></ion-input>
                 </ion-item>
+                <app-input-error-message [form]="productFromGroup" formInput='amount'></app-input-error-message>
                 <ion-item>
                     <ion-label>Category Name </ion-label>
                     <ion-select placeholder="Select One"  formControlName="categoryId">
@@ -37,10 +40,12 @@
                     <ion-label position="floating" >Description</ion-label>
                     <ion-textarea formControlName="description"></ion-textarea>
                 </ion-item>
+                <app-input-error-message [form]="productFromGroup" formInput='description'></app-input-error-message>
                 <ion-item>
                     <ion-label position="floating">Tags</ion-label>
                     <ion-input formControlName="tags"></ion-input>
                 </ion-item>
+                <app-input-error-message [form]="productFromGroup" formInput='tags'></app-input-error-message>
             </div>
             <div class="d-flex flex-wrap justify-content-around">
                 <div *ngFor="let image of images">

@@ -1,4 +1,9 @@
 <section style="overflow-y: auto;" class="container search-results" infiniteScroll [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="50" (scrolled)="getProduct('down')" (scrolledUp)="getProduct('up')" [infiniteScrollUpDistance]="1.5">
-    <app-card *ngFor="let product of products" [data]="product" [type]="'products'"></app-card>
+    <app-search-bar [isHeader]="false" ></app-search-bar>
+    <ion-infinite-scroll>
+        <ion-infinite-scroll-content>
+            <app-card *ngFor="let product of products" [data]="product" [type]="'products'"></app-card>
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </section>

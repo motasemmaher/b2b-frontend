@@ -5,6 +5,7 @@
       <ion-label position="floating">Store name</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
     </ion-item>
+    <app-input-error-message [form]="newStore" formInput='name'></app-input-error-message>
     <ion-item lines="full" class="margined">
       <ion-label position="floating">Open Time</ion-label>
       <ion-datetime
@@ -14,6 +15,7 @@
       >
       </ion-datetime>
     </ion-item>
+    <app-input-error-message [form]="newStore" formInput='openTime'></app-input-error-message>
     <ion-item lines="full" class="margined">
       <ion-label position="floating">Close Time</ion-label>
       <ion-datetime
@@ -23,10 +25,12 @@
       >
       </ion-datetime>
     </ion-item>
+    <app-input-error-message [form]="newStore" formInput='closeTime'></app-input-error-message>
     <ion-item lines="full" class="margined">
       <ion-label position="floating">Location</ion-label>
       <ion-input type="text" formControlName="location"></ion-input>
     </ion-item>
+    <app-input-error-message [form]="newStore" formInput='location'></app-input-error-message>
     <ion-item class="margined">
       <app-upload-image
         (getImageAsBase64)="getImageAsBase64($event)"
@@ -36,10 +40,12 @@
       <ion-label position="floating">Description</ion-label>
       <ion-textarea rows="4" formControlName="description"></ion-textarea>
     </ion-item>
+    <app-input-error-message [form]="newStore" formInput='description'></app-input-error-message>
     <ion-item lines="full" class="margined">
       <ion-label position="floating">Tags</ion-label>
       <ion-input type="text" formControlName="tags"></ion-input>
     </ion-item>
+    <app-input-error-message [form]="newStore" formInput='tags'></app-input-error-message>
   </ion-list>
   <div class="d-flex justify-content-end my-3">
     <div>

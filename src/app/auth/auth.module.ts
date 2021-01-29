@@ -1,3 +1,4 @@
+import { SharedModule } from '@app/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +15,8 @@ import { IonicModule } from '@ionic/angular';
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    SharedModule
   ],
   declarations: [
     AuthComponent,
