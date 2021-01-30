@@ -8,8 +8,8 @@
             <div class="card-body">
                 <div>
                     <ion-card-header>
-                        <ion-card-subtitle *ngIf="type && type === 'products'">in stock</ion-card-subtitle>
-                        <ion-card-subtitle *ngIf="type && type === 'stores'">
+                        <ion-card-subtitle *ngIf="type && type === products">in stock</ion-card-subtitle>
+                        <ion-card-subtitle *ngIf="type && type === stores">
                             <span *ngIf="data.isOpen" class="open">
                                 open
                             </span>
@@ -18,15 +18,15 @@
                             </span>
                         </ion-card-subtitle>
                         <ion-card-title>Name: {{data.name}}</ion-card-title>
-                        <ion-card-subtitle *ngIf="type && type === 'stores'">
+                        <ion-card-subtitle *ngIf="type && type === stores">
                             <span>
                                 Address: {{data.address}}
                             </span>
                         </ion-card-subtitle>
                     </ion-card-header>
-                    <a *ngIf="type && type === 'stores'" [routerLink]="[data.href]"
+                    <a *ngIf="type && type === stores" [routerLink]="[data.href]"
                         class="btn btn-primary">View</a>
-                    <a *ngIf="type && type === 'products'" (click)="presentModal(data._id)" class="btn btn-primary">View</a>
+                    <a *ngIf="type && type === products" (click)="presentModal(data._id)" class="btn btn-primary">View</a>
                 </div>
             </div>
             <div *ngIf="isOwne" style="position: absolute; right: 10px; top: 0px;">

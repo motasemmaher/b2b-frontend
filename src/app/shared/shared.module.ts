@@ -44,7 +44,6 @@ import { SearchResultComponent } from './search-result/search-result.component';
     SearchResultComponent
   ],
   providers:[
-    ToastService,
     Geolocation,
     NativeGeocoder,
   ],
@@ -55,7 +54,6 @@ import { SearchResultComponent } from './search-result/search-result.component';
     ViewProductComponent,
     UploadImageComponent,
     NoDataFoundComponent,
-    ToastService,
     ShowHidePasswordComponent,
     MapComponent,
     SearchBarComponent,
@@ -63,4 +61,5 @@ import { SearchResultComponent } from './search-result/search-result.component';
     SearchResultComponent
   ]
 })
+
 export class SharedModule { }

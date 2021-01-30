@@ -1,4 +1,4 @@
 <section style="overflow-y: auto;" class="container search-results" infiniteScroll [infiniteScrollDistance]="0.5"
-    [infiniteScrollThrottle]="5"  [scrollWindow]="false" (scrolled)="getProduct('down')" [infiniteScrollUpDistance]="1.5">
+    [infiniteScrollThrottle]="5"  [scrollWindow]="false" (scrolled)="getProduct()" [infiniteScrollUpDistance]="1.5">
     <app-card *ngFor="let product of products" [data]="product" [type]="'products'"></app-card>
 </section>
