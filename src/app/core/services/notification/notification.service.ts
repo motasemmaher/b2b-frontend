@@ -33,9 +33,9 @@ export class NotificationService {
     self.addEventListener('push', (event: any) => {
       const data = event.data.json();
   
-      self.registration.showNotification(data.title, {
-          body: 'Yay it works!',
-      });
+      // self.registration.showNotification(data.title, {
+      //     body: 'Yay it works!',
+      // });
   });
   }
 
