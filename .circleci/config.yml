@@ -1,13 +1,53 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
-# Use a package of configuration called an orb.
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+##
+# Please refer to Circle CI Documentation for
+# advanced tweaks and configuration
+##
+
+version: 2
+################################ Workflows ################################
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  version: 2
+  build_and_deploy:
     jobs:
-      - welcome/run
+      - build-deploy-PRODUCTION:
+          filters:
+            branches:
+              only: staging
+
+################################ JOBS ################################
+jobs:
+  #(PRODUCTION) Build and Deploy Configuration
+  build-deploy-PRODUCTION:
+    working_directory: ~/b2b
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: sudo apt install rsync
+      # (Production) Build VueJS sub project
+      # (Production) Build Angular project
+      - restore_cache:
+          key: dependency-cache-production-{{ checksum "package-lock.json" }}
+      - run:
+          name: install-dependencies (PRODUCTION)
+          command: npm install
+
+      - save_cache:
+          key: dependency-cache-production-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.cache/yarn
+            - ./node_modules
+      - run:
+          name: angular-build (PRODUCTION)
+          command: npm run build-production
+      - run:
+          name: Fix host authenticity for dev.makt-b2b.live (PRODUCTION)
+          command: ssh-keyscan 174.138.124.76 >> ~/.ssh/known_hosts
+      - run:
+          name: Copy files to server (PRODUCTION)
+          command: rsync -azvh --progress --delete-after  ~/posrocket/dist root@174.138.124.76:/var/www/b2b
+
+
+
+
+
