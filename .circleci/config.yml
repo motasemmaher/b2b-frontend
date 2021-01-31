@@ -37,7 +37,7 @@ jobs:
             - ./node_modules
       - run:
           name: angular-build (PRODUCTION)
-          command: ng build --prod
+          command: npm run build --prod
       - run:
           name: Fix host authenticity for dev.makt-b2b.live (PRODUCTION)
           command: ssh-keyscan 174.138.124.76 >> ~/.ssh/known_hosts
