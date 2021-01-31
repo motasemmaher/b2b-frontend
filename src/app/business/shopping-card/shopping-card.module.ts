@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,8 @@ import { FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/for
     ShoppingCardRoutingModule,
     IonicModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    TranslateModule.forChild()
   ]
 })
 export class ShoppingCardModule { }

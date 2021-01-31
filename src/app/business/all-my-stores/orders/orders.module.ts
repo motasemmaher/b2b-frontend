@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     OrdersRoutingModule,
     IonicModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TranslateModule.forChild()
   ]
 })
 export class OrdersModule { }

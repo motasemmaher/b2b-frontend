@@ -6,7 +6,7 @@
 
   <div class="w-100 d-flex justify-content-center">
     <div class="d-flex justify-content-around">
-      <ion-label class="mt-2">Select a category name: </ion-label>
+      <ion-label class="mt-2">{{ "SELECT_A_CATEGORY_NAME" | translate }}: </ion-label>
       <ion-select
         interface="alert"
         (ionChange)="updateCategory($event)"
@@ -14,7 +14,7 @@
         placeholder="Select One"
         value="all"
       >
-        <ion-select-option value="all">All</ion-select-option>
+        <ion-select-option value="all">{{ "ALL" | translate }}</ion-select-option>
         <ion-select-option
           *ngFor="let category of categories"
           [value]="category._id"

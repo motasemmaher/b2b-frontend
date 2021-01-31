@@ -1,6 +1,6 @@
 <section class="h-100">
   <div>
-    <ion-title style="border: none">Shopping Cart</ion-title>
+    <ion-title style="border: none">{{ "SHOPPING_CART" | translate }}</ion-title>
   </div>
   <ng-template [ngIf]="!isFetching" [ngIfElse]="loading">
     <div *ngIf="cartForm" [formGroup]="cartForm" class="h-100 w-100 container">
@@ -41,7 +41,7 @@
                             item.get("price").value * item.get("quantity").value
                           ).toFixed(2)
                         }}
-                        JOD
+                        {{ "JOD" | translate }}
                       </ion-label>
                     </ion-col>
                   </ion-row>
@@ -120,13 +120,13 @@
         <ion-grid>
           <ion-row style="align-items: center">
             <ion-col>
-              <ion-label class="totalText">Total: </ion-label>
+              <ion-label class="totalText">{{ "TOTAL" | translate }}: </ion-label>
               <ion-label class="totalPrice">{{ total?.toFixed(2) }}</ion-label>
-              <ion-label class="totalCurrency"> JOD</ion-label>
+              <ion-label class="totalCurrency"> {{ "JOD" | translate }}</ion-label>
             </ion-col>
             <ion-col>
               <ion-button (click)="onSubmit()" style="float: right"
-                >Checkout</ion-button
+                >{{ "CHECKOUT" | translate }}</ion-button
               >
             </ion-col>
           </ion-row>

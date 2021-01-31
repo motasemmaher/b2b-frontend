@@ -10,7 +10,7 @@
     [ngIf]="complaints && complaints.length !== 0"
     [ngIfElse]="noDataFound"
     >
-    <h2>View Complaints</h2>
+    <h2>{{ "VIEW_COMPLAINTS" | translate }}</h2>
     <div class="d-flex flex-column">
       <div
         *ngFor="let complaint of complaints"
@@ -19,14 +19,14 @@
       >
         <div class="d-flex flex-column justify-content-lg-start">
           <div>
-            <span> Garage Owner Name: {{ complaint.garageOwnerName }} </span>
+            <span> {{ "GARAGE_OWNER_NAME" | translate }}: {{ complaint.garageOwnerName }} </span>
           </div>
           <div>
-            <span> Garage Name: {{ complaint.storeName }} </span>
+            <span> {{ "GARAGE_NAME" | translate }}: {{ complaint.storeName }} </span>
           </div>
         </div>
         <div>
-          <span> Message: </span>
+          <span> {{ "MESSAGE" | translate }}: </span>
           <p style="max-height: 250px; overflow-y: auto">
             {{ complaint.message }}
           </p>

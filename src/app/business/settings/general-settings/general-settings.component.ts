@@ -47,7 +47,7 @@ export class GeneralSettingsComponent implements OnInit {
           Validators.minLength(8),
           Validators.maxLength(64),
           Validators.required,
-          this.customPatternValid({ pattern: /(^[\p{L}\d_]{8,64}$)/ugi , msg: 'invalid username'})
+          this.customPatternValid({ pattern: /(^[\p{L}\d_]{8,64}$)/ugi , msg: 'INVALID_USERNAME'})
         ])
         ),
       fullName: new FormControl('adsfasdffd',
@@ -55,33 +55,33 @@ export class GeneralSettingsComponent implements OnInit {
           Validators.minLength(3),
           Validators.maxLength(64),
           Validators.required,
-          this.customPatternValid({ pattern: /(^[\p{L}\s]{3,64}$)/ugi , msg: 'invalid name'})
+          this.customPatternValid({ pattern: /(^[\p{L}\s]{3,64}$)/ugi , msg: 'INVALID_NAME'})
         ])),
       email: new FormControl('asd4r5er@fadf.com',
         Validators.compose([
           Validators.required,
           Validators.email,
-          this.customPatternValid({ pattern: /(^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$)/ , msg: 'invalid email'})
+          this.customPatternValid({ pattern: /(^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$)/ , msg: 'INVALID_EMAIL'})
         ])),
       address: new FormControl('asdfd',
         Validators.compose([
           Validators.minLength(5),
           Validators.maxLength(8),
           Validators.required,
-          this.customPatternValid({ pattern: /(^[A-Z a-z ' -]{5,8}$)/ , msg: 'invalid address'})
+          this.customPatternValid({ pattern: /(^[A-Z a-z ' -]{5,8}$)/ , msg: 'INVALID_ADDRESS'})
         ])),
       phoneNumber: new FormControl('0795486325',
         Validators.compose([
           Validators.required,
-          this.customPatternValid({ pattern: /(^\d{10}$)/ , msg: 'must be 10 numbers'}),
-          this.customPatternValid({ pattern: /(^[0][7][789])/ , msg: 'must start with (077 or 078 or 079)'})
+          this.customPatternValid({ pattern: /(^\d{10}$)/ , msg: 'MUST_BE_10_NUMBERS'}),
+          this.customPatternValid({ pattern: /(^[0][7][789])/ , msg: 'MUST_START_WITH_(077_OR_078_OR_079)'})
         ])),
       password: new FormControl('asdfagha234',
         Validators.compose([
           Validators.minLength(8),
           Validators.maxLength(64),
           Validators.required,
-          this.customPatternValid({ pattern: /(^.{8,64}$)/ , msg: 'invalid password'})
+          this.customPatternValid({ pattern: /(^.{8,64}$)/ , msg: 'INVALID_PASSWORD'})
         ])),
       role: new FormControl('')
      });

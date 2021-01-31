@@ -10,26 +10,26 @@
           >{{ pageName }}</ion-button
         >
         <ion-button color="success" *ngIf="productId" routerLink="../../"
-          >Go to insert Product</ion-button
+          >{{ "GO_TO_INSERT_PRODUCT" | translate }}</ion-button
         >
       </div>
     </ion-card-header>
     <ion-card-content [formGroup]="productFromGroup">
       <div>
         <ion-item>
-          <ion-label position="floating">Name</ion-label>
+          <ion-label position="floating">{{ "NAME" | translate }}</ion-label>
           <ion-input formControlName="name"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Type </ion-label>
+          <ion-label>{{ "TYPE" | translate }} </ion-label>
           <ion-select placeholder="Select One" formControlName="productType">
-            <ion-select-option value="Part">Part</ion-select-option>
-            <ion-select-option value="Accessory">Accessory</ion-select-option>
-            <ion-select-option value="Service">Service</ion-select-option>
+            <ion-select-option value="Part">{{ "PART" | translate }}</ion-select-option>
+            <ion-select-option value="Accessory">{{ "ACCESSORY" | translate }}</ion-select-option>
+            <ion-select-option value="Service">{{ "SERVICE" | translate }}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Price</ion-label>
+          <ion-label position="floating">{{ "PRICE" | translate }}</ion-label>
           <ion-input
             [type]="'number'"
             formControlName="price"
@@ -37,7 +37,7 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Amount</ion-label>
+          <ion-label position="floating">{{ "AMOUNT" | translate }}</ion-label>
           <ion-input
             [type]="'number'"
             formControlName="amount"
@@ -45,7 +45,7 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Category Name </ion-label>
+          <ion-label>{{ "CATEGORY_NAME" | translate }} </ion-label>
           <ion-select placeholder="Select One" formControlName="categoryId">
             <ion-select-option
               *ngFor="let category of categories"
@@ -55,7 +55,7 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label>General Type </ion-label>
+          <ion-label>{{ "GENERAL_TYPE" | translate }} </ion-label>
           <ion-select placeholder="Select One" formControlName="generalType">
             <ion-select-option
               *ngFor="let type of typies"
@@ -65,11 +65,11 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Description</ion-label>
+          <ion-label position="floating">{{ "DESCRIPTION" | translate }}</ion-label>
           <ion-textarea formControlName="description"></ion-textarea>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Tags</ion-label>
+          <ion-label position="floating">{{ "TAGS" | translate }}</ion-label>
           <ion-input formControlName="tags"></ion-input>
         </ion-item>
       </div>
@@ -89,13 +89,13 @@
         <ion-spinner
           *ngIf="loadType === 'takePhoto' && isLoading"
         ></ion-spinner>
-        Take photo
+        {{ "TAKE_PHOTO" | translate }}
       </ion-button>
       <ion-button expand="full" (click)="file.click()">
         <ion-spinner
           *ngIf="loadType === 'uploadImage' && isLoading"
         ></ion-spinner>
-        Upload file
+        {{ "UPLOAD_FILE" | translate }}
       </ion-button>
     </ion-card-content>
   </ion-card>
