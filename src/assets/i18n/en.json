@@ -97,6 +97,17 @@
   "MANAGE_ACCOUNTS": "Manage accounts",
   "COMPLAINTS": "Complaints",
   "MY_STORES": "My Stores",
-  "ADD_STORE": "Add Store"
+  "ADD_STORE": "Add Store",
+  "INVALID_NAME":"Invalid name !",
+  "INVALID_ADDRESS": "invalid address !",
+  "MUST_BE_10_NUMBERS": "must be 10 numbers !",
+  "MUST_START_WITH_(077_OR_078_OR_079)": "must start with (077 or 078 or 079) !",
+  "PLEASE_ENTER_AN_EMAIL_ADDRESS": "Please enter an email address",
+  "MUST_BE_AT_LEAST": "must be at least ",
+  "CHARACTERS_LONG.": " characters long.",
+  "JOD": "JOD",
+  "TOTAL": "Total",
+  "CHECKOUT": "Checkout",
+  "VIEW": "View"
 
 }

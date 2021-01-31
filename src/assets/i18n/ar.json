@@ -97,6 +97,18 @@
   "MANAGE_ACCOUNTS": "إدارة الحسابات",
   "COMPLAINTS": "شكاوي",
   "MY_STORES": "متاجري",
-  "ADD_STORE": "أضف المتجر"
+  "ADD_STORE": "أضف المتجر",
+  "INVALID_NAME":"! اسم غير صالح",
+  "INVALID_ADDRESS": "! عنوان غير صالح",
+  "MUST_BE_10_NUMBERS": "! يجب أن يكون 10 أرقام",
+  "MUST_START_WITH_(077_OR_078_OR_079)": "! يجب أن يبدأ بـ (077 أو 078 أو 079)",
+  "PLEASE_ENTER_AN_EMAIL_ADDRESS": "الرجاء إدخال عنوان البريد الإلكتروني",
+  "MUST_BE_AT_LEAST": ".أحرف ",
+  "CHARACTERS_LONG.": " يجب أن يكون على الأقل",
+  "JOD": "دينار",
+  "TOTAL": "السعر الكلي",
+  "CHECKOUT": "الدفع",
+  "VIEW": "عرض"
 
+  
 }

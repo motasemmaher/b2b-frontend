@@ -29,7 +29,7 @@ export class InputErrorMessageComponent implements OnInit {
             case 'maxlength':
               return `Must be at most ${this.form.controls[this.formInput].errors.maxlength.requiredLength} characters long.`;
             case 'email':
-              return 'Please enter an email address';
+              return 'PLEASE_ENTER_AN_EMAIL_ADDRESS';
             default:
               return this.form.controls[this.formInput].errors[errorName];
           }

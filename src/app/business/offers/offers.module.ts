@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +13,8 @@ import { SharedModule } from '@app/shared/shared.module';
     CommonModule,
     OffersRoutingModule,
     IonicModule,
-    SharedModule
+    SharedModule,
+    TranslateModule.forChild()
   ],
   providers: [Camera],
 })
