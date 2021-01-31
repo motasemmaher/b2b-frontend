@@ -38,12 +38,12 @@ jobs:
       - run:
           name: angular-build (PRODUCTION)
           command: npm run build --prod
-      - add_ssh_keys:
-          fingerprints:
-            - "b9:17:29:24:7b:e3:f9:08:45:a5:08:9e:44:64:c9:75"
       - run:
           name: Fix host authenticity for dev.makt-b2b.live (PRODUCTION)
           command: ssh-keyscan 174.138.124.76 >> ~/.ssh/known_hosts
+      - add_ssh_keys:
+          fingerprints:
+            - "b9:17:29:24:7b:e3:f9:08:45:a5:08:9e:44:64:c9:75"
       - run:
           name: Copy files to server (PRODUCTION)
           command: rsync -azvh --progress --delete-after  ~/b2b/dist root@174.138.124.76:/var/www/b2b
