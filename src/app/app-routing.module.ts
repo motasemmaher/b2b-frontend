@@ -27,7 +27,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     // tslint:disable-next-line: max-line-length
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, paramsInheritanceStrategy: routingConfiguration.paramsInheritanceStrategy, relativeLinkResolution: 'legacy' })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, paramsInheritanceStrategy: routingConfiguration.paramsInheritanceStrategy,useHash: true , relativeLinkResolution: 'legacy' })
   ],
   exports: [RouterModule]
 })

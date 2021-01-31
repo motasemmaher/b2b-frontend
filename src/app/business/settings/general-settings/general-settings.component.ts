@@ -114,8 +114,9 @@ export class GeneralSettingsComponent implements OnInit {
 
   onChange(value: any){
     localStorage.setItem('language', this.selectedLanguage);
-    this.translate.use(this.selectedLanguage);
-    
+    if (this.translate) {
+      this.translate.use(this.selectedLanguage);
+    }
   }
 
   setUserInfo() {
