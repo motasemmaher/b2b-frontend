@@ -3,21 +3,21 @@
   [infiniteScrollThrottle]="5"  [scrollWindow]="false" (scrolled)="getMyCars()" [infiniteScrollUpDistance]="1.5">
     <ion-card-header>
       <ion-card [formGroup]="addNewCarFormGroup">
-        <ion-title> Add new Car </ion-title>
+        <ion-title> {{ "ADD_NEW_CAR" | translate }} </ion-title>
         <div class="container">
           <div class="d-flex justify-content-between flex-wrap border-bottom">
             <ion-item>
-              <ion-label position="floating">Model</ion-label>
+              <ion-label position="floating">{{ "MODEL" | translate }}</ion-label>
               <ion-input type="text" formControlName="model"></ion-input>
             </ion-item>
             <app-input-error-message [form]="addNewCarFormGroup" formInput='model'></app-input-error-message>
             <ion-item>
-              <ion-label position="floating">Make</ion-label>
+              <ion-label position="floating">{{ "MAKE" | translate }}</ion-label>
               <ion-input type="text" formControlName="make"></ion-input>
             </ion-item>
             <app-input-error-message [form]="addNewCarFormGroup" formInput='make'></app-input-error-message>
             <ion-item>
-              <ion-label position="floating">Year</ion-label>
+              <ion-label position="floating">{{ "YEAR" | translate }}</ion-label>
               <ion-datetime
                 display-format="YYYY"
                 picker-format="YYYY"
@@ -38,7 +38,7 @@
         </div>
       </ion-card>
       <ion-card-header class="d-flex justify-content-between">
-        <ion-card-title class="pt-2">My Cars</ion-card-title>
+        <ion-card-title class="pt-2">{{ "MY_CARS" | translate }}</ion-card-title>
       </ion-card-header>
     </ion-card-header>
     <ion-card-content *ngIf="myCars" [formGroup]="myCars">
@@ -50,17 +50,17 @@
               *ngIf="car.get('isEditing').value"
             >
               <ion-item>
-                <ion-label position="floating">Model</ion-label>
+                <ion-label position="floating">{{ "MODEL" | translate }}</ion-label>
                 <ion-input type="text" formControlName="model"></ion-input>
               </ion-item>
               <app-input-error-message [form]="i" formInput='model'></app-input-error-message>
               <ion-item>
-                <ion-label position="floating">Make</ion-label>
+                <ion-label position="floating">{{ "MAKE" | translate }}</ion-label>
                 <ion-input type="text" formControlName="make"></ion-input>
               </ion-item>
               <app-input-error-message [form]="i" formInput='make'></app-input-error-message>
               <ion-item>
-                <ion-label position="floating">Year</ion-label>
+                <ion-label position="floating">{{ "YEAR" | translate }}</ion-label>
                 <ion-datetime
                   display-format="YYYY"
                   picker-format="YYYY"
@@ -83,13 +83,13 @@
               *ngIf="!car.get('isEditing').value"
             >
               <div class="col pt-2">
-                <span> Model: {{ car.get("model").value }} </span>
+                <span> {{ "MODEL" | translate }}: {{ car.get("model").value }} </span>
               </div>
               <div class="col pt-2">
-                <span> Make: {{ car.get("make").value }} </span>
+                <span> {{ "MAKE" | translate }}: {{ car.get("make").value }} </span>
               </div>
               <div class="col pt-2">
-                <span> Year: {{ car.get("year").value }} </span>
+                <span> {{ "YEAR" | translate }}: {{ car.get("year").value }} </span>
               </div>
               <div class="col mb-2 row-btns d-flex justify-content-end">
                 <ion-button

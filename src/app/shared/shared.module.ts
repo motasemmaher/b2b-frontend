@@ -18,6 +18,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 // import { AgmCoreModule } from '@agm/core';
 import { InputErrorMessageComponent } from './input-error-message/input-error-message.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { InputErrorMessageComponent } from './input-error-message/input-error-me
     ShowHidePasswordComponent,
     MapComponent,
     SearchBarComponent,
-    InputErrorMessageComponent
+    InputErrorMessageComponent,
+    SearchResultComponent
   ],
   providers:[
     ToastService,
@@ -57,7 +59,8 @@ import { InputErrorMessageComponent } from './input-error-message/input-error-me
     ShowHidePasswordComponent,
     MapComponent,
     SearchBarComponent,
-    InputErrorMessageComponent
+    InputErrorMessageComponent,
+    SearchResultComponent
   ]
 })
 export class SharedModule { }

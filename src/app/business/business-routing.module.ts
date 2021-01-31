@@ -55,13 +55,13 @@ const routes: Routes = [
           import('./shopping-card/shopping-card.module').then(
             (m) => m.ShoppingCardModule
           ),
-        //canActivate: [AuthGuard], for testing
+        canActivate: [AuthGuard],
       },
       {
         path: 'chat',
         loadChildren: () =>
           import('./chat/chat.module').then((m) => m.ChatModule),
-        //canActivate: [AuthGuard], for testing
+        canActivate: [AuthGuard],
       },
       {
         path: BusinessRoutingConstants.MY_STORES,
@@ -69,24 +69,24 @@ const routes: Routes = [
           import('./all-my-stores/all-my-stores.module').then(
             (m) => m.AllMyStoresModule
           ),
-        //canActivate: [AuthGuard], for testing
+        canActivate: [AuthGuard],
       },
       {
         path: 'my-cars',
         loadChildren: () =>
           import('./my-cars/my-cars.module').then((m) => m.MyCarsModule),
-        //canActivate: [AuthGuard], for testing
+        canActivate: [AuthGuard],
       },
       {
         path: 'complaints',
         loadChildren: () =>
           import('./complaints/complaints.module').then(m => m.ComplaintsModule),
-        //canActivate: [AuthGuard], for testing
+        canActivate: [AuthGuard],
       },
       {
         path: 'admin',
         loadChildren: './admin/admin.module#AdminModule',
-        //canActivate: [AuthGuard], for testing
+        canActivate: [AuthGuard],
       },
       { path: 'sos', loadChildren: () => import('./sos/sos.module').then(m => m.SosModule) },
     ],

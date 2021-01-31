@@ -1,7 +1,7 @@
 <section class="container h-100">
   <div class="m-3 d-flex justify-content-around flex-wrap border-bottom">
     <div>
-      <ion-label> Select Store </ion-label>
+      <ion-label> {{ "SELECT_STORE" | translate }} </ion-label>
       <ion-select
         interface="alert"
         (ionChange)="selectStore($event)"
@@ -17,7 +17,7 @@
       </ion-select>
     </div>
     <div>
-      <ion-label> Select Status orders </ion-label>
+      <ion-label> {{ "SELECT_STATUS_ORDERS" | translate }} </ion-label>
       <ion-select
         interface="alert"
         (ionChange)="selectStatusOrder($event)"
@@ -38,11 +38,11 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">User Inforamtion</th>
-          <th scope="col">Phone Number</th>
-          <th scope="col">Address</th>
-          <th scope="col">Product Info</th>
-          <th *ngIf="statusOrder === 'pending' || statusOrder === 'all'" scope="col">Action</th>
+          <th scope="col">{{ "USER_INFORMATION" | translate }}</th>
+          <th scope="col">{{ "PHONE_NUMBER" | translate }}</th>
+          <th scope="col">{{ "ADDRESS" | translate }}</th>
+          <th scope="col">{{ "PRODUCT_INFO" | translate }}</th>
+          <th *ngIf="statusOrder === 'pending' || statusOrder === 'all'" scope="col">{{ "ACTION" | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -50,15 +50,15 @@
           <th scope="row">{{ index + 1 }}</th>
           <td>
             <div>
-              <div>User Name: {{ order.carOwner.fullName }}</div>
-              <div>Email: {{ order.carOwner.fullName }}</div>
+              <div>{{ "USERNAME" | translate }}: {{ order.carOwner.fullName }}</div>
+              <div>{{ "EMAIL" | translate }}: {{ order.carOwner.fullName }}</div>
             </div>
           </td>
           <td>{{ order.phoneNumber }}</td>
           <td>{{ order.deliveryAddress }}</td>
           <td>
-            <div>Name: {{ order.product.name }}</div>
-            <div>Price: {{ order.product.price }}</div>
+            <div>{{ "NAME" | translate }}: {{ order.product.name }}</div>
+            <div>{{ "PRICE" | translate }}: {{ order.product.price }}</div>
           </td>
           <td *ngIf="statusOrder === 'pending' || order.status === 'pending'">
             <div class="d-flex justify-content-start">

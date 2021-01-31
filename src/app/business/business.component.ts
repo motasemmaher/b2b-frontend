@@ -1,12 +1,12 @@
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { BusinessRoutingConstants, SharedRoutingConstants } from '@app/core/constants/routes';
+import { BasedUrlsConstants, BusinessRoutingConstants, SharedRoutingConstants } from '@app/core/constants/routes';
 import { SharedConstants } from '@app/core/constants/constants';
 import { AuthService } from '@app/core/services/auth/auth.service';
 
-import { ActivatedRoute } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { SearchService } from '@app/shared/search/search.service';
 
 @Component({
   selector: 'app-component',
@@ -17,7 +17,8 @@ export class BusinessComponent implements OnInit, OnDestroy {
   public selectedIndex = 0;
   public folder: string;
   isSearchOpen: boolean = false;
-  resizeObservable$: Observable<Event>; 
+  isChangeRoute: boolean = false;
+  resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
   isMobile: boolean = false;
 
@@ -84,11 +85,22 @@ export class BusinessComponent implements OnInit, OnDestroy {
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   role: string;
   isLoggedIn = false;
+  searchResult: any [];
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private translate: TranslateService,
+    private router: Router,
+    private searchService: SearchService,
     private authService: AuthService // private menu: MenuController
   ) {
+    this.router.events.subscribe(() => {
+      this.searchResult = [];
+      if (this.isSearchOpen) {
+        this.isChangeRoute = true;
+        setTimeout(() => {
+          this.isChangeRoute = false;
+        }, 50);
+      }
+      this.isSearchOpen = false;
+    });
     this.appPages = [
       {
         title: 'SEARCH_BY_IMAGE',
@@ -149,8 +161,23 @@ export class BusinessComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 
-  search() {
-    //
+
+  search(value) {
+    const stores = [];
+    const products = [];
+    if (value) {
+      this.searchService.search(value).subscribe(res => {
+        stores.push(...res.storesSearchResult.map((store) => {
+          return { ...store, href: `store/info/${store._id}`, type: 'stores', image: store.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${store.image}` : store.image };
+        }));
+        products.push(...res.productsSearchResult.map((product) => {
+          return { ...product, type: 'products', image: product.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${product.image}` : product.image };
+        }));
+        this.searchResult = [...stores, ...products];
+      })
+    } else {
+      this.searchResult = [];
+    }
   }
 
   isSearchOpened(value: boolean) {
@@ -169,9 +196,14 @@ export class BusinessComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (window.innerWidth <= 720 && !this.isMobile) {
+      this.isMobile = true;
+    } else if (window.innerWidth > 720 && this.isMobile) {
+      this.isMobile = false;
+    }
     this.listenOnChangeSizeWindow();
   }
-  
+
   ngOnDestroy() {
     this.appPages = [];
   }

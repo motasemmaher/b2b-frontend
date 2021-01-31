@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@app/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,7 +18,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     IonicModule,
     ReactiveFormsModule,
     InfiniteScrollModule,
-    SharedModule
+    SharedModule,
+    TranslateModule.forChild()
   ],
   providers: [
     CarsService,

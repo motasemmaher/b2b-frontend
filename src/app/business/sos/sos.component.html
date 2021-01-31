@@ -2,14 +2,14 @@
   <div class="d-flex justify-content-between flex-wrap">
     <div>
         <ion-label>
-         Get Location From Map
+         {{ "GET_LOCATION_FROM_MAP" | translate}}
         </ion-label>
       <ion-button
       color="secondary"
       (click)="applyLocationFromMap()"
       size="default"
     >
-      Apply
+      {{ "APPLY" | translate }}
     </ion-button>
     </div>
     <div>
@@ -19,12 +19,12 @@
         (click)="getStoresNearBy()"
         size="default"
       >
-        Get Store Near By
+        {{ "GET_STORE_NEAR_BY" | translate }}
       </ion-button>
     </div>
   </div>
 
-    <app-card *ngFor="let product of products" [data]="product" [type]="'products'"></app-card>
+    <!-- <app-card *ngFor="let product of products" [data]="product" [type]="'products'"></app-card> -->
 </section>
 <!-- 
 infiniteScroll [infiniteScrollDistance]="0.5"

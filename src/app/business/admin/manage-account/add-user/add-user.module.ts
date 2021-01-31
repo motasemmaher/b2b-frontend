@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +13,8 @@ import { ToastService } from '@app/shared/toaster/toast.service';
   imports: [
     CommonModule,
     AddUserRoutingModule,
-    IonicModule
+    IonicModule,
+    TranslateModule.forChild()
   ],
   providers: [
     ToastService

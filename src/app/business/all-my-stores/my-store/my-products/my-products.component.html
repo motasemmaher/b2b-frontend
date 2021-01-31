@@ -1,14 +1,14 @@
 <section style="overflow-y: auto" class="container" infiniteScroll [infiniteScrollDistance]="0.5"
 [infiniteScrollThrottle]="5"  [scrollWindow]="false" (scrolled)="getProducts()" [infiniteScrollUpDistance]="1.5">
     <h2>
-        View Products
+        {{ "VIEW_PRODUCTS" | translate }}
     </h2>
     <div>
       <div>
         <ion-card>
           <ion-card-content>
             <ion-item>
-              <ion-label>Select a category name: </ion-label>
+              <ion-label>{{ "SELECT_A_CATEGORY_NAME" | translate }}: </ion-label>
               <ion-select
                 interface="alert"
                 (ionChange)="updateCategory($event)"
@@ -16,7 +16,7 @@
                 placeholder="Select One"
                 value="all"
               >
-                <ion-select-option value="all">All</ion-select-option>
+                <ion-select-option value="all">{{ "ALL" | translate }}</ion-select-option>
                 <ion-select-option
                   *ngFor="let category of categories"
                   [value]="category._id"

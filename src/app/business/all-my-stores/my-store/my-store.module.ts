@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -29,7 +30,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    TranslateModule.forChild()
   ],
   providers: [
     Camera,

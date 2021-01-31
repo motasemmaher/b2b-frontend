@@ -1,3 +1,6 @@
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '@app/shared/shared.module';
+import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +12,10 @@ import { SosService } from './service/sos.service';
   declarations: [SosComponent],
   imports: [
     CommonModule,
-    SosRoutingModule
+    SosRoutingModule,
+    IonicModule,
+    SharedModule,
+    TranslateModule.forChild()
   ],
   providers: [
     SosService

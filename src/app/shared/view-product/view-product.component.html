@@ -5,27 +5,27 @@
             <div class="card-title d-flex justify-content-between flex-wrap">
                 <div>
                     <div class="mb-1" style="font-size: 24px; font-weight: bold;">
-                        Name: {{product.name}} 
+                        {{ "NAME" | translate }}: {{product.name}} 
                     </div>
                     <div>
-                        Price: {{product.price}} JOD
+                        {{ "PRICE" | translate }}: {{product.price}} {{ "JOD" | translate }}
                     </div>
                 </div>
                 <div class="mt-1">
                     <div class="mb-1">
                         <span *ngIf="product.isInStock" class="inStock">
-                            In Stock
+                            {{ "IN_STOCK" | translate }}
                         </span>
                         <span *ngIf="!product.isInStock" class="out-stock">
-                            Out of Stock
+                            {{ "OUT_OF_STOCK" | translate }}
                         </span>
                     </div>
                     <div>
-                        Type: {{product.productType}}
+                        {{ "TYPE" | translate}}: {{product.productType}}
                     </div>
                 </div>
                 <div>
-                    <a class="btn btn-primary" (click)="addToShoppingCart()">Add To Cart</a>
+                    <a class="btn btn-primary" (click)="addToShoppingCart()">{{ "ADD_TO_CART" | translate }}</a>
                 </div>
             </div >
             <div style="display: block; overflow-y: auto; height: calc(100% - 60px);">

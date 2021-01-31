@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +15,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     CommonModule,
     ComplaintsRoutingModule,
     SharedModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    TranslateModule.forChild()
   ],
   providers: [
     ComplaintsService,
