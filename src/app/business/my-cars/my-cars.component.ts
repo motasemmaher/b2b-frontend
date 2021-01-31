@@ -17,16 +17,15 @@ export class MyCarsComponent implements OnInit, OnDestroy {
   constructor(private carsService: CarsService, private toastService: ToastService,
   ) {
     this.myCars = new FormGroup({ cars: new FormArray([]) });
-    this.getMyCars();
     this.manageAddNewCar();
+    this.getMyCars();
   }
 
   ngOnInit(): void { }
 
   getMyCars() {
     this.carsService.getMyCars().subscribe((res) => {
-      this.carsService.setSkip(this.carsService.skip + 5);
-      this.manageMyCars(res);
+      this.manageMyCars(res.cars);
     });
   }
 
@@ -35,7 +34,7 @@ export class MyCarsComponent implements OnInit, OnDestroy {
       (this.myCars.get('cars') as FormArray).push(
         new FormGroup({
           carId: new FormControl(car._id),
-          model: new FormControl('',
+          model: new FormControl(car.model,
           Validators.compose([
             Validators.minLength(2),
             Validators.maxLength(24),
@@ -43,7 +42,7 @@ export class MyCarsComponent implements OnInit, OnDestroy {
             this.customPatternValid({ pattern: /(^[\p{L} \d'-]{2,24}$)/ugi , msg: 'invalid model'})
           ])
         ),
-          make: new FormControl('',
+          make: new FormControl(car.make,
           Validators.compose([
             Validators.minLength(3),
             Validators.maxLength(24),
@@ -114,7 +113,7 @@ export class MyCarsComponent implements OnInit, OnDestroy {
         )
         .subscribe(() => {
           this.myCars = new FormGroup({ cars: new FormArray([]) });
-          this.carsService.resetBothDataSkipAndLimit();
+          // this.carsService.resetBothDataSkipAndLimit();
           this.disableAddNewCarBtn = true;
           this.manageAddNewCar();
           this.getMyCars();
@@ -149,7 +148,7 @@ export class MyCarsComponent implements OnInit, OnDestroy {
   }
   
   ngOnDestroy(): void {
-    this.carsService.resetBothDataSkipAndLimit();
+    // this.carsService.resetBothDataSkipAndLimit();
   }
 
   public customPatternValid(config: any): ValidatorFn {
