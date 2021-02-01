@@ -35,10 +35,6 @@ const routes: Routes = [
             (m) => m.SearchByImageModule
           ),
       },
-      // {
-      //   path: 'categories',
-      //   loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
-      // },
       {
         path: 'offers',
         loadChildren: () =>
@@ -84,7 +80,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'admin',
+        path: BusinessRoutingConstants.ADMIN,
         loadChildren: './admin/admin.module#AdminModule',
         canActivate: [AuthGuard],
       },

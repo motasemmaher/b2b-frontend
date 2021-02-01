@@ -19,6 +19,7 @@ import { CoreModule } from './core/core.module';
 // import { ServiceWorkerModule } from '@angular/service-worker';
 // import { environment } from '../environments/environment';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -31,6 +32,7 @@ export function createTranslateLoader(http: HttpClient) {
     FormsModule,
     HttpClientModule,
     BrowserModule,
+    QuicklinkModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     TranslateModule.forRoot({

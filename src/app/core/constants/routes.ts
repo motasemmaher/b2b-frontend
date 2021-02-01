@@ -14,6 +14,7 @@ export class BusinessRoutingConstants {
     static MY_STORES = 'my-stores';
     static SOS = 'sos';
     static ADD_STORE = 'add-store';
+    static ADMIN = 'admin';
     static BUSINESS = 'business';
     static EXPORT = 'export';
     static COMPLAINTS = 'complaints';
@@ -21,8 +22,8 @@ export class BusinessRoutingConstants {
 
 export class BasedUrlsConstants {
     static BASED_URL_LOCALHOST_CHAT = 'http://localhost:3001';
-    static BASED_URL_LOCALHOST = 'http://localhost:3000';
-    // static BASED_URL_LOCALHOST = 'http://157.230.66.5:3000';
+    // static BASED_URL_LOCALHOST = 'http://localhost:3000';
+    static BASED_URL_LOCALHOST = 'http://157.230.66.5:3000';
     static BASED_URL_SEARCH_BY_IMAGE = 'http://localhost:8000';
 }
 

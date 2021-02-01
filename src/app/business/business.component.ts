@@ -21,7 +21,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
   resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
   isMobile: boolean = false;
-
+  listenOnRouting: Subscription;
   username: string;
 
   garageOwnerPages = [
@@ -85,76 +85,13 @@ export class BusinessComponent implements OnInit, OnDestroy {
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   role: string;
   isLoggedIn = false;
-  searchResult: any [];
+  searchResult: any[];
   constructor(
     private router: Router,
     private searchService: SearchService,
     private authService: AuthService // private menu: MenuController
   ) {
-    this.router.events.subscribe(() => {
-      this.searchResult = [];
-      if (this.isSearchOpen) {
-        this.isChangeRoute = true;
-        setTimeout(() => {
-          this.isChangeRoute = false;
-        }, 50);
-      }
-      this.isSearchOpen = false;
-    });
-    this.appPages = [
-      {
-        title: 'SEARCH_BY_IMAGE',
-        url: '/business/search-by-image',
-        icon: 'search',
-      },
-      {
-        title: 'CHAT',
-        url: '/business/chat',
-        icon: 'mail',
-      },
-      {
-        title: 'SETTING',
-        url: '/business/settings',
-        icon: 'settings',
 
-      },
-
-    ];
-    this.role = this.authService.getRole();
-    if (this.authService.loggedIn) {
-      this.isLoggedIn = true;
-    }
-    // this.menu.enable(true, 'mainContent')
-    this.username = this.authService.getUsername();
-    if (
-      this.role === SharedConstants.GUEST ||
-      this.role === SharedConstants.CAR_OWNER
-    ) {
-      this.appPages.unshift(...this.guestPages);
-      if (this.role === SharedConstants.CAR_OWNER) {
-        this.appPages.unshift(...this.CarOwnerPages);
-      }
-    } else if (this.role === SharedConstants.GARAGE_OWNER) {
-      this.appPages.unshift(...this.garageOwnerPages);
-    } else if (this.role === SharedConstants.ADMIN) {
-      this.appPages = [
-        {
-          title: 'MANAGE_ACCOUNTS',
-          url: '/business/admin/manage-account',
-          icon: 'people',
-        },
-        {
-          title: 'COMPLAINTS',
-          url: '/business/admin/complaints',
-          icon: 'document-text',
-        },
-        {
-          title: 'SETTING',
-          url: '/business/settings',
-          icon: 'settings',
-        },
-      ];
-    }
   }
 
   logout() {
@@ -196,6 +133,69 @@ export class BusinessComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.listenOnRouting = this.router.events.subscribe(() => {
+      this.searchResult = [];
+      if (this.isSearchOpen) {
+        this.isChangeRoute = true;
+        setTimeout(() => {
+          this.isChangeRoute = false;
+        }, 50);
+      }
+      this.isSearchOpen = false;
+    });
+    this.appPages = [
+      {
+        title: 'SEARCH_BY_IMAGE',
+        url: '/business/search-by-image',
+        icon: 'search',
+      },
+      {
+        title: 'CHAT',
+        url: '/business/chat',
+        icon: 'mail',
+      },
+      {
+        title: 'SETTING',
+        url: '/business/settings',
+        icon: 'settings',
+
+      },
+
+    ];
+    this.role = this.authService.getRole();
+    if (this.authService.loggedIn) {
+      this.isLoggedIn = true;
+    }
+    this.username = this.authService.getUsername();
+    if (
+      this.role === SharedConstants.GUEST ||
+      this.role === SharedConstants.CAR_OWNER
+    ) {
+      this.appPages.unshift(...this.guestPages);
+      if (this.role === SharedConstants.CAR_OWNER) {
+        this.appPages.unshift(...this.CarOwnerPages);
+      }
+    } else if (this.role === SharedConstants.GARAGE_OWNER) {
+      this.appPages.unshift(...this.garageOwnerPages);
+    } else if (this.role === SharedConstants.ADMIN) {
+      this.appPages = [
+        {
+          title: 'MANAGE_ACCOUNTS',
+          url: '/business/admin/manage-account',
+          icon: 'people',
+        },
+        {
+          title: 'COMPLAINTS',
+          url: '/business/admin/complaints',
+          icon: 'document-text',
+        },
+        {
+          title: 'SETTING',
+          url: '/business/settings',
+          icon: 'settings',
+        },
+      ];
+    }
     if (window.innerWidth <= 720 && !this.isMobile) {
       this.isMobile = true;
     } else if (window.innerWidth > 720 && this.isMobile) {
@@ -204,7 +204,10 @@ export class BusinessComponent implements OnInit, OnDestroy {
     this.listenOnChangeSizeWindow();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
+    this.listenOnRouting.unsubscribe();
+    this.resizeSubscription$.unsubscribe();
+    console.log('ewrwwer')
     this.appPages = [];
   }
 }

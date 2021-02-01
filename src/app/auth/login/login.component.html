@@ -1,3 +1,4 @@
+
 <ion-card>
   <ion-card-header>
     <h1 style="font-weight: bold;">
@@ -12,7 +13,7 @@
       <app-input-error-message [form]="loginInfo" formInput='username'></app-input-error-message>
       <ion-item lines="full" class="margined">
         <ion-label position="floating">{{ "PASSWORD" | translate }}</ion-label>
-        <app-Show-Hide-Password>
+        <app-Show-Hide-Password class="w-100">
           <ion-input type="password" formControlName="password" required></ion-input>
         </app-Show-Hide-Password>
       </ion-item>
