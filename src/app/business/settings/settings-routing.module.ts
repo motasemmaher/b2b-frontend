@@ -1,6 +1,5 @@
 import { SettingsRoutingConstants } from './../../core/constants/routes';
 import { ManageAccountComponent } from './../admin/manage-account/manage-account.component';
-import { GeneralSettingsComponent } from './general-settings/general-settings.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -15,10 +14,6 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         redirectTo: SettingsRoutingConstants.GENERAL
-      },
-      {
-        path: SettingsRoutingConstants.GENERAL,
-        component: GeneralSettingsComponent
       },
       {
         path: SettingsRoutingConstants.MANAGE_ACCOUNTS,

@@ -69,11 +69,11 @@ export class BusinessComponent implements OnInit, OnDestroy {
       url: '/business/products',
       icon: 'cube',
     },
-    {
-      title: 'OFFERS',
-      url: '/business/offers',
-      icon: 'gift',
-    },
+    // {
+    //   title: 'OFFERS',
+    //   url: '/business/offers',
+    //   icon: 'gift',
+    // },
     {
       title: 'SHOPPING_CART',
       url: '/business/shopping-card',
