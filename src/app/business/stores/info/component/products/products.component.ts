@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { StoresService } from '../../../service/stores.service';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from '../../../model/category';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -9,14 +10,14 @@ import { Category } from '../../../model/category';
   styleUrls: ['./products.component.css'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
 
 
   products: any[];
   storeId: string;
   categories: Category;
   isFetching = false;
-
+  listenOnErrorLoading: Subscription;
   constructor(
     private storesService: StoresService,
     private activatedRoute: ActivatedRoute,
@@ -32,6 +33,9 @@ export class ProductsComponent implements OnInit {
         this.products = res.products;
       });
     });
+    this.listenOnErrorLoading = this.storesService.listenOnErrorLoading().subscribe(res => {
+      this.products = [];
+    })
   }
   customPopoverOptions: any = {
     header: 'Select Category',
@@ -52,5 +56,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-
+  ngOnDestroy(): void {
+    this.listenOnErrorLoading.unsubscribe();
+  }
 }

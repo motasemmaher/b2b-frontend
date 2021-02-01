@@ -42,4 +42,8 @@ export class ProductsService {
     const path = `products?limit=${this.limit}&skip=${this.skip}`;
     return this.businessService.get(path);
   }
+
+  listenOnErrorLoading(): Observable<any> {
+    return this.businessService.errorLoading.asObservable();
+  }
 }

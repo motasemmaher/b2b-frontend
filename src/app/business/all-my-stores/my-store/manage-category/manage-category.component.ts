@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MyStoresService } from '@app/business/all-my-stores/services/my-stores.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-category',
@@ -10,7 +11,7 @@ import { ToastService } from '@app/shared/toaster/toast.service';
   styleUrls: ['./manage-category.component.css']
 })
 
-export class ManageCategoryComponent implements OnInit {
+export class ManageCategoryComponent implements OnInit, OnDestroy {
   categoryFromGroup: FormGroup;
   categoryFromGroupForUpdate: FormGroup;
   disableButtonUpdate: boolean = true;
@@ -23,6 +24,7 @@ export class ManageCategoryComponent implements OnInit {
     header: 'Select Category',
   };
   isFetchingCategories: boolean = false;
+  listenOnErrorLoading: Subscription;
 
   constructor(
     private myStoresService: MyStoresService,
@@ -36,6 +38,9 @@ export class ManageCategoryComponent implements OnInit {
 
     this.listenOnValidateButtonSave();
     this.getStoreId();
+    this.listenOnErrorLoading =  this.myStoresService.listenOnErrorLoading().subscribe(res => {
+      this.categories = [];
+    })
   }
 
   ngOnInit(): void {
@@ -101,5 +106,7 @@ export class ManageCategoryComponent implements OnInit {
     });
   }
 
-
+  ngOnDestroy(): void {
+    this.listenOnErrorLoading.unsubscribe();
+  }
 }

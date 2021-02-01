@@ -27,4 +27,7 @@ export class ShoppingCartService {
     return this.businessService.post('shopping-cart/checkout', { headers: { authorization: this.authService.token } }, data);
   }
 
+  listenOnErrorLoading(): Observable<any> {
+    return this.businessService.errorLoading.asObservable();
+  }
 }

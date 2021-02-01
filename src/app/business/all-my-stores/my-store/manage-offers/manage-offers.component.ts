@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MyStoresService } from '../../services/my-stores.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-offers',
@@ -10,7 +11,7 @@ import { ToastService } from '@app/shared/toaster/toast.service';
   styleUrls: ['./manage-offers.component.css'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ManageOffersComponent implements OnInit {
+export class ManageOffersComponent implements OnInit, OnDestroy {
 
   disableButtonSave = true;
   offersFromGroup: FormGroup;
@@ -19,6 +20,8 @@ export class ManageOffersComponent implements OnInit {
   customPopoverOptions: any = {
     header: 'Select Product',
   };
+  listenOnErrorLoading: Subscription;
+
   constructor(
     private myStoresService: MyStoresService,
     private activatedRoute: ActivatedRoute,
@@ -31,6 +34,9 @@ export class ManageOffersComponent implements OnInit {
     this.addOffer();
     this.initFields();
     this.listenOnCreateButton();
+    this.listenOnErrorLoading =  this.myStoresService.listenOnErrorLoading().subscribe(res => {
+      this.products = [];
+    })
   }
 
   ngOnInit(): void {
@@ -108,5 +114,7 @@ export class ManageOffersComponent implements OnInit {
     });
   }
 
-
+  ngOnDestroy(): void {
+    this.listenOnErrorLoading.unsubscribe();
+  }
 }

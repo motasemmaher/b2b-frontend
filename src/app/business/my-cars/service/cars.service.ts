@@ -12,7 +12,10 @@ export class CarsService {
     private authService: AuthService
   ) {}
 
- 
+  listenOnErrorLoading(): Observable<any> {
+    return this.businessService.errorLoading.asObservable();
+  }
+
   getMyCars(): Observable<any> {
     return this.businessService.get(`user/manage-car-owner/cars`, {
       headers: { authorization: this.authService.token },

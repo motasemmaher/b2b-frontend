@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MyStoresService } from '../../services/my-stores.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
 import { BasedUrlsConstants } from '@app/core/constants/routes';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,12 +11,12 @@ import { BasedUrlsConstants } from '@app/core/constants/routes';
   templateUrl: './my-products.component.html',
   styleUrls: ['./my-products.component.css'],
 })
-export class MyProductsComponent implements OnInit {
+export class MyProductsComponent implements OnInit, OnDestroy {
   products: any[];
   categories: any[];
   storeId: string = null;
   categoryId: string = null;
-
+  listenOnErrorLoading: Subscription;
 
   filters = [
     { label: 'By Descending Name', value: 'nameSort=1' },
@@ -32,8 +33,10 @@ export class MyProductsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toastService: ToastService,
   ) {
-    this.products = [];
     this.getStoreId();
+    this.listenOnErrorLoading = this.myStoresService.listenOnErrorLoading().subscribe(res => {
+      this.categories = [];
+    })
   }
 
   getStoreId() {
@@ -86,5 +89,6 @@ export class MyProductsComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.myStoresService.resetBothDataSkipAndLimit();
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

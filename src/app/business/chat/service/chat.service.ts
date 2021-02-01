@@ -24,6 +24,10 @@ export class ChatService {
 
   }
 
+  listenOnErrorLoading(): Observable<any> {
+    return this.businessService.errorLoading.asObservable();
+  }
+
   destroyChat() {
     this.socket.disconnect();
   }

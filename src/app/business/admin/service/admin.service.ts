@@ -20,6 +20,10 @@ export class AdminService {
     });
   }
 
+  listenOnErrorLoading(): Observable<any> {
+    return this.busunessService.errorLoading.asObservable();
+  }
+
   getWaitingUsers(): Observable<any> {
     return this.busunessService.get('admin/waiting-users',  {
       headers: { authorization: this.auth.token },

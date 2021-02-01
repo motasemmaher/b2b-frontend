@@ -3,6 +3,7 @@ import { SosService } from './service/sos.service';
 import { ModalController } from '@ionic/angular';
 import { ViewProductComponent } from '@app/shared/view-product/view-product.component';
 import { MapComponent } from '@app/shared/map/map.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sos',
@@ -14,14 +15,16 @@ export class SosComponent implements OnInit, OnDestroy {
   lat: string;
   long: string;
   stores: any [] = [];
-
+  listenOnErrorLoading: Subscription;
   constructor(
     private sosService: SosService,
     private modalController: ModalController
   ) { }
 
   ngOnInit(): void {
-
+    this.listenOnErrorLoading = this.sosService.listenOnErrorLoading().subscribe(res => {
+      this.stores = [];
+    })
   }
 
   async applyLocationFromMap() {
@@ -55,5 +58,6 @@ export class SosComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sosService.resetBothDataSkipAndLimit();
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

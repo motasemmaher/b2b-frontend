@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProductsService } from './service/products.service';
 // import { InfiniteScroll } from 'ngx-infinite-scroll';
 
@@ -11,11 +12,15 @@ import { ProductsService } from './service/products.service';
 export class ProductsComponent implements OnInit, OnDestroy {
 
   products: any[];
+  listenOnErrorLoading: Subscription;
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
     this.products = [];
     this.getProduct();
+    this.listenOnErrorLoading = this.productsService.listenOnErrorLoading().subscribe(res => {
+      this.products = [];
+    })
   }
 
   getProduct() {
@@ -26,5 +31,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.productsService.resetBothDateSkipAndLimit();
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

@@ -13,6 +13,10 @@ export class StoresService {
     private businessService: BusinessService
   ) { }
 
+  listenOnErrorLoading(): Observable<any> {
+    return this.businessService.errorLoading.asObservable();
+  }
+
   public getStoreById(path: string, id: string, options?: any): Observable<any> {
     path = path.concat(`/${id}`);
     return this.businessService.get(path, options);

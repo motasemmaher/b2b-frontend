@@ -29,4 +29,7 @@ export class UserInfoService {
     );
   }
 
+  listenOnErrorLoading(): Observable<any> {
+    return this.businessService.errorLoading.asObservable();
+  }
 }

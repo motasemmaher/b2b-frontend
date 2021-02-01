@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, Input, OnDestroy, Output, EventEmitter } 
 import { IonContent, NavController } from '@ionic/angular';
 import { ChatService } from '../service/chat.service';
 import { AuthService } from '@app/core/services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-conversation',
@@ -15,7 +16,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
   messages: any[] = [];
   chatId: string;
   userInfo: any;
-
+  listenOnErrorLoading: Subscription;
   @Input() conversationInfo: any;
   @Output('backToContacts') backToContacts: EventEmitter<any> = new EventEmitter();
 
@@ -35,6 +36,9 @@ export class ConversationComponent implements OnInit, OnDestroy {
     this.getContact();
     this.userInfo = this.auth.userInfo();
     this.chat.initChat();
+    this.listenOnErrorLoading = this.chat.listenOnErrorLoading().subscribe(res => {
+      this.messages = [];
+    })
   }
 
 
@@ -86,5 +90,6 @@ export class ConversationComponent implements OnInit, OnDestroy {
     this.messages = [];
     this.chatId = null;
     this.userInfo = null;
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

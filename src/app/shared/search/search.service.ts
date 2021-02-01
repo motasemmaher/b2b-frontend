@@ -16,4 +16,8 @@ export class SearchService {
     const path = `${SharedConstants.SEARCH}`.concat('?search=').concat(searchFor).concat('&filter=products').concat(filters || '');
     return this.businessService.get(path);
   }
+
+  listenOnErrorLoading(): Observable<any> {
+    return this.businessService.errorLoading.asObservable();
+  }
 }

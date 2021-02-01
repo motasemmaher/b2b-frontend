@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { BasedUrlsConstants } from '@app/core/constants/routes';
@@ -10,6 +10,7 @@ import { ToastService } from '@app/shared/toaster/toast.service';
 export class BusinessService {
 
   basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST + '/';
+  errorLoading: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient, private toastService: ToastService) { }
 
@@ -43,6 +44,7 @@ export class BusinessService {
 
   private error(error: HttpErrorResponse) {
     console.log(error)
+    this.errorLoading.emit(true)
     this.toastService.presentToastWithOptions('error', error.error.error, 'danger');
     return throwError('Something bad happened; please try aga<  in later.');
   }
