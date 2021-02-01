@@ -18,7 +18,7 @@ export class ManageStoreInfoComponent implements OnInit {
 
   newStore: FormGroup;
   storeId?: string;
-  pageName: string = 'Add New Store';
+  pageName: string = 'ADD_NEW_STORE';
 
   constructor(
     private myStoresService: MyStoresService,
@@ -32,7 +32,7 @@ export class ManageStoreInfoComponent implements OnInit {
       this.storeId = params.storeId;
       // this.isFetching = true;
       if (this.storeId) {
-        this.pageName = 'Edit Store'
+        this.pageName = 'EDIT_STORE'
         this.myStoresService.getMyStore(this.storeId).subscribe(res => {
           this.createStoreStructure(res);
         });

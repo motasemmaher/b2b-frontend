@@ -1,5 +1,5 @@
 <section class="container h-100">
-  <div class="m-3 d-flex justify-content-around flex-wrap border-bottom">
+  <div class="m-3 d-flex justify-content-around flex-wrap border-bottom divColorFix settingsDiv">
     <div>
       <ion-label> {{ "SELECT_STORE" | translate }} </ion-label>
       <ion-select
@@ -28,13 +28,13 @@
         <ion-select-option
           *ngFor="let status of statuses"
           [value]="status.key"
-          >{{ status.label }}</ion-select-option
+          >{{ status.label | translate }}</ion-select-option
         >
       </ion-select>
     </div>
   </div>
   <div>
-    <table class="table table-striped">
+    <table class="table table-striped divColorFix settingsDiv">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -50,15 +50,15 @@
           <th scope="row">{{ index + 1 }}</th>
           <td>
             <div>
-              <div>{{ "USERNAME" | translate }}: {{ order.carOwner.fullName }}</div>
-              <div>{{ "EMAIL" | translate }}: {{ order.carOwner.fullName }}</div>
+              <div class="light-text-darktheme">{{ "USERNAME" | translate }}: {{ order.carOwner.fullName }}</div>
+              <div class="light-text-darktheme">{{ "EMAIL" | translate }}: {{ order.carOwner.fullName }}</div>
             </div>
           </td>
           <td>{{ order.phoneNumber }}</td>
           <td>{{ order.deliveryAddress }}</td>
           <td>
-            <div>{{ "NAME" | translate }}: {{ order.product.name }}</div>
-            <div>{{ "PRICE" | translate }}: {{ order.product.price }}</div>
+            <div class="light-text-darktheme">{{ "NAME" | translate }}: {{ order.product.name }}</div>
+            <div class="light-text-darktheme">{{ "PRICE" | translate }}: {{ order.product.price }}</div>
           </td>
           <td *ngIf="statusOrder === 'pending' || order.status === 'pending'">
             <div class="d-flex justify-content-start">

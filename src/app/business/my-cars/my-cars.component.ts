@@ -35,7 +35,7 @@ export class MyCarsComponent implements OnInit, OnDestroy {
       (this.myCars.get('cars') as FormArray).push(
         new FormGroup({
           carId: new FormControl(car._id),
-          model: new FormControl('',
+          model: new FormControl(car.model,
           Validators.compose([
             Validators.minLength(2),
             Validators.maxLength(24),
@@ -43,7 +43,7 @@ export class MyCarsComponent implements OnInit, OnDestroy {
             this.customPatternValid({ pattern: /(^[\p{L} \d'-]{2,24}$)/ugi , msg: 'invalid model'})
           ])
         ),
-          make: new FormControl('',
+          make: new FormControl(car.make,
           Validators.compose([
             Validators.minLength(3),
             Validators.maxLength(24),

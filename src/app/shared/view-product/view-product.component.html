@@ -1,35 +1,35 @@
 <section *ngIf="product" class="h-100">
-    <div class="card w-100 h-100">
+    <div class="card w-100 h-100 inner-card">
         <ion-img [src]="product.image" class="card-img-top img-product"></ion-img>
         <div class="card-body">
             <div class="card-title d-flex justify-content-between flex-wrap">
                 <div>
-                    <div class="mb-1" style="font-size: 24px; font-weight: bold;">
+                    <div class="mb-1 light-text-darktheme" style="font-size: 24px; font-weight: bold;">
                         {{ "NAME" | translate }}: {{product.name}} 
                     </div>
-                    <div>
+                    <div class="light-text-darktheme">
                         {{ "PRICE" | translate }}: {{product.price}} {{ "JOD" | translate }}
                     </div>
                 </div>
                 <div class="mt-1">
                     <div class="mb-1">
-                        <span *ngIf="product.isInStock" class="inStock">
+                        <span *ngIf="product.isInStock" class="inStock light-text-darktheme">
                             {{ "IN_STOCK" | translate }}
                         </span>
-                        <span *ngIf="!product.isInStock" class="out-stock">
+                        <span *ngIf="!product.isInStock" class="out-stock light-text-darktheme">
                             {{ "OUT_OF_STOCK" | translate }}
                         </span>
                     </div>
-                    <div>
+                    <div class="light-text-darktheme">
                         {{ "TYPE" | translate}}: {{product.productType}}
                     </div>
                 </div>
                 <div>
-                    <a class="btn btn-primary" (click)="addToShoppingCart()">{{ "ADD_TO_CART" | translate }}</a>
+                    <a class="btn btn-primary light-text-darktheme" (click)="addToShoppingCart()">{{ "ADD_TO_CART" | translate }}</a>
                 </div>
             </div >
             <div style="display: block; overflow-y: auto; height: calc(100% - 60px);">
-                <p class="card-text mt-1">{{product.description}}</p>
+                <p class="card-text mt-1 light-text-darktheme">{{product.description}}</p>
             </div>
         </div>
     </div>

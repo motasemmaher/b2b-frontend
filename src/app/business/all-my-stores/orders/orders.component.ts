@@ -21,19 +21,19 @@ export class OrdersComponent implements OnInit {
   statuses: any[] = [
     {
       key: 'pending',
-      label: 'Pending',
+      label: 'PENDING',
     },
     {
       key: 'delivered',
-      label: 'Delivered',
+      label: 'DELIVERED',
     },
     {
       key: 'cancel',
-      label: 'Canceled',
+      label: 'CANCELED',
     },
     {
       key: '',
-      label: 'All',
+      label: 'ALL',
     },
   ];
 

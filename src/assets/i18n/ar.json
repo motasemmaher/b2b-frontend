@@ -134,7 +134,7 @@
   "USER": "المستخدم",
   "EMAIL": "البريد الإلكتروني",
   "ROLE": "دور",
-  "ACTION": "Action",
+  "ACTION": "عمل",
   "APPLY_LOCATION_FROM_MAP": "تطبيق الموقع من الخريطة",
   "CREATE_CATEGORY": "إنشاء فئة",
   "CREATE": "أنشئ",
@@ -163,7 +163,13 @@
   "CATEGORY": "الفئة",
   "SELECT_STORE": "حدد المتجر",
   "SELECT_STATUS_ORDERS": "حدد أوامر الحالة",
-  "PRODUCT_INFO": "معلومات المنتج"
+  "PRODUCT_INFO": "معلومات المنتج",
+  "ORDERS": "الطلبات",
+  "PENDING": "قيد الانتظار",
+  "DELIVERED": "تم التوصيل",
+  "CANCELED": "ألغيت",
+  "ADD_NEW_STORE": "إضافة متجر جديد",
+  "EDIT_STORE": "تعديل متجر"
 
   
 }

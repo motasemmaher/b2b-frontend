@@ -68,6 +68,9 @@ ion-item.margined{
   // border-bottom: 2px !important;
   box-shadow: none !important;
 }
+.ion-title{
+  color: black;
+}
 
 
 /*
@@ -181,7 +184,29 @@ ion-item.margined{
     ion-searchbar.header{
       --background: #121212;
     }
+    th{
+      color: white;
+    }
+    ion-label{
+      color: white;
+    }
+    ion-select{
+      color: white;
+    }
+    .light-text-darktheme{
+      color: white;
+    }
 
+    .ion-title{
+      color: white;
+    }
+    .inner-card{
+      background-color: #121212;
+    }
+
+    .item-dark{
+      background-color: #121212;
+    }
   }
   
   /*
@@ -255,6 +280,27 @@ ion-item.margined{
     ion-card{
       background-color: #1e1e1e;
     }
+    th{
+      color: white;
+    }
+    ion-label{
+      color: white;
+    }
+    ion-select{
+      color: white;
+    }
+    .light-text-darktheme{
+      color: white;
+    }
+    .ion-title{
+      color: white;
+    }
+    .inner-card{
+      background-color: #121212;
+    }
+    .item-dark{
+      background-color: #121212;
+    }
   }
   
   
@@ -318,5 +364,26 @@ ion-item.margined{
     }
     ion-searchbar.header{
       --background: #121212;
+    }
+    th{
+      color: white;
+    }
+    ion-label{
+      color: white;
+    }
+    ion-select{
+      color: white;
+    }
+    .light-text-darktheme{
+      color: white;
+    }
+    .ion-title{
+      color: white;
+    }
+    .inner-card{
+      background-color: #121212;
+    }
+    .item-dark{
+      background-color: #121212;
     }
   }

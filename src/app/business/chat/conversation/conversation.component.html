@@ -14,13 +14,13 @@
     style="align-items: center; border: 1px solid #f1f1f1; border-radius: 5px; height: 65px;"
   >
     <ion-col class="manage-back-btn" style="flex-grow: unset" (click)="goBack()">
-      <ion-icon style="width: 26px; height: 26px" name="arrow-back"></ion-icon>
+      <ion-icon class="light-text-darktheme" style="width: 26px; height: 26px" name="arrow-back"></ion-icon>
     </ion-col>
     <ion-col style="max-width: 60px; max-height: 60px">
       <ngx-avatar name="{{ conversationInfo.name }}"></ngx-avatar>
     </ion-col>
     <ion-col>
-      <ion-label style="font-weight: bold">
+      <ion-label class="light-text-darktheme" style="font-weight: bold">
         {{ conversationInfo.name }}
       </ion-label>
     </ion-col>
@@ -57,7 +57,7 @@
       <div style="width: calc(100% - 60px) !important">
         <ion-textarea
           autosize
-          class="message-input"
+          class="message-input light-text-darktheme"
           [(ngModel)]="message"
           maxRows="2"
         >

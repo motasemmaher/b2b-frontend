@@ -1,5 +1,5 @@
 <section *ngIf="newStore" class="container main-container-in-page h-100">
-  <h2>{{pageName}}</h2>
+  <h2>{{pageName | translate}}</h2>
   <ion-list [formGroup]="newStore">
     <ion-item lines="full" class="margined">
       <ion-label position="floating">{{ "STORE_NAME" | translate }}</ion-label>

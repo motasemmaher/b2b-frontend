@@ -36,12 +36,12 @@ export class BusinessComponent implements OnInit, OnDestroy {
       icon: 'add-circle',
     },
     {
-      title: 'Orders',
+      title: 'ORDERS',
       url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.MY_STORES}/${BusinessRoutingConstants.ORDERS}`,
       icon: 'documents',
     },
     {
-      title: 'Complaints',
+      title: 'COMPLAINTS',
       url: `/${BusinessRoutingConstants.BUSINESS}/${BusinessRoutingConstants.COMPLAINTS}`,
       icon: 'document-text',
     },

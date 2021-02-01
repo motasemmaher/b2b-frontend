@@ -163,6 +163,14 @@
   "CATEGORY": "Category",
   "SELECT_STORE": "Select Store",
   "SELECT_STATUS_ORDERS": "Select Status orders",
-  "PRODUCT_INFO": "Product Info"
+  "PRODUCT_INFO": "Product Info",
+  "ORDERS": "Orders",
+  "PENDING": "Pending",
+  "DELIVERED": "Delivered",
+  "CANCELED": "Canceled",
+  "ADD_NEW_STORE": "Add new Store",
+  "EDIT_STORE": "Edit Store"
+
+  
 
 }
