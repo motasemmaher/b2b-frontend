@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { SosRoutingModule } from './sos-routing.module';
 import { SosComponent } from './sos.component';
 import { SosService } from './service/sos.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [SosComponent],
@@ -15,6 +16,7 @@ import { SosService } from './service/sos.service';
     SosRoutingModule,
     IonicModule,
     SharedModule,
+    InfiniteScrollModule,
     TranslateModule.forChild()
   ],
   providers: [

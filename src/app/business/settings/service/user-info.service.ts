@@ -13,14 +13,20 @@ export class UserInfoService {
     private businessService: BusinessService
   ) { }
 
-  getUserInfo(userId: any): Observable<any> {
-    
-    return;
+  getUserInfo(): Observable<any> {
+    return this.businessService.get('user-info', {
+      headers: { authorization: this.auth.token },
+    });
   }
 
-  setUserInfo(userId: any, data: any): Observable<any>{
-    
-    return;
+  setUserInfo(data: any): Observable<any>{
+    return this.businessService.put(
+      'user/manage-user-info',
+      {
+        headers: { authorization: this.auth.token },
+      },
+      data
+    );
   }
 
 }

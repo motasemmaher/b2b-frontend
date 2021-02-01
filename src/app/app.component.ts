@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { SwPush } from '@angular/service-worker';
+// import { SwPush } from '@angular/service-worker';
 
 
 @Component({
@@ -17,22 +17,22 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private swPush: SwPush,
+    // private swPush: SwPush,
   ) {
     this.initializeApp();
-    console.log(this.swPush.isEnabled)
-    navigator.serviceWorker.ready.then(function(reg) {
-      this.subscribeToNotifications();
-      reg.pushManager.getSubscription().then(function(subscription) {
+    // console.log(this.swPush.isEnabled)
+    // navigator.serviceWorker.ready.then(function(reg) {
+    //   this.subscribeToNotifications();
+    //   reg.pushManager.getSubscription().then(function(subscription) {
 
-        subscription.unsubscribe().then(function(successful) {
-          console.log(successful)
-          // You've successfully unsubscribed
-        }).catch(function(e) {
-          // Unsubscription failed
-        })
-      })
-    });
+    //     subscription.unsubscribe().then(function(successful) {
+    //       console.log(successful)
+    //       // You've successfully unsubscribed
+    //     }).catch(function(e) {
+    //       // Unsubscription failed
+    //     })
+    //   })
+    // });
   }
 
   initializeApp() {
@@ -47,11 +47,12 @@ export class AppComponent implements OnInit {
   }
 
   subscribeToNotifications() {
-    
-    this.swPush.requestSubscription({
-      serverPublicKey: this.VAPID_PUBLIC_KEY
-    })
-      .then(sub => console.log(sub))
-      .catch(err => console.error("Could not subscribe to notifications", err));
   }
+
+  //   this.swPush.requestSubscription({
+  //     serverPublicKey: this.VAPID_PUBLIC_KEY
+  //   })
+  //     .then(sub => console.log(sub))
+  //     .catch(err => console.error("Could not subscribe to notifications", err));
+  // }
 }

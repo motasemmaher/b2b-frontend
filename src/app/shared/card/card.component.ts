@@ -10,8 +10,10 @@ import { BusinessService } from '@app/business/services/business.service';
 })
 export class CardComponent implements OnInit {
   @Input() data: any;
-  @Input() type?: string;
+  @Input() type?: string = 'products';
   @Input() isOwne?: boolean;
+  products = 'products';
+  stores = 'stores';
   @Output('delete') delete: EventEmitter<any> = new EventEmitter();
 
 

@@ -30,18 +30,20 @@ export class ShoppingCardComponent implements OnInit {
     this.shoppingCartService.getShoppingCart().subscribe((res) => {
       this.items = new FormArray([]);
       res.cartItems.forEach((item) => {
-        this.items.push(
-          new FormGroup({
-            cartItemId: new FormControl(item._id),
-            id: new FormControl(item.product._id),
-            name: new FormControl(item.product.name),
-            price: new FormControl(item.product.price),
-            description: new FormControl(item.product.description),
-            quantity: new FormControl(item.quantity),
-            image: new FormControl(item.product.image),
-            tags: new FormControl(item.product.tags),
-          })
-        );
+        if (item.product) {
+          this.items.push(
+            new FormGroup({
+              cartItemId: new FormControl(item._id),
+              id: new FormControl(item.product._id),
+              name: new FormControl(item.product.name),
+              price: new FormControl(item.product.price),
+              description: new FormControl(item.product.description),
+              quantity: new FormControl(item.quantity),
+              image: new FormControl(item.product.image),
+              tags: new FormControl(item.product.tags),
+            })
+          );
+        }
       });
       this.cartForm = new FormGroup({
         items: this.items,
@@ -56,7 +58,7 @@ export class ShoppingCardComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   calculateTotal() {
     let total = 0;
@@ -157,10 +159,10 @@ export class ShoppingCardComponent implements OnInit {
             console.log(data);
             this.shoppingCartService
               .checkout(data)
-              .subscribe(res =>{
-                 this.getShoppingCartItems();
-                 this.toastService.presentToastWithOptions('success', 'Checkout successfully', 'success');
-                });
+              .subscribe(res => {
+                this.getShoppingCartItems();
+                this.toastService.presentToastWithOptions('success', 'Checkout successfully', 'success');
+              });
           },
         },
       ],

@@ -1,6 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
-import { GeneralSettingsComponent } from './general-settings/general-settings.component';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     SettingsComponent,
-    GeneralSettingsComponent,
   ],
   imports: [
     CommonModule,
