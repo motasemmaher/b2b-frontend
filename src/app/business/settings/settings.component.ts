@@ -12,7 +12,7 @@ import { ToastService } from '@app/shared/toaster/toast.service';
 })
 export class SettingsComponent implements OnInit {
   darkMode: boolean;
-  isLoggedIn = true; //must be false
+  isLoggedIn = false; 
   role: string;
   selectedLanguage: string;
 
@@ -27,17 +27,6 @@ export class SettingsComponent implements OnInit {
     private userInfoService: UserInfoService
   ) {
 
-    if (localStorage.getItem('darkMode') === 'disabled') {
-      this.darkMode = false;
-    }
-    else if (localStorage.getItem('darkMode') === 'enabled') {
-      this.darkMode = true;
-    }
-
-    this.selectedLanguage = localStorage.getItem('language');
-
-
-    this.getUserInfo();
   }
 
 
@@ -98,6 +87,19 @@ export class SettingsComponent implements OnInit {
     }
     this.role = this.authService.getRole();
 
+    if (localStorage.getItem('darkMode') === 'disabled') {
+      this.darkMode = false;
+    }
+    else if (localStorage.getItem('darkMode') === 'enabled') {
+      this.darkMode = true;
+    }
+
+    this.selectedLanguage = localStorage.getItem('language');
+
+
+    if (this.isLoggedIn) {
+      this.getUserInfo();
+    }
   }
 
   toggleClicked() {
