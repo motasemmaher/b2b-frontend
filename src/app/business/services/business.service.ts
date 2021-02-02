@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { BasedUrlsConstants } from '@app/core/constants/routes';
@@ -11,6 +11,7 @@ import { ToastService } from '@app/shared/toaster/toast.service';
 export class BusinessService {
 
   basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST + '/';
+  errorLoading: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient, private toastService: ToastService, private translate: TranslateService) { }
 
@@ -43,7 +44,7 @@ export class BusinessService {
   }
 
   private error(error: HttpErrorResponse) {
-    console.log(error)
+    this.errorLoading.emit(true)
     if(error?.error?.error){
       this.translate.get(error.error.error).subscribe(res => {
         this.translate.get('ERROR').subscribe(res1 => {

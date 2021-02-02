@@ -38,6 +38,10 @@ export class MyStoresService {
     return this.limit;
   }
 
+  listenOnErrorLoading(): Observable<any> {
+    return this.businessService.errorLoading.asObservable();
+  }
+
   public getSkip(): number {
     return this.skip;
   }

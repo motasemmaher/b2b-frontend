@@ -48,4 +48,7 @@ export class SosService {
       headers: { authorization: this.authService.token },
     });
   }
+  listenOnErrorLoading(): Observable<any> {
+    return this.businessService.errorLoading.asObservable();
+  }
 }

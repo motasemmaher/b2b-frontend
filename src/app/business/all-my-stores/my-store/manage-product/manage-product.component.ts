@@ -1,9 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { MyStoresService } from '@app/business/all-my-stores/services/my-stores.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { ToastService } from '@app/shared/toaster/toast.service';
   styleUrls: ['./manage-product.component.css'],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ManageProductComponent implements OnInit {
+export class ManageProductComponent implements OnInit, OnDestroy {
   images = [];
   isLoading = false;
   loadType = '';
@@ -28,13 +29,16 @@ export class ManageProductComponent implements OnInit {
     'wheel',
     'mirror',
   ];
+  listenOnErrorLoading: Subscription;
   constructor(
     private camera: Camera,
     private myStoresService: MyStoresService,
     private activatedRoute: ActivatedRoute,
     private toastService: ToastService,
   ) {
-
+    this.listenOnErrorLoading = this.myStoresService.listenOnErrorLoading().subscribe(res => {
+      this.categories = [];
+    })
     this.activatedRoute.params.subscribe(params => {
       this.storeId = params.id;
       this.productId = params.productId;
@@ -204,5 +208,8 @@ export class ManageProductComponent implements OnInit {
         return null;
       }
     };
+  }
+  ngOnDestroy(): void {
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

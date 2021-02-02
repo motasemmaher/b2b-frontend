@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BusinessService } from '@app/business/services/business.service';
 import { MyStoresService } from '../services/my-stores.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit, OnDestroy {
   storeId: string;
   status: string;
   orders: any[];
@@ -36,12 +37,16 @@ export class OrdersComponent implements OnInit {
       label: 'ALL',
     },
   ];
-
+  listenOnErrorLoading: Subscription;
   constructor(
     private myStoresService: MyStoresService,
     private toastService: ToastService
   ) {
     this.getMyStoresId();
+    this.listenOnErrorLoading = this.myStoresService.listenOnErrorLoading().subscribe(res => {
+      this.storesId = [];
+      this.orders = [];
+    })
   }
 
   ngOnInit(): void {
@@ -83,5 +88,9 @@ export class OrdersComponent implements OnInit {
       this.toastService.presentToastWithOptions('success', `order ${status} successfully`, 'success');
       this.getOrders();
     })
+  }
+
+  ngOnDestroy(): void {
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

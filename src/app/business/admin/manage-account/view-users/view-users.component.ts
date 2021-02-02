@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminService } from '@app/business/admin/service/admin.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-users',
   templateUrl: './view-users.component.html',
   styleUrls: ['./view-users.component.css']
 })
-export class ViewUsersComponent implements OnInit {
+export class ViewUsersComponent implements OnInit, OnDestroy {
 
   users: any[] = [];
+  listenOnErrorLoading: Subscription;
 
   constructor(
     private adminService: AdminService
   ) {
     this.getUsers();
+    this.listenOnErrorLoading = this.adminService.listenOnErrorLoading().subscribe(res => {
+      this.users = [];
+    })
   }
 
   ngOnInit(): void {
@@ -45,5 +50,8 @@ export class ViewUsersComponent implements OnInit {
     this.adminService.deleteUser(userId).subscribe((res) => {
       console.log(res)
     })
+  }
+  ngOnDestroy(): void {
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

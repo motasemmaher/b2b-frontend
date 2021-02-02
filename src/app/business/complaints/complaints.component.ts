@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ComplaintsService } from './service/complaints.service';
 @Component({
   selector: 'app-complaints',
@@ -8,6 +9,7 @@ import { ComplaintsService } from './service/complaints.service';
 export class ComplaintsComponent implements OnInit, OnDestroy {
   complaints: any[];
   isLoading: boolean = false;
+  listenOnErrorLoading: Subscription;
   constructor(
     private complaintsService: ComplaintsService,
   ) {
@@ -18,6 +20,9 @@ export class ComplaintsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.complaints = [];
     this.getComplaints();
+    this.listenOnErrorLoading = this.complaintsService.listenOnErrorLoading().subscribe(res => {
+      this.complaints = [];
+    })
   }
 
   getComplaints() {
@@ -34,6 +39,7 @@ export class ComplaintsComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.complaintsService.resetBothDataSkipAndLimit();
+    this.listenOnErrorLoading.unsubscribe();
   }
 
 }

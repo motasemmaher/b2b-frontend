@@ -2,6 +2,7 @@ import { FormArray, FormControl, FormGroup, Validators, ValidatorFn } from '@ang
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CarsService } from './service/cars.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,11 +15,15 @@ export class MyCarsComponent implements OnInit, OnDestroy {
   addNewCarFormGroup: FormGroup;
   disableAddNewCarBtn = true;
   myCars: FormGroup;
+  listenOnErrorLoading: Subscription;
   constructor(private carsService: CarsService, private toastService: ToastService,
   ) {
     this.myCars = new FormGroup({ cars: new FormArray([]) });
     this.manageAddNewCar();
     this.getMyCars();
+    this.listenOnErrorLoading = this.carsService.listenOnErrorLoading().subscribe(res => {
+      this.manageMyCars([]);
+    })
   }
 
   ngOnInit(): void { }
@@ -149,6 +154,7 @@ export class MyCarsComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(): void {
     // this.carsService.resetBothDataSkipAndLimit();
+    this.listenOnErrorLoading.unsubscribe();
   }
 
   public customPatternValid(config: any): ValidatorFn {

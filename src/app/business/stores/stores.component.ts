@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { StoresService } from './service/stores.service';
 import { Store } from './model/store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stores',
   templateUrl: './stores.component.html',
   styleUrls: ['./stores.component.css']
 })
-export class StoresComponent implements OnInit {
+export class StoresComponent implements OnInit, OnDestroy {
   stores: Store[];
-
+  listenOnErrorLoading: Subscription;
   constructor(
     private storeService: StoresService
   ) {
+    this.listenOnErrorLoading = this.listenOnErrorLoading = this.storeService.listenOnErrorLoading().subscribe(res => {
+      this.stores = [];
+    })
     this.getStores();
   }
 
@@ -28,5 +32,8 @@ export class StoresComponent implements OnInit {
         });
       });
     // }, 1000)
+  }
+  ngOnDestroy(): void {
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

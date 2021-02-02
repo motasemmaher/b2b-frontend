@@ -27,6 +27,10 @@ export class ComplaintsService {
     return true;
   }
 
+  listenOnErrorLoading(): Observable<any> {
+    return this.businessService.errorLoading.asObservable();
+  }
+
   public resetBothDataSkipAndLimit(): boolean {
     this.limit = 5;
     this.skip = 0;

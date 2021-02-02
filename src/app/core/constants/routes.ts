@@ -14,6 +14,7 @@ export class BusinessRoutingConstants {
     static MY_STORES = 'my-stores';
     static SOS = 'sos';
     static ADD_STORE = 'add-store';
+    static ADMIN = 'admin';
     static BUSINESS = 'business';
     static EXPORT = 'export';
     static COMPLAINTS = 'complaints';

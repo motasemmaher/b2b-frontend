@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MyStoresService } from './services/my-stores.service';
 import { AuthService } from '@app/core/services/auth/auth.service';
 import { BasedUrlsConstants } from '@app/core/constants/routes';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-all-my-stores',
   templateUrl: './all-my-stores.component.html',
@@ -10,10 +11,14 @@ import { BasedUrlsConstants } from '@app/core/constants/routes';
 export class AllMyStoresComponent implements OnInit, OnDestroy {
   stores: any[];
   userId: string;
+  listenOnErrorLoading: Subscription;
   constructor(private myStoresService: MyStoresService, private auth: AuthService) {
     this.userId = this.auth.userInfo()._id;
     this.stores = [];
     this.getMyStores();
+    this.listenOnErrorLoading = this.myStoresService.listenOnErrorLoading().subscribe(res => {
+      this.stores = [];
+    })
   }
 
   ngOnInit(): void {
@@ -38,5 +43,6 @@ export class AllMyStoresComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.myStoresService.resetBothDataSkipAndLimit();
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

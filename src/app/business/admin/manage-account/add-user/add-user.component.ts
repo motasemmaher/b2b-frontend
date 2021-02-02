@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminService } from '../../service/admin.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css']
 })
-export class AddUserComponent implements OnInit {
+export class AddUserComponent implements OnInit, OnDestroy {
   users: any [] = [];
+  listenOnErrorLoading: Subscription;
 
   constructor(
     private adminService: AdminService,
     private toastService: ToastService
   ) { 
     this.getUsers();
+    this.listenOnErrorLoading = this.adminService.listenOnErrorLoading().subscribe(res => {
+      this.users = [];
+    })
   }
 
   ngOnInit(): void {
@@ -48,5 +53,8 @@ export class AddUserComponent implements OnInit {
     this.adminService.rejectUser(userId).subscribe((res) => {
       this.toastService.presentToastWithOptions('success', 'User rejected successfully', 'success');
     })
+  }
+  ngOnDestroy(): void {
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

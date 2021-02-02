@@ -1,26 +1,30 @@
 import { TranslateService } from '@ngx-translate/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SearchByImageService } from './service/search-by-image.service';
 import { SearchService } from '@app/shared/search/search.service';
+import { Subscription } from 'rxjs';
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'search-by-image',
   templateUrl: './search-by-image.component.html',
   styleUrls: ['./search-by-image.component.css']
 })
-export class SearchByImageComponent implements OnInit {
+export class SearchByImageComponent implements OnInit, OnDestroy {
   image = 'assets/defaultImage.png';
   disableSaerch = true;
   isLoading = false;
   isShowResult = false;
   imageNameResult: string;
   resultOfSearch: any [];
+  listenOnErrorLoading: Subscription;
   constructor(
     private searchByImageService: SearchByImageService,
     private translate: TranslateService,
     private searchService: SearchService
   ) {
-
+    this.listenOnErrorLoading = this.searchService.listenOnErrorLoading().subscribe(res => {
+      this.resultOfSearch = [];
+    })
   }
 
   ngOnInit(): void {
@@ -40,5 +44,8 @@ export class SearchByImageComponent implements OnInit {
         this.resultOfSearch = res.productsSearchResult;
       })
     });
+  }
+  ngOnDestroy(): void {
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

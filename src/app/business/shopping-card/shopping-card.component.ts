@@ -1,28 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ShoppingCartService } from './service/shopping-cart.service';
 import { AlertController } from '@ionic/angular';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-card',
   templateUrl: './shopping-card.component.html',
   styleUrls: ['./shopping-card.component.scss'],
 })
-export class ShoppingCardComponent implements OnInit {
+export class ShoppingCardComponent implements OnInit, OnDestroy {
   // cart = stores;
   total: number;
   cartForm: FormGroup;
   items: FormArray;
   isFetching = true;
   isEmpty: boolean;
-
+  listenOnErrorLoading: Subscription;
   constructor(
     private shoppingCartService: ShoppingCartService,
     private alertController: AlertController,
     private toastService: ToastService,
   ) {
     this.getShoppingCartItems();
+    this.listenOnErrorLoading = this.shoppingCartService.listenOnErrorLoading().subscribe(res => {
+      this.items = new FormArray([]);
+    })
   }
 
   getShoppingCartItems() {
@@ -171,5 +175,8 @@ export class ShoppingCardComponent implements OnInit {
   }
   onSubmit() {
     this.presentAlertConfirm();
+  }
+  ngOnDestroy(): void {
+    this.listenOnErrorLoading.unsubscribe();
   }
 }

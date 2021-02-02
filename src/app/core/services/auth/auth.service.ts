@@ -14,6 +14,7 @@ import {
 import { TokenHandlerService } from '@app/core/services/token-handler/token-handler.service';
 import { catchError } from 'rxjs/operators';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { SharedConstants } from '@app/core/constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -66,11 +67,8 @@ export class AuthService {
     this.http.delete(this.basedUrl + 'user/logout', {
       headers: { authorization: this.token },
     }).subscribe(() => {
-      localStorage.removeItem('access_token');
-      this.user = null;
-      this.token = null;
+     this.clearDate();
       window.location.href = `/${AppRoutingConstants.AUTH}`;
-      // this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}`);
     });
   }
 
@@ -79,6 +77,7 @@ export class AuthService {
     this.user = null;
     this.token = null;
   }
+
   login(data) {
     this.http
       .post(this.basedUrl + 'user/login', data)
@@ -88,12 +87,22 @@ export class AuthService {
           localStorage.setItem('access_token', res.token);
           this.token = res.token;
           this.user = this.tokenHandlerService.getPayload(this.token);
-          this.router.navigateByUrl(`/${AppRoutingConstants.BUSINESS}`);
-        } else {
+          this.redirectToHome();
         }
       });
   }
 
+  redirectToHome() {
+    if (this.user.role === SharedConstants.GARAGE_OWNER) {
+      window.location.href = `/${AppRoutingConstants.BUSINESS}/${BusinessRoutingConstants.MY_STORES}`;
+    }
+    else if (this.user.role === SharedConstants.ADMIN) {
+      // this.router.navigateByUrl(`/${AppRoutingConstants.BUSINESS}/${BusinessRoutingConstants.ADMIN}`);
+      window.location.href = `/${AppRoutingConstants.BUSINESS}/${BusinessRoutingConstants.ADMIN}`;
+    }
+    else
+    window.location.href = `/${AppRoutingConstants.BUSINESS}`;
+  }
   public get loggedIn(): boolean {
     return this.token && this.tokenHandlerService.isTokenValid(this.token);
   }
