@@ -16,6 +16,7 @@ export class ViewUsersComponent implements OnInit, OnDestroy {
     private adminService: AdminService
   ) {
     this.getUsers();
+    this.users = [];
     this.listenOnErrorLoading = this.adminService.listenOnErrorLoading().subscribe(res => {
       this.users = [];
     })

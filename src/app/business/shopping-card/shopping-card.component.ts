@@ -24,6 +24,7 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
     private toastService: ToastService,
   ) {
     this.getShoppingCartItems();
+    this.items = new FormArray([]);
     this.listenOnErrorLoading = this.shoppingCartService.listenOnErrorLoading().subscribe(res => {
       this.items = new FormArray([]);
     })

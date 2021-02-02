@@ -36,6 +36,7 @@ export class ManageProductComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private toastService: ToastService,
   ) {
+    this.categories = [];
     this.listenOnErrorLoading = this.myStoresService.listenOnErrorLoading().subscribe(res => {
       this.categories = [];
     })

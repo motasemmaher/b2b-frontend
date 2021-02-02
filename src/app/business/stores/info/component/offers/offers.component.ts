@@ -19,6 +19,7 @@ export class OffersComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
   ) {
 
+    this.offers = [];
     this.activatedRoute.params.subscribe(params => {
       const id = params.id;
       this.isFetching = true;

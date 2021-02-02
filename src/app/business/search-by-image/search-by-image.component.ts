@@ -22,6 +22,7 @@ export class SearchByImageComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private searchService: SearchService
   ) {
+    this.resultOfSearch = [];
     this.listenOnErrorLoading = this.searchService.listenOnErrorLoading().subscribe(res => {
       this.resultOfSearch = [];
     })

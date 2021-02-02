@@ -22,6 +22,7 @@ export class SosComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.stores = [];
     this.listenOnErrorLoading = this.sosService.listenOnErrorLoading().subscribe(res => {
       this.stores = [];
     })

@@ -43,6 +43,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
     private toastService: ToastService
   ) {
     this.getMyStoresId();
+    this.storesId = [];
+    this.orders = [];
     this.listenOnErrorLoading = this.myStoresService.listenOnErrorLoading().subscribe(res => {
       this.storesId = [];
       this.orders = [];

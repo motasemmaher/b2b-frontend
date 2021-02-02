@@ -38,6 +38,7 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
 
     this.listenOnValidateButtonSave();
     this.getStoreId();
+    this.categories = [];
     this.listenOnErrorLoading =  this.myStoresService.listenOnErrorLoading().subscribe(res => {
       this.categories = [];
     })

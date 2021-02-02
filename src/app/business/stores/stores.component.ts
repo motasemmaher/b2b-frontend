@@ -14,6 +14,7 @@ export class StoresComponent implements OnInit, OnDestroy {
   constructor(
     private storeService: StoresService
   ) {
+    this.stores = [];
     this.listenOnErrorLoading = this.listenOnErrorLoading = this.storeService.listenOnErrorLoading().subscribe(res => {
       this.stores = [];
     })

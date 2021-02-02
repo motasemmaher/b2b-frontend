@@ -22,6 +22,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private storesService: StoresService,
     private activatedRoute: ActivatedRoute,
   ) {
+    this.products = [];
     this.activatedRoute.params.subscribe(params => {
       this.storeId = params.id;
       this.storesService.getCategoriesByStoreId('stores', this.storeId).subscribe(res => {

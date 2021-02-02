@@ -17,6 +17,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
     private toastService: ToastService
   ) { 
     this.getUsers();
+    this.users = [];
     this.listenOnErrorLoading = this.adminService.listenOnErrorLoading().subscribe(res => {
       this.users = [];
     })

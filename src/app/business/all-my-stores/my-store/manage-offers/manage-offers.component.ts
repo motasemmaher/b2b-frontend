@@ -34,6 +34,7 @@ export class ManageOffersComponent implements OnInit, OnDestroy {
     this.addOffer();
     this.initFields();
     this.listenOnCreateButton();
+    this.products = [];
     this.listenOnErrorLoading =  this.myStoresService.listenOnErrorLoading().subscribe(res => {
       this.products = [];
     })

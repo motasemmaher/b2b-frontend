@@ -16,6 +16,7 @@ export class AllMyStoresComponent implements OnInit, OnDestroy {
     this.userId = this.auth.userInfo()._id;
     this.stores = [];
     this.getMyStores();
+    this.stores = [];
     this.listenOnErrorLoading = this.myStoresService.listenOnErrorLoading().subscribe(res => {
       this.stores = [];
     })
