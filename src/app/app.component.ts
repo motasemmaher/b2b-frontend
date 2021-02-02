@@ -1,3 +1,4 @@
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
@@ -13,10 +14,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent implements OnInit {
   readonly VAPID_PUBLIC_KEY = "BKUYYDI-m-U6MHCs4k30yvVZQwK5_cVNJr07SzdnbIWELB8DU4zsoDUpBm9vT1W8uwPlfW9tuTEmsMDyd89TVyk";
+  textDir = 'rtl';
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    private translate: TranslateService
     // private swPush: SwPush,
   ) {
     this.initializeApp();
@@ -33,6 +36,18 @@ export class AppComponent implements OnInit {
     //     })
     //   })
     // });
+    
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) =>
+    {
+      if(event.lang == 'ar')
+      {
+        this.textDir = 'rtl';
+      } 
+      else
+      {
+        this.textDir = 'ltr';
+      }
+    });
   }
 
   initializeApp() {

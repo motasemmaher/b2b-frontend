@@ -26,7 +26,7 @@
                     </ion-card-header>
                     <a *ngIf="type && type === stores" [routerLink]="[data.href]"
                         class="btn btn-primary">{{ "VIEW" | translate }}</a>
-                    <a *ngIf="type && type === products" (click)="presentModal(data._id)" class="btn btn-primary">View</a>
+                    <a *ngIf="type && type === products" (click)="presentModal(data._id)" class="btn btn-primary">{{ "VIEW" | translate }}</a>
                 </div>
             </div>
             <div *ngIf="isOwne" style="position: absolute; right: 10px; top: 0px;">

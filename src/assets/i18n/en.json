@@ -169,7 +169,14 @@
   "DELIVERED": "Delivered",
   "CANCELED": "Canceled",
   "ADD_NEW_STORE": "Add new Store",
-  "EDIT_STORE": "Edit Store"
+  "EDIT_STORE": "Edit Store",
+  "WHERE_I_AM": "Where I Am",
+  "APPLY_LOCATION": "Apply Location",
+  "FILTERS": "Filters",
+  "MUST_BE_NUMBERS": "must be {number} numbers !",
+  "ERROR": "error",
+  "ERROR_CONNECTING_WITH_BACKEND": "Error connecting with backend"
+
 
   
 

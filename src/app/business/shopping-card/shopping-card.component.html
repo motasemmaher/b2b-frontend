@@ -1,6 +1,6 @@
 <section class="h-100">
   <div>
-    <ion-title style="border: none">{{ "SHOPPING_CART" | translate }}</ion-title>
+    <ion-title style="border: none; margin: 5px;">{{ "SHOPPING_CART" | translate }}</ion-title>
   </div>
   <ng-template [ngIf]="!isFetching" [ngIfElse]="loading">
     <div *ngIf="cartForm" [formGroup]="cartForm" class="h-100 w-100 container">
@@ -115,7 +115,7 @@
         <!-- </ion-card> -->
       </div>
 
-      <div class="">
+      <div class="divColorFix" style="border-style: solid; border-color: rgb(218, 220, 224); border-radius: 8px; border-width: 1px;">
         <!-- <ion-card class="ioncard2"> -->
         <ion-grid>
           <ion-row style="align-items: center">
@@ -125,7 +125,7 @@
               <ion-label class="totalCurrency"> {{ "JOD" | translate }}</ion-label>
             </ion-col>
             <ion-col>
-              <ion-button (click)="onSubmit()" style="float: right"
+              <ion-button (click)="onSubmit()" style="float: right" [disabled]="!items || (items && items.length === 0)"
                 >{{ "CHECKOUT" | translate }}</ion-button
               >
             </ion-col>

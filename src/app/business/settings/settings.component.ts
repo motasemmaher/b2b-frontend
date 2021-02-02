@@ -12,7 +12,7 @@ import { ToastService } from '@app/shared/toaster/toast.service';
 })
 export class SettingsComponent implements OnInit {
   darkMode: boolean;
-  isLoggedIn = true; //must be false
+  isLoggedIn = false; //must be false
   role: string;
   selectedLanguage: string;
 

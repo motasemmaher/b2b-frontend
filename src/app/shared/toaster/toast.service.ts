@@ -16,7 +16,7 @@ export class ToastService {
       position: 'top',
       duration: 5000,
       buttons: [ {
-          text: 'Close',
+          text: 'X',
           role: 'cancel',
           handler: () => cb,
         }

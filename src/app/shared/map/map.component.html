@@ -3,10 +3,10 @@
     <ion-toolbar color="warning">
       <ion-button (click)="loadMap()" shape="round" color="dark">
         <ion-icon slot="start" name="locate"></ion-icon>
-        Where I Am
+        {{ "WHERE_I_AM" | translate}}
       </ion-button>
       <ion-title slot="end">
-        <ion-button color="success" (click)="applyLocation()"> Apply Location
+        <ion-button color="success" (click)="applyLocation()"> {{ "APPLY_LOCATION" | translate}}
         </ion-button>
       </ion-title>
     </ion-toolbar>

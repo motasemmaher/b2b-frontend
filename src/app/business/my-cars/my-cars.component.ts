@@ -29,7 +29,7 @@ export class MyCarsComponent implements OnInit, OnDestroy {
     });
   }
 
-  manageMyCars(cars: any[]) {
+  manageMyCars(cars: any[] = []) {
     cars.forEach((car) => {
       (this.myCars.get('cars') as FormArray).push(
         new FormGroup({

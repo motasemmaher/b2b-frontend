@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -11,7 +12,7 @@ export class BusinessService {
 
   basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST + '/';
 
-  constructor(private http: HttpClient, private toastService: ToastService) { }
+  constructor(private http: HttpClient, private toastService: ToastService, private translate: TranslateService) { }
 
   public get(path: string, options?: any): Observable<any> {
     const basedUrl = this.basedUrl.concat(path);
@@ -43,7 +44,22 @@ export class BusinessService {
 
   private error(error: HttpErrorResponse) {
     console.log(error)
-    this.toastService.presentToastWithOptions('error', error.error.error, 'danger');
+    if(error?.error?.error){
+      this.translate.get(error.error.error).subscribe(res => {
+        this.translate.get('ERROR').subscribe(res1 => {
+          this.toastService.presentToastWithOptions(res1, res, 'danger');
+        });
+      });
+    }
+    else{
+      this.translate.get('ERROR_CONNECTING_WITH_BACKEND').subscribe(res => {
+        this.translate.get('ERROR').subscribe(res1 => {
+          this.toastService.presentToastWithOptions(res1, res, 'danger');
+        });
+      });
+    }
+    
+    
     return throwError('Something bad happened; please try aga<  in later.');
   }
 }

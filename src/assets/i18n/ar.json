@@ -112,7 +112,7 @@
   "CHECKOUT": "الدفع",
   "VIEW": "عرض",
   "GET_LOCATION_FROM_MAP": "احصل على الموقع من الخريطة",
-  "APPLY": "قدم طلبا",
+  "APPLY": "تطبيق",
   "GET_STORE_NEAR_BY": "احصل على المتجر القريب",
   "SOS": "نجدة",
   "ADD_NEW_CAR": "اضافة سيارة جديدة",
@@ -169,7 +169,12 @@
   "DELIVERED": "تم التوصيل",
   "CANCELED": "ألغيت",
   "ADD_NEW_STORE": "إضافة متجر جديد",
-  "EDIT_STORE": "تعديل متجر"
+  "EDIT_STORE": "تعديل متجر",
+  "APPLY_LOCATION": "تطبيق الموقع",
+  "FILTERS": "تصفية",
+  "MUST_BE_NUMBERS": "! أرقام {number} يجب أن يكون",
+  "ERROR": "خطأ",
+  "ERROR_CONNECTING_WITH_BACKEND": "خطأ في الاتصال بالخادم"
 
   
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '@app/core/services/product/product.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-product',
@@ -11,7 +12,10 @@ import { ToastService } from '@app/shared/toaster/toast.service';
 export class ViewProductComponent implements OnInit {
   id;
   product: any;
-  constructor(private productsService: ProductService, private toastService: ToastService,
+  constructor(
+    private productsService: ProductService, 
+    private toastService: ToastService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit(): void {
@@ -29,4 +33,9 @@ export class ViewProductComponent implements OnInit {
         this.toastService.presentToastWithOptions('success', 'Product added to shopping cart successfully', 'success');
       });
   }
+
+  closeCard(){
+    this.modalController.dismiss();
+  }
+
 }
