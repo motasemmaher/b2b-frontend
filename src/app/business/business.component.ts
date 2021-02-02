@@ -11,7 +11,7 @@ import { SearchService } from '@app/shared/search/search.service';
 @Component({
   selector: 'app-component',
   templateUrl: './business.component.html',
-  styleUrls: ['./business.component.css'],
+  styleUrls: ['./business.component.scss'],
 })
 export class BusinessComponent implements OnInit, OnDestroy {
   public selectedIndex = 0;
