@@ -26,8 +26,8 @@
                         {{ "TYPE" | translate}}: {{product.productType}}
                     </div>
                 </div>
-                <div>
-                    <a class="btn btn-primary light-text-darktheme" (click)="addToShoppingCart()">{{ "ADD_TO_CART" | translate }}</a>
+                <div *ngIf="product.type !== 'Accessory'">
+                    <ion-button color="primary" class="light-text-darktheme" (click)="addToShoppingCart()">{{ "ADD_TO_CART" | translate }}</ion-button>
                 </div>
             </div >
             <div style="display: block; overflow-y: auto; height: calc(100% - 60px);">
