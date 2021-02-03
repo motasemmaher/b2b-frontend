@@ -23,6 +23,7 @@ export class BusinessComponent implements OnInit, OnDestroy {
   isMobile: boolean = false;
   listenOnRouting: Subscription;
   username: string;
+  public isLoading: boolean = true;
 
   garageOwnerPages = [
     {
@@ -102,8 +103,11 @@ export class BusinessComponent implements OnInit, OnDestroy {
   search(value) {
     const stores = [];
     const products = [];
+    this.isLoading = true;
+    this.searchResult = null;
     if (value) {
       this.searchService.search(value).subscribe(res => {
+        console.log(res);
         stores.push(...res.storesSearchResult.map((store) => {
           return { ...store, href: `store/info/${store._id}`, type: 'stores', image: store.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${store.image}` : store.image };
         }));
@@ -111,6 +115,10 @@ export class BusinessComponent implements OnInit, OnDestroy {
           return { ...product, type: 'products', image: product.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${product.image}` : product.image };
         }));
         this.searchResult = [...stores, ...products];
+        this.isLoading = false;
+        if(stores.length === 0 && products.length === 0){
+          this.searchResult = [];
+        }
       })
     } else {
       this.searchResult = [];
