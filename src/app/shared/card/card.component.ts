@@ -52,7 +52,8 @@ export class CardComponent implements OnInit {
     const closeTime = new Date(`11/11/2020 ${data?.closeTime}`);
     const currentTime = new Date(new Date(`11/11/2020 ${new Date().toString().split(' ')[4]}`));
 
-    console.log(openTime,closeTime,currentTime,data,isAfter(currentTime, openTime),isBefore(currentTime, closeTime),differenceInHours(closeTime, openTime));
+    //console.log(openTime,closeTime,currentTime,data,isAfter(currentTime, openTime),isBefore(currentTime, closeTime),differenceInHours(closeTime, openTime));
+    //console.log(closeTime.toDateString());
 
     if(differenceInHours(closeTime, openTime) < 0){
       closeTime.setDate(closeTime.getDate() + 1);

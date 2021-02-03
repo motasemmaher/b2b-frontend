@@ -111,7 +111,16 @@
       </ion-content>
     </ion-menu>
     <ion-router-outlet class="test {{isSearchOpen ? 'd-none' : ''}}" id="main-content"></ion-router-outlet>
-    <app-search-result *ngIf="isSearchOpen" [result]= "searchResult" class="w-100 h-100" style=" margin-top: 60px !important;">
-    </app-search-result>
+    
+    <div *ngIf="isSearchOpen" style="/* height: 100%-50px;  */width: 100%; margin-top: 50px; overflow-y: scroll;">
+      <ng-template [ngIf]="!isLoading || searchResult" [ngIfElse]="loading">
+        <app-search-result *ngIf="isSearchOpen" [result]= "searchResult" class="w-100 h-100" style=" margin-top: 60px !important;">
+        </app-search-result>
+      </ng-template>
+    </div>
   </ion-split-pane>
 </ion-app>
+
+<ng-template #loading>
+  <app-loading [type]='"card"'></app-loading>
+</ng-template>
