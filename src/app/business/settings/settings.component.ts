@@ -142,4 +142,8 @@ export class SettingsComponent implements OnInit {
       }
     };
   }
+
+  refreshPage(){
+
+  }
 }

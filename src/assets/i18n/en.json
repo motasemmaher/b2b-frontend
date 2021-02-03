@@ -175,7 +175,11 @@
   "FILTERS": "Filters",
   "MUST_BE_NUMBERS": "must be {number} numbers !",
   "ERROR": "error",
-  "ERROR_CONNECTING_WITH_BACKEND": "Error connecting with backend"
+  "ERROR_CONNECTING_WITH_BACKEND": "Error connecting with backend",
+  "DELIVERY_ADDRESS": "Delivery Address",
+  "CANCEL": "Cancel",
+  "OKAY": "Okay",
+  "CHECKOUT_INFO": "Checkout info"
 
 
   

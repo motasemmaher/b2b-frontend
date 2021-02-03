@@ -121,8 +121,8 @@
   "ALL": "الكل",
   "IN_STOCK": "متوفر",
   "OUT_OF_STOCK": "غير متوفر",
-  "OPEN": "افتح",
-  "CLOSE": "أغلق",
+  "OPEN": "مفتوح",
+  "CLOSE": "مغلق",
   "PRICE": "السعر",
   "TYPE": "نوع",
   "ADD_TO_CART": "أضف إلى السلة",
@@ -140,7 +140,7 @@
   "CREATE": "أنشئ",
   "INSERT_PRODUCT": "أدخل المنتج",
   "INSERT": "إدراج",
-  "ACCESSORY": "Accessory",
+  "ACCESSORY": "إكسسوارات",
   "PART": "جزء",
   "SERVICE": "خدمة",
   "AMOUNT": "كمية",
@@ -174,7 +174,11 @@
   "FILTERS": "تصفية",
   "MUST_BE_NUMBERS": "! أرقام {number} يجب أن يكون",
   "ERROR": "خطأ",
-  "ERROR_CONNECTING_WITH_BACKEND": "خطأ في الاتصال بالخادم"
+  "ERROR_CONNECTING_WITH_BACKEND": "خطأ في الاتصال بالخادم",
+  "DELIVERY_ADDRESS": "عنوان التسليم",
+  "CANCEL": "إلغاء",
+  "OKAY": "موافق",
+  "CHECKOUT_INFO": "معلومات الدفع"
 
   
 }

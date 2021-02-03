@@ -1,7 +1,7 @@
 <section class="h-100 container">
-  <div>
+  <ion-item lines="none" style="--background: unset;">
     <ion-title style="border: none; margin: 5px;">{{ "SHOPPING_CART" | translate }}</ion-title>
-  </div>
+  </ion-item>
   <ng-template [ngIf]="!isFetching" [ngIfElse]="loading">
     <div *ngIf="cartForm" [formGroup]="cartForm" class="h-100 w-100">
       <div

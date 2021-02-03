@@ -2,11 +2,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 import { ModalController } from '@ionic/angular';
 import { ViewProductComponent } from '@app/shared/view-product/view-product.component';
 import { BusinessService } from '@app/business/services/business.service';
+import { isAfter, isBefore, differenceInHours } from 'date-fns';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent implements OnInit {
   @Input() data: any;
@@ -43,6 +44,22 @@ export class CardComponent implements OnInit {
   }
 
   editCard() {
+
+  }
+
+  isOpen(data : any){
+    const openTime = new Date(`11/11/2020 ${data?.openTime}`);
+    const closeTime = new Date(`11/11/2020 ${data?.closeTime}`);
+    const currentTime = new Date(new Date(`11/11/2020 ${new Date().toString().split(' ')[4]}`));
+
+    console.log(openTime,closeTime,currentTime,data,isAfter(currentTime, openTime),isBefore(currentTime, closeTime),differenceInHours(closeTime, openTime));
+
+    if(differenceInHours(closeTime, openTime) < 0){
+      closeTime.setDate(closeTime.getDate() + 1);
+      return isAfter(currentTime, openTime) && isBefore(currentTime, closeTime);
+    }
+    
+    return isAfter(currentTime, openTime) && isBefore(currentTime, closeTime);
 
   }
 
