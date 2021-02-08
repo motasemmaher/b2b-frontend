@@ -23,6 +23,7 @@ export class CreateGarageOwnerComponent implements OnInit {
     private modalController: ModalController
 
   ) {
+    this.storeInfo = this.signUpInfoService.getGarageInfoData();
     if (this.signUpInfoService.getUserInfoData().invalid) {
       this.router.navigateByUrl(`${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.USER_INFO}`);
       return;
@@ -30,7 +31,6 @@ export class CreateGarageOwnerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.storeInfo = this.signUpInfoService.getGarageInfoData();
   }
 
   getImageAsBase64(value) {

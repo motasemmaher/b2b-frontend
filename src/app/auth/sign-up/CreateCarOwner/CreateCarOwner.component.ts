@@ -19,13 +19,13 @@ export class CreateCarOwnerComponent implements OnInit {
     private translate: TranslateService
 
   ) {
-   if (this.signUpInfoService.getUserInfoData().invalid) {
-    //  this.router.navigateByUrl(`${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.USER_INFO}`);
-     return;
-   }
+    this.carInfo = this.signUpInfoService.getCarInfoData();
+    if (this.signUpInfoService.getUserInfoData().invalid) {
+      //  this.router.navigateByUrl(`${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.USER_INFO}`);
+      return;
+    }
   }
 
   ngOnInit() {
-    this.carInfo = this.signUpInfoService.getCarInfoData();
   }
 }
