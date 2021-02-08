@@ -48,7 +48,7 @@ export class ManageOffersComponent implements OnInit, OnDestroy {
       id: new FormControl(offer?._id || ''),
       isNew: new FormControl(offer?._id ? false : true),
       productId: new FormControl(offer?.productId || '', [Validators.required]),
-      price: new FormControl(offer?.price || 0, [Validators.required, Validators.pattern(/(^[\d\.]+$)/)]),
+      price: new FormControl(offer?.newPrice || 0, [Validators.required, Validators.pattern(/(^[\d\.]+$)/)]),
       discountRate: new FormControl(offer?.discountRate || 0, [Validators.required, Validators.pattern(/(^[\d]{1,3}$)/)]),
       duration: new FormControl(offer?.duration || 0, [Validators.required, Validators.pattern(/(^[\d]{1,3}$)/)]),
       isEditing: new FormControl(false)
@@ -64,7 +64,6 @@ export class ManageOffersComponent implements OnInit, OnDestroy {
         this.offersFromGroup = new FormGroup({
           offers: new FormArray([])
         });
-        this.myStoresService.resetBothDataSkipAndLimit();
         this.toastService.presentToastWithOptions('success', 'Offers removed successfully', 'success');
       })
     } else {
@@ -72,10 +71,11 @@ export class ManageOffersComponent implements OnInit, OnDestroy {
       (this.offersFromGroup.get('offers') as FormArray).removeAt(index);
     }
   }
+
   initFields() {
     this.activatedRoute.params.subscribe(params => {
       this.storeId = params.id;
-      this.myStoresService.getProducts(this.storeId, null, 'nameSort=1').subscribe((res) => {
+      this.myStoresService.getProductsForOffers(this.storeId).subscribe((res) => {
         this.products = res.products.map((product) => ({ name: product.name, value: product._id }));
       });
       this.getOffers();
@@ -83,8 +83,10 @@ export class ManageOffersComponent implements OnInit, OnDestroy {
   }
 
   getOffers() {
+    this.offersFromGroup = new FormGroup({
+      offers: new FormArray([])
+    });
     this.myStoresService.getOffers(this.storeId).subscribe((res) => {
-      this.myStoresService.setSkip(this.myStoresService.skip + 5);
       res.offers.forEach((offer) => this.addOffer({ productId: offer._id, ...offer.offer }));
     });
   }
@@ -109,7 +111,6 @@ export class ManageOffersComponent implements OnInit, OnDestroy {
       this.offersFromGroup = new FormGroup({
         offers: new FormArray([])
       });
-      this.myStoresService.resetBothDataSkipAndLimit();
       this.getOffers();
       this.toastService.presentToastWithOptions('success', 'Offers created successfully', 'success');
     });

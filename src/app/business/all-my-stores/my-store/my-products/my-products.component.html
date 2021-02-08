@@ -1,50 +1,41 @@
 <section style="overflow-y: auto" class="container" infiniteScroll [infiniteScrollDistance]="0.5"
-[infiniteScrollThrottle]="5"  [scrollWindow]="false" (scrolled)="getProducts()" [infiniteScrollUpDistance]="1.5">
-    <h2>
-        {{ "VIEW_PRODUCTS" | translate }}
-    </h2>
+  [infiniteScrollThrottle]="5" [scrollWindow]="false" (scrolled)="getProducts()" [infiniteScrollUpDistance]="1.5">
+  <h2>
+    {{ "VIEW_PRODUCTS" | translate }}
+  </h2>
+  <div>
     <div>
-      <div>
-        <ion-card>
-          <ion-card-content>
-            <ion-item>
-              <ion-label>{{ "SELECT_A_CATEGORY_NAME" | translate }}: </ion-label>
-              <ion-select
-                interface="alert"
-                (ionChange)="updateCategory($event)"
-                [interfaceOptions]="customPopoverOptions"
-                placeholder="Select One"
-                value="all"
-              >
-                <ion-select-option value="all">{{ "ALL" | translate }}</ion-select-option>
-                <ion-select-option
-                  *ngFor="let category of categories"
-                  [value]="category._id"
-                >
-                  {{ category.name }}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-            <app-filters
-              [values]="filters"
-              (filterApplied)="filterApplied($event)"
-            ></app-filters>
-          </ion-card-content>
-        </ion-card>
-        <ng-template [ngIf]="products" [ngIfElse]="noDataFound">
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <ion-label>{{ "SELECT_A_CATEGORY_NAME" | translate }}: </ion-label>
+            <ion-select interface="alert" (ionChange)="updateCategory($event)" [interfaceOptions]="customPopoverOptions"
+              placeholder="Select One" value="all">
+              <ion-select-option value="all">{{ "ALL" | translate }}</ion-select-option>
+              <ion-select-option *ngFor="let category of categories" [value]="category._id">
+                {{ category.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-filters [values]="filters" (filterApplied)="filterApplied($event)"></app-filters>
+        </ion-card-content>
+      </ion-card>
+      <ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
+        <ng-template [ngIf]="products && products.length !== 0" [ngIfElse]="noDataFound">
           <div *ngFor="let product of products; index as index">
-            <app-card
-              [data]="product"
-              [type]="'products'"
-              [isOwne]="product.isOwne"
-              (delete)="deleteProduct(index)"
-            ></app-card>
+            <app-card [data]="product" [type]="'products'" [isOwne]="product.isOwne" (delete)="deleteProduct(index)">
+            </app-card>
           </div>
         </ng-template>
-      </div>
+      </ng-template>
     </div>
+  </div>
 </section>
 
 <ng-template #noDataFound>
   <app-no-data-found class="h-100 w-100"></app-no-data-found>
+</ng-template>
+
+<ng-template #loading>
+  <app-loading [type]='"card"'></app-loading>
 </ng-template>

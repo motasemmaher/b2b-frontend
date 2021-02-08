@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MyStoresService } from './services/my-stores.service';
 import { AuthService } from '@app/core/services/auth/auth.service';
-import { BasedUrlsConstants } from '@app/core/constants/routes';
+import { AppRoutingConstants, BasedUrlsConstants, BusinessRoutingConstants } from '@app/core/constants/routes';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-all-my-stores',
@@ -29,7 +29,7 @@ export class AllMyStoresComponent implements OnInit, OnDestroy {
     this.myStoresService.getMyStores().subscribe((res) => {
       this.myStoresService.setSkip(this.myStoresService.skip + 5);
       this.stores.push(...res.stores.map((store) => {
-        return { ...store, href: `store-info/${store._id}`, editPath: store.userId === this.userId ? `edit-store/${store._id}` : '', isOwne: store.userId === this.userId, image: store.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${store.image}`: store.image };
+        return { ...store, href: `/${AppRoutingConstants.BUSINESS}/${BusinessRoutingConstants.MY_STORES}/store-info/${store._id}`, editPath: store.userId === this.userId ? `edit-store/${store._id}` : '', isOwne: store.userId === this.userId, image: store.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${store.image}`: store.image };
       }));
     });
   }

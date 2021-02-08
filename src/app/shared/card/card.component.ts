@@ -33,7 +33,7 @@ export class CardComponent implements OnInit {
   }
 
   routeTo(value) {
-    this.router.navigateByUrl(`/${AppRoutingConstants.BUSINESS}/${BusinessRoutingConstants.STORE}/${value}`);
+    this.router.navigateByUrl(value);
   }
 
   async presentModal(id) {

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { StoresService } from './service/stores.service';
 import { Store } from './model/store';
 import { Subscription } from 'rxjs';
+import { AppRoutingConstants, BusinessRoutingConstants } from '@app/core/constants/routes';
 
 @Component({
   selector: 'app-stores',
@@ -29,7 +30,7 @@ export class StoresComponent implements OnInit, OnDestroy {
     // setTimeout(() => {
       this.storeService.getStores('stores').subscribe((res) => {
         this.stores = res.stores.map((store) => {
-          return { ...store, href: `info/${store._id}/tabs` };
+          return { ...store, href: `/${AppRoutingConstants.BUSINESS}/${BusinessRoutingConstants.STORE}/info/${store._id}/tabs` };
         });
       });
     // }, 1000)

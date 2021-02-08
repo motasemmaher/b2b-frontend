@@ -92,7 +92,7 @@ export class MyStoresService {
   }
 
   public getOffers(storeId: string): Observable<any> {
-    const path = `stores/${storeId}/offers?limit=${this.limit}&skip=${this.skip}`;
+    const path = `stores/${storeId}/offers`;
     return this.businessService.get(path);
   }
 
@@ -114,6 +114,10 @@ export class MyStoresService {
     return this.businessService.get(`stores/${storeId}/categories/${categoryId}`);
   }
 
+  getProductsForOffers(storeId: string, categoryId?: string, filter?: string): Observable<any> {
+    const path = `stores/${storeId}${categoryId ? `/category/${categoryId}` : ''}/products`;
+    return this.businessService.get(path);
+  }
   getProducts(storeId: string, categoryId?: string, filter?: string): Observable<any> {
     const path = `stores/${storeId}${categoryId ? `/category/${categoryId}` : ''}/products?limit=${this.limit}&skip=${this.skip}${filter ? '&'.concat(filter) : ''}`;
     return this.businessService.get(path);

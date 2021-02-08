@@ -16,6 +16,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   categories: any[];
   storeId: string = null;
   categoryId: string = null;
+  isLoading: boolean = true;
   listenOnErrorLoading: Subscription;
   subscription: Subscription;
   filters = [
@@ -33,11 +34,13 @@ export class MyProductsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private toastService: ToastService,
   ) {
+    this.myStoresService.resetBothDataSkipAndLimit();
     this.getStoreId();
     this.categories = [];
     this.products = [];
     this.listenOnErrorLoading = this.myStoresService.listenOnErrorLoading().subscribe(res => {
       this.categories = [];
+      this.isLoading = false;
       this.products = [];
     })
   }
@@ -55,6 +58,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   getProducts() {
     this.myStoresService.getProducts(this.storeId, this.categoryId, this.filterSelected).subscribe((res) => {
       this.myStoresService.setSkip(this.myStoresService.skip + 5);
+      this.isLoading = false;
       this.products.push(...res.products.map((product) => {
         return { ...product, isOwne: product.storeId === this.storeId, editPath: product.storeId === this.storeId ? `../manage-product/edit/${product._id}` : '', image: product.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${product.image}` : product.image };
       }));
@@ -64,7 +68,8 @@ export class MyProductsComponent implements OnInit, OnDestroy {
 
   filterApplied(value) {
     this.filterSelected = value;
-    console.log(value);
+    this.products = [];
+    this.isLoading = true;
     this.myStoresService.resetBothDataSkipAndLimit();
     this.getProducts();
   }
@@ -77,7 +82,10 @@ export class MyProductsComponent implements OnInit, OnDestroy {
     if (categoryId === 'all') {
       categoryId = null;
     }
+    this.isLoading = true;
     this.categoryId = categoryId;
+    this.products = [];
+    this.myStoresService.resetBothDataSkipAndLimit();
     this.getProducts();
   }
 
@@ -88,7 +96,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
     const categoryId = this.products[index].categoryId;
     this.myStoresService.deleteProduct(storeId, categoryId, productId).subscribe((res) => {
       //this.getProducts();
-      this.products = this.products.filter((products,i) => index !== i);
+      this.products = this.products.filter((products, i) => index !== i);
       this.toastService.presentToastWithOptions('success', 'Product removed successfully', 'success');
     })
   }
