@@ -20,7 +20,7 @@ export class CreateCarOwnerComponent implements OnInit {
 
   ) {
    if (this.signUpInfoService.getUserInfoData().invalid) {
-     this.router.navigateByUrl(`${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.USER_INFO}`);
+    //  this.router.navigateByUrl(`${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.USER_INFO}`);
      return;
    }
   }
