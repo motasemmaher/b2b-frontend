@@ -27,7 +27,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   customPopoverOptions: any = {
     header: 'Select Category',
   };
-  filterSelected: any = null;
+  filterSelected: any = 'null';
   constructor(
     private myStoresService: MyStoresService,
     private activatedRoute: ActivatedRoute,
@@ -53,7 +53,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   }
 
   getProducts() {
-    this.myStoresService.getProducts(this.storeId, this.categoryId, 'nameSort=1').subscribe((res) => {
+    this.myStoresService.getProducts(this.storeId, this.categoryId, this.filterSelected).subscribe((res) => {
       this.myStoresService.setSkip(this.myStoresService.skip + 5);
       this.products.push(...res.products.map((product) => {
         return { ...product, isOwne: product.storeId === this.storeId, editPath: product.storeId === this.storeId ? `../manage-product/edit/${product._id}` : '', image: product.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${product.image}` : product.image };
