@@ -1,65 +1,66 @@
-<ion-app>
-  <ion-header>
-    <ion-toolbar>
-      <section class="d-flex justify-content-between">
-        <ion-buttons slot="start">
-          <ion-menu-button ng-controller="RightController" autoHide="true"></ion-menu-button>
-        </ion-buttons>
-        <div class="w-100 d-flex justify-content-between">
-          <div class="w-100 d-flex justify-content-start">
-            <div *ngIf="(!isSearchOpen && isMobile) || !isMobile">
-              <ion-title class="custom-title"> B2B </ion-title>
-            </div>
-            <div class="{{isSearchOpen? 'w-100 customSearchButton' : ''}}">
-              <app-search-bar [isHeader]="true" *ngIf="!isChangeRoute" (searchTerm)="search($event)" (isSearchOpen)="isSearchOpened($event)">
-              </app-search-bar>
-            </div>
-          </div>
+<ion-header>
+  <ion-toolbar>
+    <section class="d-flex justify-content-between">
+      <ion-buttons slot="start">
+        <ion-menu-button ng-controller="RightController" autoHide="true"></ion-menu-button>
+      </ion-buttons>
+      <div class="w-100 d-flex justify-content-between">
+        <div class="w-100 d-flex justify-content-start">
           <div *ngIf="(!isSearchOpen && isMobile) || !isMobile">
-            <ion-title >
-              <div class="d-flex justify-content-end">
-                <ngx-avatar class="mx-2" name="{{ username }}"></ngx-avatar>
-                <span class="mt-2">{{ username }}</span>
-              </div>
-            </ion-title>
+            <ion-title class="custom-title"> B2B </ion-title>
+          </div>
+          <div class="{{isSearchOpen? 'w-100 customSearchButton' : ''}}">
+            <app-search-bar [isHeader]="true" *ngIf="!isChangeRoute" (searchTerm)="search($event)"
+              (isSearchOpen)="isSearchOpened($event)">
+            </app-search-bar>
           </div>
         </div>
-      </section>
-    </ion-toolbar>
-  </ion-header>
-  <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" [menuId]="'mainContent'" type="overlay" class="side-menu">
-      <ion-content>
-        <ion-list id="inbox-list" class="border-0 h-100">
-          <ion-menu-toggle auto-hide="false">
-            <ion-item *ngFor="let p of appPages; let i = index" (click)="selectedIndex = i" routerDirection="root"
-              [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title | translate }}</ion-label>
-            </ion-item>
+        <div *ngIf="(!isSearchOpen && isMobile) || !isMobile">
+          <ion-title>
+            <div class="d-flex justify-content-end">
+              <ngx-avatar class="mx-2" name="{{ username }}"></ngx-avatar>
+              <span class="mt-2">{{ username }}</span>
+            </div>
+          </ion-title>
+        </div>
+      </div>
+    </section>
+  </ion-toolbar>
+</ion-header>
+<ion-split-pane contentId="main-content">
+  <ion-menu contentId="main-content" [menuId]="'mainContent'" type="overlay" class="side-menu">
+    <ion-content>
+      <ion-list id="inbox-list" class="border-0 h-100">
+        <ion-menu-toggle auto-hide="false">
+          <ion-item *ngFor="let p of appPages; let i = index" (click)="selectedIndex = i" routerDirection="root"
+            [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+            <ion-label>{{ p.title | translate }}</ion-label>
+          </ion-item>
 
-            <ion-item *ngIf="isLoggedIn" routerLink="" (click)="logout()" lines="none" detail="false">
-              <ion-icon slot="start" [ios]="'log-out-outline'" [md]="'log-out-sharp'"></ion-icon>
-              <ion-label>{{ "LOG_OUT" | translate }}</ion-label>
-            </ion-item>
-            <ion-item *ngIf="!isLoggedIn" routerLink="/auth" lines="none" detail="false">
-              <ion-icon slot="start" [ios]="'enter-outline'" [md]="'enter-sharp'" name="-outline"></ion-icon>
-              <ion-label>{{ "LOGIN" | translate }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet class="test {{isSearchOpen ? 'd-none' : ''}}" id="main-content"></ion-router-outlet>
-    
-    <div *ngIf="isSearchOpen" style="/* height: 100%-50px;  */width: 100%; margin-top: 50px; overflow-y: scroll;">
-      <ng-template [ngIf]="!isLoading || searchResult" [ngIfElse]="loading">
-        <app-search-result *ngIf="isSearchOpen" [result]= "searchResult" class="w-100 h-100" style=" margin-top: 60px !important;">
-        </app-search-result>
-      </ng-template>
-    </div>
-  </ion-split-pane>
-</ion-app>
+          <ion-item *ngIf="isLoggedIn" routerLink="" (click)="logout()" lines="none" detail="false">
+            <ion-icon slot="start" [ios]="'log-out-outline'" [md]="'log-out-sharp'"></ion-icon>
+            <ion-label>{{ "LOG_OUT" | translate }}</ion-label>
+          </ion-item>
+          <ion-item *ngIf="!isLoggedIn" routerLink="/auth" lines="none" detail="false">
+            <ion-icon slot="start" [ios]="'enter-outline'" [md]="'enter-sharp'" name="-outline"></ion-icon>
+            <ion-label>{{ "LOGIN" | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet class="test {{isSearchOpen ? 'd-none' : ''}}" id="main-content"></ion-router-outlet>
+
+  <div *ngIf="isSearchOpen" style="/* height: 100%-50px;  */width: 100%; margin-top: 50px; overflow-y: scroll;">
+    <ng-template [ngIf]="!isLoading || searchResult" [ngIfElse]="loading">
+      <app-search-result *ngIf="isSearchOpen" [result]="searchResult" class="w-100 h-100"
+        style=" margin-top: 60px !important;">
+      </app-search-result>
+    </ng-template>
+  </div>
+</ion-split-pane>
+
 
 <ng-template #loading>
   <app-loading [type]='"card"'></app-loading>

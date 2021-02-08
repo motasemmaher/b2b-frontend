@@ -11,7 +11,7 @@ export const routingConfiguration: ExtraOptions = {
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/business',
+    redirectTo: 'business',
     pathMatch: 'full'
   },
   {
