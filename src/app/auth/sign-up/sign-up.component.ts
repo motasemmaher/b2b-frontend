@@ -142,7 +142,9 @@ export class SignUpComponent implements OnInit {
 
   manipulateDataBeforeSending() {
     if (this.type === SharedRoutingConstants.GARAGE) {
+      if (this.data.store.openTime.toString().includes('T'))
       this.data.store.openTime = convertFrom24To12Hour(this.data.store.openTime.toString().split('T')[1].split('.')[0]);
+      if (this.data.store.closeTime.toString().includes('T'))
       this.data.store.closeTime = convertFrom24To12Hour(this.data.store.closeTime.toString().split('T')[1].split('.')[0]);
     } else {
       this.data.car.year = '' + new Date(this.data.car.year.toString()).getFullYear();
