@@ -111,8 +111,12 @@ export class ManageStoreInfoComponent implements OnInit {
   }
 
   manipulateDataBeforeSending(data) {
-    data.openTime = convertFrom24To12Hour(data.openTime.toString().split('T')[1].split('.')[0]);
-    data.closeTime = convertFrom24To12Hour(data.closeTime.toString().split('T')[1].split('.')[0]);
+    if (data.openTime.toString().includes('T')) {
+      data.openTime = convertFrom24To12Hour(data.openTime.toString().split('T')[1].split('.')[0]);
+    }
+    if (data.closeTime.toString().includes('T')) {
+      data.closeTime = convertFrom24To12Hour(data.closeTime.toString().split('T')[1].split('.')[0]);
+    }
     return data;
   }
 
