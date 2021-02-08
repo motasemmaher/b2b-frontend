@@ -27,66 +27,6 @@
       </section>
     </ion-toolbar>
   </ion-header>
-
-  <!--<ion-header>
-     <ion-toolbar>
-      <section class=" justify-content-between">
-        <ion-buttons slot="start">
-          <ion-menu-button autoHide="true"></ion-menu-button>
-        </ion-buttons>
-        <div class="w-100  justify-content-between" slot="">
-          <div class=" justify-content-start">
-            <div class="mt-2" *ngIf="(!isSearchOpen && isMobile) || !isMobile">
-              <ion-title> B2B </ion-title>
-            </div>
-            <div >
-              <app-search-bar [isHeader]="true" *ngIf="!isChangeRoute" (searchTerm)="search($event)" (isSearchOpen)="isSearchOpened($event)">
-              </app-search-bar>
-            </div>
-          </div>
-          <div>
-            <ion-title style="position: absolute;" *ngIf="(!isSearchOpen && isMobile) || !isMobile">
-              <div class=" justify-content-end">
-                <ngx-avatar class="mx-2" name="{{ username }}"></ngx-avatar>
-                <span class="mt-2">{{ username }}</span>
-              </div>
-            </ion-title>
-          </div>
-        </div>
-      </section>
-    </ion-toolbar>
-  </ion-header>  -->
-
-  <!-- <ion-header>
-    <ion-toolbar>
-      <section class="justify-content-between">
-        <ion-buttons slot="start">
-          <ion-menu-button ng-controller="RightController" autoHide="true"></ion-menu-button>
-        </ion-buttons>
-        
-          
-            <div class="mt-2" *ngIf="(!isSearchOpen && isMobile) || !isMobile">
-              <ion-title> B2B </ion-title>
-            </div>
-             <div>
-              <app-search-bar [isHeader]="true" *ngIf="!isChangeRoute" (searchTerm)="search($event)" (isSearchOpen)="isSearchOpened($event)">
-              </app-search-bar>
-            </div> 
-          
-          
-            <ion-title slot="end" *ngIf="(!isSearchOpen && isMobile) || !isMobile">
-              <div class="justify-content-end">
-                <ngx-avatar class="mx-2" name="{{ username }}"></ngx-avatar>
-                <span class="mt-2">{{ username }}</span>
-              </div>
-            </ion-title>
-          
-        
-      </section>
-    </ion-toolbar>
-  </ion-header> -->
-
-
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" [menuId]="'mainContent'" type="overlay" class="side-menu">
       <ion-content>
