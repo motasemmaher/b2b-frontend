@@ -64,6 +64,8 @@ export class MyProductsComponent implements OnInit, OnDestroy {
 
   filterApplied(value) {
     this.filterSelected = value;
+    console.log(value);
+    this.myStoresService.resetBothDataSkipAndLimit();
     this.getProducts();
   }
 
@@ -85,7 +87,8 @@ export class MyProductsComponent implements OnInit, OnDestroy {
     const storeId = this.products[index].storeId;
     const categoryId = this.products[index].categoryId;
     this.myStoresService.deleteProduct(storeId, categoryId, productId).subscribe((res) => {
-      this.getProducts();
+      //this.getProducts();
+      this.products = this.products.filter((products,i) => index !== i);
       this.toastService.presentToastWithOptions('success', 'Product removed successfully', 'success');
     })
   }

@@ -1,9 +1,11 @@
+import { Router } from '@angular/router';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Subscription } from 'rxjs';
 // import { SwPush } from '@angular/service-worker';
 
 
@@ -12,14 +14,17 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   readonly VAPID_PUBLIC_KEY = "BKUYYDI-m-U6MHCs4k30yvVZQwK5_cVNJr07SzdnbIWELB8DU4zsoDUpBm9vT1W8uwPlfW9tuTEmsMDyd89TVyk";
   textDir = 'rtl';
+  listenTranslate: Subscription;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
     // private swPush: SwPush,
   ) {
     this.initializeApp();
@@ -37,17 +42,28 @@ export class AppComponent implements OnInit {
     //   })
     // });
     
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) =>
+    this.listenTranslate = this.translate.onLangChange.subscribe((event: LangChangeEvent) =>
     {
-      if(event.lang == 'ar')
-      {
+      //window.location.reload(true);
+      const prev = this.router.url;
+      this.router.navigate(['/']).then(data => {
+        this.router.navigate([prev]);
+
+        if(event.lang == 'ar') {
         this.textDir = 'rtl';
-      } 
-      else
-      {
+        } 
+        else {
         this.textDir = 'ltr';
-      }
+        }
+
+        
+      });
+
+      
     });
+  }
+  ngOnDestroy(): void {
+    this.listenTranslate.unsubscribe();
   }
 
   initializeApp() {

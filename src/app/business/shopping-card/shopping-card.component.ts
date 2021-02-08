@@ -1,9 +1,11 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ShoppingCartService } from './service/shopping-cart.service';
 import { AlertController } from '@ionic/angular';
 import { ToastService } from '@app/shared/toaster/toast.service';
 import { Subscription } from 'rxjs';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-shopping-card',
@@ -22,6 +24,7 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
     private shoppingCartService: ShoppingCartService,
     private alertController: AlertController,
     private toastService: ToastService,
+    private translate: TranslateService
   ) {
     this.getShoppingCartItems();
     this.items = new FormArray([]);
@@ -134,45 +137,59 @@ export class ShoppingCardComponent implements OnInit, OnDestroy {
   }
 
   async presentAlertConfirm() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Checkout info',
-      inputs: [
-        {
-          name: 'deliveryAddress',
-          type: 'text',
-          placeholder: 'Delivery Address',
-        },
-        {
-          name: 'phoneNumber',
-          type: 'text',
-          placeholder: 'Phone Number',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          // handler: (blah) => {
-          //   console.log(blah)
-          // }
-        },
-        {
-          text: 'Okay',
-          handler: (data) => {
-            console.log(data);
-            this.shoppingCartService
-              .checkout(data)
-              .subscribe(res => {
-                this.getShoppingCartItems();
-                this.toastService.presentToastWithOptions('success', 'Checkout successfully', 'success');
+    
+    this.translate.get('CHECKOUT_INFO').subscribe(res1 => {
+      this.translate.get('DELIVERY_ADDRESS').subscribe(res2 => {
+        this.translate.get('PHONE_NUMBER').subscribe(res3 => {
+          this.translate.get('CANCEL').subscribe(res4 => {
+            this.translate.get('OKAY').subscribe(async res5 => {
+              const alert = await this.alertController.create({
+                cssClass: 'my-custom-class',
+                header: res1,
+                inputs: [
+                  {
+                    name: 'deliveryAddress',
+                    type: 'text',
+                    placeholder: res2,
+                  },
+                  {
+                    name: 'phoneNumber',
+                    type: 'text',
+                    placeholder: res3,
+                  },
+                ],
+                buttons: [
+                  {
+                    text: res4,
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    // handler: (blah) => {
+                    //   console.log(blah)
+                    // }
+                  },
+                  {
+                    text: res5,
+                    handler: (data) => {
+                      console.log(data);
+                      this.shoppingCartService
+                        .checkout(data)
+                        .subscribe(res => {
+                          this.getShoppingCartItems();
+                          this.toastService.presentToastWithOptions('success', 'Checkout successfully', 'success');
+                        });
+                    },
+                  },
+                ],
               });
-          },
-        },
-      ],
+              await alert.present();
+            });
+          });
+        });
+      });
     });
-    await alert.present();
+    
+
+    
   }
   onSubmit() {
     this.presentAlertConfirm();
