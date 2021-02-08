@@ -4,6 +4,8 @@ import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { BusinessComponent } from './business.component';
 import { AuthGuard } from '@app/core/guards/auth/auth.guard';
 import { BusinessRoutingConstants } from '@app/core/constants/routes';
+import { SearchResultComponent } from './search-result/search-result.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -83,6 +85,10 @@ const routes: Routes = [
         path: BusinessRoutingConstants.ADMIN,
         loadChildren: './admin/admin.module#AdminModule',
         canActivate: [AuthGuard],
+      },
+      {
+        path: BusinessRoutingConstants.SEARCH,
+        component: SearchResultComponent
       },
       { path: 'sos', loadChildren: () => import('./sos/sos.module').then(m => m.SosModule) },
     ],

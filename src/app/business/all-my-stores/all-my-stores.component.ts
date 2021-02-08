@@ -23,7 +23,7 @@ export class AllMyStoresComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-  }
+  } 
 
   getMyStores() {
     this.myStoresService.getMyStores().subscribe((res) => {

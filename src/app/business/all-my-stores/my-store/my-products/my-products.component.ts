@@ -17,7 +17,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   storeId: string = null;
   categoryId: string = null;
   listenOnErrorLoading: Subscription;
-
+  subscription: Subscription;
   filters = [
     { label: 'By Descending Name', value: 'nameSort=1' },
     { label: 'By ascending Name', value: 'nameSort=-1' },
@@ -43,7 +43,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   }
 
   getStoreId() {
-    this.activatedRoute.params.subscribe(params => {
+    this.subscription = this.activatedRoute.params.subscribe(params => {
       this.storeId = params.id;
       this.myStoresService.getCategories(this.storeId).subscribe(res => {
         this.categories = res.categories;
@@ -96,5 +96,6 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.myStoresService.resetBothDataSkipAndLimit();
     this.listenOnErrorLoading.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
