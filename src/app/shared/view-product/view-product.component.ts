@@ -1,3 +1,4 @@
+import { AuthService } from '@app/core/services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '@app/core/services/product/product.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
@@ -15,7 +16,8 @@ export class ViewProductComponent implements OnInit {
   constructor(
     private productsService: ProductService, 
     private toastService: ToastService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
