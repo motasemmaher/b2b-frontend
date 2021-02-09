@@ -34,7 +34,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
   }
 
   pushToArrayContacts(contacts : Contact[]){
-    this.contacts.push(...contacts);
+    this.contacts = contacts;
   }
 
   openChat(index: number) {
