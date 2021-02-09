@@ -29,7 +29,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
   getContacts() {
     this.chatService.getContacts().subscribe((res) => {
       //this.contacts = res.contacts;
-      this.pushToArrayContacts(res.contacts);
+      this.pushToArrayContacts( res.contacts.contacts);
     });
   }
 

@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { ViewProductComponent } from '@app/shared/view-product/view-product.component';
 import { MapComponent } from '@app/shared/map/map.component';
 import { Subscription } from 'rxjs';
-import { BasedUrlsConstants } from '@app/core/constants/routes';
+import { AppRoutingConstants, BasedUrlsConstants, BusinessRoutingConstants } from '@app/core/constants/routes';
 import { Store } from '@app/core/model/store';
 
 @Component({
@@ -58,7 +58,7 @@ export class SosComponent implements OnInit, OnDestroy {
 
   pushToArrayStores(stores : Store[]){
     this.stores.push(...stores.map((store) => {
-      return { ...store, href: `info/${store._id}/tabs`, type: 'stores', image: store.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${store.image}` : store.image };
+      return { ...store, href: `/${AppRoutingConstants.BUSINESS}/${BusinessRoutingConstants.STORE}/info/${store._id}/tabs`, type: 'stores', image: store.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${store.image}` : store.image };
     }));
   }
 
