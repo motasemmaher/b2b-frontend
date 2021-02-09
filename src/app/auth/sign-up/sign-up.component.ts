@@ -1,5 +1,6 @@
+import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '@app/core/services/auth/auth.service';
 import { NavController } from '@ionic/angular';
 import { NgForm, FormGroup } from '@angular/forms';
@@ -13,13 +14,15 @@ import { convertFrom24To12Hour } from '@app/shared/functions/convertTime';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnDestroy {
 
   type: string;
   userInfo: FormGroup;
+  subscription: Subscription;
   disableNextButton = true;
   disableSaveButton = true;
   buttonName = 'NEXT';
+  isLoading: boolean = false;
   isMoved = false;
   headerName = 'USER_INFO';
   heightClassName = 'user-info';
@@ -61,6 +64,12 @@ export class SignUpComponent implements OnInit {
         this.userInfo.updateValueAndValidity();
       }
     });
+    this.subscription = this.authService.errorLoadingAuth.subscribe(() => {
+      this.isLoading = false;
+    })
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   listenOnSaveButton() {
@@ -119,6 +128,7 @@ export class SignUpComponent implements OnInit {
   }
 
   saveInfo() {
+    this.isLoading = true;
     if (this.userInfo.valid && ((this.type === SharedRoutingConstants.CAR && this.signUpInfoService.getCarInfoData().valid) || (this.type === SharedRoutingConstants.GARAGE && this.signUpInfoService.getGarageInfoData().valid))) {
       if (this.type === SharedRoutingConstants.GARAGE) {
         this.data = this.signUpInfoService.getMergeBeforeSendToBackEndForGarage();

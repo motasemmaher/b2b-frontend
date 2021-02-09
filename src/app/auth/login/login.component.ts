@@ -1,6 +1,7 @@
+import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicModule, NavController } from '@ionic/angular';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, ReactiveFormsModule, FormControl, ValidatorFn } from '@angular/forms';
 import { AuthRoutingConstants, AppRoutingConstants, SharedRoutingConstants } from '@app/core/constants/routes';
 import { AuthService } from '@app/core/services/auth/auth.service';
@@ -10,8 +11,10 @@ import { AuthService } from '@app/core/services/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginInfo: FormGroup;
+  isLoading: boolean = false;
+  subscription: Subscription;
 
   pathOfSignUpForCarOwner = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.CAR}/${AuthRoutingConstants.USER_INFO}`;
   pathOfSignUpForG1Owner = `/${AppRoutingConstants.AUTH}/${AuthRoutingConstants.SIGN_UP}/${SharedRoutingConstants.GARAGE}/${AuthRoutingConstants.USER_INFO}`;
@@ -42,7 +45,13 @@ export class LoginComponent implements OnInit {
     rememberMe: new FormControl(false),
     });
 
+    this.subscription = this.authService.errorLoadingAuth.subscribe(() => {
+      this.isLoading = false;
+    })
+  }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   ngOnInit() {
@@ -50,6 +59,7 @@ export class LoginComponent implements OnInit {
 
   loginFormLog() {
     if (this.loginInfo.valid) {
+      this.isLoading = true;
       this.authService.login(this.loginInfo.value);
     }
   }

@@ -14,9 +14,10 @@
             <ion-item [lines]="'none'" style="height: 50px;">
                 <div class="d-flex flex-wrap align-items-end w-100 justify-content-end">
                     <ion-button (click)="backURL()" [color]="'secondary'" size="default">{{ "PREVIOUS" | translate}}</ion-button>
-                    <ion-button [disabled]="disableNextButton || (disableSaveButton && isMoved)" color="primary"
-                        (click)="doSomething()" size="default"> {{buttonName | translate}}
-                    </ion-button>
+                    <ion-button type="submit" size="default"  color="primary" [disabled]="disableNextButton || (disableSaveButton && isMoved) || isLoading" (click)="doSomething()">
+                        {{buttonName | translate}}
+                        <ion-spinner *ngIf="isLoading"></ion-spinner>
+                      </ion-button>
                 </div>
             </ion-item>
         </ion-card-content>

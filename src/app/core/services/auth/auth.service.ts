@@ -1,4 +1,4 @@
-import { Injectable, Pipe } from '@angular/core';
+import { EventEmitter, Injectable, Pipe } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -23,7 +23,7 @@ export class AuthService {
   basedUrl = BasedUrlsConstants.BASED_URL_LOCALHOST + '/';
   token: string;
   user: any;
-
+  errorLoadingAuth: EventEmitter<any> = new EventEmitter();
   constructor(
     private router: Router,
     private tokenHandlerService: TokenHandlerService,
@@ -108,6 +108,7 @@ export class AuthService {
   }
 
   public error(error: HttpErrorResponse) {
+    this.errorLoadingAuth.emit();
     this.toastService.presentToastWithOptions('error', error.error.error, 'danger');
     return throwError('Something bad happened; please try aga<  in later.');
   }
