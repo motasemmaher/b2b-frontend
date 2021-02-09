@@ -11,6 +11,7 @@ import { AppRoutingConstants, BusinessRoutingConstants } from '@app/core/constan
 })
 export class StoresComponent implements OnInit, OnDestroy {
   stores: Store[];
+  isLoading: boolean = true;
   listenOnErrorLoading: Subscription;
   constructor(
     private storeService: StoresService
@@ -27,13 +28,13 @@ export class StoresComponent implements OnInit, OnDestroy {
   }
 
   getStores() {
-    // setTimeout(() => {
-      this.storeService.getStores('stores').subscribe((res) => {
-        this.stores = res.stores.map((store) => {
+    this.isLoading = true;
+    this.storeService.getStores('stores').subscribe((res) => {
+      this.isLoading = false;
+      this.stores = res.stores.map((store) => {
           return { ...store, href: `/${AppRoutingConstants.BUSINESS}/${BusinessRoutingConstants.STORE}/info/${store._id}/tabs` };
         });
       });
-    // }, 1000)
   }
   ngOnDestroy(): void {
     this.listenOnErrorLoading.unsubscribe();

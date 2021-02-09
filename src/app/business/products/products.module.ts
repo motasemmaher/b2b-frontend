@@ -7,6 +7,7 @@ import { ProductsComponent } from './products.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { ProductsService } from './service/products.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [ProductsComponent],
@@ -15,7 +16,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ProductsRoutingModule,
     SharedModule,
     InfiniteScrollModule,
-    IonicModule
+    IonicModule,
+    TranslateModule.forChild()
+
   ],
   providers: [
     ProductsService

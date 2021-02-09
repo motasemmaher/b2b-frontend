@@ -12,25 +12,45 @@ import { ProductsService } from './service/products.service';
 export class ProductsComponent implements OnInit, OnDestroy {
 
   products: any[];
+  isLoading: boolean = true;
+  filterSelected: string;
+  categoryId: string;
+  filters = [
+    { label: 'By Descending Name', value: 'nameSort=1' },
+    { label: 'By ascending Name', value: 'nameSort=-1' },
+    { label: 'By Descending Price', value: 'priceSort=-1&nameSort=0' },
+    { label: 'By ascending Price', value: 'priceSort=1&nameSort=0' },
+  ];
   listenOnErrorLoading: Subscription;
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
     this.products = [];
-    this.getProduct();
+    this.getProducts();
     this.listenOnErrorLoading = this.productsService.listenOnErrorLoading().subscribe(res => {
       this.products = [];
+      this.isLoading = false;
     })
   }
-
-  getProduct() {
-    this.productsService.getProducts().subscribe((res) => {
+  
+  getProducts() {
+    this.productsService.getProducts(this.filterSelected).subscribe((res) => {
+      this.isLoading = false;
       this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit(), this.productsService.getSkip() + 5);
       this.products.push(...res.products);
     });
   }
   ngOnDestroy(): void {
-    this.productsService.resetBothDateSkipAndLimit();
+    this.productsService.resetBothDataSkipAndLimit();
     this.listenOnErrorLoading.unsubscribe();
   }
+
+  filterApplied(value) {
+    this.filterSelected = value;
+    this.products = [];
+    this.isLoading = true;
+    this.productsService.resetBothDataSkipAndLimit();
+    this.getProducts();
+  }
+
 }

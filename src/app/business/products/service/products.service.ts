@@ -24,7 +24,7 @@ export class ProductsService {
     return true;
   }
 
-  public resetBothDateSkipAndLimit(): boolean {
+  public resetBothDataSkipAndLimit(): boolean {
     this.limit = 5;
     this.skip = 0;
     return true;
