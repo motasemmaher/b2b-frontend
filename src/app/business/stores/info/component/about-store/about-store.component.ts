@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '../../../model/store';
+import { Store } from '@app/core/model/store';
 import { StoresService } from '../../../service/stores.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';

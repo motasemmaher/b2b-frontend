@@ -1,3 +1,4 @@
+import { Product } from '@app/core/model/product';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProductsService } from './service/products.service';
@@ -11,7 +12,7 @@ import { ProductsService } from './service/products.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  products: any[];
+  products: Product[];
   isLoading: boolean = true;
   filterSelected: string;
   categoryId: string;
@@ -37,9 +38,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productsService.getProducts(this.filterSelected).subscribe((res) => {
       this.isLoading = false;
       this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit(), this.productsService.getSkip() + 5);
-      this.products.push(...res.products);
+      this.pushToArrayProducts(res.products);
     });
   }
+
+  pushToArrayProducts(products : Product[]){
+    this.products.push(...products);
+  }
+
   ngOnDestroy(): void {
     this.productsService.resetBothDataSkipAndLimit();
     this.listenOnErrorLoading.unsubscribe();

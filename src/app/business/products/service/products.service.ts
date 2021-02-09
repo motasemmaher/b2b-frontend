@@ -39,7 +39,7 @@ export class ProductsService {
   }
 
   getProducts(filter?: string): Observable<any>{
-    const path = `products?limit=${this.limit}&skip=${this.skip}`;
+    const path = `products?limit=${this.limit}&skip=${this.skip}&${filter}`;
     return this.businessService.get(path);
   }
 

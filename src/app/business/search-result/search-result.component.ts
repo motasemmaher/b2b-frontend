@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { SearchService } from '@app/shared/search/search.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppRoutingConstants, BasedUrlsConstants, BusinessRoutingConstants } from '@app/core/constants/routes';
@@ -9,8 +9,8 @@ import { AppRoutingConstants, BasedUrlsConstants, BusinessRoutingConstants } fro
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.css'],
 })
-export class SearchResultComponent implements OnInit {
-  result: any [] = null;
+export class SearchResultComponent implements OnInit, OnDestroy {
+  result: any [];
   isLoading: boolean = false;
   subscription: Subscription;
   key: string;
@@ -18,6 +18,9 @@ export class SearchResultComponent implements OnInit {
     private searchService: SearchService,
     private activatedRoute: ActivatedRoute,
   ) { }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.subscription = this.activatedRoute.queryParams.subscribe(queryParams => {

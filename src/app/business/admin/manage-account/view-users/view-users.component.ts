@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminService } from '@app/business/admin/service/admin.service';
+import { User } from '@app/core/model/user';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class ViewUsersComponent implements OnInit, OnDestroy {
 
-  users: any[] = [];
+  users: User[] = [];
   listenOnErrorLoading: Subscription;
 
   constructor(
@@ -25,10 +26,11 @@ export class ViewUsersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  addToUsersList(user: any) {
+  addToUsersList(user: User) {
     let role = user.role.split('O').join(' O');
     role = role.replace(role[0], role[0].toLocaleUpperCase());
     this.users.push({
+      _id: user._id,
       username: user.username,
       email: user.email,
       role,
@@ -39,15 +41,22 @@ export class ViewUsersComponent implements OnInit, OnDestroy {
   getUsers() {
     this.adminService.getUsers().subscribe((res) => {
       res.carOwners.forEach((user) => {
-        this.addToUsersList(user.user);
+        //this.addToUsersList(user.user);
+        this.pushToArrayPUsers(user.user);
       });
       res.garageOwners.forEach((user) => {
-        this.addToUsersList(user.user);
+        //this.addToUsersList(user.user);
+        this.pushToArrayPUsers(user.user);
       });
     });
   }
+
+  pushToArrayPUsers(users : User[]){
+    this.users.push(...users);
+  }
+  
   deleteUser(index: number) {
-    const userId = this.users[index].id;
+    const userId = this.users[index]._id;
     this.adminService.deleteUser(userId).subscribe((res) => {
       console.log(res)
     })

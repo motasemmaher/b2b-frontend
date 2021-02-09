@@ -1,3 +1,4 @@
+import { Contact } from './../../../core/model/contact';
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ChatService } from '../service/chat.service';
@@ -10,7 +11,7 @@ import { ChatService } from '../service/chat.service';
 })
 export class ContactsComponent implements OnInit, OnDestroy {
   listenOnErrorLoading: Subscription;
-  contacts: any[];
+  contacts: Contact[] = [];
   // tslint:disable-next-line: no-output-rename
   @Output('selectedContacts') contactSelect: EventEmitter<any> = new EventEmitter();
 
@@ -27,8 +28,13 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   getContacts() {
     this.chatService.getContacts().subscribe((res) => {
-      this.contacts = res.contacts;
+      //this.contacts = res.contacts;
+      this.pushToArrayContacts(res.contacts);
     });
+  }
+
+  pushToArrayContacts(contacts : Contact[]){
+    this.contacts = contacts;
   }
 
   openChat(index: number) {

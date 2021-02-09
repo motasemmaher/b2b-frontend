@@ -5,6 +5,7 @@ import { ViewProductComponent } from '@app/shared/view-product/view-product.comp
 import { MapComponent } from '@app/shared/map/map.component';
 import { Subscription } from 'rxjs';
 import { BasedUrlsConstants } from '@app/core/constants/routes';
+import { Store } from '@app/core/model/store';
 
 @Component({
   selector: 'app-sos',
@@ -15,7 +16,7 @@ export class SosComponent implements OnInit, OnDestroy {
 
   lat: string;
   long: string;
-  stores: any [] = [];
+  stores: Store [] = [];
   listenOnErrorLoading: Subscription;
   constructor(
     private sosService: SosService,
@@ -50,10 +51,15 @@ export class SosComponent implements OnInit, OnDestroy {
       if (!this.stores) {
         this.stores = [];
       }
-      this.stores.push(...res.stores.map((store) => {
-        return { ...store, href: `info/${store._id}/tabs`, type: 'stores', image: store.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${store.image}` : store.image };
-      }));
+      this.pushToArrayStores(res.stores);
+      //this.stores.push(...res.stores);
     })
+  }
+
+  pushToArrayStores(stores : Store[]){
+    this.stores.push(...stores.map((store) => {
+      return { ...store, href: `info/${store._id}/tabs`, type: 'stores', image: store.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${store.image}` : store.image };
+    }));
   }
 
   getStoresNearBy() {

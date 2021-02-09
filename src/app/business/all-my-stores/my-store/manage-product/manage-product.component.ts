@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { ToastService } from '@app/shared/toaster/toast.service';
 import { Subscription } from 'rxjs';
+import { Category } from '@app/core/model/category';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class ManageProductComponent implements OnInit, OnDestroy {
   images = [];
   isLoading = false;
   loadType = '';
-  categories: any[];
+  categories: Category[];
   productFromGroup: FormGroup;
   disableButtonSave = true;
   storeId: string;
@@ -97,9 +98,14 @@ export class ManageProductComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe((params) => {
       this.storeId = params.id;
       this.myStoresService.getCategories(this.storeId).subscribe((res) => {
-        this.categories = res.categories;
+        //this.categories = res.categories;
+        this.setCategories(res.categories);
       });
     });
+  }
+
+  setCategories(categories: Category[]){
+    this.categories = categories;
   }
 
   listenOnValidateButtonSave() {

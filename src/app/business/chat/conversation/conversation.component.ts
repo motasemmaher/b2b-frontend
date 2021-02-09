@@ -1,3 +1,4 @@
+import { Message } from '@app/core/model/chat';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { IonContent, NavController } from '@ionic/angular';
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class ConversationComponent implements OnInit, OnDestroy {
   message: string;
   conversationId; string;
-  messages: any[] = [];
+  messages: Message[] = [];
   chatId: string;
   userInfo: any;
   listenOnErrorLoading: Subscription;
@@ -57,7 +58,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    const msg = {
+    const msg:Message = {
       text: this.message,
       date: new Date().toUTCString(),
       reply: false,

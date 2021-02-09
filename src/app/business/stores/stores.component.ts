@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { StoresService } from './service/stores.service';
-import { Store } from './model/store';
+import { Store } from '@app/core/model/store';
 import { Subscription } from 'rxjs';
 import { AppRoutingConstants, BusinessRoutingConstants } from '@app/core/constants/routes';
 

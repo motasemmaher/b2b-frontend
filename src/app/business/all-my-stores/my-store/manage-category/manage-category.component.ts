@@ -4,6 +4,7 @@ import { MyStoresService } from '@app/business/all-my-stores/services/my-stores.
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from '@app/shared/toaster/toast.service';
 import { Subscription } from 'rxjs';
+import { Category } from '@app/core/model/category';
 
 @Component({
   selector: 'app-create-category',
@@ -17,7 +18,7 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
   disableButtonUpdate: boolean = true;
   disableButtonSave: boolean = true;
   storeId: string;
-  categories: any [] = [];
+  categories: Category [] = [];
   categoryIdSelectedForUpdate: string;
   categoryIdForRemoving: string;
   customPopoverOptions: any = {
@@ -81,8 +82,13 @@ export class ManageCategoryComponent implements OnInit, OnDestroy {
     this.isFetchingCategories = true;
     this.myStoresService.getCategories(this.storeId).subscribe(res => {
       this.isFetchingCategories = false;
-      this.categories = res.categories;
+      //this.categories = res.categories;
+      this.setCategories(res.categories);
     });
+  }
+
+  setCategories(categories: Category[]) {
+    this.categories = categories;
   }
   
   updateCategoryInfo(categoryId) {

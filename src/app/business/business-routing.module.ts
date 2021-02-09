@@ -13,41 +13,41 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'store',
+        redirectTo: BusinessRoutingConstants.STORE,
       },
       // {
       //   path: 'home',
       //   loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
       // },
       {
-        path: 'store',
+        path: BusinessRoutingConstants.STORE,
         loadChildren: () =>
           import('./stores/stores.module').then((m) => m.StoresModule),
       },
       {
-        path: 'products',
+        path: BusinessRoutingConstants.PRODUCTS,
         loadChildren: () =>
           import('./products/products.module').then((m) => m.ProductsModule),
       },
       {
-        path: 'search-by-image',
+        path: BusinessRoutingConstants.SEARCH_BY_IMAGE,
         loadChildren: () =>
           import('./search-by-image/search-by-image.module').then(
             (m) => m.SearchByImageModule
           ),
       },
       {
-        path: 'offers',
+        path: BusinessRoutingConstants.OFFERS,
         loadChildren: () =>
           import('./offers/offers.module').then((m) => m.OffersModule),
       },
       {
-        path: 'settings',
+        path: BusinessRoutingConstants.SETTINGS,
         loadChildren: () =>
           import('./settings/settings.module').then((m) => m.SettingsModule),
       },
       {
-        path: 'shopping-card',
+        path: BusinessRoutingConstants.SHOPPING_CARD,
         loadChildren: () =>
           import('./shopping-card/shopping-card.module').then(
             (m) => m.ShoppingCardModule
@@ -55,7 +55,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'chat',
+        path: BusinessRoutingConstants.CHAT,
         loadChildren: () =>
           import('./chat/chat.module').then((m) => m.ChatModule),
         canActivate: [AuthGuard],
@@ -69,13 +69,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'my-cars',
+        path: BusinessRoutingConstants.MY_CARS,
         loadChildren: () =>
           import('./my-cars/my-cars.module').then((m) => m.MyCarsModule),
         canActivate: [AuthGuard],
       },
       {
-        path: 'complaints',
+        path: BusinessRoutingConstants.COMPLAINTS,
         loadChildren: () =>
           import('./complaints/complaints.module').then(m => m.ComplaintsModule),
         canActivate: [AuthGuard],
@@ -91,6 +91,7 @@ const routes: Routes = [
         import('./search-result/search-result.module').then(m => m.SearchResultModule),
       },
       { path: 'sos', loadChildren: () => import('./sos/sos.module').then(m => m.SosModule) },
+      { path: BusinessRoutingConstants.SOS, loadChildren: () => import('./sos/sos.module').then(m => m.SosModule) },
     ],
   },
 ];

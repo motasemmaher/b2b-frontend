@@ -1,3 +1,4 @@
+import { AllMyStoresRoutingConstants } from './../../core/constants/routes';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -9,24 +10,24 @@ const routes: Routes = [
   {
     path: '',
     component: AllMyStoresComponent,
-    pathMatch: 'store-info',
+    pathMatch: AllMyStoresRoutingConstants.STORE_INFO,
     canActivate: [AuthGuard]
   },
   {
-    path: 'store-info/:id',
+    path: `${AllMyStoresRoutingConstants.STORE_INFO}/:${AllMyStoresRoutingConstants.ID}`,
     loadChildren: () => import('./my-store/my-store.module').then(m => m.MyStoreModule),
     canActivate: [AuthGuard]
   },
   {
-    path: 'add-store',
+    path: AllMyStoresRoutingConstants.ADD_STORE,
     component: ManageStoreInfoComponent,
   },
   {
-    path: 'edit-store/:storeId',
+    path: `${AllMyStoresRoutingConstants.EDIT_STORE}/:${AllMyStoresRoutingConstants.STOREID}`,
     component: ManageStoreInfoComponent,
   },
   {
-    path: 'orders',
+    path: AllMyStoresRoutingConstants.ORDERS,
     loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
   },
 
