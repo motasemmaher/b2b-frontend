@@ -1,4 +1,3 @@
-import { Product } from './../../../../core/model/product';
 import { Product } from '@app/core/model/product';
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
