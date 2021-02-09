@@ -4,7 +4,6 @@ import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { BusinessComponent } from './business.component';
 import { AuthGuard } from '@app/core/guards/auth/auth.guard';
 import { BusinessRoutingConstants } from '@app/core/constants/routes';
-import { SearchResultComponent } from './search-result/search-result.component';
 
 const routes: Routes = [
   {
@@ -88,7 +87,8 @@ const routes: Routes = [
       },
       {
         path: BusinessRoutingConstants.SEARCH,
-        component: SearchResultComponent
+        loadChildren: () =>
+        import('./search-result/search-result.module').then(m => m.SearchResultModule),
       },
       { path: 'sos', loadChildren: () => import('./sos/sos.module').then(m => m.SosModule) },
     ],

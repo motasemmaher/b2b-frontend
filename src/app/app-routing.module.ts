@@ -16,7 +16,8 @@ const routes: Routes = [
   },
   {
     path: 'business',
-    loadChildren: './business/business.module#BusinessModule',
+    loadChildren: () =>
+      import('./business/business.module').then(m => m.BusinessModule),
   },
   {
     path: 'auth',
