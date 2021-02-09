@@ -1,3 +1,4 @@
+import { User } from '@app/core/model/user';
 import { UserInfoService } from './service/user-info.service';
 import { AuthService } from '@app/core/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,7 +33,7 @@ export class SettingsComponent implements OnInit {
 
   getUserInfo() {
     this.userInfoService.getUserInfo().subscribe(res => {
-      const user = res.user?.result || {};
+      const user:User = res.user?.result || {};
       this.userInfo = new FormGroup({
         username: new FormControl(user.username,
           Validators.compose([

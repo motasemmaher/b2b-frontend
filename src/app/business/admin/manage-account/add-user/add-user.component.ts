@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminService } from '../../service/admin.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
 import { Subscription } from 'rxjs';
+import { User } from '@app/core/model/user';
 
 @Component({
   selector: 'app-add-user',
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit, OnDestroy {
-  users: any [] = [];
+  users: User [] = [];
   listenOnErrorLoading: Subscription;
 
   constructor(
@@ -27,7 +28,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   addToUsersList(user: any) {
     this.users.push({
-      id: user._id,
+      _id: user._id,
       username: user.username,
       email: user.email,
       phoneNumber: user.phoneNumber,
@@ -43,13 +44,13 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   acceptUser(index: number) {
-    const userId = this.users[index].id;
+    const userId = this.users[index]._id;
     this.adminService.acceptUser(userId).subscribe((res) => {
       this.toastService.presentToastWithOptions('success', 'User accepted successfully', 'success');
     })
   }
   rejectUser(index: number) {
-    const userId = this.users[index].id;
+    const userId = this.users[index]._id;
     this.adminService.rejectUser(userId).subscribe((res) => {
       this.toastService.presentToastWithOptions('success', 'User rejected successfully', 'success');
     })

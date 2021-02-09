@@ -121,17 +121,17 @@ export class SignUpComponent implements OnInit {
   saveInfo() {
     if (this.userInfo.valid && ((this.type === SharedRoutingConstants.CAR && this.signUpInfoService.getCarInfoData().valid) || (this.type === SharedRoutingConstants.GARAGE && this.signUpInfoService.getGarageInfoData().valid))) {
       if (this.type === SharedRoutingConstants.GARAGE) {
-        this.data = this.signUpInfoService.getMergeBeforeSendToBackEndForGarage();
-        this.manipulateDataBeforeSending();
-        this.authService.signUpForGarageOwner(this.data).subscribe((res) => {
+        const data = JSON.parse(JSON.stringify(this.signUpInfoService.getMergeBeforeSendToBackEndForGarage()));
+        
+        this.authService.signUpForGarageOwner(this.manipulateDataBeforeSending(data)).subscribe((res) => {
           if (res) {
             this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}`);
           }
         });
       } else {
-        this.data = this.signUpInfoService.getMergeBeforeSendToBackEndForCar();
-        this.manipulateDataBeforeSending();
-        this.authService.signUpForCarOwner(this.data).subscribe((res) => {
+        const data = JSON.parse(JSON.stringify(this.signUpInfoService.getMergeBeforeSendToBackEndForCar()));
+        
+        this.authService.signUpForCarOwner(this.manipulateDataBeforeSending(data)).subscribe((res) => {
           if (res) {
             this.router.navigateByUrl(`/${AppRoutingConstants.AUTH}`);
           }
@@ -140,13 +140,14 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  manipulateDataBeforeSending() {
+  manipulateDataBeforeSending(data: any) {
     if (this.type === SharedRoutingConstants.GARAGE) {
-      this.data.store.openTime = convertFrom24To12Hour(this.data.store.openTime.toString().split('T')[1].split('.')[0]);
-      this.data.store.closeTime = convertFrom24To12Hour(this.data.store.closeTime.toString().split('T')[1].split('.')[0]);
+      data.store.openTime = convertFrom24To12Hour(data.store.openTime.toString().split('T')[1].split('.')[0]);
+      data.store.closeTime = convertFrom24To12Hour(data.store.closeTime.toString().split('T')[1].split('.')[0]);
     } else {
-      this.data.car.year = '' + new Date(this.data.car.year.toString()).getFullYear();
+      data.car.year = '' + new Date(data.car.year.toString()).getFullYear();
     }
+    return data;
   }
 
   doSomething() {

@@ -178,7 +178,8 @@
   "DELIVERY_ADDRESS": "عنوان التسليم",
   "CANCEL": "إلغاء",
   "OKAY": "موافق",
-  "CHECKOUT_INFO": "معلومات الدفع"
+  "CHECKOUT_INFO": "معلومات الدفع",
+  "PRODUCT": "المنتج"
 
   
 }

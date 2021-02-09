@@ -1,3 +1,4 @@
+import { Product } from './../../core/model/product';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProductsService } from './service/products.service';
@@ -11,7 +12,7 @@ import { ProductsService } from './service/products.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  products: any[];
+  products: Product[] = [];
   listenOnErrorLoading: Subscription;
   constructor(private productsService: ProductsService) { }
 
@@ -26,9 +27,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getProduct() {
     this.productsService.getProducts().subscribe((res) => {
       this.productsService.setBothDataSkipAndLimit(this.productsService.getLimit(), this.productsService.getSkip() + 5);
-      this.products.push(...res.products);
+      this.pushToArrayProducts(res.products);
     });
   }
+
+  pushToArrayProducts(products : Product[]){
+    this.products.push(...products);
+  }
+
   ngOnDestroy(): void {
     this.productsService.resetBothDateSkipAndLimit();
     this.listenOnErrorLoading.unsubscribe();

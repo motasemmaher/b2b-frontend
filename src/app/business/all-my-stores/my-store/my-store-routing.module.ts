@@ -8,6 +8,7 @@ import { ManageOffersComponent } from './manage-offers/manage-offers.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { AuthGuard} from '@app/core/guards/auth/auth.guard';
 import { BusinessAllowedGuard} from '@app/core/guards/business-allowed.guard';
+import { MyStoreRoutingConstants } from '@app/core/constants/routes';
 
 const routes: Routes = [
   {
@@ -18,41 +19,41 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'my-products',
+        redirectTo: MyStoreRoutingConstants.MY_PRODUCTS,
       },
       {
-        path: 'manage-product',
+        path: MyStoreRoutingConstants.MANAGE_PRODUCT,
         // pathMatch: 'full',
-        redirectTo: 'manage-product/insert',
+        redirectTo: `${MyStoreRoutingConstants.MANAGE_PRODUCT}/${MyStoreRoutingConstants.INSERT}`,
       },
       {
-        path: 'manage-product/insert',
+        path: `${MyStoreRoutingConstants.MANAGE_PRODUCT}/${MyStoreRoutingConstants.INSERT}`,
         component: ManageProductComponent,
         canActivate: [AuthGuard],
       },
       {
-        path: 'manage-product/edit/:productId',
+        path: `${MyStoreRoutingConstants.MANAGE_PRODUCT}/${MyStoreRoutingConstants.EDIT}/:${MyStoreRoutingConstants.PRODUCTID}`,
         component: ManageProductComponent,
         canActivate: [AuthGuard],
       },
       {
-        path: 'manage-category',
+        path: MyStoreRoutingConstants.MANAGE_CATEGORY,
         component: ManageCategoryComponent,
         canActivate: [AuthGuard],
       },
       {
-        path: 'manage-offers',
+        path: MyStoreRoutingConstants.MANAGE_OFFERS,
         component: ManageOffersComponent,
         canActivate: [AuthGuard],
       },
       {
-        path: 'my-products',
+        path: MyStoreRoutingConstants.MY_PRODUCTS,
         component: MyProductsComponent,
         canActivate: [AuthGuard, BusinessAllowedGuard],
         // canLoad: [BusinessAllowedGuard]
       },
       {
-        path: 'orders',
+        path: MyStoreRoutingConstants.ORDERS,
         component: MyProductsComponent,
         canActivate: [AuthGuard, BusinessAllowedGuard],
         // canLoad: [BusinessAllowedGuard]

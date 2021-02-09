@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { ViewProductComponent } from '@app/shared/view-product/view-product.component';
 import { MapComponent } from '@app/shared/map/map.component';
 import { Subscription } from 'rxjs';
+import { Store } from '@app/core/model/store';
 
 @Component({
   selector: 'app-sos',
@@ -14,7 +15,7 @@ export class SosComponent implements OnInit, OnDestroy {
 
   lat: string;
   long: string;
-  stores: any [] = [];
+  stores: Store [] = [];
   listenOnErrorLoading: Subscription;
   constructor(
     private sosService: SosService,
@@ -48,8 +49,13 @@ export class SosComponent implements OnInit, OnDestroy {
       if (!this.stores) {
         this.stores = [];
       }
-      this.stores.push(...res.stores);
+      this.pushToArrayStores(res.stores);
+      //this.stores.push(...res.stores);
     })
+  }
+
+  pushToArrayStores(stores : Store[]){
+    this.stores.push(...stores);
   }
 
   getStoresNearBy() {

@@ -1,3 +1,5 @@
+import { Product } from './../../../../core/model/product';
+import { Product } from '@app/core/model/product';
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -15,7 +17,7 @@ export class ManageOffersComponent implements OnInit, OnDestroy {
 
   disableButtonSave = true;
   offersFromGroup: FormGroup;
-  products: any[];
+  products: Product[];
   storeId: any;
   customPopoverOptions: any = {
     header: 'Select Product',
@@ -75,10 +77,15 @@ export class ManageOffersComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(params => {
       this.storeId = params.id;
       this.myStoresService.getProducts(this.storeId, null, 'nameSort=1').subscribe((res) => {
-        this.products = res.products.map((product) => ({ name: product.name, value: product._id }));
+        //this.products = res.products.map((product) => ({ name: product.name, value: product._id }));
+        this.setProducts(res.products);
       });
       this.getOffers();
     });
+  }
+
+  setProducts(products: Product[]){
+    this.products = products.map((product) => ({ name: product.name, _id: product._id }));
   }
 
   getOffers() {

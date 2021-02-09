@@ -4,6 +4,8 @@ import { MyStoresService } from '../../services/my-stores.service';
 import { ToastService } from '@app/shared/toaster/toast.service';
 import { BasedUrlsConstants } from '@app/core/constants/routes';
 import { Subscription } from 'rxjs';
+import { Product } from '@app/core/model/product';
+import { Category } from '@app/core/model/category';
 
 
 @Component({
@@ -12,8 +14,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./my-products.component.css'],
 })
 export class MyProductsComponent implements OnInit, OnDestroy {
-  products: any[];
-  categories: any[];
+  products: Product[];
+  categories: Category[];
   storeId: string = null;
   categoryId: string = null;
   listenOnErrorLoading: Subscription;
@@ -45,7 +47,8 @@ export class MyProductsComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(params => {
       this.storeId = params.id;
       this.myStoresService.getCategories(this.storeId).subscribe(res => {
-        this.categories = res.categories;
+        //this.categories = res.categories;
+        this.setCategories(res.categories);
       });
       this.getProducts();
     });
@@ -54,10 +57,21 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   getProducts() {
     this.myStoresService.getProducts(this.storeId, this.categoryId, 'nameSort=1').subscribe((res) => {
       this.myStoresService.setSkip(this.myStoresService.skip + 5);
-      this.products.push(...res.products.map((product) => {
+      /* this.products.push(...res.products.map((product) => {
         return { ...product, isOwne: product.storeId === this.storeId, editPath: product.storeId === this.storeId ? `../manage-product/edit/${product._id}` : '', image: product.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${product.image}` : product.image };
-      }));
+      })); */
+      this.setProducts(res.products);
     });
+  }
+
+  setCategories(categories: Category[]){
+    this.categories = categories;
+  }
+
+  setProducts(products: Product[]){
+    this.products.push(...products.map((product) => {
+      return { ...product, isOwne: product.storeId === this.storeId, editPath: product.storeId === this.storeId ? `../manage-product/edit/${product._id}` : '', image: product.image.includes('.png') ? `${BasedUrlsConstants.BASED_URL_LOCALHOST}/${product.image}` : product.image };
+    }));
   }
 
 

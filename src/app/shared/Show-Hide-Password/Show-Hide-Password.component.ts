@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, ContentChild, OnInit } from '@angular/core';
 import { IonInput, IonicModule } from '@ionic/angular';
 
@@ -9,10 +10,20 @@ import { IonInput, IonicModule } from '@ionic/angular';
 })
 export class ShowHidePasswordComponent implements OnInit {
   showPassword = false;
+  right = true;
 
   @ContentChild(IonInput) input: IonInput;
 
-  constructor() { }
+  constructor(private translate: TranslateService) { 
+
+    if(translate.currentLang == 'ar') {
+      this.right = false;
+    } 
+    else {
+      this.right = true;
+    }
+
+  }
 
   ngOnInit() {
   }
