@@ -184,7 +184,9 @@ export class BusinessComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.listenOnRouting.unsubscribe();
+    if (this.listenOnRouting) {
+      this.listenOnRouting.unsubscribe();
+    }
     this.resizeSubscription$.unsubscribe();
     this.appPages = [];
   }
