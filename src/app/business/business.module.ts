@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BusinessService } from './services/business.service';
 import { AvatarModule } from 'ngx-avatar';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { SearchService } from '@app/shared/search/search.service';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
   ],
   providers: [
     BusinessService,
+    SearchService
   ]
 })
 
