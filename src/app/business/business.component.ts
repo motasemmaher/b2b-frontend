@@ -90,7 +90,14 @@ export class BusinessComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private authService: AuthService // private menu: MenuController
-  ) { }
+  ) {
+    this.router.events.subscribe(() => {
+      const url = this.router.url;
+      if (this.isSearchOpen && !url.includes('search')) {
+        this.isSearchOpen = false;
+      }
+    });
+   }
 
   logout() {
     this.authService.logout();
