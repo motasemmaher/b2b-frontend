@@ -19,6 +19,7 @@ export class StoresComponent implements OnInit, OnDestroy {
     this.stores = [];
     this.listenOnErrorLoading = this.listenOnErrorLoading = this.storeService.listenOnErrorLoading().subscribe(res => {
       this.stores = [];
+      this.isLoading = false;
     })
     this.getStores();
   }
@@ -39,4 +40,5 @@ export class StoresComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.listenOnErrorLoading.unsubscribe();
   }
+  
 }
