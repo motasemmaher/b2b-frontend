@@ -1,3 +1,4 @@
+import { Order } from '@app/core/model/order';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BusinessService } from '@app/business/services/business.service';
 import { MyStoresService } from '../services/my-stores.service';
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class OrdersComponent implements OnInit, OnDestroy {
   storeId: string;
   status: string;
-  orders: any[];
+  orders: Order[];
   storesId: any[];
   customPopoverOptions: any = {
     header: 'Select Store',
@@ -59,8 +60,13 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.orders = [];
     this.myStoresService.getOrders(this.storeId, this.status).subscribe(res => {
       console.log(res);
-      this.orders = res.order;
+      //this.orders = res.order;
+      this.setOrders(res.order);
     });
+  }
+
+  setOrders(orders: Order[]){
+    this.orders = orders;
   }
 
   getMyStoresId() {

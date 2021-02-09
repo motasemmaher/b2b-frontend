@@ -207,6 +207,15 @@ ion-item.margined{
     .item-dark{
       background-color: #121212;
     }
+    
+    input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active  {
+      -webkit-box-shadow: 0 0 0 30px #1e1e1e inset !important;
+      box-shadow: 0 0 0 30px #1e1e1e inset !important;
+    }
+    input:-webkit-autofill {
+      -webkit-text-fill-color: white !important;
+      max-height: 80% !important;
+    }
   }
   
   /*

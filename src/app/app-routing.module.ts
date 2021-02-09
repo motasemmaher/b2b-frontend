@@ -1,3 +1,4 @@
+import { AppRoutingConstants } from '@app/core/constants/routes';
 import { NgModule } from '@angular/core';
 import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { QuicklinkStrategy } from 'ngx-quicklink';
@@ -11,15 +12,15 @@ export const routingConfiguration: ExtraOptions = {
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'business',
+    redirectTo: `/${AppRoutingConstants.BUSINESS}`,
     pathMatch: 'full'
   },
   {
-    path: 'business',
+    path: AppRoutingConstants.BUSINESS,
     loadChildren: './business/business.module#BusinessModule',
   },
   {
-    path: 'auth',
+    path: AppRoutingConstants.AUTH,
     loadChildren: './auth/auth.module#AuthModule',
   },
   // { path: 'view-users', loadChildren: () => import('./business/admin/manage-account/view-users/view-users.module').then(m => m.ViewUsersModule) },
