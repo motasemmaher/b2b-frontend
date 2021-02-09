@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SearchByImageService } from './service/search-by-image.service';
-import { SearchService } from '@app/shared/search/search.service';
+import { SearchService } from '@app/business/search-result/service/search.service';
 import { Subscription } from 'rxjs';
 @Component({
   // tslint:disable-next-line: component-selector

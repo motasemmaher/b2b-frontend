@@ -7,7 +7,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
+import { SearchService } from './service/search.service';
 
 @NgModule({
   declarations: [SearchResultComponent],
@@ -18,6 +18,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     InfiniteScrollModule,
     IonicModule,
     TranslateModule.forChild()
+  ],
+  providers: [
+    SearchService
   ]
 })
 export class SearchResultModule { }

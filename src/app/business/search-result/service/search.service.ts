@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import { BusinessService } from '@app/business/services/business.service';
 import { SharedConstants } from '@app/core/constants/constants';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SearchService {
 
   constructor(
