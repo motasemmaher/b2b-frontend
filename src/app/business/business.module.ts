@@ -9,8 +9,6 @@ import { SharedModule } from '@app/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { BusinessService } from './services/business.service';
 import { AvatarModule } from 'ngx-avatar';
-import { SearchResultComponent } from './search-result/search-result.component';
-import { SearchService } from '@app/business/search-result/service/search.service';
 
 
 @NgModule({
@@ -22,14 +20,12 @@ import { SearchService } from '@app/business/search-result/service/search.servic
     TranslateModule.forChild(),
     HttpClientModule,
     AvatarModule,
-    SearchResultComponent
   ],
   declarations: [
     BusinessComponent,
   ],
   providers: [
     BusinessService,
-    SearchService
   ]
 })
 
